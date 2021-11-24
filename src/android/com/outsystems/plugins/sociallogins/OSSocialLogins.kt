@@ -28,12 +28,9 @@ class OSSocialLogins : CordovaImplementation() {
         return true
     }
 
-    override fun onActivityResult(requestCode: Int, resultCode: Int, intent: Intent) {
-        //TODO
-    }
-
     override fun areGooglePlayServicesAvailable(): Boolean {
         //TODO
+        return true
     }
 
     override fun onRequestPermissionResult(
