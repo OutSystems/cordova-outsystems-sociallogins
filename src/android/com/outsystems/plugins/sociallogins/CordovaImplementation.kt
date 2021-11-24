@@ -3,7 +3,7 @@ package com.outsystems.plugins.sociallogins
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
-import com.outsystems.plugins.healthfitness.AndroidPlatformInterface
+import com.outsystems.plugins.sociallogins.AndroidPlatformInterface
 
 import org.apache.cordova.*
 import org.json.JSONArray
