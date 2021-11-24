@@ -1,4 +1,4 @@
-package com.outsystems.plugins.oscordova
+package com.outsystems.plugins.sociallogins
 
 import android.app.Activity
 import android.content.Context

@@ -1,4 +1,4 @@
-package com.outsystems.plugins.healthfitness
+package com.outsystems.plugins.sociallogins
 
 import android.app.Activity
 import android.content.Context
