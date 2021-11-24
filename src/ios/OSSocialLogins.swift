@@ -14,7 +14,7 @@ class OSSocialLogins: CordovaImplementation {
         callbackId = command.callbackId
         
         plugin?.doLogin()
-        self.sendResult(result: "", error:err , callBackID: self.callbackId)
+        self.sendResult(result: "", error:nil , callBackID: self.callbackId)
     }
        
 }

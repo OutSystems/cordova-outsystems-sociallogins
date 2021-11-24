@@ -25,6 +25,19 @@
       <preference name="UseSwiftLanguageVersion" value="5" />
     </config-file>
 
+        <!-- Entitlements -->
+    <config-file target="*/Entitlements-Debug.plist" parent="com.apple.developer.applesignin">
+      <array>
+        <string>Default</string>
+      </array>
+    </config-file>
+
+    <config-file target="*/Entitlements-Release.plist" parent="com.apple.developer.applesignin">
+      <array>
+        <string>Default</string>
+      </array>
+    </config-file>
+
     <!-- Hooks -->
     <hook type="before_plugin_install" src="hooks/add_cordova_implementation_ios.js"/>
 		<hook type="before_plugin_install" src="hooks/install_prerequisites.js"/>
