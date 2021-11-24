@@ -21,7 +21,7 @@
     <config-file parent="/*" target="AndroidManifest.xml"/>
 
 
-    <source-file src="src/android/com/outsystems/plugins/sociallogins/OSSocialLogins.kt" target-dir="src/com/outsystems/plugins/sociallogins"/>
+    <source-file src="src/android/com/outsystems/plugins/sociallogins/OSSocialLogins.kt" target-dir="app/src/main/kotlin/com/outsystems/plugins/sociallogins"/>
     <source-file src="src/android/com/outsystems/plugins/sociallogins/AndroidPlatformInterface.kt" target-dir="app/src/main/kotlin/com/outsystems/plugins/sociallogins"/>
     <source-file src="src/android/com/outsystems/plugins/sociallogins/CordovaImplementation.kt" target-dir="app/src/main/kotlin/com/outsystems/plugins/sociallogins"/>
 
