@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<plugin id="com.outsystems.plugins.sociallogins" version="0.0.1" xmlns="http://apache.org/cordova/ns/plugins/1.0" xmlns:android="http://schemas.android.com/apk/res/android">
+<plugin id="cordova-outsystems-sociallogins" version="0.0.1" xmlns="http://apache.org/cordova/ns/plugins/1.0" xmlns:android="http://schemas.android.com/apk/res/android">
   <name>OSSocialLogins</name>
   <description>OutSystems Template for Cordova Plugin</description>
   <author>OutSystems Inc</author>
@@ -23,5 +23,15 @@
     </config-file>
     <source-file src="src/ios/OSSocialLogins.m"/>
     <header-file src="src/ios/OSSocialLogins.h"/>
+  </platform>
+  <platform name="browser">
+    <config-file target="config.xml" parent="/*">
+      <feature name="OSSocialLogins">
+        <param name="browser-package" value="OSSocialLogins" />
+      </feature>
+    </config-file>
+    <js-module src="src/browser/OSSocialLoginsProxy.js" name="OSSocialLoginsProxy">
+      <runs />
+    </js-module>
   </platform>
 </plugin>
