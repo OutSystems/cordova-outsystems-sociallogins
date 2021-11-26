@@ -1,6 +1,27 @@
 
 function doLogin (success, error, opts) {
     console.log("Hello social logins!");
+
+    let clientId = "com.outsystems.mobile.plugin.sociallogin.apple";
+    let redirectUri = "https://enmobile11-dev.outsystemsenterprise.com/SL_Core/rest/SocialLoginSignin/AuthRedirectOpenId";
+    let responseType = "code id_token";
+    let scope = "email name";
+    let responseMode = "form_post";
+    let state = "1333";
+
+    let url = "https://appleid.apple.com/auth/authorize?" +
+        "client_id=" + clientId +
+        "&redirect_uri=" + redirectUri + 
+        "&response_type=" + responseType + 
+        "&scope=" + scope +
+        "&response_mode=" + responseMode + 
+        "&state=" + state;
+
+    window.open(url);
+    window.addEventListener("message", (event) => {
+        alert(event.name);
+        console.log(event);
+    }, false);
 }
 
 
@@ -10,3 +31,4 @@ module.exports = {
 };
 
 require('cordova/exec/proxy').add('OSSocialLogins', module.exports);
+    

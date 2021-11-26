@@ -24,14 +24,18 @@
     <source-file src="src/ios/OSSocialLogins.m"/>
     <header-file src="src/ios/OSSocialLogins.h"/>
   </platform>
+
   <platform name="browser">
+
     <config-file target="config.xml" parent="/*">
       <feature name="OSSocialLogins">
         <param name="browser-package" value="OSSocialLogins" />
       </feature>
     </config-file>
+
     <js-module src="src/browser/OSSocialLoginsProxy.js" name="OSSocialLoginsProxy">
       <runs />
     </js-module>
+    
   </platform>
 </plugin>
