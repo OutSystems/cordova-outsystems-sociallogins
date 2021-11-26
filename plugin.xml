@@ -46,6 +46,8 @@
 		<!-- iOS Source Files -->
 		<source-file src="src/ios/OSSocialLogins.swift" />
     <source-file src="src/ios/SocialLoginsPlugin.swift" />
+    <source-file src="src/ios/KeychainItem.swift" />
+    <source-file src="src/ios/SocialLoginsProtocol.swift" />
     <source-file src="src/ios/CordovaImplementation.swift" />
     <framework src="src/ios/frameworks/OSCore.xcframework" embed="true" custom="true" />
 
