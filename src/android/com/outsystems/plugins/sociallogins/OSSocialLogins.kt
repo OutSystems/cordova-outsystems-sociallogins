@@ -2,7 +2,6 @@ package com.outsystems.plugins.sociallogins
 
 import android.app.Activity
 import android.content.Intent
-import android.util.Log
 import org.apache.cordova.CallbackContext
 import org.apache.cordova.CordovaInterface
 import org.apache.cordova.CordovaWebView
@@ -17,8 +16,11 @@ class OSSocialLogins : CordovaImplementation() {
 
     val APPLE_SIGNIN: Int = 13;
 
+    var socialLogin: SocialLogin? = null
+
     override fun initialize(cordova: CordovaInterface, webView: CordovaWebView) {
         super.initialize(cordova, webView)
+        socialLogin = SocialLogin(cordova.activity, cordova.context)
     }
 
     override fun execute(
@@ -37,14 +39,36 @@ class OSSocialLogins : CordovaImplementation() {
     }
 
     private fun doLogin(args : JSONArray) {
+
+        setAsActivityResultCallback()
+
         this.clientId = "com.outsystems.mobile.plugin.sociallogin.apple"
         this.redirectUri = "https://enmobile11-dev.outsystemsenterprise.com/SL_Core/rest/SocialLoginSignin/AuthRedirectOpenId"
 
-        val currentActivity: Activity? = this.getActivity()
-        val intent = Intent(currentActivity, AppleSignInActivity::class.java)
+        val provider = "google"
 
-        currentActivity?.startActivityForResult(intent, APPLE_SIGNIN)
+        if(provider == "apple"){
+            val currentActivity: Activity? = this.getActivity()
+            val intent = Intent(currentActivity, AppleSignInActivity::class.java)
 
+            currentActivity?.startActivityForResult(intent, APPLE_SIGNIN)
+        }
+
+        else if (provider == "google"){
+            socialLogin?.doLoginGoogle()
+        }
+
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, intent: Intent) {
+        super.onActivityResult(requestCode, resultCode, intent)
+
+        try {
+            socialLogin?.handleActivityResult(requestCode, resultCode, intent)
+        }
+        catch(hse : Exception) {
+            sendPluginResult(null, Pair(1, "errorMessage"))
+        }
     }
 
     override fun areGooglePlayServicesAvailable(): Boolean {
