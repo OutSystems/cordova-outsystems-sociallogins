@@ -38,6 +38,7 @@ class AppleSignInActivity : Activity() {
         val code = intent?.data?.getQueryParameter("Code")
         val user = intent?.data?.getQueryParameter("User")
         val firstName = intent?.data?.getQueryParameter("firstName")
+        finish()
     }
 
     @SuppressLint("SetJavaScriptEnabled", "NewApi")
