@@ -7,9 +7,23 @@ class OSSocialLogins: CordovaImplementation {
     var callbackId:String=""
     
     override func pluginInitialize() {
-        plugin = SocialLoginsPlugin()
+        let googleProvider = SocialLoginsGoogleProvider()
+        let appleProvider = SocialLoginsAppleProvider()
+        
+        plugin = SocialLoginsPlugin(appleProvider: appleProvider, googleProvider: googleProvider)
         plugin?.rootViewController = self.viewController
         plugin?.delegate = self
+    }
+    
+    @objc(doLoginGoogle:)
+    func doLoginGoogle(command: CDVInvokedUrlCommand) {
+        callbackId = command.callbackId
+        
+        do {
+            try plugin?.doLoginGoogle(callbackID: self.callbackId)
+        } catch {
+            self.sendResult(result: "", error:nil , callBackID: self.callbackId)
+        }
     }
     
     @objc(doLogin:)
@@ -17,7 +31,7 @@ class OSSocialLogins: CordovaImplementation {
         callbackId = command.callbackId
         
         do {
-            try plugin?.doLogin(callbackID: self.callbackId)
+            try plugin?.doLogin(callbackID: self.callbackId, provider: "GOOGLE")
         } catch {
             self.sendResult(result: "", error:nil , callBackID: self.callbackId)
         }
@@ -28,7 +42,7 @@ class OSSocialLogins: CordovaImplementation {
         callbackId = command.callbackId
         
         do {
-            try plugin?.getCredentialState(userID: "")
+            try plugin?.getCredentialState(userID: "", provider: "GOOGLE")
         } catch {
             self.sendResult(result: "", error:nil , callBackID: self.callbackId)
         }

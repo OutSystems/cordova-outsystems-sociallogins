@@ -17,12 +17,35 @@
   </platform>
 
   <platform name="ios">
+
+    <!-- Hooks -->
+    <hook type="before_plugin_install" src="hooks/add_cordova_implementation_ios.js"/>
+		<hook type="before_plugin_install" src="hooks/install_prerequisites.js"/>
+    <hook type="after_plugin_add" src="hooks/add_swift_support.js" />
+    <hook type="after_prepare" src="hooks/iOSCopyPreferences.js" />
+
     <config-file parent="/*" target="config.xml">
+      <preference name="GOOGLE_CLIENT_ID" value="$GOOGLE_CLIENT_URL"/>
       <feature name="OSSocialLogins">
         <param name="ios-package" value="OSSocialLogins"/>
       </feature>
       <preference name="deployment-target" value="12" />
       <preference name="UseSwiftLanguageVersion" value="5" />
+    </config-file>
+
+    <config-file target="*-Info.plist" parent="CFBundleURLTypes">
+        <array>
+            <dict>
+                <key>CFBundleTypeRole</key>
+                <string>Editor</string>
+                <key>CFBundleURLName</key>
+                <string>BUNDLE_ID</string>
+                <key>CFBundleURLSchemes</key>
+                <array>
+                    <string>GOOGLE_CLIENT_ID</string>
+                </array>
+            </dict>
+        </array>
     </config-file>
 
         <!-- Entitlements -->
@@ -38,18 +61,24 @@
       </array>
     </config-file>
 
-    <!-- Hooks -->
-    <hook type="before_plugin_install" src="hooks/add_cordova_implementation_ios.js"/>
-		<hook type="before_plugin_install" src="hooks/install_prerequisites.js"/>
-    <hook type="after_plugin_add" src="hooks/add_swift_support.js" />
-
 		<!-- iOS Source Files -->
 		<source-file src="src/ios/OSSocialLogins.swift" />
     <source-file src="src/ios/SocialLoginsPlugin.swift" />
     <source-file src="src/ios/KeychainItem.swift" />
     <source-file src="src/ios/SocialLoginsProtocol.swift" />
+    <source-file src="src/ios/SocialLoginsGoogleProvider.swift" />
+    <source-file src="src/ios/SocialLoginsAppleProvider.swift" />
     <source-file src="src/ios/CordovaImplementation.swift" />
     <framework src="src/ios/frameworks/OSCore.xcframework" embed="true" custom="true" />
+
+    <podspec>
+            <config>
+                <source url="https://cdn.cocoapods.org/" />
+            </config>
+            <pods>
+                <pod name="GoogleSignIn" spec="6.0.2" />
+            </pods>
+        </podspec>
 
   </platform>
 </plugin>

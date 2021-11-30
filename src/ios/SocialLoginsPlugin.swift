@@ -8,13 +8,17 @@ class SocialLoginsPlugin: NSObject,
     private var callbackID:String=""
     var delegate: SocialLoginsProtocol?
     var rootViewController:UIViewController?
+    var appleProvider: SocialLoginsAppleProvider?
+    var googleProvider: SocialLoginsGoogleProvider?
     
     func presentationAnchor(for controller: ASAuthorizationController) -> ASPresentationAnchor {
         return self.rootViewController!.view as! ASPresentationAnchor
     }
     
-    override init() {
+    init (appleProvider: SocialLoginsAppleProvider, googleProvider:SocialLoginsGoogleProvider) {
         super.init()
+        self.googleProvider = googleProvider
+        self.appleProvider = appleProvider
 //        performExistingAccountSetupFlows() TODO: verify if this needs to be called.
     }
     
@@ -28,7 +32,7 @@ class SocialLoginsPlugin: NSObject,
         authorizationController.performRequests()
     }
     
-    func doLogin(callbackID:String) throws {
+    func doLogin(callbackID:String, provider: String) throws {
         self.callbackID = callbackID
         let appleIDProvider = ASAuthorizationAppleIDProvider()
         let request = appleIDProvider.createRequest()
@@ -41,17 +45,50 @@ class SocialLoginsPlugin: NSObject,
         authorizationController.performRequests()
     }
     
+    func doLoginGoogle(callbackID:String) throws {
+        
+        if let signInConfig = googleProvider?.signInConfig {
+            googleProvider?.GIDSharedInstance.signIn(with: signInConfig, presenting: rootViewController!) { user, error in
+                guard error == nil else { return }
+
+                if let user = user {
+                    let name = user.profile?.name ?? ""
+                    let email = user.profile?.email ?? ""
+                    let userID = user.userID ?? ""
+                    let accessToken = user.authentication.accessToken
+
+                    let userResponse = UserInfoResponse(userIdentifier: userID,
+                                                        email: email,
+                                                        fullName: name,
+                                                        identityToken: accessToken)
+
+                    self.delegate?.callBackUserInfoResponse(result: userResponse, error: nil, callBackID: self.callbackID)
+                }
+            }
+        }
+        
+    }
+    
     func doLogout(callbackID:String) throws {
-//        Here we should clear all the user information in keychain or server side.
+//        Here we should clean all the user information in keychain or server side.
 //        But apple does not provide a logout or revoke method
     }
     
-    func getCredentialState(userID:String) throws {
-        
+    func getGoogleCredentialState(userID:String) {
+        googleProvider?.GIDSharedInstance.restorePreviousSignIn { user, error in
+            if error != nil || user == nil {
+              // Show the app's signed-out state.
+                self.delegate?.callBackCredentialState(result: "notFound", error: nil, callBackID: self.callbackID)
+            } else {
+              // Show the app's signed-in state.
+                self.delegate?.callBackCredentialState(result: "authorized", error: nil, callBackID: self.callbackID)
+            }
+          }
+    }
+    
+    func getAppleCredentialState(userID:String) {
         var ID: String = KeychainItem.currentUserIdentifier
-        if !userID.isEmpty {
-            ID = userID
-        }
+        if !userID.isEmpty { ID = userID }
         
         if ID.isEmpty {
             self.delegate?.callBackCredentialState(result: "notFound", error: nil, callBackID: self.callbackID)
@@ -60,11 +97,7 @@ class SocialLoginsPlugin: NSObject,
         
         let appleIDProvider = ASAuthorizationAppleIDProvider()
         appleIDProvider.getCredentialState(forUserID: ID) { (credentialState, error) in
-            
-            if let error = error {
-                debugPrint(error)
-            }
-            
+            if let error = error { debugPrint(error) }
             switch credentialState {
             case .authorized:
                 self.delegate?.callBackCredentialState(result: "authorized", error: nil, callBackID: self.callbackID)
@@ -81,14 +114,30 @@ class SocialLoginsPlugin: NSObject,
         }
     }
     
+    func getCredentialState(userID:String, provider:String) throws {
+        switch provider {
+        case ProviderEnum.apple.rawValue:
+            getAppleCredentialState(userID:userID)
+        case ProviderEnum.google.rawValue:
+            getGoogleCredentialState(userID: userID)
+        default:
+            getGoogleCredentialState(userID: userID)
+        }
+    }
+    
     func authorizationController(controller: ASAuthorizationController, didCompleteWithAuthorization authorization: ASAuthorization) {
         if let appleIDCredential = authorization.credential as?  ASAuthorizationAppleIDCredential {
             let userIdentifier = appleIDCredential.user
             let email = appleIDCredential.email ?? ""
+            
+            if let authorizationCode = appleIDCredential.authorizationCode {
+                guard let authoCode = String(data: authorizationCode, encoding: .utf8) else {return}
+                print(authoCode)
+            }
                     
             if let token = appleIDCredential.identityToken {
                 guard let strToken = String(data: token, encoding: .utf8) else {return}
-                
+                print(strToken)
                 let userResponse = UserInfoResponse(userIdentifier: userIdentifier,
                                                     email: email,
                                                     fullName: "",
@@ -98,7 +147,6 @@ class SocialLoginsPlugin: NSObject,
                 delegate?.callBackUserInfoResponse(result: userResponse, error: nil, callBackID: self.callbackID)
             }
         }
-            
     }
     
     private func saveUserInKeychain(_ userIdentifier: String) {
@@ -120,4 +168,10 @@ struct UserInfoResponse: Encodable {
     let email:String
     let fullName:String
     let identityToken:String
+}
+
+enum ProviderEnum: String
+{
+    case apple = "APPLE",
+         google = "GOOGLE"
 }
