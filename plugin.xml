@@ -29,7 +29,7 @@
       <feature name="OSSocialLogins">
         <param name="ios-package" value="OSSocialLogins"/>
       </feature>
-      <preference name="deployment-target" value="12" />
+      <preference name="deployment-target" value="13" />
       <preference name="UseSwiftLanguageVersion" value="5" />
     </config-file>
 
