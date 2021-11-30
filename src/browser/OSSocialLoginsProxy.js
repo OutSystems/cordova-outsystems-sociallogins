@@ -1,7 +1,5 @@
 
-function doLogin (success, error, opts) {
-    console.log("Hello social logins!");
-
+function doAppleLogin (success, error, opts) {
     let clientId = "com.outsystems.mobile.plugin.sociallogin.apple";
     let redirectUri = "https://enmobile11-dev.outsystemsenterprise.com/SL_Core/rest/SocialLoginSignin/AuthRedirectOpenId";
     let responseType = "code id_token";
@@ -17,16 +15,15 @@ function doLogin (success, error, opts) {
         "&response_mode=" + responseMode + 
         "&state=" + state;
 
-    window.open(url);
+    let popup = window.open(url);
     window.addEventListener("message", (event) => {
-        alert(event.name);
         console.log(event);
+        popup.close();
     }, false);
 }
 
-
 module.exports = {
-    coolMethod: doLogin,
+    coolMethod: doAppleLogin,
     cleanup: function () {}
 };
 
