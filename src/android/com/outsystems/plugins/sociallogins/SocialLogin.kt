@@ -37,19 +37,8 @@ class SocialLogin(var activity : Activity, var context : Context) {
 
         val mGoogleSignInClient = GoogleSignIn.getClient(activity, gso);
 
-        val account = GoogleSignIn.getLastSignedInAccount(context)
-
-        if(account != null){
-            Log.d("Check for logged in account", "Account not null!")
-            val email = account.email
-            val displayName = account.displayName
-            val String = ""
-        }
-        else{
-            //start the login flow:
-            signIn(mGoogleSignInClient)
-        }
-
+        //start the login flow:
+        signIn(mGoogleSignInClient)
     }
 
     fun doLogoutGoogle(){
@@ -57,6 +46,31 @@ class SocialLogin(var activity : Activity, var context : Context) {
             .build()
         val mGoogleSignInClient = GoogleSignIn.getClient(activity, gso)
         signOut(mGoogleSignInClient)
+    }
+
+    fun isUserLoggedIn() : Pair<Boolean, GoogleSignInAccount?>{
+        val account = GoogleSignIn.getLastSignedInAccount(context)
+        if(account != null){
+            return Pair(true, account)
+        }
+        return Pair(false, null)
+    }
+
+    fun getLoginData(onSuccess : (LoginDataResponse) -> Unit, onError : (SocialLoginError) -> Unit) {
+
+        val isLoggedIn = isUserLoggedIn()
+        if(isLoggedIn.first){
+            onSuccess(LoginDataResponse(
+                isLoggedIn.second!!.id,
+                isLoggedIn.second!!.email,
+                isLoggedIn.second!!.displayName,
+                isLoggedIn.second!!.photoUrl.toString()
+                )
+            )
+        }
+        else{
+            onError(SocialLoginError.NO_USER_LOGGED_IN_ERROR)
+        }
     }
 
     private fun signIn(signInClient: GoogleSignInClient) {
@@ -67,7 +81,8 @@ class SocialLogin(var activity : Activity, var context : Context) {
     private fun signOut(signInClient: GoogleSignInClient) {
         signInClient.signOut()
             .addOnCompleteListener(activity, OnCompleteListener {
-                // do nothing
+                //do nothing, probably send plugin result with success using addOnSuccessListener
+                //also add a addOnFailureListener
             })
     }
 

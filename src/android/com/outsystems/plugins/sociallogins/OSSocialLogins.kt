@@ -6,6 +6,7 @@ import org.apache.cordova.CallbackContext
 import org.apache.cordova.CordovaInterface
 import org.apache.cordova.CordovaWebView
 import org.json.JSONArray
+import com.google.gson.Gson
 
 class OSSocialLogins : CordovaImplementation() {
 
@@ -17,6 +18,7 @@ class OSSocialLogins : CordovaImplementation() {
     val APPLE_SIGNIN: Int = 13;
 
     var socialLogin: SocialLogin? = null
+    val gson by lazy { Gson() }
 
     override fun initialize(cordova: CordovaInterface, webView: CordovaWebView) {
         super.initialize(cordova, webView)
@@ -37,17 +39,20 @@ class OSSocialLogins : CordovaImplementation() {
             "logout" -> {
                 doLogout(args)
             }
+            "getLoginData" -> {
+                getLoginData(args)
+            }
+            "checkLoginStatus" -> {
+                checkLoginStatus(args)
+            }
         }
         return true
     }
 
     private fun doLogin(args : JSONArray) {
 
-        setAsActivityResultCallback()
-
         this.clientId = "com.outsystems.mobile.plugin.sociallogin.apple"
         this.redirectUri = "https://enmobile11-dev.outsystemsenterprise.com/SL_Core/rest/SocialLoginSignin/AuthRedirectOpenId"
-
         val provider = "google"
 
         if(provider == "apple"){
@@ -58,19 +63,45 @@ class OSSocialLogins : CordovaImplementation() {
         }
 
         else if (provider == "google"){
-            socialLogin?.doLoginGoogle()
-        }
 
+            if(!socialLogin?.isUserLoggedIn()!!.first){
+                setAsActivityResultCallback()
+                socialLogin?.doLoginGoogle()
+            }
+            //decide what we should do when user is already logged in
+            //maybe send back a message saying login already done?
+        }
     }
 
     private fun doLogout(args: JSONArray) {
-
         val provider = "google"
 
         if(provider == "google"){
             socialLogin?.doLogoutGoogle()
         }
+    }
 
+    private fun getLoginData(args: JSONArray) {
+
+        socialLogin?.getLoginData(
+            {
+                response ->
+                    val pluginResponseJson = gson.toJson(response)
+                    sendPluginResult(pluginResponseJson, null)
+            },
+            {
+                error ->
+                    sendPluginResult(null, Pair(error.code, error.message))
+            })
+    }
+
+    private fun checkLoginStatus(args: JSONArray) {
+        if(socialLogin?.isUserLoggedIn()!!.first){
+            sendPluginResult("logged", null)
+        }
+        else{
+            sendPluginResult("notLogged", null)
+        }
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, intent: Intent) {
