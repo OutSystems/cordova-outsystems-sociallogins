@@ -31,8 +31,11 @@ class OSSocialLogins : CordovaImplementation() {
         this.callbackContext = callbackContext
 
         when (action) {
-            "coolMethod" -> {
+            "login" -> {
                 doLogin(args)
+            }
+            "logout" -> {
+                doLogout(args)
             }
         }
         return true
@@ -56,6 +59,16 @@ class OSSocialLogins : CordovaImplementation() {
 
         else if (provider == "google"){
             socialLogin?.doLoginGoogle()
+        }
+
+    }
+
+    private fun doLogout(args: JSONArray) {
+
+        val provider = "google"
+
+        if(provider == "google"){
+            socialLogin?.doLogoutGoogle()
         }
 
     }

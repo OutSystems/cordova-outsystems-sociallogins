@@ -14,6 +14,11 @@ import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.tasks.Task
 import com.google.android.gms.common.api.ApiException
 
+import com.google.android.gms.tasks.OnCompleteListener
+
+
+
+
 
 class SocialLogin(var activity : Activity, var context : Context) {
 
@@ -47,9 +52,23 @@ class SocialLogin(var activity : Activity, var context : Context) {
 
     }
 
+    fun doLogoutGoogle(){
+        val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+            .build()
+        val mGoogleSignInClient = GoogleSignIn.getClient(activity, gso)
+        signOut(mGoogleSignInClient)
+    }
+
     private fun signIn(signInClient: GoogleSignInClient) {
         val signInIntent: Intent = signInClient.signInIntent
         startActivityForResult(activity, signInIntent, GOOGLE_SIGN_IN, null)
+    }
+
+    private fun signOut(signInClient: GoogleSignInClient) {
+        signInClient.signOut()
+            .addOnCompleteListener(activity, OnCompleteListener {
+                // do nothing
+            })
     }
 
     fun handleActivityResult(requestCode: Int, resultCode: Int, intent: Intent) {
