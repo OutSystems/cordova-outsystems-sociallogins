@@ -22,9 +22,9 @@ module.exports = function (context) {
     var infoPlistTags = etreeInfoPlist.findall('./dict/array/dict/array/string');
 
     for (var i = 0; i < infoPlistTags.length; i++) {
-        console.log(infoPlistTags[i].text);
         if (infoPlistTags[i].text.includes("GOOGLE_CLIENT_ID")) {
             infoPlistTags[i].text = infoPlistTags[i].text.replace('GOOGLE_CLIENT_ID', google_client_id)
+            console.log(infoPlistTags[i].text);
         }
     }
 
