@@ -5,13 +5,15 @@
   "keywords": [
     "ecosystem:cordova",
     "cordova-android",
-    "cordova-ios"
+    "cordova-ios",
+    "cordova-browser"
   ],
   "cordova": {
     "id": "com.outsystems.plugins.sociallogins",
     "platforms": [
       "android",
-      "ios"
+      "ios",
+      "browser"
     ]
   },
   "engines": []
