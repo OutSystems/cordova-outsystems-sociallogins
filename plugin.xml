@@ -11,10 +11,53 @@
       <feature name="OSSocialLogins">
         <param name="android-package" value="com.outsystems.plugins.sociallogins.OSSocialLogins"/>
       </feature>
+
+      <preference name="GradlePluginKotlinEnabled" value="true" />
+      <preference name="GradlePluginKotlinCodeStyle" value="official" />
+      <preference name="GradlePluginKotlinVersion" value="1.3.50" />
+      <preference name="AndroidXEnabled" value="true"/>
+
     </config-file>
     <config-file parent="/*" target="AndroidManifest.xml"/>
-    <source-file src="src/android/com/outsystems/plugins/sociallogins/OSSocialLogins.java" target-dir="src/com/outsystems/plugins/sociallogins"/>
+
+    <config-file target="AndroidManifest.xml" parent="/manifest/application">
+      <activity
+            android:name="com.outsystems.plugins.sociallogins.AppleSignInActivity"
+            android:exported="true"
+            android:launchMode="singleTop">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <data android:scheme="https" android:host="enmobile11-dev.outsystemsenterprise.com" />
+            </intent-filter>
+        </activity>
+    </config-file>
+
+    <config-file target="AndroidManifest.xml" parent="/manifest">
+      <queries>
+        <intent>
+            <action android:name=
+                "android.support.customtabs.action.CustomTabsService" />
+        </intent>
+      </queries>
+    </config-file>
+
+
+    <source-file src="src/android/com/outsystems/plugins/sociallogins/OSSocialLogins.kt" target-dir="app/src/main/kotlin/com/outsystems/plugins/sociallogins"/>
+    <source-file src="src/android/com/outsystems/plugins/sociallogins/AndroidPlatformInterface.kt" target-dir="app/src/main/kotlin/com/outsystems/plugins/sociallogins"/>
+    <source-file src="src/android/com/outsystems/plugins/sociallogins/CordovaImplementation.kt" target-dir="app/src/main/kotlin/com/outsystems/plugins/sociallogins"/>
+    <source-file src="src/android/com/outsystems/plugins/sociallogins/AppleSignInActivity.kt" target-dir="app/src/main/kotlin/com/outsystems/plugins/sociallogins"/>
+    <source-file src="src/android/com/outsystems/plugins/sociallogins/AppleConstants.kt" target-dir="app/src/main/kotlin/com/outsystems/plugins/sociallogins"/>
+    <source-file src="src/android/com/outsystems/plugins/sociallogins/AppleData.kt" target-dir="app/src/main/kotlin/com/outsystems/plugins/sociallogins"/>
+
+    <framework src="org.jetbrains.kotlinx:kotlinx-coroutines-core-jvm:1.4.3" />
+    <framework src="org.jetbrains.kotlinx:kotlinx-coroutines-android:1.4.3" />
+    <!--For Custom Tabs-->
+    <framework src="androidx.browser:browser:1.3.0" />
+  
   </platform>
+  
   <platform name="ios">
     <config-file parent="/*" target="config.xml">
       <feature name="OSSocialLogins">

@@ -83,3 +83,8 @@ lint/generated/
 lint/outputs/
 lint/tmp/
 # lint/reports/
+src/android/.DS_Store
+src/android/com/outsystems/plugins/.DS_Store
+src/android/com/outsystems/plugins/sociallogins/.DS_Store
+tests/android/OSSocialLoginsTests/.project
+tests/android/OSSocialLoginsTests/.settings/org.eclipse.buildship.core.prefs
