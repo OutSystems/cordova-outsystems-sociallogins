@@ -71,13 +71,14 @@
     <source-file src="src/ios/CordovaImplementation.swift" />
     <framework src="src/ios/frameworks/OSCore.xcframework" embed="true" custom="true" />
 
+    <!-- Google frameworks -->
     <podspec>
-        <config>
-            <source url="https://cdn.cocoapods.org/" />
-        </config>
-        <pods>
-            <pod name="GoogleSignIn" spec="6.0.2" />
-        </pods>
+      <config>
+        <source url="https://cdn.cocoapods.org/"/>
+      </config>
+      <pods use-frameworks="true">
+        <pod name="GoogleSignIn" spec="~> 6.0.2"/>
+      </pods>
     </podspec>
 
   </platform>
