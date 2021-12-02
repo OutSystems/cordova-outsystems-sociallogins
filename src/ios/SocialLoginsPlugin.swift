@@ -33,45 +33,58 @@ class SocialLoginsPlugin: NSObject,
     }
     
     func doLogin(callbackID:String, provider: String) throws {
-        self.callbackID = callbackID
-        let appleIDProvider = ASAuthorizationAppleIDProvider()
-        let request = appleIDProvider.createRequest()
-        request.requestedOperation = ASAuthorization.OpenIDOperation.operationLogin
-        request.requestedScopes = [.fullName, .email]
-
-        let authorizationController = ASAuthorizationController(authorizationRequests: [request])
-        authorizationController.delegate = self
-        authorizationController.presentationContextProvider = self
-        authorizationController.performRequests()
-    }
-    
-    func doLoginGoogle(callbackID:String) throws {
         
-        if let signInConfig = googleProvider?.signInConfig {
-            googleProvider?.GIDSharedInstance.signIn(with: signInConfig, presenting: rootViewController!) { user, error in
-                guard error == nil else { return }
+        if (provider == ProviderEnum.apple.rawValue) {
+            self.callbackID = callbackID
+            let appleIDProvider = ASAuthorizationAppleIDProvider()
+            let request = appleIDProvider.createRequest()
+            request.requestedOperation = ASAuthorization.OpenIDOperation.operationLogin
+            request.requestedScopes = [.fullName, .email]
 
-                if let user = user {
-                    let name = user.profile?.name ?? ""
-                    let email = user.profile?.email ?? ""
-                    let userID = user.userID ?? ""
-                    let accessToken = user.authentication.accessToken
+            let authorizationController = ASAuthorizationController(authorizationRequests: [request])
+            authorizationController.delegate = self
+            authorizationController.presentationContextProvider = self
+            authorizationController.performRequests()
+            
+        } else {
+            
+            if let signInConfig = googleProvider?.signInConfig {
+                googleProvider?.GIDSharedInstance.signIn(with: signInConfig, presenting: rootViewController!) { user, error in
+                    guard error == nil else { return }
 
-                    let userResponse = UserInfoResponse(userIdentifier: userID,
-                                                        email: email,
-                                                        fullName: name,
-                                                        identityToken: accessToken)
+                    if let user = user {
+                        let name = user.profile?.name ?? ""
+                        let email = user.profile?.email ?? ""
+                        let userID = user.userID ?? ""
+                        let accessToken = user.authentication.accessToken
 
-                    self.delegate?.callBackUserInfoResponse(result: userResponse, error: nil, callBackID: self.callbackID)
+                        let userResponse = UserInfoResponse(userIdentifier: userID,
+                                                            email: email,
+                                                            fullName: name,
+                                                            identityToken: accessToken)
+
+                        self.delegate?.callBackUserInfoResponse(result: userResponse, error: nil, callBackID: self.callbackID)
+                    }
                 }
             }
         }
         
     }
     
-    func doLogout(callbackID:String) throws {
-//        Here we should clean all the user information in keychain or server side.
-//        But apple does not provide a logout or revoke method
+    func doLogout(callbackID:String, provider: String) throws {
+        
+        if (provider == ProviderEnum.apple.rawValue) {
+            
+            //        Here we should clean all the user information in keychain or server side.
+            //        But apple does not provide a logout or revoke method
+            
+        } else {
+            
+            googleProvider?.GIDSharedInstance.signOut()
+            self.delegate?.callBackCredentialState(result: "loggedout", error: nil, callBackID: self.callbackID)
+            
+        }
+        
     }
     
     func getGoogleCredentialState(userID:String) {
@@ -161,17 +174,4 @@ class SocialLoginsPlugin: NSObject,
         // TODO: create a class for the errors
     }
     
-}
-
-struct UserInfoResponse: Encodable {
-    let userIdentifier:String
-    let email:String
-    let fullName:String
-    let identityToken:String
-}
-
-enum ProviderEnum: String
-{
-    case apple = "APPLE",
-         google = "GOOGLE"
 }

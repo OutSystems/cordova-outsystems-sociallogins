@@ -68,6 +68,7 @@
     <source-file src="src/ios/SocialLoginsProtocol.swift" />
     <source-file src="src/ios/SocialLoginsGoogleProvider.swift" />
     <source-file src="src/ios/SocialLoginsAppleProvider.swift" />
+    <source-file src="src/ios/UserInfoResponse.swift" />
     <source-file src="src/ios/CordovaImplementation.swift" />
     <framework src="src/ios/frameworks/OSCore.xcframework" embed="true" custom="true" />
 

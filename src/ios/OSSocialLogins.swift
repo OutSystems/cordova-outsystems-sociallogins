@@ -15,34 +15,37 @@ class OSSocialLogins: CordovaImplementation {
         plugin?.delegate = self
     }
     
-    @objc(doLoginGoogle:)
-    func doLoginGoogle(command: CDVInvokedUrlCommand) {
-        callbackId = command.callbackId
-        
-        do {
-            try plugin?.doLoginGoogle(callbackID: self.callbackId)
-        } catch {
-            self.sendResult(result: "", error:nil , callBackID: self.callbackId)
-        }
-    }
-    
     @objc(doLogin:)
     func doLogin(command: CDVInvokedUrlCommand) {
         callbackId = command.callbackId
+        let provider = command.arguments[0] as? String ?? ""
         
         do {
-            try plugin?.doLogin(callbackID: self.callbackId, provider: "GOOGLE")
+            try plugin?.doLogin(callbackID: self.callbackId, provider: provider)
         } catch {
             self.sendResult(result: "", error:nil , callBackID: self.callbackId)
         }
     }
     
-    @objc(isLoggedIn:)
-    func isLoggedIn(command: CDVInvokedUrlCommand) {
+    @objc(logout:)
+    func logout(command: CDVInvokedUrlCommand) {
         callbackId = command.callbackId
+        let provider = command.arguments[0] as? String ?? ""
         
         do {
-            try plugin?.getCredentialState(userID: "", provider: "GOOGLE")
+            try plugin?.doLogout(callbackID: self.callbackId, provider: provider)
+        } catch {
+            self.sendResult(result: "", error:nil , callBackID: self.callbackId)
+        }
+    }
+    
+    @objc(checkLoginStatus:)
+    func checkLoginStatus(command: CDVInvokedUrlCommand) {
+        callbackId = command.callbackId
+        let provider = command.arguments[0] as? String ?? ""
+        
+        do {
+            try plugin?.getCredentialState(userID: "", provider: provider)
         } catch {
             self.sendResult(result: "", error:nil , callBackID: self.callbackId)
         }
