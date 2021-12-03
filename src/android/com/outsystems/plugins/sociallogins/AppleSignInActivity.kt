@@ -5,13 +5,7 @@ import android.app.Activity
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
-import android.os.PersistableBundle
-import android.webkit.WebView
-import androidx.appcompat.app.AppCompatActivity
-import androidx.browser.customtabs.CustomTabsCallback
 import androidx.browser.customtabs.CustomTabsIntent
-import com.outsystemsenterprise.enmobile11dev.SocialLoginsPluginDemo.R
-import java.util.*
 import androidx.browser.customtabs.CustomTabsClient
 
 import android.content.ComponentName
