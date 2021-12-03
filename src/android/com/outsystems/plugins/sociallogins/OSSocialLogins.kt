@@ -70,6 +70,7 @@ class OSSocialLogins : CordovaImplementation() {
             }
             //decide what we should do when user is already logged in
             //maybe send back a message saying login already done?
+            sendPluginResult("success", null)
         }
     }
 
