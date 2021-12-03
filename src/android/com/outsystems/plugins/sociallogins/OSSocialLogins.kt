@@ -33,7 +33,7 @@ class OSSocialLogins : CordovaImplementation() {
         this.callbackContext = callbackContext
 
         when (action) {
-            "login" -> {
+            "doLogin" -> {
                 doLogin(args)
             }
             "logout" -> {
