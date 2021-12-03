@@ -70,7 +70,6 @@ class OSSocialLogins : CordovaImplementation() {
             }
             //decide what we should do when user is already logged in
             //maybe send back a message saying login already done?
-            sendPluginResult("success", null)
         }
     }
 
@@ -110,6 +109,8 @@ class OSSocialLogins : CordovaImplementation() {
 
         try {
             socialLogin?.handleActivityResult(requestCode, resultCode, intent)
+            //implement in closure to sendPluginResult after handleActivityResult returns success
+            sendPluginResult("success", null)
         }
         catch(hse : Exception) {
             sendPluginResult(null, Pair(1, "errorMessage"))
