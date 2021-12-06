@@ -33,7 +33,7 @@ class OSSocialLogins : CordovaImplementation() {
         this.callbackContext = callbackContext
 
         when (action) {
-            "login" -> {
+            "doLogin" -> {
                 doLogin(args)
             }
             "logout" -> {
@@ -109,6 +109,8 @@ class OSSocialLogins : CordovaImplementation() {
 
         try {
             socialLogin?.handleActivityResult(requestCode, resultCode, intent)
+            //implement in closure to sendPluginResult after handleActivityResult returns success
+            sendPluginResult("success", null)
         }
         catch(hse : Exception) {
             sendPluginResult(null, Pair(1, "errorMessage"))
