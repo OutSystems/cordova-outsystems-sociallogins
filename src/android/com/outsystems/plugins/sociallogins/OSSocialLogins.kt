@@ -53,7 +53,7 @@ class OSSocialLogins : CordovaImplementation() {
 
         this.clientId = "com.outsystems.mobile.plugin.sociallogin.apple"
         this.redirectUri = "https://enmobile11-dev.outsystemsenterprise.com/SL_Core/rest/SocialLoginSignin/AuthRedirectOpenId"
-        val provider = "apple"
+        val provider = "google"
 
         if(provider == "apple"){
             val currentActivity: Activity? = this.getActivity()
