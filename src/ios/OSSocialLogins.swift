@@ -15,8 +15,8 @@ class OSSocialLogins: CordovaImplementation {
         plugin?.delegate = self
     }
     
-    @objc(login:)
-    func login(command: CDVInvokedUrlCommand) {
+    @objc(doLogin:)
+    func doLogin(command: CDVInvokedUrlCommand) {
         callbackId = command.callbackId
         let provider = command.arguments[0] as? String ?? ""
         
