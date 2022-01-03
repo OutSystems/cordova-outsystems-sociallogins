@@ -7,8 +7,8 @@ struct UserInfoResponse: Encodable {
     let identityToken:String
 }
 
-enum ProviderEnum: String
+enum ProviderEnum: Int
 {
-    case apple = "APPLE",
-         google = "GOOGLE"
+    case apple = 57,
+         google = 25
 }

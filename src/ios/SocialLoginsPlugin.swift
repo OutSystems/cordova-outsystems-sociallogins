@@ -32,7 +32,7 @@ class SocialLoginsPlugin: NSObject,
         authorizationController.performRequests()
     }
     
-    func doLogin(callbackID:String, provider: String) throws {
+    func doLogin(callbackID:String, provider: Int) throws {
         
         if (provider == ProviderEnum.apple.rawValue) {
             self.callbackID = callbackID
@@ -71,7 +71,7 @@ class SocialLoginsPlugin: NSObject,
         
     }
     
-    func doLogout(callbackID:String, provider: String) throws {
+    func doLogout(callbackID:String, provider: Int) throws {
         
         if (provider == ProviderEnum.apple.rawValue) {
             
@@ -127,7 +127,7 @@ class SocialLoginsPlugin: NSObject,
         }
     }
     
-    func getCredentialState(userID:String, provider:String) throws {
+    func getCredentialState(userID:String, provider:Int) throws {
         switch provider {
         case ProviderEnum.apple.rawValue:
             getAppleCredentialState(userID:userID)

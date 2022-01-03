@@ -20,8 +20,10 @@ class OSSocialLogins: CordovaImplementation {
         callbackId = command.callbackId
         let provider = command.arguments[0] as? String ?? ""
         
+        guard let providerInt = Int(provider) else {return}
+        
         do {
-            try plugin?.doLogin(callbackID: self.callbackId, provider: provider)
+            try plugin?.doLogin(callbackID: self.callbackId, provider: providerInt)
         } catch {
             self.sendResult(result: "", error:nil , callBackID: self.callbackId)
         }
@@ -31,9 +33,10 @@ class OSSocialLogins: CordovaImplementation {
     func logout(command: CDVInvokedUrlCommand) {
         callbackId = command.callbackId
         let provider = command.arguments[0] as? String ?? ""
+        guard let providerInt = Int(provider) else {return}
         
         do {
-            try plugin?.doLogout(callbackID: self.callbackId, provider: provider)
+            try plugin?.doLogout(callbackID: self.callbackId, provider: providerInt)
         } catch {
             self.sendResult(result: "", error:nil , callBackID: self.callbackId)
         }
@@ -43,9 +46,10 @@ class OSSocialLogins: CordovaImplementation {
     func checkLoginStatus(command: CDVInvokedUrlCommand) {
         callbackId = command.callbackId
         let provider = command.arguments[0] as? String ?? ""
+        guard let providerInt = Int(provider) else {return}
         
         do {
-            try plugin?.getCredentialState(userID: "", provider: provider)
+            try plugin?.getCredentialState(userID: "", provider: providerInt)
         } catch {
             self.sendResult(result: "", error:nil , callBackID: self.callbackId)
         }
