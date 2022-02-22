@@ -1,4 +1,5 @@
 import Foundation
+import OSCore
 
 @objc(OSSocialLogins)
 class OSSocialLogins: CordovaImplementation {
@@ -7,45 +8,17 @@ class OSSocialLogins: CordovaImplementation {
     var callbackId:String=""
     
     override func pluginInitialize() {
-        let googleProvider = SocialLoginsGoogleProvider()
-        let appleProvider = SocialLoginsAppleProvider()
-        
-        plugin = SocialLoginsPlugin(appleProvider: appleProvider, googleProvider: googleProvider)
+        plugin = SocialLoginsPlugin()
         plugin?.rootViewController = self.viewController
         plugin?.delegate = self
     }
     
-    @objc(login:)
-    func login(command: CDVInvokedUrlCommand) {
+    @objc(doLogin:)
+    func doLogin(command: CDVInvokedUrlCommand) {
         callbackId = command.callbackId
-        let provider = command.arguments[0] as? String ?? ""
         
         do {
-            try plugin?.doLogin(callbackID: self.callbackId, provider: provider)
-        } catch {
-            self.sendResult(result: "", error:nil , callBackID: self.callbackId)
-        }
-    }
-    
-    @objc(logout:)
-    func logout(command: CDVInvokedUrlCommand) {
-        callbackId = command.callbackId
-        let provider = command.arguments[0] as? String ?? ""
-        
-        do {
-            try plugin?.doLogout(callbackID: self.callbackId, provider: provider)
-        } catch {
-            self.sendResult(result: "", error:nil , callBackID: self.callbackId)
-        }
-    }
-    
-    @objc(checkLoginStatus:)
-    func checkLoginStatus(command: CDVInvokedUrlCommand) {
-        callbackId = command.callbackId
-        let provider = command.arguments[0] as? String ?? ""
-        
-        do {
-            try plugin?.getCredentialState(userID: "", provider: provider)
+            try plugin?.doLogin(callbackID: self.callbackId)
         } catch {
             self.sendResult(result: "", error:nil , callBackID: self.callbackId)
         }
