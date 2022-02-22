@@ -66,9 +66,9 @@ class SocialLoginsPlugin: NSObject,
     
 }
 
-struct UserInfoResponse: Encodable {
-    let userIdentifier:String
-    let email:String
-    let fullName:String
-    let identityToken:String
-}
+//struct UserInfoResponse: Encodable {
+//    let userIdentifier:String
+//    let email:String
+//    let fullName:String
+//    let identityToken:String
+//}
