@@ -1,5 +1,4 @@
 import Foundation
-import OSCore
 
 @objc(OSSocialLogins)
 class OSSocialLogins: CordovaImplementation {
@@ -9,10 +8,9 @@ class OSSocialLogins: CordovaImplementation {
     
     override func pluginInitialize() {
         let googleProvider = SocialLoginsGoogleProvider()
-        let appleProvider = SocialLoginsAppleProvider()
+        let appleProvider = SocialLoginsAppleProvider(delegate:self)
         plugin = SocialLoginsPlugin(appleProvider: appleProvider, googleProvider: googleProvider)
         plugin?.rootViewController = self.viewController
-        plugin?.delegate = self
     }
     
     @objc(login:)

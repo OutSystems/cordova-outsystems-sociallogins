@@ -7,7 +7,9 @@ class SocialLoginsAppleProvider: NSObject, ASAuthorizationControllerDelegate, AS
     var delegate: SocialLoginsProtocol?
     var rootViewController:UIViewController?
     
-    override init() {}
+    init (delegate:SocialLoginsProtocol) {
+        self.delegate = delegate
+    }
  
     func presentationAnchor(for controller: ASAuthorizationController) -> ASPresentationAnchor {
         return self.rootViewController!.view as! ASPresentationAnchor

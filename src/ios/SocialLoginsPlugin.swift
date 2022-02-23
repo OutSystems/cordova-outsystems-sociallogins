@@ -2,7 +2,6 @@ import Foundation
 
 class SocialLoginsPlugin: NSObject {
 
-    var delegate: SocialLoginsProtocol?
     var rootViewController:UIViewController?
     var appleProvider: SocialLoginsAppleProvider?
     var googleProvider: SocialLoginsGoogleProvider?
@@ -10,8 +9,8 @@ class SocialLoginsPlugin: NSObject {
     init (appleProvider: SocialLoginsAppleProvider, googleProvider:SocialLoginsGoogleProvider) {
         super.init()
         self.googleProvider = googleProvider
-        self.appleProvider = appleProvider
         self.appleProvider?.rootViewController = self.rootViewController
+        self.appleProvider = appleProvider
     }
     
     func doLogin(callbackID: String) {
