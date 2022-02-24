@@ -5,7 +5,7 @@ exports.login = function (success, error, provider) {
 };
 
 exports.loginApple = function (success, error, state, clientId, redirectUrl) {
-    exec(success, error, 'OSSocialLogins', 'login', [state, clientId, redirectUrl]);
+    exec(success, error, 'OSSocialLogins', 'loginApple', [state, clientId, redirectUrl]);
 };
 
 exports.logout = function (arg0, success, error) {
