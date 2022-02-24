@@ -18,20 +18,44 @@ import androidx.browser.customtabs.CustomTabsServiceConnection
 class AppleSignInActivity : Activity() {
     lateinit var redirectUri: String
     lateinit var clientId: String
+    var state: String = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         //setContentView(R.layout.activity_main)
+
+        val bundle = intent.extras
+        if (bundle != null) {
+            state = bundle.getString("state").toString()
+            clientId = bundle.getString("clientId").toString()
+            redirectUri = bundle.getString("redirectUri").toString()
+        }
+
         setupAppleWebviewDialog(
-            "com.outsystems.mobile.plugin.sociallogin.apple",
-            "https://enmobile11-dev.outsystemsenterprise.com/SL_Core/rest/SocialLoginSignin/AuthRedirectOpenId")
+            clientId,
+            redirectUri)
     }
 
     override fun onNewIntent(intent: Intent?) {
         super.onNewIntent(intent)
-        val code = intent?.data?.getQueryParameter("Code")
-        val user = intent?.data?.getQueryParameter("User")
-        val firstName = intent?.data?.getQueryParameter("firstName")
+        val id = intent?.data?.getQueryParameter("id")
+        val firstName = intent?.data?.getQueryParameter("first_name")
+        val lastName = intent?.data?.getQueryParameter("last_name")
+        val token = intent?.data?.getQueryParameter("token")
+        val email = intent?.data?.getQueryParameter("email")
+
+        //send Activity result
+        val resultBundle = Bundle()
+        resultBundle.putString("id", id)
+        resultBundle.putString("firstName", firstName)
+        resultBundle.putString("lastName", lastName)
+        resultBundle.putString("token", token)
+        resultBundle.putString("email", email)
+
+        val resultIntent = Intent()
+        resultIntent.putExtras(resultBundle)
+
+        setResult(1, resultIntent)
         finish()
     }
 
@@ -57,7 +81,6 @@ class AppleSignInActivity : Activity() {
         val session = client.newSession(null)!!
 
         //custom chrome tabs solution
-        val state = 1333
         val url: String = AppleConstants.AUTHURL + "?response_type=code id_token&response_mode=form_post&client_id=" + clientId + "&scope=" + AppleConstants.SCOPE + "&state=" + state + "&redirect_uri=" + redirectUri
 
         val builder = CustomTabsIntent.Builder()
