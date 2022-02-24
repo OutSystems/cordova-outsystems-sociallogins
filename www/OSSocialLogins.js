@@ -4,7 +4,7 @@ exports.login = function (success, error, provider) {
     exec(success, error, 'OSSocialLogins', 'login', [provider]);
 };
 
-exports.loginApple = function (success, error, provider) {
+exports.loginApple = function (success, error, state, clientId, redirectUrl) {
     exec(success, error, 'OSSocialLogins', 'login', [state, clientId, redirectUrl]);
 };
 
