@@ -1,6 +1,6 @@
 import Foundation
 
-struct UserInfoResponse: Encodable {
+struct UserInfo: Encodable {
     let userIdentifier:String
     let email:String
     let firstName:String

@@ -1,7 +1,7 @@
 import Foundation
 
 protocol SocialLoginsProtocol {
-    func callBackUserInfoResponse(result: UserInfoResponse?, error: NSError?, callBackID:String)
+    func callBackUserInfoResponse(result: UserInfo?, error: NSError?, callBackID:String)
     func callBackCredentialState(result: String?, error: NSError?, callBackID:String)
 }
 

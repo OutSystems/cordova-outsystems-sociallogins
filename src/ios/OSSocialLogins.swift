@@ -3,13 +3,13 @@ import Foundation
 @objc(OSSocialLogins)
 class OSSocialLogins: CordovaImplementation {
     
-    var plugin: SocialLoginsPlugin?
+    var plugin: SocialLoginsController?
     var callbackId:String=""
     
     override func pluginInitialize() {
-        let googleProvider = SocialLoginsGoogleProvider()
-        let appleProvider = SocialLoginsAppleProvider(delegate:self)
-        plugin = SocialLoginsPlugin(appleProvider: appleProvider, googleProvider: googleProvider)
+        let googleController = SocialLoginsGoogleController()
+        let appleController = SocialLoginsAppleController(delegate:self)
+        plugin = SocialLoginsController(appleController: appleController, googleController: googleController)
         plugin?.rootViewController = self.viewController
     }
     
@@ -22,7 +22,7 @@ class OSSocialLogins: CordovaImplementation {
 }
 
 extension OSSocialLogins: SocialLoginsProtocol {
-    func callBackUserInfoResponse(result: UserInfoResponse?, error: NSError?, callBackID: String) {
+    func callBackUserInfoResponse(result: UserInfo?, error: NSError?, callBackID: String) {
         let finalResult = result?.encode(object:result)
         self.sendResult(result: finalResult, error:nil , callBackID: self.callbackId)
     }

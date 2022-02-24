@@ -1,7 +1,7 @@
 import Foundation
 import AuthenticationServices
 
-class SocialLoginsAppleProvider: NSObject, ASAuthorizationControllerDelegate, ASAuthorizationControllerPresentationContextProviding {
+class SocialLoginsAppleController: NSObject, ASAuthorizationControllerDelegate, ASAuthorizationControllerPresentationContextProviding {
     
     private var callbackID:String=""
     var delegate: SocialLoginsProtocol?
@@ -48,11 +48,11 @@ class SocialLoginsAppleProvider: NSObject, ASAuthorizationControllerDelegate, AS
             if let token = appleIDCredential.identityToken {
                 guard let strToken = String(data: token, encoding: .utf8) else {return}
                 
-                let userResponse = UserInfoResponse(userIdentifier: userIdentifier,
-                                                    email: email,
-                                                    firstName: firstname,
-                                                    lastName: familyName,
-                                                    identityToken: strToken)
+                let userResponse = UserInfo(userIdentifier: userIdentifier,
+                                            email: email,
+                                            firstName: firstname,
+                                            lastName: familyName,
+                                            identityToken: strToken)
                 
                 delegate?.callBackUserInfoResponse(result: userResponse, error: nil, callBackID: self.callbackID)
             } else {

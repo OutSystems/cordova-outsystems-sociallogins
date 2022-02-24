@@ -1,7 +1,7 @@
 import Foundation
 import GoogleSignIn
 
-class SocialLoginsGoogleProvider {
+class SocialLoginsGoogleController {
     
     var signInConfig: GIDConfiguration?
     var GIDSharedInstance = GIDSignIn.sharedInstance
