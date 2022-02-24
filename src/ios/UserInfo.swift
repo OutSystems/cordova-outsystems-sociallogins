@@ -1,11 +1,12 @@
 import Foundation
 
 struct UserInfo: Encodable {
-    let userIdentifier:String
+    let id:String
     let email:String
     let firstName:String
     let lastName:String
-    let identityToken:String
+    let token:String
+    let picture:String
 }
 
 enum ProviderEnum: String

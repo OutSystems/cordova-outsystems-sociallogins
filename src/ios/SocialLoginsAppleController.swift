@@ -48,11 +48,12 @@ class SocialLoginsAppleController: NSObject, ASAuthorizationControllerDelegate, 
             if let token = appleIDCredential.identityToken {
                 guard let strToken = String(data: token, encoding: .utf8) else {return}
                 
-                let userResponse = UserInfo(userIdentifier: userIdentifier,
+                let userResponse = UserInfo(id: userIdentifier,
                                             email: email,
                                             firstName: firstname,
                                             lastName: familyName,
-                                            identityToken: strToken)
+                                            token: strToken,
+                                            picture: "")
                 
                 delegate?.callBackUserInfoResponse(result: userResponse, error: nil, callBackID: self.callbackID)
             } else {
