@@ -153,6 +153,7 @@ class OSSocialLogins : CordovaImplementation() {
 
         }
         else{ // for now, its only google sign in case
+            /*
             try {
                 socialLogin?.handleActivityResult(requestCode, resultCode, intent)
                 //implement in closure to sendPluginResult after handleActivityResult returns success
@@ -161,6 +162,7 @@ class OSSocialLogins : CordovaImplementation() {
             catch(hse : Exception) {
                 sendPluginResult(null, Pair(1, "errorMessage"))
             }
+             */
         }
 
 
