@@ -18,7 +18,17 @@ module.exports = function (context) {
     var manifestFile = fs.readFileSync(manifestPath).toString();
     var etreeManifest = et.parse(manifestFile);
 
+    console.log("ElementTree fez o parse do manifest");
+
+    var dataTags1 = etreeManifest.findall('./application/activity/intent-filter/data[@android:scheme]');
+    console.log("Number of data tags: " + dataTags1.length);
+
+    var appleActivityTags = etreeManifest.findall('./application/activity[@android:name="com.outsystems.plugins.sociallogins.AppleSignInActivity"]');
+    console.log("Number of apple activity tags: " + appleActivityTags.length);
+
     var dataTags = etreeManifest.findall('./application/activity/intent-filter/data[@android:host="DEFAULT_HOSTNAME"]');
+    console.log("dataTags.length: " + dataTags.length);
+
     for (var i = 0; i < dataTags.length; i++) {
         var data = dataTags[i];
         data.set("android:host", default_hostname);
