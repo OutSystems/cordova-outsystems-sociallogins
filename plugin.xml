@@ -50,14 +50,15 @@
 
 
     <source-file src="src/android/com/outsystems/plugins/sociallogins/OSSocialLogins.kt" target-dir="app/src/main/kotlin/com/outsystems/plugins/sociallogins"/>
-    <source-file src="src/android/com/outsystems/plugins/sociallogins/SocialLogin.kt" target-dir="app/src/main/kotlin/com/outsystems/plugins/sociallogins"/>
-    <source-file src="src/android/com/outsystems/plugins/sociallogins/UserInfo.kt" target-dir="app/src/main/kotlin/com/outsystems/plugins/sociallogins"/>
+    <source-file src="src/android/com/outsystems/plugins/sociallogins/SocialLoginsController.kt" target-dir="app/src/main/kotlin/com/outsystems/plugins/sociallogins"/>
+    <source-file src="src/android/com/outsystems/plugins/sociallogins/SocialLoginsGoogleController.kt" target-dir="app/src/main/kotlin/com/outsystems/plugins/sociallogins"/>
+    <source-file src="src/android/com/outsystems/plugins/sociallogins/SocialLoginsAppleController.kt" target-dir="app/src/main/kotlin/com/outsystems/plugins/sociallogins"/>
     <source-file src="src/android/com/outsystems/plugins/sociallogins/SocialLoginError.kt" target-dir="app/src/main/kotlin/com/outsystems/plugins/sociallogins"/>
+    <source-file src="src/android/com/outsystems/plugins/sociallogins/UserInfo.kt" target-dir="app/src/main/kotlin/com/outsystems/plugins/sociallogins"/>
     <source-file src="src/android/com/outsystems/plugins/sociallogins/AndroidPlatformInterface.kt" target-dir="app/src/main/kotlin/com/outsystems/plugins/sociallogins"/>
     <source-file src="src/android/com/outsystems/plugins/sociallogins/CordovaImplementation.kt" target-dir="app/src/main/kotlin/com/outsystems/plugins/sociallogins"/>
     <source-file src="src/android/com/outsystems/plugins/sociallogins/AppleSignInActivity.kt" target-dir="app/src/main/kotlin/com/outsystems/plugins/sociallogins"/>
     <source-file src="src/android/com/outsystems/plugins/sociallogins/AppleConstants.kt" target-dir="app/src/main/kotlin/com/outsystems/plugins/sociallogins"/>
-    <source-file src="src/android/com/outsystems/plugins/sociallogins/AppleData.kt" target-dir="app/src/main/kotlin/com/outsystems/plugins/sociallogins"/>
 
     <framework src="org.jetbrains.kotlinx:kotlinx-coroutines-core-jvm:1.4.3" />
     <framework src="org.jetbrains.kotlinx:kotlinx-coroutines-android:1.4.3" />

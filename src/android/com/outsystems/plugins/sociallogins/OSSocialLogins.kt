@@ -1,32 +1,28 @@
 package com.outsystems.plugins.sociallogins
 
-import android.app.Activity
 import android.content.Intent
-import android.os.Bundle
 import org.apache.cordova.CallbackContext
 import org.apache.cordova.CordovaInterface
 import org.apache.cordova.CordovaWebView
 import org.json.JSONArray
-import com.google.gson.Gson
 
 class OSSocialLogins : CordovaImplementation() {
 
     override var callbackContext: CallbackContext? = null
 
-    val APPLE_SIGNIN: Int = 13;
-
     //var socialLogin: SocialLoginsGoogleController? = null
 
-    //var socialLoginController: SocialLoginsController? = null
-
-    val gson by lazy { Gson() }
+    var socialLoginController: SocialLoginsController? = null
+    var socialLoginControllerApple: SocialLoginsAppleController? = null
 
     override fun initialize(cordova: CordovaInterface, webView: CordovaWebView) {
         super.initialize(cordova, webView)
 
         //socialLogin = SocialLoginsGoogleController(cordova.activity, cordova.context)
 
-        //socialLoginController = SocialLoginsController(cordova.activity, cordova.context)
+        socialLoginControllerApple = SocialLoginsAppleController(cordova.activity, cordova.context)
+
+        socialLoginController = SocialLoginsController(socialLoginControllerApple!!)
 
     }
 
@@ -38,36 +34,13 @@ class OSSocialLogins : CordovaImplementation() {
         this.callbackContext = callbackContext
 
         when (action) {
-            "login" -> {
-                doLoginApple(args)
-            }
             "loginApple" -> {
                 doLoginApple(args)
-            }
-            "logout" -> {
-                //doLogout(args)
-            }
-            "getLoginData" -> {
-                //getLoginData(args)
-            }
-            "checkLoginStatus" -> {
-                //checkLoginStatus(args)
             }
         }
         return true
     }
 
-    private fun doLoginGoogle(args : JSONArray){
-        //TODO
-        /*
-        if(!socialLogin?.isUserLoggedIn()!!.first){
-            setAsActivityResultCallback()
-            socialLogin?.doLoginGoogle()
-        }
-        //decide what we should do when user is already logged in
-        //maybe send back a message saying login already done?
-         */
-    }
 
     private fun doLoginApple(args : JSONArray) {
 
@@ -75,28 +48,23 @@ class OSSocialLogins : CordovaImplementation() {
         val clientId = args.get(1).toString()
         val redirectUri = args.get(2).toString()
 
-
-        val currentActivity: Activity? = this.getActivity()
-
-
-        //socialLoginController?.doLoginApple(state, clientId, redirectUri)
-
-
-        val intent = Intent(currentActivity, AppleSignInActivity::class.java)
-
-        val bundle = Bundle()
-        bundle.putString("state", state)
-        bundle.putString("clientId", clientId)
-        bundle.putString("redirectUri", redirectUri)
-
-        intent.putExtras(bundle)
-
-        currentActivity?.startActivityForResult(intent, APPLE_SIGNIN)
-
+        socialLoginController?.doLoginApple(state, clientId, redirectUri)
         setAsActivityResultCallback()
     }
+
+
     
     /*
+
+    private fun doLoginGoogle(args : JSONArray){
+        //TODO
+        if(!socialLogin?.isUserLoggedIn()!!.first){
+            setAsActivityResultCallback()
+            socialLogin?.doLoginGoogle()
+        }
+        //decide what we should do when user is already logged in
+        //maybe send back a message saying login already done?
+    }
 
     private fun doLogout(args: JSONArray) {
         val provider = "google"
@@ -135,22 +103,16 @@ class OSSocialLogins : CordovaImplementation() {
         super.onActivityResult(requestCode, resultCode, intent)
 
         if(resultCode == 1){//Apple Sign in case
-            val returnBundle = intent.extras
 
-            if (returnBundle != null) {
 
-                val userInfo = UserInfo(
-                    returnBundle.getString("id"),
-                    returnBundle.getString("email"),
-                    returnBundle.getString("firstName"),
-                    returnBundle.getString("lastName"),
-                    returnBundle.getString("token")
-                )
-                val pluginResponseJson = gson.toJson(userInfo)
-                sendPluginResult(pluginResponseJson, null)
-
-            }
-
+            socialLoginController?.handleActivityResult(requestCode, resultCode, intent,
+                {
+                    sendPluginResult(it, null)
+                },
+                {
+                    sendPluginResult(null, Pair(it.first, it.second))
+                }
+            )
         }
         else{ // for now, its only google sign in case
             /*
