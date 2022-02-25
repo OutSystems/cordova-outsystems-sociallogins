@@ -56,6 +56,7 @@ class SocialLogin(var activity : Activity, var context : Context) {
         return Pair(false, null)
     }
 
+/*
     fun getLoginData(onSuccess : (LoginDataResponse) -> Unit, onError : (SocialLoginError) -> Unit) {
 
         val isLoggedIn = isUserLoggedIn()
@@ -72,6 +73,7 @@ class SocialLogin(var activity : Activity, var context : Context) {
             onError(SocialLoginError.NO_USER_LOGGED_IN_ERROR)
         }
     }
+    */
 
     private fun signIn(signInClient: GoogleSignInClient) {
         val signInIntent: Intent = signInClient.signInIntent

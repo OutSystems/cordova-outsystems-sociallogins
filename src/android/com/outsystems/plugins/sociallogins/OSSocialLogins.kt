@@ -15,9 +15,9 @@ class OSSocialLogins : CordovaImplementation() {
 
     val APPLE_SIGNIN: Int = 13;
 
-    var socialLogin: SocialLoginsGoogleController? = null
+    //var socialLogin: SocialLoginsGoogleController? = null
 
-    var socialLoginController: SocialLoginsController? = null
+    //var socialLoginController: SocialLoginsController? = null
 
     val gson by lazy { Gson() }
 
