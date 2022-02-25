@@ -10,6 +10,8 @@ module.exports = function (context) {
     var configParser = new ConfigParser(configXML);
     var default_hostname = configParser.getGlobalPreference("DefaultHostname");
 
+    console.log("default_hostname: " + default_hostname);
+
     
     //go inside the AndroidManifest and change value for DEFAULT_HOSTNAME
     var manifestPath = path.join(projectRoot, 'platforms/android/app/src/main/AndroidManifest.xml');
@@ -20,9 +22,12 @@ module.exports = function (context) {
     for (var i = 0; i < dataTags.length; i++) {
         var data = dataTags[i];
         data.set("android:host", default_hostname);
+        console.log("entrou no for");
     }
 
     var resultXmlManifest = etreeManifest.write();
     fs.writeFileSync(manifestPath, resultXmlManifest);
+
+    console.log("acabou, fez o write");
     
 };
