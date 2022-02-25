@@ -1,6 +1,7 @@
 package com.outsystems.plugins.sociallogins
 
 import android.content.Intent
+import com.google.gson.Gson
 import org.apache.cordova.CallbackContext
 import org.apache.cordova.CordovaInterface
 import org.apache.cordova.CordovaWebView
@@ -9,6 +10,8 @@ import org.json.JSONArray
 class OSSocialLogins : CordovaImplementation() {
 
     override var callbackContext: CallbackContext? = null
+
+    val gson by lazy { Gson() }
 
     //var socialLogin: SocialLoginsGoogleController? = null
 
@@ -103,14 +106,13 @@ class OSSocialLogins : CordovaImplementation() {
         super.onActivityResult(requestCode, resultCode, intent)
 
         if(resultCode == 1){//Apple Sign in case
-
-
             socialLoginController?.handleActivityResult(requestCode, resultCode, intent,
                 {
-                    sendPluginResult(it, null)
+                    val pluginResponseJson = gson.toJson(it)
+                    sendPluginResult(pluginResponseJson, null)
                 },
                 {
-                    sendPluginResult(null, Pair(it.first, it.second))
+                    sendPluginResult(null, Pair(it.code, it.message))
                 }
             )
         }
