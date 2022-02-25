@@ -10,7 +10,6 @@
   <platform name="android">
 
   <!--Hooks-->
-  <!--<hook type="before_plugin_install" src="hooks/install_prerequisites.js"/>-->
   <hook type="after_prepare" src="hooks/androidCopyPreferences.js"/>
 
     <config-file parent="/*" target="res/xml/config.xml">
