@@ -1,7 +1,6 @@
 package com.outsystems.plugins.sociallogins
 
 import android.content.Intent
-import android.util.Log
 import com.google.gson.Gson
 import org.apache.cordova.CallbackContext
 import org.apache.cordova.CordovaInterface
@@ -56,8 +55,6 @@ class OSSocialLogins : CordovaImplementation() {
         socialLoginController?.doLoginApple(state, clientId, redirectUri)
 
     }
-
-
     
     /*
 
@@ -107,7 +104,7 @@ class OSSocialLogins : CordovaImplementation() {
     override fun onActivityResult(requestCode: Int, resultCode: Int, intent: Intent?) {
 
         if(resultCode == 0){
-            sendPluginResult(null, Pair(0, "Login was cancelled"))
+            sendPluginResult(null, Pair(SocialLoginError.LOGIN_CANCELLED_ERROR.code, SocialLoginError.LOGIN_CANCELLED_ERROR.message))
         }
 
         else if(resultCode == 1){//Apple Sign in case
