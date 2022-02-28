@@ -10,5 +10,6 @@ struct UserInfoResponse: Encodable {
 enum ProviderEnum: String
 {
     case apple = "APPLE",
-         google = "GOOGLE"
+         google = "GOOGLE",
+         facebook = "FACEBOOK"
 }

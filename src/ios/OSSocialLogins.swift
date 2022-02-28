@@ -9,8 +9,9 @@ class OSSocialLogins: CordovaImplementation {
     override func pluginInitialize() {
         let googleProvider = SocialLoginsGoogleProvider()
         let appleProvider = SocialLoginsAppleProvider()
+        let facebookProvider = SocialLoginsFacebookProvider()
         
-        plugin = SocialLoginsPlugin(appleProvider: appleProvider, googleProvider: googleProvider)
+        plugin = SocialLoginsPlugin(appleProvider: appleProvider, googleProvider: googleProvider, facebookProvider: facebookProvider)
         plugin?.rootViewController = self.viewController
         plugin?.delegate = self
     }

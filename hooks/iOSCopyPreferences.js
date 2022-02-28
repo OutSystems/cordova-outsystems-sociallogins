@@ -11,6 +11,10 @@ module.exports = function (context) {
     var configParser = new ConfigParser(configXML);
     var google_client_id = configParser.getGlobalPreference("GOOGLE_CLIENT_ID");
 
+    var facebook_client_urlScheme = configParser.getGlobalPreference("FACEBOOK_CLIENT_URLSCHEME");
+    var facebook_client_appId = configParser.getGlobalPreference("FACEBOOK_CLIENT_APPID");
+    var facebook_client_token = configParser.getGlobalPreference("FACEBOOK_CLIENT_TOKEN");
+
     var appNamePath = path.join(projectRoot, 'config.xml');
     var appNameParser = new ConfigParser(appNamePath);
     var appName = appNameParser.name();
@@ -24,6 +28,15 @@ module.exports = function (context) {
     for (var i = 0; i < infoPlistTags.length; i++) {
         if (infoPlistTags[i].text.includes("GOOGLE_CLIENT_ID")) {
             infoPlistTags[i].text = infoPlistTags[i].text.replace('GOOGLE_CLIENT_ID', google_client_id)
+            console.log(infoPlistTags[i].text);
+        } else if (infoPlistTags[i].text.includes("FACEBOOK_CLIENT_URLSCHEME")) {
+            infoPlistTags[i].text = infoPlistTags[i].text.replace('FACEBOOK_CLIENT_URLSCHEME', facebook_client_urlScheme)
+            console.log(infoPlistTags[i].text);
+        } else if (infoPlistTags[i].text.includes("FACEBOOK_CLIENT_APPID")) {
+            infoPlistTags[i].text = infoPlistTags[i].text.replace('FACEBOOK_CLIENT_APPID', facebook_client_appId)
+            console.log(infoPlistTags[i].text);
+        } else if (infoPlistTags[i].text.includes("FACEBOOK_CLIENT_TOKEN")) {
+            infoPlistTags[i].text = infoPlistTags[i].text.replace('FACEBOOK_CLIENT_TOKEN', facebook_client_token)
             console.log(infoPlistTags[i].text);
         }
     }

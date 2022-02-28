@@ -10,15 +10,17 @@ class SocialLoginsPlugin: NSObject,
     var rootViewController:UIViewController?
     var appleProvider: SocialLoginsAppleProvider?
     var googleProvider: SocialLoginsGoogleProvider?
+    var facebookProvider: SocialLoginsFacebookProvider?
     
     func presentationAnchor(for controller: ASAuthorizationController) -> ASPresentationAnchor {
         return self.rootViewController!.view as! ASPresentationAnchor
     }
     
-    init (appleProvider: SocialLoginsAppleProvider, googleProvider:SocialLoginsGoogleProvider) {
+    init (appleProvider: SocialLoginsAppleProvider, googleProvider: SocialLoginsGoogleProvider, facebookProvider: SocialLoginsFacebookProvider) {
         super.init()
         self.googleProvider = googleProvider
         self.appleProvider = appleProvider
+        self.facebookProvider = facebookProvider
 //        performExistingAccountSetupFlows() TODO: verify if this needs to be called.
     }
     
@@ -33,58 +35,70 @@ class SocialLoginsPlugin: NSObject,
     }
     
     func doLogin(callbackID:String, provider: String) throws {
+        guard let provider = ProviderEnum(rawValue: provider) else { return }
         
-        if (provider == ProviderEnum.apple.rawValue) {
-            self.callbackID = callbackID
-            let appleIDProvider = ASAuthorizationAppleIDProvider()
-            let request = appleIDProvider.createRequest()
-            request.requestedOperation = ASAuthorization.OpenIDOperation.operationLogin
-            request.requestedScopes = [.fullName, .email]
+        switch provider {
+            case .apple:
+                self.callbackID = callbackID
+                let appleIDProvider = ASAuthorizationAppleIDProvider()
+                let request = appleIDProvider.createRequest()
+                request.requestedOperation = ASAuthorization.OpenIDOperation.operationLogin
+                request.requestedScopes = [.fullName, .email]
 
-            let authorizationController = ASAuthorizationController(authorizationRequests: [request])
-            authorizationController.delegate = self
-            authorizationController.presentationContextProvider = self
-            authorizationController.performRequests()
-            
-        } else {
-            
-            if let signInConfig = googleProvider?.signInConfig {
-                googleProvider?.GIDSharedInstance.signIn(with: signInConfig, presenting: rootViewController!) { user, error in
-                    guard error == nil else { return }
+                let authorizationController = ASAuthorizationController(authorizationRequests: [request])
+                authorizationController.delegate = self
+                authorizationController.presentationContextProvider = self
+                authorizationController.performRequests()
+            case .google:
+                if let signInConfig = googleProvider?.signInConfig {
+                    googleProvider?.GIDSharedInstance.signIn(with: signInConfig, presenting: rootViewController!) { user, error in
+                        guard error == nil else { return }
 
-                    if let user = user {
-                        let name = user.profile?.name ?? ""
-                        let email = user.profile?.email ?? ""
-                        let userID = user.userID ?? ""
-                        let accessToken = user.authentication.accessToken
+                        if let user = user {
+                            let name = user.profile?.name ?? ""
+                            let email = user.profile?.email ?? ""
+                            let userID = user.userID ?? ""
+                            let accessToken = user.authentication.accessToken
 
-                        let userResponse = UserInfoResponse(userIdentifier: userID,
-                                                            email: email,
-                                                            fullName: name,
-                                                            identityToken: accessToken)
+                            let userResponse = UserInfoResponse(userIdentifier: userID,
+                                                                email: email,
+                                                                fullName: name,
+                                                                identityToken: accessToken)
 
-                        self.delegate?.callBackUserInfoResponse(result: userResponse, error: nil, callBackID: self.callbackID)
+                            self.delegate?.callBackUserInfoResponse(result: userResponse, error: nil, callBackID: self.callbackID)
+                        }
                     }
                 }
-            }
+            case .facebook:
+                if let provider = self.facebookProvider {
+                    provider.login(from: rootViewController) { result in
+                        switch result {
+                        case .success(let userResponse):
+                            self.delegate?.callBackUserInfoResponse(result: userResponse, error: nil, callBackID: self.callbackID)
+                        case .failure(_):
+                            break
+                        }
+                        
+                    }
+                }
         }
-        
     }
     
     func doLogout(callbackID:String, provider: String) throws {
+        guard let provider = ProviderEnum(rawValue: provider) else { return }
         
-        if (provider == ProviderEnum.apple.rawValue) {
-            
-            //        Here we should clean all the user information in keychain or server side.
-            //        But apple does not provide a logout or revoke method
-            
-        } else {
-            
-            googleProvider?.GIDSharedInstance.signOut()
-            self.delegate?.callBackCredentialState(result: "loggedout", error: nil, callBackID: self.callbackID)
-            
+        switch provider {
+            case .google:
+                self.googleProvider?.GIDSharedInstance.signOut()
+                self.delegate?.callBackCredentialState(result: "loggedout", error: nil, callBackID: self.callbackID)
+            case .facebook:
+                if let provider = self.facebookProvider {
+                    provider.logout()
+                    self.delegate?.callBackCredentialState(result: "loggedout", error: nil, callBackID: self.callbackID)
+                }
+            default:
+                break
         }
-        
     }
     
     func getGoogleCredentialState(userID:String) {
@@ -128,13 +142,24 @@ class SocialLoginsPlugin: NSObject,
     }
     
     func getCredentialState(userID:String, provider:String) throws {
+        guard let provider = ProviderEnum(rawValue: provider) else { return }
+        
         switch provider {
-        case ProviderEnum.apple.rawValue:
+        case .apple:
             getAppleCredentialState(userID:userID)
-        case ProviderEnum.google.rawValue:
+        case .google:
             getGoogleCredentialState(userID: userID)
-        default:
-            getGoogleCredentialState(userID: userID)
+        case .facebook:
+            if let provider = self.facebookProvider {
+                provider.getCredentialState { result in
+                    switch result {
+                    case .success(_):
+                        self.delegate?.callBackCredentialState(result: "authorized", error: nil, callBackID: self.callbackID)
+                    case .failure(_):
+                        self.delegate?.callBackCredentialState(result: "notFound", error: nil, callBackID: self.callbackID)
+                    }
+                }
+            }
         }
     }
     

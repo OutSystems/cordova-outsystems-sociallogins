@@ -74,6 +74,12 @@
 
     <config-file parent="/*" target="config.xml">
       <preference name="GOOGLE_CLIENT_ID" value="$GOOGLE_CLIENT_URL"/>
+
+      <preference name="FACEBOOK_CLIENT_URLSCHEME" value="fb$FACEBOOK_CLIENT_APPID"/>
+      <preference name="FACEBOOK_CLIENT_APPID" value="$FACEBOOK_CLIENT_APPID"/>
+      <preference name="FACEBOOK_CLIENT_TOKEN" value="$FACEBOOK_CLIENT_TOKEN"/>
+
+
       <feature name="OSSocialLogins">
         <param name="ios-package" value="OSSocialLogins"/>
       </feature>
@@ -93,6 +99,30 @@
                     <string>GOOGLE_CLIENT_ID</string>
                 </array>
             </dict>
+            <dict>
+                <key>CFBundleTypeRole</key>
+                <string>Editor</string>
+                <key>CFBundleURLName</key>
+                <string>BUNDLE_ID</string>
+                <key>CFBundleURLSchemes</key>
+                <array>
+                    <string>FACEBOOK_CLIENT_URLSCHEME</string>
+                </array>
+            </dict>
+        </array>
+    </config-file>
+
+    <config-file target="*-Info.plist" parent="FacebookAppID">
+         <string>FACEBOOK_CLIENT_APPID</string>
+    </config-file>
+
+    <config-file target="*-Info.plist" parent="FacebookClientToken">
+         <string>FACEBOOK_CLIENT_TOKEN</string>
+    </config-file>
+
+    <config-file target="*-Info.plist" parent="LSApplicationQueriesSchemes">
+         <array>
+            <string>fbapi</string>
         </array>
     </config-file>
 
@@ -116,6 +146,7 @@
     <source-file src="src/ios/SocialLoginsProtocol.swift" />
     <source-file src="src/ios/SocialLoginsGoogleProvider.swift" />
     <source-file src="src/ios/SocialLoginsAppleProvider.swift" />
+    <source-file src="src/ios/SocialLoginsFacebookProvider.swift" />
     <source-file src="src/ios/UserInfoResponse.swift" />
     <source-file src="src/ios/CordovaImplementation.swift" />
     <framework src="src/ios/frameworks/OSCore.xcframework" embed="true" custom="true" />
@@ -127,6 +158,7 @@
       </config>
       <pods use-frameworks="true">
         <pod name="GoogleSignIn" spec="~> 6.0.2"/>
+        <pod name="FBSDKLoginKit" spec="~> 12.3.2"/>
       </pods>
     </podspec>
 
