@@ -52,8 +52,9 @@ class OSSocialLogins : CordovaImplementation() {
         val clientId = args.get(1).toString()
         val redirectUri = args.get(2).toString()
 
-        socialLoginController?.doLoginApple(state, clientId, redirectUri)
         setAsActivityResultCallback()
+        socialLoginController?.doLoginApple(state, clientId, redirectUri)
+
     }
 
 
@@ -104,7 +105,7 @@ class OSSocialLogins : CordovaImplementation() {
      */
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, intent: Intent?) {
-        
+
         if(resultCode == 0){
             sendPluginResult(null, Pair(0, "Login was cancelled"))
         }
