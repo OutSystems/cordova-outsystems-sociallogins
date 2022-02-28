@@ -1,6 +1,7 @@
 package com.outsystems.plugins.sociallogins
 
 import android.content.Intent
+import android.util.Log
 import com.google.gson.Gson
 import org.apache.cordova.CallbackContext
 import org.apache.cordova.CordovaInterface
@@ -102,22 +103,35 @@ class OSSocialLogins : CordovaImplementation() {
     
      */
 
-    override fun onActivityResult(requestCode: Int, resultCode: Int, intent: Intent) {
-        super.onActivityResult(requestCode, resultCode, intent)
+    override fun onActivityResult(requestCode: Int, resultCode: Int, intent: Intent?) {
+        
+        if(resultCode == 0){
+            sendPluginResult(null, Pair(0, "Login was cancelled"))
+        }
 
-        if(resultCode == 1){//Apple Sign in case
-            socialLoginController?.handleActivityResult(requestCode, resultCode, intent,
-                {
-                    val pluginResponseJson = gson.toJson(it)
-                    sendPluginResult(pluginResponseJson, null)
-                },
-                {
-                    sendPluginResult(null, Pair(it.code, it.message))
-                }
-            )
+        else if(resultCode == 1){//Apple Sign in case
+
+            if(intent != null){
+
+                super.onActivityResult(requestCode, resultCode, intent)
+
+                socialLoginController?.handleActivityResult(requestCode, resultCode, intent,
+                    {
+                        val pluginResponseJson = gson.toJson(it)
+                        sendPluginResult(pluginResponseJson, null)
+                    },
+                    {
+                        sendPluginResult(null, Pair(it.code, it.message))
+                    }
+                )
+
+            }
+
+
         }
         else{ // for now, its only google sign in case
             /*
+            super.onActivityResult(requestCode, resultCode, intent)
             try {
                 socialLogin?.handleActivityResult(requestCode, resultCode, intent)
                 //implement in closure to sendPluginResult after handleActivityResult returns success

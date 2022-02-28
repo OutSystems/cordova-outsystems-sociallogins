@@ -9,16 +9,19 @@ import androidx.browser.customtabs.CustomTabsIntent
 import androidx.browser.customtabs.CustomTabsClient
 
 import android.content.ComponentName
+import android.util.Log
+import androidx.appcompat.app.AppCompatActivity
 
 import androidx.browser.customtabs.CustomTabsServiceConnection
-
-
 
 
 class AppleSignInActivity : Activity() {
     lateinit var redirectUri: String
     lateinit var clientId: String
     var state: String = ""
+
+    var myIntent: Intent? = null
+    var isFirstTime = true
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,10 +37,16 @@ class AppleSignInActivity : Activity() {
         setupAppleWebviewDialog(
             clientId,
             redirectUri)
+
     }
 
     override fun onNewIntent(intent: Intent?) {
         super.onNewIntent(intent)
+
+        myIntent = intent
+
+        Log.d("onNewIntent:", "passed in onNewIntent")
+
         val id = intent?.data?.getQueryParameter("id")
         val firstName = intent?.data?.getQueryParameter("first_name")
         val lastName = intent?.data?.getQueryParameter("last_name")
@@ -56,7 +65,14 @@ class AppleSignInActivity : Activity() {
         resultIntent.putExtras(resultBundle)
 
         setResult(1, resultIntent)
-        finish()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        
+        if(!isFirstTime){
+            finish()
+        }
     }
 
     @SuppressLint("SetJavaScriptEnabled", "NewApi")
@@ -71,6 +87,7 @@ class AppleSignInActivity : Activity() {
             }
 
             override fun onServiceDisconnected(name: ComponentName) {}
+
         }
         val ok = CustomTabsClient.bindCustomTabsService(this, "com.android.chrome", connection)
 
@@ -89,6 +106,7 @@ class AppleSignInActivity : Activity() {
             .build()
 
         customTabsIntent.launchUrl(this, Uri.parse(url))
+        isFirstTime = false
     }
 
 
