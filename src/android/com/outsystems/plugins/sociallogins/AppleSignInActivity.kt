@@ -19,13 +19,10 @@ class AppleSignInActivity : Activity() {
     lateinit var redirectUri: String
     lateinit var clientId: String
     var state: String = ""
-
-    var myIntent: Intent? = null
     var isFirstTime = true
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        //setContentView(R.layout.activity_main)
 
         val bundle = intent.extras
         if (bundle != null) {
@@ -42,10 +39,6 @@ class AppleSignInActivity : Activity() {
 
     override fun onNewIntent(intent: Intent?) {
         super.onNewIntent(intent)
-
-        myIntent = intent
-
-        Log.d("onNewIntent:", "passed in onNewIntent")
 
         val id = intent?.data?.getQueryParameter("id")
         val firstName = intent?.data?.getQueryParameter("first_name")
@@ -69,7 +62,7 @@ class AppleSignInActivity : Activity() {
 
     override fun onResume() {
         super.onResume()
-        
+
         if(!isFirstTime){
             finish()
         }
