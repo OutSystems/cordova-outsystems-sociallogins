@@ -1,11 +1,12 @@
 package com.outsystems.plugins.sociallogins
 
+import android.app.Activity
 import android.content.Intent
 
 class SocialLoginsController(var controllerApple: SocialLoginsAppleController) {
 
-    fun doLoginApple(state: String, clientId: String, redirectUri: String){
-        controllerApple.doLogin(state, clientId, redirectUri)
+    fun doLoginApple(state: String, clientId: String, redirectUri: String, activity: Activity){
+        controllerApple.doLogin(state, clientId, redirectUri, activity)
     }
 
     fun handleActivityResult(requestCode: Int, resultCode: Int, intent: Intent,
