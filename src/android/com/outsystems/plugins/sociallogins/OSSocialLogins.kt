@@ -23,7 +23,7 @@ class OSSocialLogins : CordovaImplementation() {
 
         //socialLogin = SocialLoginsGoogleController(cordova.activity, cordova.context)
 
-        socialLoginControllerApple = SocialLoginsAppleController(cordova.activity, cordova.context)
+        socialLoginControllerApple = SocialLoginsAppleController()
 
         socialLoginController = SocialLoginsController(socialLoginControllerApple!!)
 
@@ -52,7 +52,7 @@ class OSSocialLogins : CordovaImplementation() {
         val redirectUri = args.get(2).toString()
 
         setAsActivityResultCallback()
-        socialLoginController?.doLoginApple(state, clientId, redirectUri)
+        socialLoginController?.doLoginApple(state, clientId, redirectUri, cordova.activity)
 
     }
     
