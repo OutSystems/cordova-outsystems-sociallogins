@@ -11,8 +11,19 @@ public struct UserInfo : Swift.Encodable, Swift.Equatable {
   public static func == (a: OSSocialLoginsLib.UserInfo, b: OSSocialLoginsLib.UserInfo) -> Swift.Bool
   public func encode(to encoder: Swift.Encoder) throws
 }
+public enum SocialLoginsErrors : Swift.Int, Foundation.CustomNSError, Foundation.LocalizedError {
+  case AppleSignInGenericError
+  public var errorDescription: Swift.String? {
+    get
+  }
+  public init?(rawValue: Swift.Int)
+  public typealias RawValue = Swift.Int
+  public var rawValue: Swift.Int {
+    get
+  }
+}
 public protocol SocialLoginsProtocol {
-  func callBackUserInfo(result: OSSocialLoginsLib.UserInfo?, error: Foundation.NSError?, callBackID: Swift.String)
+  func callBackUserInfo(result: OSSocialLoginsLib.UserInfo?, error: OSSocialLoginsLib.SocialLoginsErrors?, callBackID: Swift.String)
 }
 extension Swift.String {
   public func decode<T>(string: Swift.String) -> T where T : Swift.Decodable
@@ -53,3 +64,6 @@ public protocol AppleIDCredentialProtocol {
   var givenName: Swift.String? { get }
   var familyName: Swift.String? { get }
 }
+extension OSSocialLoginsLib.SocialLoginsErrors : Swift.Equatable {}
+extension OSSocialLoginsLib.SocialLoginsErrors : Swift.Hashable {}
+extension OSSocialLoginsLib.SocialLoginsErrors : Swift.RawRepresentable {}

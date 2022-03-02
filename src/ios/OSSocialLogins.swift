@@ -12,8 +12,8 @@ class OSSocialLogins: CordovaImplementation {
         plugin = SocialLoginsController(appleController: appleController, rootViewController: self.viewController)
     }
     
-    @objc(login:)
-    func doLogin(command: CDVInvokedUrlCommand) {
+    @objc(loginApple:)
+    func loginApple(command: CDVInvokedUrlCommand) {
         callbackId = command.callbackId
         plugin?.loginApple(callbackID: self.callbackId)
     }
@@ -21,8 +21,12 @@ class OSSocialLogins: CordovaImplementation {
 }
 
 extension OSSocialLogins: SocialLoginsProtocol {
-    func callBackUserInfo(result: UserInfo?, error: NSError?, callBackID: String) {
-        let finalResult = result?.encode(object:result)
-        self.sendResult(result: finalResult, error:nil , callBackID: self.callbackId)
+    func callBackUserInfo(result: UserInfo?, error: SocialLoginsErrors?, callBackID: String) {
+        if let error = error {
+            self.sendResult(result: nil, error:error as NSError, callBackID: self.callbackId)
+        } else {
+            let finalResult = result?.encode(object:result)
+            self.sendResult(result: finalResult, error:nil , callBackID: self.callbackId)
+        }
     }
 }
