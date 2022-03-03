@@ -67,7 +67,7 @@
     <!--aar for social logins library-->
     <!--<source-file src="src/android/com/outsystems/plugins/sociallogins/OSSocialLoginsLib-Android-release.aar" target-dir="app/libs"/>-->
 
-    <framework src="build.gradle" custom="true" type="gradleReference" />
+    <framework src="src/android/build.gradle" custom="true" type="gradleReference" />
     <resource-file src="src/android/com/outsystems/plugins/sociallogins/OSSocialLoginsLib-Android-release.aar" target="libs/OSSocialLoginsLib-Android-release.aar" />
 
     <framework src="org.jetbrains.kotlinx:kotlinx-coroutines-core-jvm:1.4.3" />
