@@ -10,10 +10,10 @@ import android.webkit.WebResourceRequest
 import android.webkit.WebView
 import android.webkit.WebViewClient
 import androidx.annotation.RequiresApi
+import androidx.core.content.ContextCompat.startActivity
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.runBlocking
 import java.net.HttpURLConnection
 import java.net.URI
 import java.net.URL
@@ -31,10 +31,21 @@ class AppleWebViewClient(var context: AppleSignInActivity): WebViewClient() {
 
     @RequiresApi(Build.VERSION_CODES.N)
     override fun shouldOverrideUrlLoading(view: WebView?, request: WebResourceRequest?): Boolean {
-        if(request!!.method.equals("GET")){
-            handleUrl(request?.url.toString())
-        }
+        val uri = Uri.parse(request?.url.toString())
 
+        //checking if we have a state query parameter in the url
+        val isStateNullOrEmpty = uri.getQueryParameter("state").isNullOrEmpty()
+
+        //if we do, then we follow the normal flow
+        if(!isStateNullOrEmpty){
+            if(request!!.method.equals("GET")){
+                handleUrl(request?.url.toString())
+            }
+        }
+        //if we don't, we'll open the url in the devices browser
+        else{
+            openWebPage(uri)
+        }
         return true
     }
 
@@ -134,16 +145,17 @@ class AppleWebViewClient(var context: AppleSignInActivity): WebViewClient() {
 
         }
 
-
-
-
     }
 
-
-    fun getDomainName(url: String?): String? {
+    private fun getDomainName(url: String?): String? {
         val uri = URI(url)
         val domain: String = uri.host
         return if (domain.startsWith("www.")) domain.substring(4) else domain
+    }
+
+    private fun openWebPage(webpage: Uri) {
+        val browserIntent = Intent(Intent.ACTION_VIEW, webpage)
+        startActivity(this.context, browserIntent, null)
     }
 
 }
