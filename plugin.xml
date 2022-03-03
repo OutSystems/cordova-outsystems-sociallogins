@@ -78,6 +78,7 @@
       <preference name="FACEBOOK_CLIENT_URLSCHEME" value="fb$FACEBOOK_CLIENT_APPID"/>
       <preference name="FACEBOOK_CLIENT_APPID" value="$FACEBOOK_CLIENT_APPID"/>
       <preference name="FACEBOOK_CLIENT_TOKEN" value="$FACEBOOK_CLIENT_TOKEN"/>
+      <preference name="FACEBOOK_CLIENT_DISPLAYNAME" value="$FACEBOOK_CLIENT_DISPLAYNAME"/>
 
 
       <feature name="OSSocialLogins">
@@ -120,9 +121,14 @@
          <string>FACEBOOK_CLIENT_TOKEN</string>
     </config-file>
 
+    <config-file target="*-Info.plist" parent="FacebookDisplayName">
+         <string>FACEBOOK_CLIENT_DISPLAYNAME</string>
+    </config-file>
+
     <config-file target="*-Info.plist" parent="LSApplicationQueriesSchemes">
          <array>
             <string>fbapi</string>
+            <string>fb-messenger-share-api</string>
         </array>
     </config-file>
 
@@ -149,9 +155,10 @@
     <source-file src="src/ios/SocialLoginsFacebookProvider.swift" />
     <source-file src="src/ios/UserInfoResponse.swift" />
     <source-file src="src/ios/CordovaImplementation.swift" />
+    <header-file src="src/ios/AppDelegate+OSSocialLogins.h" />
+    <source-file src="src/ios/AppDelegate+OSSocialLogins.m" />
     <framework src="src/ios/frameworks/OSCore.xcframework" embed="true" custom="true" />
 
-    <!-- Google frameworks -->
     <podspec>
       <config>
         <source url="https://cdn.cocoapods.org/"/>
