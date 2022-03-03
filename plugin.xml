@@ -10,7 +10,7 @@
   <platform name="android">
 
   <!--Hooks-->
-  <hook type="after_prepare" src="hooks/androidCopyPreferences.js"/>
+  <!--<hook type="after_prepare" src="hooks/androidCopyPreferences.js"/>-->
 
     <config-file parent="/*" target="res/xml/config.xml">
       <feature name="OSSocialLogins">
@@ -31,12 +31,12 @@
             android:name="com.outsystems.plugins.sociallogins.AppleSignInActivity"
             android:exported="true"
             android:launchMode="singleTop">
-            <intent-filter>
+            <!--<intent-filter>
                 <action android:name="android.intent.action.VIEW" />
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
                 <data android:scheme="https" android:host="DEFAULT_HOSTNAME" />
-            </intent-filter>
+            </intent-filter>-->
         </activity>
     </config-file>
 
