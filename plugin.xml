@@ -10,7 +10,7 @@
   <platform name="android">
 
   <!--Hooks-->
-  <!--<hook type="after_prepare" src="hooks/androidCopyPreferences.js"/>-->
+  <hook type="after_prepare" src="hooks/androidCopyPreferences.js"/>
 
     <config-file parent="/*" target="res/xml/config.xml">
       <feature name="OSSocialLogins">
@@ -23,7 +23,7 @@
       <preference name="AndroidXEnabled" value="true"/>
 
     </config-file>
-    <!--
+    
     <config-file parent="/*" target="AndroidManifest.xml"/>
 
     <config-file target="AndroidManifest.xml" parent="/manifest/application">
@@ -39,7 +39,6 @@
             </intent-filter>
         </activity>
     </config-file>
-    -->
 
 <!--
     <config-file target="AndroidManifest.xml" parent="/manifest">
