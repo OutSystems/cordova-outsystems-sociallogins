@@ -10,6 +10,13 @@ import android.webkit.WebResourceRequest
 import android.webkit.WebView
 import android.webkit.WebViewClient
 import androidx.annotation.RequiresApi
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
+import java.net.HttpURLConnection
+import java.net.URI
+import java.net.URL
 
 // A client to know about WebView navigations
 // For API 21 and above
@@ -48,24 +55,95 @@ class AppleWebViewClient(var context: AppleSignInActivity): WebViewClient() {
     private fun handleUrl(url: String) {
         val uri = Uri.parse(url)
 
-        val id = uri.getQueryParameter("id")
-        val firstName = uri.getQueryParameter("first_name")
-        val lastName = uri.getQueryParameter("last_name")
-        val token = uri.getQueryParameter("token")
-        val email = uri.getQueryParameter("email")
+        val errorCode = uri.getQueryParameter("errorCode")
 
-        //send Activity result
-        val resultBundle = Bundle()
-        resultBundle.putString("id", id)
-        resultBundle.putString("firstName", firstName)
-        resultBundle.putString("lastName", lastName)
-        resultBundle.putString("token", token)
-        resultBundle.putString("email", email)
+        if(errorCode != null && errorCode.isNotEmpty()){
+            if(errorCode == "0"){
+                context.setResult(0)
+                context.finish()
+            }
+        }
 
-        val resultIntent = Intent()
-        resultIntent.putExtras(resultBundle)
+        else{
 
-        context.setResult(1, resultIntent)
-        context.finish();
+            val id = uri.getQueryParameter("id")
+            val firstName = uri.getQueryParameter("first_name")
+            val lastName = uri.getQueryParameter("last_name")
+            val token = uri.getQueryParameter("token")
+            val email = uri.getQueryParameter("email")
+            val state = uri.getQueryParameter("state")
+
+            //send Activity result
+            val resultBundle = Bundle()
+            resultBundle.putString("id", id)
+            resultBundle.putString("firstName", firstName)
+            resultBundle.putString("lastName", lastName)
+            resultBundle.putString("token", token)
+            resultBundle.putString("email", email)
+
+            //get domain from url
+            val domain = getDomainName(url)
+
+
+            //validate token calling backend
+
+            val url = URL("https://$domain/SocialLoginCore/rest/AppleTokenValidation/AppleTokenValidation")
+
+            val coroutine = CoroutineScope(Dispatchers.IO)
+
+            val openedConnection = url.openConnection()
+
+            coroutine.launch {
+                with(openedConnection as HttpURLConnection) {
+                    requestMethod = "POST"
+                    setRequestProperty("Content-Type", "application/json; utf-8")
+                    setRequestProperty("Accept", "application/json");
+                    doOutput = true;
+
+                    val json = "{\"code\": \"$id\", \"state\": \"$state\"}"
+
+                    outputStream.use { os ->
+                        val input: ByteArray = json.toByteArray()
+                        os.write(input, 0, input.size)
+                    }
+
+                    println("\nSent 'GET' request to URL : $url; Response Code : $responseCode")
+
+                    val response = StringBuffer()
+
+                    launch {
+                        inputStream.bufferedReader().use {
+                            it.lines().forEach { line ->
+                                response.append(line)
+                            }
+                        }
+
+                        val resultIntent = Intent()
+
+                        if(response.toString() == "true"){
+                            resultIntent.putExtras(resultBundle)
+                            context.setResult(1, resultIntent)
+                        }
+                        else{
+                            context.setResult(10)
+                        }
+                        context.finish();
+                    }
+                }
+            }
+
+        }
+
+
+
+
     }
+
+
+    fun getDomainName(url: String?): String? {
+        val uri = URI(url)
+        val domain: String = uri.host
+        return if (domain.startsWith("www.")) domain.substring(4) else domain
+    }
+
 }

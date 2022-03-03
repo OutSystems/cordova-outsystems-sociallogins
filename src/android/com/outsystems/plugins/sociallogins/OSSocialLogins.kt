@@ -107,6 +107,10 @@ class OSSocialLogins : CordovaImplementation() {
             sendPluginResult(null, Pair(SocialLoginError.LOGIN_CANCELLED_ERROR.code, SocialLoginError.LOGIN_CANCELLED_ERROR.message))
         }
 
+        else if(resultCode == 10){
+            sendPluginResult(null, Pair(SocialLoginError.APPLE_INVALID_TOKEN_ERROR.code, SocialLoginError.APPLE_INVALID_TOKEN_ERROR.message))
+        }
+
         else if(resultCode == 1){//Apple Sign in case
 
             if(intent != null){
