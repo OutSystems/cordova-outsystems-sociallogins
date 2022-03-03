@@ -1,4 +1,3 @@
-/*
 repositories{    
  jcenter()
    flatDir {
@@ -8,40 +7,4 @@ repositories{
 
 dependencies {
   implementation (name:'OSSocialLoginsLib-Android-release', ext:'aar')
-}
-*/
-
-//---------------------------
-
-buildscript {
-    repositories {
-        google()
-        jcenter()
-          flatDir {
-            dirs 'src/main/libs'
-          }
-    }
-
-    dependencies {
-        classpath 'com.android.tools.build:gradle:3.4.2'
-    }
-}
-
-apply plugin: 'kotlin-kapt'
-allprojects {
-    repositories {
-        maven { url 'https://jitpack.io' }
-    }
-}
-
-dependencies{
-    //implementation (name:'OSSocialLoginsLib-Android-release', ext:'aar')
-}
-
-android {
-    buildTypes {
-        debug {
-            // do not upload debug versions to crashlytics
-        }
-    }
 }

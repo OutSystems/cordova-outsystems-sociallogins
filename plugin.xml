@@ -36,8 +36,7 @@
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
                 <data android:scheme="https" android:host="DEFAULT_HOSTNAME" />
-            </intent-filter>
-            -->
+            </intent-filter>-->
         </activity>
     </config-file>
 
@@ -59,7 +58,7 @@
     <source-file src="src/android/com/outsystems/plugins/sociallogins/SocialLoginsAppleController.kt" target-dir="app/src/main/kotlin/com/outsystems/plugins/sociallogins"/>
     <source-file src="src/android/com/outsystems/plugins/sociallogins/SocialLoginError.kt" target-dir="app/src/main/kotlin/com/outsystems/plugins/sociallogins"/>
     <source-file src="src/android/com/outsystems/plugins/sociallogins/UserInfo.kt" target-dir="app/src/main/kotlin/com/outsystems/plugins/sociallogins"/>
-    <!--<source-file src="src/android/com/outsystems/plugins/sociallogins/AndroidPlatformInterface.kt" target-dir="app/src/main/kotlin/com/outsystems/plugins/sociallogins"/>-->
+    <source-file src="src/android/com/outsystems/plugins/sociallogins/AndroidPlatformInterface.kt" target-dir="app/src/main/kotlin/com/outsystems/plugins/sociallogins"/>
     <source-file src="src/android/com/outsystems/plugins/sociallogins/CordovaImplementation.kt" target-dir="app/src/main/kotlin/com/outsystems/plugins/sociallogins"/>
     <source-file src="src/android/com/outsystems/plugins/sociallogins/AppleSignInActivity.kt" target-dir="app/src/main/kotlin/com/outsystems/plugins/sociallogins"/>
     <source-file src="src/android/com/outsystems/plugins/sociallogins/AppleWebViewClient.kt" target-dir="app/src/main/kotlin/com/outsystems/plugins/sociallogins"/>
@@ -68,11 +67,8 @@
     <!--aar for social logins library-->
     <!--<source-file src="src/android/com/outsystems/plugins/sociallogins/OSSocialLoginsLib-Android-release.aar" target-dir="app/libs"/>-->
 
-    <framework src="src/android/build.gradle" custom="true" type="gradleReference" />
-    <!--<resource-file src="src/android/com/outsystems/plugins/sociallogins/OSSocialLoginsLib-Android-release.aar" target="libs/OSSocialLoginsLib-Android-release.aar" />-->
-
-    <!-- OS Core Library -->
-    <framework src="com.github.OutSystems.os-plugins-base-interface:oscore-android:core-0.0.3@aar" /> 
+    <!--<framework src="src/android/build.gradle" custom="true" type="gradleReference" />
+    <resource-file src="src/android/com/outsystems/plugins/sociallogins/OSSocialLoginsLib-Android-release.aar" target="libs/OSSocialLoginsLib-Android-release.aar" />-->
 
     <framework src="org.jetbrains.kotlinx:kotlinx-coroutines-core-jvm:1.4.3" />
     <framework src="org.jetbrains.kotlinx:kotlinx-coroutines-android:1.4.3" />
