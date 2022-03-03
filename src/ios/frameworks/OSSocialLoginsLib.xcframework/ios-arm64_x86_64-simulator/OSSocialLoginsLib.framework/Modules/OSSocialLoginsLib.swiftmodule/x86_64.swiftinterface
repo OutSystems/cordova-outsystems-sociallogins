@@ -13,6 +13,7 @@ public struct UserInfo : Swift.Encodable, Swift.Equatable {
 }
 public enum SocialLoginsErrors : Swift.Int, Foundation.CustomNSError, Foundation.LocalizedError {
   case AppleSignInGenericError
+  case LoginCancelledError
   public var errorDescription: Swift.String? {
     get
   }
