@@ -10,7 +10,7 @@
   <platform name="android">
 
   <!--Hooks-->
-  <hook type="after_prepare" src="hooks/androidCopyPreferences.js"/>
+  <!--<hook type="after_prepare" src="hooks/androidCopyPreferences.js"/>-->
 
     <config-file parent="/*" target="res/xml/config.xml">
       <feature name="OSSocialLogins">
@@ -67,7 +67,8 @@
     <!--aar for social logins library-->
     <!--<source-file src="src/android/com/outsystems/plugins/sociallogins/OSSocialLoginsLib-Android-release.aar" target-dir="app/libs"/>-->
 
-    <framework src="src/android/com/outsystems/plugins/sociallogins/OSSocialLoginsLib-Android-release.aar" custom="true" />
+    <framework src="build.gradle" custom="true" type="gradleReference" />
+    <resource-file src="src/android/com/outsystems/plugins/sociallogins/OSSocialLoginsLib-Android-release.aar" target="libs/OSSocialLoginsLib-Android-release.aar" />
 
     <framework src="org.jetbrains.kotlinx:kotlinx-coroutines-core-jvm:1.4.3" />
     <framework src="org.jetbrains.kotlinx:kotlinx-coroutines-android:1.4.3" />
