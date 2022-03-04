@@ -44,7 +44,7 @@ abstract class CordovaImplementation : CordovaPlugin(), AndroidPlatformInterface
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int,
-                                  intent: Intent) {
+                                  intent: Intent?) {
         super.onActivityResult(requestCode,resultCode,intent)
     }
 

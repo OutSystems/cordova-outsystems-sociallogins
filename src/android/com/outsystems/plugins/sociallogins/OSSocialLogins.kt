@@ -1,28 +1,27 @@
 package com.outsystems.plugins.sociallogins
 
-import android.app.Activity
 import android.content.Intent
+import com.google.gson.Gson
 import org.apache.cordova.CallbackContext
 import org.apache.cordova.CordovaInterface
 import org.apache.cordova.CordovaWebView
 import org.json.JSONArray
-import com.google.gson.Gson
+import org.json.JSONException
 
 class OSSocialLogins : CordovaImplementation() {
 
     override var callbackContext: CallbackContext? = null
 
-    var clientId: String = ""
-    var redirectUri: String =  ""
-
-    val APPLE_SIGNIN: Int = 13;
-
-    var socialLogin: SocialLogin? = null
     val gson by lazy { Gson() }
+
+    var socialLoginController: SocialLoginsController? = null
+    var socialLoginControllerApple = SocialLoginsAppleController()
 
     override fun initialize(cordova: CordovaInterface, webView: CordovaWebView) {
         super.initialize(cordova, webView)
-        socialLogin = SocialLogin(cordova.activity, cordova.context)
+
+        socialLoginController = SocialLoginsController(socialLoginControllerApple)
+
     }
 
     override fun execute(
@@ -33,87 +32,70 @@ class OSSocialLogins : CordovaImplementation() {
         this.callbackContext = callbackContext
 
         when (action) {
-            "doLogin" -> {
-                doLogin(args)
-            }
-            "logout" -> {
-                doLogout(args)
-            }
-            "getLoginData" -> {
-                getLoginData(args)
-            }
-            "checkLoginStatus" -> {
-                checkLoginStatus(args)
+            "loginApple" -> {
+                doLoginApple(args)
             }
         }
         return true
     }
 
-    private fun doLogin(args : JSONArray) {
 
-        this.clientId = "com.outsystems.mobile.plugin.sociallogin.apple"
-        this.redirectUri = "https://enmobile11-dev.outsystemsenterprise.com/SL_Core/rest/SocialLoginSignin/AuthRedirectOpenId"
-        val provider = "google"
+    private fun doLoginApple(args : JSONArray) {
 
-        if(provider == "apple"){
-            val currentActivity: Activity? = this.getActivity()
-            val intent = Intent(currentActivity, AppleSignInActivity::class.java)
-
-            currentActivity?.startActivityForResult(intent, APPLE_SIGNIN)
-        }
-
-        else if (provider == "google"){
-
-            if(!socialLogin?.isUserLoggedIn()!!.first){
-                setAsActivityResultCallback()
-                socialLogin?.doLoginGoogle()
-            }
-            //decide what we should do when user is already logged in
-            //maybe send back a message saying login already done?
-        }
-    }
-
-    private fun doLogout(args: JSONArray) {
-        val provider = "google"
-
-        if(provider == "google"){
-            socialLogin?.doLogoutGoogle()
-        }
-    }
-
-    private fun getLoginData(args: JSONArray) {
-
-        socialLogin?.getLoginData(
-            {
-                response ->
-                    val pluginResponseJson = gson.toJson(response)
-                    sendPluginResult(pluginResponseJson, null)
-            },
-            {
-                error ->
-                    sendPluginResult(null, Pair(error.code, error.message))
-            })
-    }
-
-    private fun checkLoginStatus(args: JSONArray) {
-        if(socialLogin?.isUserLoggedIn()!!.first){
-            sendPluginResult("logged", null)
-        }
-        else{
-            sendPluginResult("notLogged", null)
-        }
-    }
-
-    override fun onActivityResult(requestCode: Int, resultCode: Int, intent: Intent) {
-        super.onActivityResult(requestCode, resultCode, intent)
+        var state = ""
+        var clientId = ""
+        var redirectUri = ""
 
         try {
-            socialLogin?.handleActivityResult(requestCode, resultCode, intent)
-            //implement in closure to sendPluginResult after handleActivityResult returns success
-            sendPluginResult("success", null)
+            state = args.get(0).toString()
+            clientId = args.get(1).toString()
+            redirectUri = args.get(2).toString()
+
+            if(clientId.isNullOrEmpty() || redirectUri.isNullOrEmpty()){
+                sendPluginResult(null, Pair(SocialLoginError.MISSING_INPUT_PARAMETERS_ERROR.code, SocialLoginError.MISSING_INPUT_PARAMETERS_ERROR.message))
+            }
+            else{
+                setAsActivityResultCallback()
+                socialLoginController?.doLoginApple(state, clientId, redirectUri, cordova.activity)
+            }
+        }catch (e: JSONException){
+            sendPluginResult(null, Pair(SocialLoginError.MISSING_INPUT_PARAMETERS_ERROR.code, SocialLoginError.MISSING_INPUT_PARAMETERS_ERROR.message))
+        }catch (e: Exception){
+            sendPluginResult(null, Pair(SocialLoginError.APPLE_SIGN_IN_GENERAL_ERROR.code, SocialLoginError.APPLE_SIGN_IN_GENERAL_ERROR.message))
         }
-        catch(hse : Exception) {
-            sendPluginResult(null, Pair(1, "errorMessage"))
+
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, intent: Intent?) {
+
+        if(resultCode == 0){
+            sendPluginResult(null, Pair(SocialLoginError.LOGIN_CANCELLED_ERROR.code, SocialLoginError.LOGIN_CANCELLED_ERROR.message))
+        }
+
+        else if(resultCode == 10){
+            sendPluginResult(null, Pair(SocialLoginError.APPLE_INVALID_TOKEN_ERROR.code, SocialLoginError.APPLE_INVALID_TOKEN_ERROR.message))
+        }
+
+        else if(resultCode == 11){
+            sendPluginResult(null, Pair(SocialLoginError.APPLE_SIGN_IN_GENERAL_ERROR.code, SocialLoginError.APPLE_SIGN_IN_GENERAL_ERROR.message))
+        }
+
+        else if(resultCode == 1){//Apple Sign in case
+
+            if(intent != null){
+
+                super.onActivityResult(requestCode, resultCode, intent)
+                socialLoginController?.handleActivityResult(requestCode, resultCode, intent,
+                    {
+                        val pluginResponseJson = gson.toJson(it)
+                        sendPluginResult(pluginResponseJson, null)
+                    },
+                    {
+                        sendPluginResult(null, Pair(it.code, it.message))
+                    }
+                )
+
+            }
         }
     }
 
