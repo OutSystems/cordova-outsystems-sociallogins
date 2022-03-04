@@ -8,23 +8,30 @@ import android.webkit.WebView
 class AppleSignInActivity : Activity() {
     lateinit var redirectUri: String
     lateinit var clientId: String
-    var state: String = ""
-    var isFirstTime = true
+    lateinit var state: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         val bundle = intent.extras
         if (bundle != null) {
-            state = bundle.getString("state").toString()
-            clientId = bundle.getString("clientId").toString()
-            redirectUri = bundle.getString("redirectUri").toString()
-        }
 
-        setupAppleWebviewDialog(
-            clientId,
-            redirectUri,
-            state)
+            if(intent.hasExtra("state") && intent.hasExtra("clientId") && intent.hasExtra("redirectUri")){
+                state = bundle.getString("state").toString()
+                clientId = bundle.getString("clientId").toString()
+                redirectUri = bundle.getString("redirectUri").toString()
+
+                setupAppleWebviewDialog(
+                    clientId,
+                    redirectUri,
+                    state
+                )
+            }
+            else{
+                setResult(11)
+                finish()
+            }
+        }
     }
     
     @SuppressLint("SetJavaScriptEnabled", "NewApi")

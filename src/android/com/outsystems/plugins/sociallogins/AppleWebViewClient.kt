@@ -84,6 +84,11 @@ class AppleWebViewClient(var context: AppleSignInActivity): WebViewClient() {
             val email = uri.getQueryParameter("email")
             val state = uri.getQueryParameter("state")
 
+            if(id.isNullOrEmpty() || state.isNullOrEmpty()){
+                context.setResult(11)
+                context.finish()
+            }
+
             //send Activity result
             val resultBundle = Bundle()
             resultBundle.putString("id", id)
@@ -94,7 +99,6 @@ class AppleWebViewClient(var context: AppleSignInActivity): WebViewClient() {
 
             //get domain from url
             val domain = getDomainName(url)
-
 
             //validate token calling backend
 

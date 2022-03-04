@@ -6,6 +6,7 @@ import org.apache.cordova.CallbackContext
 import org.apache.cordova.CordovaInterface
 import org.apache.cordova.CordovaWebView
 import org.json.JSONArray
+import org.json.JSONException
 
 class OSSocialLogins : CordovaImplementation() {
 
@@ -13,19 +14,13 @@ class OSSocialLogins : CordovaImplementation() {
 
     val gson by lazy { Gson() }
 
-    //var socialLogin: SocialLoginsGoogleController? = null
-
     var socialLoginController: SocialLoginsController? = null
-    var socialLoginControllerApple: SocialLoginsAppleController? = null
+    var socialLoginControllerApple = SocialLoginsAppleController()
 
     override fun initialize(cordova: CordovaInterface, webView: CordovaWebView) {
         super.initialize(cordova, webView)
 
-        //socialLogin = SocialLoginsGoogleController(cordova.activity, cordova.context)
-
-        socialLoginControllerApple = SocialLoginsAppleController()
-
-        socialLoginController = SocialLoginsController(socialLoginControllerApple!!)
+        socialLoginController = SocialLoginsController(socialLoginControllerApple)
 
     }
 
@@ -47,59 +42,29 @@ class OSSocialLogins : CordovaImplementation() {
 
     private fun doLoginApple(args : JSONArray) {
 
-        val state = args.get(0).toString()
-        val clientId = args.get(1).toString()
-        val redirectUri = args.get(2).toString()
+        var state = ""
+        var clientId = ""
+        var redirectUri = ""
 
-        setAsActivityResultCallback()
-        socialLoginController?.doLoginApple(state, clientId, redirectUri, cordova.activity)
+        try {
+            state = args.get(0).toString()
+            clientId = args.get(1).toString()
+            redirectUri = args.get(2).toString()
 
-    }
-    
-    /*
-
-    private fun doLoginGoogle(args : JSONArray){
-        //TODO
-        if(!socialLogin?.isUserLoggedIn()!!.first){
-            setAsActivityResultCallback()
-            socialLogin?.doLoginGoogle()
+            if(clientId.isNullOrEmpty() || redirectUri.isNullOrEmpty()){
+                sendPluginResult(null, Pair(SocialLoginError.MISSING_INPUT_PARAMETERS_ERROR.code, SocialLoginError.MISSING_INPUT_PARAMETERS_ERROR.message))
+            }
+            else{
+                setAsActivityResultCallback()
+                socialLoginController?.doLoginApple(state, clientId, redirectUri, cordova.activity)
+            }
+        }catch (e: JSONException){
+            sendPluginResult(null, Pair(SocialLoginError.MISSING_INPUT_PARAMETERS_ERROR.code, SocialLoginError.MISSING_INPUT_PARAMETERS_ERROR.message))
+        }catch (e: Exception){
+            sendPluginResult(null, Pair(SocialLoginError.APPLE_SIGN_IN_GENERAL_ERROR.code, SocialLoginError.APPLE_SIGN_IN_GENERAL_ERROR.message))
         }
-        //decide what we should do when user is already logged in
-        //maybe send back a message saying login already done?
+
     }
-
-    private fun doLogout(args: JSONArray) {
-        val provider = "google"
-
-        if(provider == "google"){
-            socialLogin?.doLogoutGoogle()
-        }
-    }
-
-    private fun getLoginData(args: JSONArray) {
-
-        socialLogin?.getLoginData(
-            {
-                response ->
-                    val pluginResponseJson = gson.toJson(response)
-                    sendPluginResult(pluginResponseJson, null)
-            },
-            {
-                error ->
-                    sendPluginResult(null, Pair(error.code, error.message))
-            })
-    }
-
-    private fun checkLoginStatus(args: JSONArray) {
-        if(socialLogin?.isUserLoggedIn()!!.first){
-            sendPluginResult("logged", null)
-        }
-        else{
-            sendPluginResult("notLogged", null)
-        }
-    }
-    
-     */
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, intent: Intent?) {
 
@@ -111,12 +76,15 @@ class OSSocialLogins : CordovaImplementation() {
             sendPluginResult(null, Pair(SocialLoginError.APPLE_INVALID_TOKEN_ERROR.code, SocialLoginError.APPLE_INVALID_TOKEN_ERROR.message))
         }
 
+        else if(resultCode == 11){
+            sendPluginResult(null, Pair(SocialLoginError.APPLE_SIGN_IN_GENERAL_ERROR.code, SocialLoginError.APPLE_SIGN_IN_GENERAL_ERROR.message))
+        }
+
         else if(resultCode == 1){//Apple Sign in case
 
             if(intent != null){
 
                 super.onActivityResult(requestCode, resultCode, intent)
-
                 socialLoginController?.handleActivityResult(requestCode, resultCode, intent,
                     {
                         val pluginResponseJson = gson.toJson(it)
@@ -128,24 +96,7 @@ class OSSocialLogins : CordovaImplementation() {
                 )
 
             }
-
-
         }
-        else{ // for now, its only google sign in case
-            /*
-            super.onActivityResult(requestCode, resultCode, intent)
-            try {
-                socialLogin?.handleActivityResult(requestCode, resultCode, intent)
-                //implement in closure to sendPluginResult after handleActivityResult returns success
-                sendPluginResult("success", null)
-            }
-            catch(hse : Exception) {
-                sendPluginResult(null, Pair(1, "errorMessage"))
-            }
-             */
-        }
-
-
     }
 
     override fun areGooglePlayServicesAvailable(): Boolean {
