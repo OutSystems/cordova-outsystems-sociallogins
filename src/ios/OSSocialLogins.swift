@@ -25,7 +25,7 @@ extension OSSocialLogins: SocialLoginsProtocol {
         if let error = error {
             self.sendResult(result: nil, error:error as NSError, callBackID: self.callbackId)
         } else {
-            let finalResult = result?.encode(object:result)
+            let finalResult = result?.encode()
             self.sendResult(result: finalResult, error:nil , callBackID: self.callbackId)
         }
     }

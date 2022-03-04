@@ -6,7 +6,7 @@
 	<dict>
 		<key>Headers/OSSocialLoginsLib-Swift.h</key>
 		<data>
-		gOOAl/G+yK5JUUZgPypf8obJL1o=
+		vAk+f2/KxnS2m3GGpf4DEoX7mEk=
 		</data>
 		<key>Headers/OSSocialLoginsLib.h</key>
 		<data>
@@ -22,11 +22,11 @@
 		</data>
 		<key>Modules/OSSocialLoginsLib.swiftmodule/arm64-apple-ios.swiftinterface</key>
 		<data>
-		hDtoZX/H60jA7xHJi9Hflo1arBo=
+		wbnSp5K7UvlhgkfOQMZrjGrQG6E=
 		</data>
 		<key>Modules/OSSocialLoginsLib.swiftmodule/arm64-apple-ios.swiftmodule</key>
 		<data>
-		/4lTqWxEFZgCZvtJklK7SkJfQF8=
+		uOKRhc8CxssBVK+zJtlSNvoVBFs=
 		</data>
 		<key>Modules/OSSocialLoginsLib.swiftmodule/arm64.swiftdoc</key>
 		<data>
@@ -34,11 +34,11 @@
 		</data>
 		<key>Modules/OSSocialLoginsLib.swiftmodule/arm64.swiftinterface</key>
 		<data>
-		hDtoZX/H60jA7xHJi9Hflo1arBo=
+		wbnSp5K7UvlhgkfOQMZrjGrQG6E=
 		</data>
 		<key>Modules/OSSocialLoginsLib.swiftmodule/arm64.swiftmodule</key>
 		<data>
-		/4lTqWxEFZgCZvtJklK7SkJfQF8=
+		uOKRhc8CxssBVK+zJtlSNvoVBFs=
 		</data>
 		<key>Modules/module.modulemap</key>
 		<data>
@@ -51,7 +51,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			ztH2BAt1I568L+NERfmnyIFQaTt9O6K53dcS5uIX+lk=
+			TUsLW7MvB4b1o6WhZ9QuAmuu0Ws1yGw7S9mrX18UkUE=
 			</data>
 		</dict>
 		<key>Headers/OSSocialLoginsLib.h</key>
@@ -72,14 +72,14 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			sfBh0uQUbaaAITk3J7IXas218O4yALGKc0v2XOyr01A=
+			2SX5rzBaJyVPyVK8lnAyKdrkBbl6uC9PvDD6z16TRPE=
 			</data>
 		</dict>
 		<key>Modules/OSSocialLoginsLib.swiftmodule/arm64-apple-ios.swiftmodule</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			ZdezdEpUKC6yIkIRcYAKublpH6m5X0syDSjIfa6GKEA=
+			+5UVr5GyESs/orT2A/h+eNibs4Zp0wrIrl4X3bXw1is=
 			</data>
 		</dict>
 		<key>Modules/OSSocialLoginsLib.swiftmodule/arm64.swiftdoc</key>
@@ -93,14 +93,14 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			sfBh0uQUbaaAITk3J7IXas218O4yALGKc0v2XOyr01A=
+			2SX5rzBaJyVPyVK8lnAyKdrkBbl6uC9PvDD6z16TRPE=
 			</data>
 		</dict>
 		<key>Modules/OSSocialLoginsLib.swiftmodule/arm64.swiftmodule</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			ZdezdEpUKC6yIkIRcYAKublpH6m5X0syDSjIfa6GKEA=
+			+5UVr5GyESs/orT2A/h+eNibs4Zp0wrIrl4X3bXw1is=
 			</data>
 		</dict>
 		<key>Modules/module.modulemap</key>

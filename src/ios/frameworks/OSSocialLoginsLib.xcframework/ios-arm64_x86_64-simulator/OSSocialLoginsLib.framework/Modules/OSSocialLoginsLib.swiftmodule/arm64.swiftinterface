@@ -12,8 +12,9 @@ public struct UserInfo : Swift.Encodable, Swift.Equatable {
   public func encode(to encoder: Swift.Encoder) throws
 }
 public enum SocialLoginsErrors : Swift.Int, Foundation.CustomNSError, Foundation.LocalizedError {
-  case AppleSignInGenericError
-  case LoginCancelledError
+  case appleSignInGenericError
+  case loginCancelledError
+  case missingInputParametersError
   public var errorDescription: Swift.String? {
     get
   }
@@ -26,31 +27,16 @@ public enum SocialLoginsErrors : Swift.Int, Foundation.CustomNSError, Foundation
 public protocol SocialLoginsProtocol {
   func callBackUserInfo(result: OSSocialLoginsLib.UserInfo?, error: OSSocialLoginsLib.SocialLoginsErrors?, callBackID: Swift.String)
 }
-extension Swift.String {
-  public func decode<T>(string: Swift.String) -> T where T : Swift.Decodable
-}
-extension Swift.Encodable {
-  public func encode<T>(object: T) -> Swift.String where T : Swift.Encodable
-}
-@objc public class SocialLoginsAppleController : ObjectiveC.NSObject, AuthenticationServices.ASAuthorizationControllerPresentationContextProviding {
+@objc public class SocialLoginsAppleController : ObjectiveC.NSObject {
   public init(delegate: OSSocialLoginsLib.SocialLoginsProtocol)
-  @objc public func presentationAnchor(for controller: AuthenticationServices.ASAuthorizationController) -> AuthenticationServices.ASPresentationAnchor
   @objc public func authorizationController(controller: AuthenticationServices.ASAuthorizationController, didCompleteWithError error: Swift.Error)
   @objc deinit
 }
-extension AuthenticationServices.ASAuthorizationAppleIDCredential : OSSocialLoginsLib.AppleIDCredentialProtocol {
-  public var userIdentifier: Swift.String? {
-    get
-  }
-  public var givenName: Swift.String? {
-    get
-  }
-  public var familyName: Swift.String? {
-    get
-  }
-}
 extension OSSocialLoginsLib.SocialLoginsAppleController : AuthenticationServices.ASAuthorizationControllerDelegate {
   @objc dynamic public func authorizationController(controller: AuthenticationServices.ASAuthorizationController, didCompleteWithAuthorization authorization: AuthenticationServices.ASAuthorization)
+}
+extension OSSocialLoginsLib.SocialLoginsAppleController : AuthenticationServices.ASAuthorizationControllerPresentationContextProviding {
+  @objc dynamic public func presentationAnchor(for controller: AuthenticationServices.ASAuthorizationController) -> AuthenticationServices.ASPresentationAnchor
 }
 @objc open class SocialLoginsController : ObjectiveC.NSObject {
   public init(appleController: OSSocialLoginsLib.SocialLoginsAppleController, rootViewController: UIKit.UIViewController)
@@ -64,6 +50,20 @@ public protocol AppleIDCredentialProtocol {
   var email: Swift.String? { get }
   var givenName: Swift.String? { get }
   var familyName: Swift.String? { get }
+}
+extension AuthenticationServices.ASAuthorizationAppleIDCredential : OSSocialLoginsLib.AppleIDCredentialProtocol {
+  public var userIdentifier: Swift.String? {
+    get
+  }
+  public var givenName: Swift.String? {
+    get
+  }
+  public var familyName: Swift.String? {
+    get
+  }
+}
+extension Swift.Encodable {
+  public func encode() -> Swift.String
 }
 extension OSSocialLoginsLib.SocialLoginsErrors : Swift.Equatable {}
 extension OSSocialLoginsLib.SocialLoginsErrors : Swift.Hashable {}

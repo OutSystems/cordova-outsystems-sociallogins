@@ -213,11 +213,15 @@ typedef unsigned int swift_uint4  __attribute__((__ext_vector_type__(4)));
 @class ASAuthorizationController;
 
 SWIFT_CLASS("_TtC17OSSocialLoginsLib27SocialLoginsAppleController")
-@interface SocialLoginsAppleController : NSObject <ASAuthorizationControllerPresentationContextProviding>
-- (ASPresentationAnchor _Nonnull)presentationAnchorForAuthorizationController:(ASAuthorizationController * _Nonnull)controller SWIFT_WARN_UNUSED_RESULT;
+@interface SocialLoginsAppleController : NSObject
 - (void)authorizationController:(ASAuthorizationController * _Nonnull)controller didCompleteWithError:(NSError * _Nonnull)error;
 - (nonnull instancetype)init SWIFT_UNAVAILABLE;
 + (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
+@end
+
+
+@interface SocialLoginsAppleController (SWIFT_EXTENSION(OSSocialLoginsLib)) <ASAuthorizationControllerPresentationContextProviding>
+- (ASPresentationAnchor _Nonnull)presentationAnchorForAuthorizationController:(ASAuthorizationController * _Nonnull)controller SWIFT_WARN_UNUSED_RESULT;
 @end
 
 @class ASAuthorization;
@@ -453,11 +457,15 @@ typedef unsigned int swift_uint4  __attribute__((__ext_vector_type__(4)));
 @class ASAuthorizationController;
 
 SWIFT_CLASS("_TtC17OSSocialLoginsLib27SocialLoginsAppleController")
-@interface SocialLoginsAppleController : NSObject <ASAuthorizationControllerPresentationContextProviding>
-- (ASPresentationAnchor _Nonnull)presentationAnchorForAuthorizationController:(ASAuthorizationController * _Nonnull)controller SWIFT_WARN_UNUSED_RESULT;
+@interface SocialLoginsAppleController : NSObject
 - (void)authorizationController:(ASAuthorizationController * _Nonnull)controller didCompleteWithError:(NSError * _Nonnull)error;
 - (nonnull instancetype)init SWIFT_UNAVAILABLE;
 + (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
+@end
+
+
+@interface SocialLoginsAppleController (SWIFT_EXTENSION(OSSocialLoginsLib)) <ASAuthorizationControllerPresentationContextProviding>
+- (ASPresentationAnchor _Nonnull)presentationAnchorForAuthorizationController:(ASAuthorizationController * _Nonnull)controller SWIFT_WARN_UNUSED_RESULT;
 @end
 
 @class ASAuthorization;
