@@ -1,64 +1,32 @@
 import Foundation
+import OSSocialLoginsLib
 
 @objc(OSSocialLogins)
 class OSSocialLogins: CordovaImplementation {
     
-    var plugin: SocialLoginsPlugin?
+    var plugin: SocialLoginsController?
     var callbackId:String=""
     
     override func pluginInitialize() {
-        let googleProvider = SocialLoginsGoogleProvider()
-        let appleProvider = SocialLoginsAppleProvider()
-        
-        plugin = SocialLoginsPlugin(appleProvider: appleProvider, googleProvider: googleProvider)
-        plugin?.rootViewController = self.viewController
-        plugin?.delegate = self
+        let appleController = SocialLoginsAppleController(delegate:self)
+        plugin = SocialLoginsController(appleController: appleController, rootViewController: self.viewController)
     }
     
-    @objc(login:)
-    func login(command: CDVInvokedUrlCommand) {
+    @objc(loginApple:)
+    func loginApple(command: CDVInvokedUrlCommand) {
         callbackId = command.callbackId
-        let provider = command.arguments[0] as? String ?? ""
-        
-        do {
-            try plugin?.doLogin(callbackID: self.callbackId, provider: provider)
-        } catch {
-            self.sendResult(result: "", error:nil , callBackID: self.callbackId)
-        }
-    }
-    
-    @objc(logout:)
-    func logout(command: CDVInvokedUrlCommand) {
-        callbackId = command.callbackId
-        let provider = command.arguments[0] as? String ?? ""
-        
-        do {
-            try plugin?.doLogout(callbackID: self.callbackId, provider: provider)
-        } catch {
-            self.sendResult(result: "", error:nil , callBackID: self.callbackId)
-        }
-    }
-    
-    @objc(checkLoginStatus:)
-    func checkLoginStatus(command: CDVInvokedUrlCommand) {
-        callbackId = command.callbackId
-        let provider = command.arguments[0] as? String ?? ""
-        
-        do {
-            try plugin?.getCredentialState(userID: "", provider: provider)
-        } catch {
-            self.sendResult(result: "", error:nil , callBackID: self.callbackId)
-        }
+        plugin?.loginApple(callbackID: self.callbackId)
     }
        
 }
 
 extension OSSocialLogins: SocialLoginsProtocol {
-    func callBackUserInfoResponse(result: UserInfoResponse?, error: NSError?, callBackID: String) {
-        let finalResult = result?.encode(object:result)
-        self.sendResult(result: finalResult, error:nil , callBackID: self.callbackId)
-    }
-    func callBackCredentialState(result: String?, error: NSError?, callBackID: String) {
-        self.sendResult(result: result, error:nil , callBackID: self.callbackId)
+    func callBackUserInfo(result: UserInfo?, error: SocialLoginsErrors?, callBackID: String) {
+        if let error = error {
+            self.sendResult(result: nil, error:error as NSError, callBackID: self.callbackId)
+        } else {
+            let finalResult = result?.encode()
+            self.sendResult(result: finalResult, error:nil , callBackID: self.callbackId)
+        }
     }
 }

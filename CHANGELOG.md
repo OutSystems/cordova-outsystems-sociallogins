@@ -9,6 +9,7 @@ The changes documented here do not include those from the original repository.
 ## [Unreleased]
 
 ## 2022-03-03
+ - Implementation of Apple Sign In on iOS ((https://outsystemsrd.atlassian.net/browse/RMET-1405)
 - Apple Sign In implementation for Android (https://outsystemsrd.atlassian.net/browse/RMET-1406)
 
 ## 2021-11-30

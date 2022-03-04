@@ -1,0 +1,11 @@
+framework module OSSocialLoginsLib {
+  umbrella header "OSSocialLoginsLib.h"
+
+  export *
+  module * { export * }
+}
+
+module OSSocialLoginsLib.Swift {
+    header "OSSocialLoginsLib-Swift.h"
+    requires objc
+}
