@@ -1,7 +1,11 @@
 var exec = require('cordova/exec');
 
-exports.doLogin = function (success, error, provider) {
-    exec(success, error, 'OSSocialLogins', 'doLogin', [provider]);
+exports.login = function (success, error, provider) {
+    exec(success, error, 'OSSocialLogins', 'login', [provider]);
+};
+
+exports.loginApple = function (success, error, state, clientId, redirectUrl) {
+    exec(success, error, 'OSSocialLogins', 'loginApple', [state, clientId, redirectUrl]);
 };
 
 exports.logout = function (arg0, success, error) {

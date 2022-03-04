@@ -1,0 +1,10 @@
+repositories{    
+ jcenter()
+   flatDir {
+     dirs 'src/main/libs'
+   }
+}
+
+dependencies {
+  implementation (name:'OSSocialLoginsLib-Android-release', ext:'aar')
+}
