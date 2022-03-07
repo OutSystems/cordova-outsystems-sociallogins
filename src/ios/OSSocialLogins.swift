@@ -22,7 +22,7 @@ class OSSocialLogins: CordovaImplementation {
     }
 
     @objc(loginGoogle:)
-    func loginApple(command: CDVInvokedUrlCommand) {
+    func loginGoogle(command: CDVInvokedUrlCommand) {
         callbackId = command.callbackId
         plugin?.loginGoogle(callbackID: self.callbackId)
     }
