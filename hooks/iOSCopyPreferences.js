@@ -7,6 +7,7 @@ const { Console } = require('console');
 module.exports = function (context) {
 
     const ProvidersEnum = Object.freeze({"Apple":"1", "Facebook":"2", "Google":"3", "LinkedIn":"4"})
+    const ApplcationTypeEnum = Object.freeze({"web":"1", "ios":"2", "android":"3"})
     var projectRoot = context.opts.cordova.project ? context.opts.cordova.project.root : context.opts.projectRoot;
 
     var google_client_id = "";
@@ -17,11 +18,10 @@ module.exports = function (context) {
     //read json config file                         platforms/ios/www/jsonConfig
     var jsonConfig = path.join(projectRoot, 'platforms/ios/www/jsonConfig/sociallogins_configurations.json');
     var jsonConfigFile = fs.readFileSync(jsonConfig).toString();
-    console.log(jsonConfigFile);
     var jsonParsed = JSON.parse(jsonConfigFile);
 
     jsonParsed.forEach(function(configItem) {
-        if (configItem.AuthenticationConfiguration.ProviderId == ProvidersEnum.Google) {
+        if ((configItem.AuthenticationConfiguration.ProviderId == ProvidersEnum.Google) && (configItem.AuthenticationConfiguration == ApplcationTypeEnum.ios)) {
             google_client_id = configItem.AuthenticationConfiguration.ClientId 
         }
     });
