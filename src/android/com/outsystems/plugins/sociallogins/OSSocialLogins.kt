@@ -16,11 +16,12 @@ class OSSocialLogins : CordovaImplementation() {
 
     var socialLoginController: SocialLoginsController? = null
     var socialLoginControllerApple = SocialLoginsAppleController()
+    var socialLoginControllerGoogle = SocialLoginsGoogleController()
 
     override fun initialize(cordova: CordovaInterface, webView: CordovaWebView) {
         super.initialize(cordova, webView)
 
-        socialLoginController = SocialLoginsController(socialLoginControllerApple)
+        socialLoginController = SocialLoginsController(socialLoginControllerApple, socialLoginControllerGoogle)
 
     }
 
@@ -34,6 +35,9 @@ class OSSocialLogins : CordovaImplementation() {
         when (action) {
             "loginApple" -> {
                 doLoginApple(args)
+            }
+            "loginGoogle" -> {
+                doLoginGoogle(args)
             }
         }
         return true
@@ -63,6 +67,13 @@ class OSSocialLogins : CordovaImplementation() {
         }catch (e: Exception){
             sendPluginResult(null, Pair(SocialLoginError.APPLE_SIGN_IN_GENERAL_ERROR.code, SocialLoginError.APPLE_SIGN_IN_GENERAL_ERROR.message))
         }
+
+    }
+
+    private fun doLoginGoogle(args : JSONArray) {
+
+        setAsActivityResultCallback()
+        socialLoginController?.doLoginGoogle(cordova.activity)
 
     }
 
@@ -97,6 +108,26 @@ class OSSocialLogins : CordovaImplementation() {
 
             }
         }
+        else if (requestCode == 2){ //Google sign in case
+            super.onActivityResult(requestCode, resultCode, intent)
+
+            if(intent != null){
+                try {
+                    socialLoginController?.handleActivityResult(requestCode, resultCode, intent,
+                        {
+                            val pluginResponseJson = gson.toJson(it)
+                            sendPluginResult(pluginResponseJson, null)
+                        },
+                        {
+                            sendPluginResult(null, Pair(it.code, it.message))
+                        })
+                }
+                catch(hse : Exception) {
+                    sendPluginResult(null, Pair(SocialLoginError.GOOGLE_SIGN_IN_GENERAL_ERROR.code, SocialLoginError.GOOGLE_SIGN_IN_GENERAL_ERROR.message))
+                }
+            }
+        }
+
     }
 
     override fun areGooglePlayServicesAvailable(): Boolean {

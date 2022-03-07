@@ -3,10 +3,14 @@ package com.outsystems.plugins.sociallogins
 import android.app.Activity
 import android.content.Intent
 
-class SocialLoginsController(var controllerApple: SocialLoginsAppleController) {
+class SocialLoginsController(var appleController: SocialLoginsAppleController, var googleController: SocialLoginsGoogleController) {
 
     fun doLoginApple(state: String, clientId: String, redirectUri: String, activity: Activity){
-        controllerApple.doLogin(state, clientId, redirectUri, activity)
+        appleController.doLogin(state, clientId, redirectUri, activity)
+    }
+
+    fun doLoginGoogle(activity: Activity){
+        googleController.doLogin(activity)
     }
 
     fun handleActivityResult(requestCode: Int, resultCode: Int, intent: Intent,
@@ -14,7 +18,7 @@ class SocialLoginsController(var controllerApple: SocialLoginsAppleController) {
 
         if(resultCode == 1){
             //call apple
-            controllerApple.handleActivityResult(requestCode, resultCode, intent,
+            appleController.handleActivityResult(requestCode, resultCode, intent,
                 {
                     onSuccess(it)
                 }, {
@@ -22,9 +26,14 @@ class SocialLoginsController(var controllerApple: SocialLoginsAppleController) {
                 }
             )
         }
-        else{
-            //other providers, like Google
-            //TODO
+        else if(requestCode == 2){ //call google
+            googleController.handleActivityResult(requestCode, resultCode, intent,
+                {
+                    onSuccess(it)
+                },
+                {
+                   onError(it)
+                })
         }
 
     }
