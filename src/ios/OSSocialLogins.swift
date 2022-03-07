@@ -9,13 +9,22 @@ class OSSocialLogins: CordovaImplementation {
     
     override func pluginInitialize() {
         let appleController = SocialLoginsAppleController(delegate:self)
-        plugin = SocialLoginsController(appleController: appleController, rootViewController: self.viewController)
+        let googleController = SocialLoginsGoogleController(delegate:self)
+        plugin = SocialLoginsController(appleController: appleController, 
+                                        googleController: googleController,
+                                        rootViewController: self.viewController)
     }
     
     @objc(loginApple:)
     func loginApple(command: CDVInvokedUrlCommand) {
         callbackId = command.callbackId
         plugin?.loginApple(callbackID: self.callbackId)
+    }
+
+    @objc(loginGoogle:)
+    func loginApple(command: CDVInvokedUrlCommand) {
+        callbackId = command.callbackId
+        plugin?.loginGoogle(callbackID: self.callbackId)
     }
        
 }
