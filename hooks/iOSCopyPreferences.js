@@ -21,7 +21,7 @@ module.exports = function (context) {
     var jsonParsed = JSON.parse(jsonConfigFile);
 
     jsonParsed.forEach(function(configItem) {
-        if ((configItem.AuthenticationConfiguration.ProviderId == ProvidersEnum.Google) && (configItem.AuthenticationConfiguration == ApplcationTypeEnum.ios)) {
+        if ((configItem.AuthenticationConfiguration.ProviderId == ProvidersEnum.Google) && (configItem.AuthenticationConfiguration.ApplicationTypeId == ApplcationTypeEnum.ios)) {
             google_client_id = configItem.AuthenticationConfiguration.ClientId 
         }
     });
