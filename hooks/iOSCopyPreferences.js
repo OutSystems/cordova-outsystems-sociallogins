@@ -22,7 +22,7 @@ module.exports = function (context) {
 
     jsonParsed.forEach(function(configItem) {
         if (configItem.AuthenticationConfiguration.ProviderId == ProvidersEnum.Google) {
-            google_client_id = configItem.ClientId 
+            google_client_id = configItem.AuthenticationConfiguration.ClientId 
         }
     });
 
