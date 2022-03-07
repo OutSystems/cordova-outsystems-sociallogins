@@ -4,6 +4,54 @@
 <dict>
 	<key>files</key>
 	<dict>
+		<key>Frameworks/FBAEMKit.framework/FBAEMKit</key>
+		<data>
+		oW0lb49YRlmFh+NMR32rf8N+mz8=
+		</data>
+		<key>Frameworks/FBAEMKit.framework/Info.plist</key>
+		<data>
+		BjSALg4l2+mVPfcSxHQIMxK87VE=
+		</data>
+		<key>Frameworks/FBAEMKit.framework/_CodeSignature/CodeResources</key>
+		<data>
+		46s8v45lNf8UHeeUPx9EhDLF4mQ=
+		</data>
+		<key>Frameworks/FBSDKCoreKit.framework/FBSDKCoreKit</key>
+		<data>
+		el/X8CMoJhCrrUNnLDa3HkO/PBY=
+		</data>
+		<key>Frameworks/FBSDKCoreKit.framework/Info.plist</key>
+		<data>
+		23m/R9uklstL/wkMsSrb/1aLWMc=
+		</data>
+		<key>Frameworks/FBSDKCoreKit.framework/_CodeSignature/CodeResources</key>
+		<data>
+		w6sHFR3axZfTwkL/gzJ5k77Y2W4=
+		</data>
+		<key>Frameworks/FBSDKCoreKit_Basics.framework/FBSDKCoreKit_Basics</key>
+		<data>
+		jaQW7WBEPwMjTRRm8KQ/2Qs1W5M=
+		</data>
+		<key>Frameworks/FBSDKCoreKit_Basics.framework/Info.plist</key>
+		<data>
+		HlTsK9i8T8hHOWUNzqALTVD+xrg=
+		</data>
+		<key>Frameworks/FBSDKCoreKit_Basics.framework/_CodeSignature/CodeResources</key>
+		<data>
+		XjWhuK9ca4ikTC66wCv9/gCHhh4=
+		</data>
+		<key>Frameworks/FBSDKLoginKit.framework/FBSDKLoginKit</key>
+		<data>
+		V+76xu42Tpy7wSW9SFnK507EUlk=
+		</data>
+		<key>Frameworks/FBSDKLoginKit.framework/Info.plist</key>
+		<data>
+		/r6vr35cliRutK9OXsNauYubxBk=
+		</data>
+		<key>Frameworks/FBSDKLoginKit.framework/_CodeSignature/CodeResources</key>
+		<data>
+		DWTSr3xJ5qTVtVUMQR/6fw3Vq+s=
+		</data>
 		<key>Headers/OSSocialLoginsLib-Swift.h</key>
 		<data>
 		bK2A0n+V0xqoBvSY9CDrI/wzOBM=
@@ -22,11 +70,11 @@
 		</data>
 		<key>Modules/OSSocialLoginsLib.swiftmodule/arm64-apple-ios-simulator.swiftinterface</key>
 		<data>
-		2ZoQZ+yjuH9vwMuj0hp0yeOQtL0=
+		NpSBRfZo4hYIQnsE5MOXiSUf+oM=
 		</data>
 		<key>Modules/OSSocialLoginsLib.swiftmodule/arm64-apple-ios-simulator.swiftmodule</key>
 		<data>
-		e++kM3r3OQNFsfujUUpThaKuvm4=
+		6KSbfI8dRo7PZyQgWZ65MPK6kkI=
 		</data>
 		<key>Modules/OSSocialLoginsLib.swiftmodule/arm64.swiftdoc</key>
 		<data>
@@ -34,11 +82,11 @@
 		</data>
 		<key>Modules/OSSocialLoginsLib.swiftmodule/arm64.swiftinterface</key>
 		<data>
-		2ZoQZ+yjuH9vwMuj0hp0yeOQtL0=
+		NpSBRfZo4hYIQnsE5MOXiSUf+oM=
 		</data>
 		<key>Modules/OSSocialLoginsLib.swiftmodule/arm64.swiftmodule</key>
 		<data>
-		e++kM3r3OQNFsfujUUpThaKuvm4=
+		6KSbfI8dRo7PZyQgWZ65MPK6kkI=
 		</data>
 		<key>Modules/OSSocialLoginsLib.swiftmodule/x86_64-apple-ios-simulator.swiftdoc</key>
 		<data>
@@ -46,11 +94,11 @@
 		</data>
 		<key>Modules/OSSocialLoginsLib.swiftmodule/x86_64-apple-ios-simulator.swiftinterface</key>
 		<data>
-		b32ftgALoAyNnDByBtmydRQUFRA=
+		P2eFngRGS/vreT/xxLRs7Z0GKFI=
 		</data>
 		<key>Modules/OSSocialLoginsLib.swiftmodule/x86_64-apple-ios-simulator.swiftmodule</key>
 		<data>
-		4YUWiEL0S9M3V9ssX0VqN1sFYFY=
+		dSm4qOzNaKbczBrcMvtFAn/nd7c=
 		</data>
 		<key>Modules/OSSocialLoginsLib.swiftmodule/x86_64.swiftdoc</key>
 		<data>
@@ -58,11 +106,11 @@
 		</data>
 		<key>Modules/OSSocialLoginsLib.swiftmodule/x86_64.swiftinterface</key>
 		<data>
-		b32ftgALoAyNnDByBtmydRQUFRA=
+		P2eFngRGS/vreT/xxLRs7Z0GKFI=
 		</data>
 		<key>Modules/OSSocialLoginsLib.swiftmodule/x86_64.swiftmodule</key>
 		<data>
-		4YUWiEL0S9M3V9ssX0VqN1sFYFY=
+		dSm4qOzNaKbczBrcMvtFAn/nd7c=
 		</data>
 		<key>Modules/module.modulemap</key>
 		<data>
@@ -71,6 +119,90 @@
 	</dict>
 	<key>files2</key>
 	<dict>
+		<key>Frameworks/FBAEMKit.framework/FBAEMKit</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			ASQOy24B+BzJD5HR30NYe0KeMxZ8ZQXwMhLEBaRvZdA=
+			</data>
+		</dict>
+		<key>Frameworks/FBAEMKit.framework/Info.plist</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			frh2JGZR2tfJBA2K1kWld8OhbjF82u1RjKiY9r+JEZs=
+			</data>
+		</dict>
+		<key>Frameworks/FBAEMKit.framework/_CodeSignature/CodeResources</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			UtW3dX4+A4rUrLbgN1wUf4pPMzIceaM8crgH2WUIlMY=
+			</data>
+		</dict>
+		<key>Frameworks/FBSDKCoreKit.framework/FBSDKCoreKit</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			HZw+6B+25kRXwK16VShwexxBxWmrlrzWUf1sQ4Zk9UQ=
+			</data>
+		</dict>
+		<key>Frameworks/FBSDKCoreKit.framework/Info.plist</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			XeO+hnygcamf0EeE6iyyD9RKzRTZ8FbjqIkMDU+gWt0=
+			</data>
+		</dict>
+		<key>Frameworks/FBSDKCoreKit.framework/_CodeSignature/CodeResources</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			MTHPddli4pw8R1DAoLIZ5tY8ts+wCcH0kqzWWUc5zJM=
+			</data>
+		</dict>
+		<key>Frameworks/FBSDKCoreKit_Basics.framework/FBSDKCoreKit_Basics</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			eYTg+EQjvChGmbP/4Oyd79NuBap6Q0dfHtir55b8/JE=
+			</data>
+		</dict>
+		<key>Frameworks/FBSDKCoreKit_Basics.framework/Info.plist</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			0R9SNbz0lq/IgoD+BlrWOUhI8IXQ7wyWoc0ysPbMqJ4=
+			</data>
+		</dict>
+		<key>Frameworks/FBSDKCoreKit_Basics.framework/_CodeSignature/CodeResources</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			3X0MbCbCPUToHUvzF2GuHkLIyYR+nt/NF7mJzaYvNME=
+			</data>
+		</dict>
+		<key>Frameworks/FBSDKLoginKit.framework/FBSDKLoginKit</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			1mZD3oaZObXrh8OMFdEQonTKXxrqliKzvgDO7oDsSbA=
+			</data>
+		</dict>
+		<key>Frameworks/FBSDKLoginKit.framework/Info.plist</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			YD+Ltm9McJmdMx771MsfRVgdhUntYWhYeZx0HNqkKL4=
+			</data>
+		</dict>
+		<key>Frameworks/FBSDKLoginKit.framework/_CodeSignature/CodeResources</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			sMYhYl+N7eyQBO+dTkB7LRBrRsu/Jv2ue9sWYU26stU=
+			</data>
+		</dict>
 		<key>Headers/OSSocialLoginsLib-Swift.h</key>
 		<dict>
 			<key>hash2</key>
@@ -96,14 +228,14 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			JdEELmuC4R+3EhuALvPrRoq2WXVX2r9NMXczu2Sh8m4=
+			+fe7HG4j5LOuHIoSXxRBkaoluxEydFMmiVbJDJF9WZs=
 			</data>
 		</dict>
 		<key>Modules/OSSocialLoginsLib.swiftmodule/arm64-apple-ios-simulator.swiftmodule</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			SF9yU72FPJE06U0iiiXYYMlmMl/izDyU/AIGxVxFIEs=
+			eMz+pj3OZl92risfck6MO6zPWQCK6BI+bPkgXHYw8TI=
 			</data>
 		</dict>
 		<key>Modules/OSSocialLoginsLib.swiftmodule/arm64.swiftdoc</key>
@@ -117,14 +249,14 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			JdEELmuC4R+3EhuALvPrRoq2WXVX2r9NMXczu2Sh8m4=
+			+fe7HG4j5LOuHIoSXxRBkaoluxEydFMmiVbJDJF9WZs=
 			</data>
 		</dict>
 		<key>Modules/OSSocialLoginsLib.swiftmodule/arm64.swiftmodule</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			SF9yU72FPJE06U0iiiXYYMlmMl/izDyU/AIGxVxFIEs=
+			eMz+pj3OZl92risfck6MO6zPWQCK6BI+bPkgXHYw8TI=
 			</data>
 		</dict>
 		<key>Modules/OSSocialLoginsLib.swiftmodule/x86_64-apple-ios-simulator.swiftdoc</key>
@@ -138,14 +270,14 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			ayOVuaAHfq2R3wQvvrSI6qXR40SVfqn6UPlFCOUv8ms=
+			53hk8YkyskZ0jA2DZY4LXA2jwwQZ6Cf2APtBcUjYAiE=
 			</data>
 		</dict>
 		<key>Modules/OSSocialLoginsLib.swiftmodule/x86_64-apple-ios-simulator.swiftmodule</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			TGfxIwYVlgv699G+/Duk/hvnO1+cDfxSTaoAP/JOwOs=
+			gcI8QBH6Sovq/UFquRXPZU4uQbxTfb8s1gI65qSA8A4=
 			</data>
 		</dict>
 		<key>Modules/OSSocialLoginsLib.swiftmodule/x86_64.swiftdoc</key>
@@ -159,14 +291,14 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			ayOVuaAHfq2R3wQvvrSI6qXR40SVfqn6UPlFCOUv8ms=
+			53hk8YkyskZ0jA2DZY4LXA2jwwQZ6Cf2APtBcUjYAiE=
 			</data>
 		</dict>
 		<key>Modules/OSSocialLoginsLib.swiftmodule/x86_64.swiftmodule</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			TGfxIwYVlgv699G+/Duk/hvnO1+cDfxSTaoAP/JOwOs=
+			gcI8QBH6Sovq/UFquRXPZU4uQbxTfb8s1gI65qSA8A4=
 			</data>
 		</dict>
 		<key>Modules/module.modulemap</key>
