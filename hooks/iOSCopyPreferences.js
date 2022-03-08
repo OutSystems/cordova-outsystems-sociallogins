@@ -6,7 +6,7 @@ const { Console } = require('console');
 
 module.exports = function (context) {
 
-    const ProvidersEnum = Object.freeze({"Apple":"1", "Facebook":"2", "Google":"3", "LinkedIn":"4"})
+    const ProvidersEnum = Object.freeze({"apple":"1", "facebook":"2", "google":"3", "linkedIn":"4"})
     const ApplcationTypeEnum = Object.freeze({"web":"1", "ios":"2", "android":"3"})
     var projectRoot = context.opts.cordova.project ? context.opts.cordova.project.root : context.opts.projectRoot;
 
@@ -20,9 +20,9 @@ module.exports = function (context) {
     var jsonConfigFile = fs.readFileSync(jsonConfig).toString();
     var jsonParsed = JSON.parse(jsonConfigFile);
 
-    jsonParsed.forEach(function(configItem) {
-        if ((configItem.AuthenticationConfiguration.ProviderId == ProvidersEnum.Google) && (configItem.AuthenticationConfiguration.ApplicationTypeId == ApplcationTypeEnum.ios)) {
-            google_client_id = configItem.AuthenticationConfiguration.ClientId 
+    jsonParsed.environment_configurations.forEach(function(configItem) {
+        if ((configItem.provider_id == ProvidersEnum.google) && (configItem.application_type_id == ApplcationTypeEnum.ios)) {
+            google_client_id = configItem.client_id 
         }
     });
 
