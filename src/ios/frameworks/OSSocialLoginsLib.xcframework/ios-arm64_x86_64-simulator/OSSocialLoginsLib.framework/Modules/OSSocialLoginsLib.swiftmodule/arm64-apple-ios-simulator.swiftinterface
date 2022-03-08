@@ -3,7 +3,6 @@
 // swift-module-flags: -target arm64-apple-ios13.0-simulator -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -module-name OSSocialLoginsLib
 import AuthenticationServices
 import Foundation
-@_exported import GoogleSignIn
 @_exported import OSSocialLoginsLib
 import Swift
 import UIKit
