@@ -8,8 +8,8 @@ exports.loginApple = function (success, error, state, clientId, redirectUrl) {
     exec(success, error, 'OSSocialLogins', 'loginApple', [state, clientId, redirectUrl]);
 };
 
-exports.loginGoogle = function (success, error, state, clientId, redirectUrl) {
-    exec(success, error, 'OSSocialLogins', 'loginGoogle', [state, clientId, redirectUrl]);
+exports.loginGoogle = function (success, error, clientId, redirectUrl) {
+    exec(success, error, 'OSSocialLogins', 'loginGoogle', [clientId, redirectUrl]);
 };
 
 exports.logout = function (arg0, success, error) {
