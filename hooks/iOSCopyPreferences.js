@@ -16,15 +16,21 @@ module.exports = function (context) {
     var appName = appNameParser.name();
 
     //read json config file                         platforms/ios/www/jsonConfig
-    var jsonConfig = path.join(projectRoot, 'platforms/ios/www/jsonConfig/sociallogins_configurations.json');
-    var jsonConfigFile = fs.readFileSync(jsonConfig).toString();
-    var jsonParsed = JSON.parse(jsonConfigFile);
+    var jsonConfig = "";
+    try {
+        jsonConfig = path.join(projectRoot, 'platforms/ios/www/jsonConfig/sociallogins_configurations.json');
+        var jsonConfigFile = fs.readFileSync(jsonConfig).toString();
+        var jsonParsed = JSON.parse(jsonConfigFile);
+    
+        jsonParsed.environment_configurations.forEach(function(configItem) {
+            if ((configItem.provider_id == ProvidersEnum.google) && (configItem.application_type_id == ApplcationTypeEnum.ios)) {
+                google_client_id = configItem.client_id 
+            }
+        });
 
-    jsonParsed.environment_configurations.forEach(function(configItem) {
-        if ((configItem.provider_id == ProvidersEnum.google) && (configItem.application_type_id == ApplcationTypeEnum.ios)) {
-            google_client_id = configItem.client_id 
-        }
-    });
+    } catch {
+        console.log("Missing configuration file or error trying to obtain the configuration information.");
+    }
 
     //Change info.plist
     var infoPlistPath = path.join(projectRoot, 'platforms/ios/' + appName + '/'+ appName +'-info.plist');
