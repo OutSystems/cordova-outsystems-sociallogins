@@ -29,7 +29,8 @@ module.exports = function (context) {
         });
 
     } catch {
-        console.log("Missing configuration file or error trying to obtain the configuration information.");
+        throw new Error("Missing configuration file or error trying to obtain the configuration.");
+        //console.log();
     }
 
     //Change info.plist
