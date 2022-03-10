@@ -1,10 +1,3 @@
-//
-//  OSSocialLoginsLib.h
-//  OSSocialLoginsLib
-//
-//  Created by Carlos Correa on 28/02/2022.
-//
-
 #import <Foundation/Foundation.h>
 
 //! Project version number for OSSocialLoginsLib.

@@ -6,11 +6,11 @@
 	<dict>
 		<key>Headers/OSSocialLoginsLib-Swift.h</key>
 		<data>
-		vAk+f2/KxnS2m3GGpf4DEoX7mEk=
+		EJiAlG4qwfn5n61z94aVEViyf1E=
 		</data>
 		<key>Headers/OSSocialLoginsLib.h</key>
 		<data>
-		Cq3dOSfNaxApn7MLVGg0IQQTqzg=
+		9lSjUQf/4Rd+Ku7AkXh8YwEMrHQ=
 		</data>
 		<key>Info.plist</key>
 		<data>
@@ -22,11 +22,11 @@
 		</data>
 		<key>Modules/OSSocialLoginsLib.swiftmodule/arm64-apple-ios.swiftinterface</key>
 		<data>
-		vPjf/PmKzYvYEAsoI+qy0K5LQiM=
+		vtobySKo4XKPXbJU1RahxhT8V4w=
 		</data>
 		<key>Modules/OSSocialLoginsLib.swiftmodule/arm64-apple-ios.swiftmodule</key>
 		<data>
-		lA8h5WhebzMZmCc3+N2kYrEfjzI=
+		5uf3UlzGEMMG4/chtkL8Txok0pc=
 		</data>
 		<key>Modules/OSSocialLoginsLib.swiftmodule/arm64.swiftdoc</key>
 		<data>
@@ -34,11 +34,11 @@
 		</data>
 		<key>Modules/OSSocialLoginsLib.swiftmodule/arm64.swiftinterface</key>
 		<data>
-		vPjf/PmKzYvYEAsoI+qy0K5LQiM=
+		vtobySKo4XKPXbJU1RahxhT8V4w=
 		</data>
 		<key>Modules/OSSocialLoginsLib.swiftmodule/arm64.swiftmodule</key>
 		<data>
-		lA8h5WhebzMZmCc3+N2kYrEfjzI=
+		5uf3UlzGEMMG4/chtkL8Txok0pc=
 		</data>
 		<key>Modules/module.modulemap</key>
 		<data>
@@ -51,14 +51,14 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			TUsLW7MvB4b1o6WhZ9QuAmuu0Ws1yGw7S9mrX18UkUE=
+			JCOi60xP6KaRnZNeK+ItRQIrh2tJOF1Sf6rNGJFxsoM=
 			</data>
 		</dict>
 		<key>Headers/OSSocialLoginsLib.h</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			tMA9SFalzvR89moSHZixJapLdg9elDfZRvx2YDtkGG4=
+			6tMk8IuFDftLVfG/mte526gb/eTCCy6CiwOzLkXDsgw=
 			</data>
 		</dict>
 		<key>Modules/OSSocialLoginsLib.swiftmodule/arm64-apple-ios.swiftdoc</key>
@@ -72,14 +72,14 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			Hbdmw38+Q15V6ZnibNjL8OCKFkuBei5wrvNLOk6zaps=
+			+VivSTbrNBvnz6Xmzmu2IEaBImZZEQIqI2AEnaBWTkw=
 			</data>
 		</dict>
 		<key>Modules/OSSocialLoginsLib.swiftmodule/arm64-apple-ios.swiftmodule</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			aV3hh1bWonrha3ixw/1xvfdkSZMQ3Lz0hxqryp3ALR0=
+			6lgZ0vhMFGSCLKxWx5B+4HrjntDsgGqezyGXfImYCzI=
 			</data>
 		</dict>
 		<key>Modules/OSSocialLoginsLib.swiftmodule/arm64.swiftdoc</key>
@@ -93,14 +93,14 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			Hbdmw38+Q15V6ZnibNjL8OCKFkuBei5wrvNLOk6zaps=
+			+VivSTbrNBvnz6Xmzmu2IEaBImZZEQIqI2AEnaBWTkw=
 			</data>
 		</dict>
 		<key>Modules/OSSocialLoginsLib.swiftmodule/arm64.swiftmodule</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			aV3hh1bWonrha3ixw/1xvfdkSZMQ3Lz0hxqryp3ALR0=
+			6lgZ0vhMFGSCLKxWx5B+4HrjntDsgGqezyGXfImYCzI=
 			</data>
 		</dict>
 		<key>Modules/module.modulemap</key>

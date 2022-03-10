@@ -208,18 +208,19 @@ typedef unsigned int swift_uint4  __attribute__((__ext_vector_type__(4)));
 #endif
 
 
-@class ASAuthorizationController;
 
-SWIFT_CLASS("_TtC17OSSocialLoginsLib27SocialLoginsAppleController")
-@interface SocialLoginsAppleController : NSObject
-- (void)authorizationController:(ASAuthorizationController * _Nonnull)controller didCompleteWithError:(NSError * _Nonnull)error;
+
+SWIFT_CLASS("_TtC17OSSocialLoginsLib26SocialLoginsBaseController")
+@interface SocialLoginsBaseController : NSObject
 - (nonnull instancetype)init SWIFT_UNAVAILABLE;
 + (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
 @end
 
+@class ASAuthorizationController;
 
-@interface SocialLoginsAppleController (SWIFT_EXTENSION(OSSocialLoginsLib)) <ASAuthorizationControllerPresentationContextProviding>
-- (ASPresentationAnchor _Nonnull)presentationAnchorForAuthorizationController:(ASAuthorizationController * _Nonnull)controller SWIFT_WARN_UNUSED_RESULT;
+SWIFT_CLASS("_TtC17OSSocialLoginsLib27SocialLoginsAppleController")
+@interface SocialLoginsAppleController : SocialLoginsBaseController
+- (void)authorizationController:(ASAuthorizationController * _Nonnull)controller didCompleteWithError:(NSError * _Nonnull)error;
 @end
 
 @class ASAuthorization;
@@ -229,10 +230,21 @@ SWIFT_CLASS("_TtC17OSSocialLoginsLib27SocialLoginsAppleController")
 @end
 
 
+@interface SocialLoginsAppleController (SWIFT_EXTENSION(OSSocialLoginsLib)) <ASAuthorizationControllerPresentationContextProviding>
+- (ASPresentationAnchor _Nonnull)presentationAnchorForAuthorizationController:(ASAuthorizationController * _Nonnull)controller SWIFT_WARN_UNUSED_RESULT;
+@end
+
+
+
 SWIFT_CLASS("_TtC17OSSocialLoginsLib22SocialLoginsController")
 @interface SocialLoginsController : NSObject
 - (nonnull instancetype)init SWIFT_UNAVAILABLE;
 + (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
+@end
+
+
+SWIFT_CLASS("_TtC17OSSocialLoginsLib28SocialLoginsGoogleController")
+@interface SocialLoginsGoogleController : SocialLoginsBaseController
 @end
 
 #if __has_attribute(external_source_symbol)
