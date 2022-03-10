@@ -30,7 +30,6 @@ module.exports = function (context) {
 
     } catch {
         throw new Error("Missing configuration file or error trying to obtain the configuration.");
-        //console.log();
     }
 
     //Change info.plist
