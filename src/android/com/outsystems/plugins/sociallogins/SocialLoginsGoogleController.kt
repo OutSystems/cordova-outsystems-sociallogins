@@ -10,6 +10,8 @@ import android.util.Log
 import androidx.core.app.ActivityCompat.startActivityForResult
 
 import android.content.Intent
+import androidx.annotation.NonNull
+import com.google.android.gms.auth.GoogleAuthException
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.tasks.Task
 import com.google.android.gms.common.api.ApiException
@@ -21,12 +23,18 @@ class SocialLoginsGoogleController {
 
     fun doLogin(activity: Activity){
 
+        //maybe here we should call silentSignIn or check if the user is already signed in first to deal with the case where the user has already signed in
+        //TODO
+
         // Configure sign-in to request the user's ID, email address, and basic
         // profile. ID and basic profile are included in DEFAULT_SIGN_IN.
         // Configure sign-in to request the user's ID, email address, and basic
         // profile. ID and basic profile are included in DEFAULT_SIGN_IN.
         val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+            //.requestIdToken("87904510334-h7lnlun7gulp6p17o6hs7b6fk61hbboa.apps.googleusercontent.com") // do we want to have this value?
             .requestEmail()
+            .requestId()
+            .requestProfile()
             .build()
 
         val mGoogleSignInClient = GoogleSignIn.getClient(activity, gso);
@@ -65,6 +73,30 @@ class SocialLoginsGoogleController {
      */
 
     private fun signIn(signInClient: GoogleSignInClient, activity: Activity) {
+
+        //to discuss, do we want to do the login silently when possible?
+        //or do we want to present the login dialog to the user every time?
+        //for now, I'll leave it commented
+        //if we want to do silentSignIn, then we have to send the result of the login here
+        //and not through the OnActivityResult
+        /*
+        signInClient.silentSignIn()
+            .addOnCompleteListener(
+                activity,
+                OnCompleteListener<GoogleSignInAccount> {
+                        task -> handleSignInResult(task,
+                    {
+                        it.email
+                        it.firstName
+                    },
+                    {
+                        it.code
+                        it.message
+                    })
+                }
+            )
+         */
+
         val signInIntent: Intent = signInClient.signInIntent
         startActivityForResult(activity, signInIntent, GOOGLE_SIGN_IN, null)
     }
@@ -98,7 +130,7 @@ class SocialLoginsGoogleController {
                     account.email,
                     account.givenName,
                     account.familyName,
-                    account.idToken, // this is coming null because we need to request it, but for that we need the server ClientID...
+                    account.idToken,
                     account.photoUrl.toString()
                 ))
             // Signed in successfully, show authenticated UI.
