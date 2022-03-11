@@ -2,6 +2,7 @@ package com.outsystems.plugins.sociallogins
 
 import android.content.Intent
 import com.google.gson.Gson
+import com.outsystems.plugins.sociallogins.facebook.SocialLoginsFacebookController
 import org.apache.cordova.CallbackContext
 import org.apache.cordova.CordovaInterface
 import org.apache.cordova.CordovaWebView
@@ -16,11 +17,14 @@ class OSSocialLogins : CordovaImplementation() {
 
     var socialLoginController: SocialLoginsController? = null
     var socialLoginControllerApple = SocialLoginsAppleController()
+    var socialloginControlerFacebook = SocialLoginsFacebookController()
 
     override fun initialize(cordova: CordovaInterface, webView: CordovaWebView) {
         super.initialize(cordova, webView)
 
-        socialLoginController = SocialLoginsController(socialLoginControllerApple)
+        socialLoginController = SocialLoginsController(
+            socialLoginControllerApple,
+            socialloginControlerFacebook)
 
     }
 
@@ -67,35 +71,17 @@ class OSSocialLogins : CordovaImplementation() {
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, intent: Intent?) {
-
-        if(resultCode == 0){
-            sendPluginResult(null, Pair(SocialLoginError.LOGIN_CANCELLED_ERROR.code, SocialLoginError.LOGIN_CANCELLED_ERROR.message))
-        }
-
-        else if(resultCode == 10){
-            sendPluginResult(null, Pair(SocialLoginError.APPLE_INVALID_TOKEN_ERROR.code, SocialLoginError.APPLE_INVALID_TOKEN_ERROR.message))
-        }
-
-        else if(resultCode == 11){
-            sendPluginResult(null, Pair(SocialLoginError.APPLE_SIGN_IN_GENERAL_ERROR.code, SocialLoginError.APPLE_SIGN_IN_GENERAL_ERROR.message))
-        }
-
-        else if(resultCode == 1){//Apple Sign in case
-
-            if(intent != null){
-
-                super.onActivityResult(requestCode, resultCode, intent)
-                socialLoginController?.handleActivityResult(requestCode, resultCode, intent,
-                    {
-                        val pluginResponseJson = gson.toJson(it)
-                        sendPluginResult(pluginResponseJson, null)
-                    },
-                    {
-                        sendPluginResult(null, Pair(it.code, it.message))
-                    }
-                )
-
-            }
+        intent?.let {
+            super.onActivityResult(requestCode, resultCode, intent)
+            socialLoginController?.handleActivityResult(requestCode, resultCode, intent,
+                {
+                    val pluginResponseJson = gson.toJson(it)
+                    sendPluginResult(pluginResponseJson, null)
+                },
+                {
+                    sendPluginResult(null, Pair(it.code, it.message))
+                }
+            )
         }
     }
 

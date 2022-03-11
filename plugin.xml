@@ -63,6 +63,9 @@
     <source-file src="src/android/com/outsystems/plugins/sociallogins/AppleWebViewClient.kt" target-dir="app/src/main/kotlin/com/outsystems/plugins/sociallogins"/>
     <source-file src="src/android/com/outsystems/plugins/sociallogins/AppleConstants.kt" target-dir="app/src/main/kotlin/com/outsystems/plugins/sociallogins"/>
 
+    <source-file src="src/android/com/outsystems/plugins/sociallogins/facebook/SocialLoginsFacebookController.kt" target-dir="app/src/main/kotlin/com/outsystems/plugins/sociallogins/facebook/"/>
+    <source-file src="src/android/com/outsystems/plugins/sociallogins/facebook/FacebookSignInActivity.kt" target-dir="app/src/main/kotlin/com/outsystems/plugins/sociallogins/facebook"/>
+
     <!--aar for social logins library-->
     <!--<source-file src="src/android/com/outsystems/plugins/sociallogins/OSSocialLoginsLib-Android-release.aar" target-dir="app/libs"/>-->
 
@@ -74,8 +77,10 @@
     
     <!--For Custom Tabs-->
     <framework src="androidx.browser:browser:1.3.0" />
-
     <framework src="com.google.android.gms:play-services-auth:19.2.0" />
+
+    <!--Facebook SDK (11.0.0 so it compiles on Kotlin 1.3.50)-->
+    <framework src="com.facebook.android:facebook-login:11.0.0" />
   
   </platform>
 

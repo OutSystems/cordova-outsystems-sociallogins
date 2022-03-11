@@ -48,7 +48,6 @@ class AppleSignInActivity : Activity() {
         webView.isHorizontalScrollBarEnabled = false
         webView.webViewClient = AppleWebViewClient(this)
 
-
         val url: String = AppleConstants.AUTHURL + "?response_type=code id_token&response_mode=form_post&client_id=" + clientId + "&scope=" + AppleConstants.SCOPE + "&state=" + state + "&redirect_uri=" + redirectUri
 
         webView.loadUrl(url)
