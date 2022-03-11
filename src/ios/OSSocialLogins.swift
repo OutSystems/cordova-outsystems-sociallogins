@@ -8,11 +8,10 @@ class OSSocialLogins: CordovaImplementation {
     var callbackId:String=""
     
     override func pluginInitialize() {
-        let appleController = SocialLoginsAppleController(delegate:self)
-        let googleController = SocialLoginsGoogleController(delegate:self)
+        let appleController = SocialLoginsAppleController(delegate:self, rootViewController: self.viewController)
+        let googleController = SocialLoginsGoogleController(delegate:self, rootViewController: self.viewController)
         plugin = SocialLoginsController(appleController: appleController, 
-                                        googleController: googleController,
-                                        rootViewController: self.viewController)
+                                        googleController: googleController)
     }
     
     @objc(loginApple:)
