@@ -10,7 +10,7 @@ module.exports = function (context) {
     const ApplcationTypeEnum = Object.freeze({"web":"1", "ios":"2", "android":"3"})
     var projectRoot = context.opts.cordova.project ? context.opts.cordova.project.root : context.opts.projectRoot;
 
-    var google_client_id = "";
+    var google_url_scheme = "";
     var appNamePath = path.join(projectRoot, 'config.xml');
     var appNameParser = new ConfigParser(appNamePath);
     var appName = appNameParser.name();
@@ -21,10 +21,10 @@ module.exports = function (context) {
         jsonConfig = path.join(projectRoot, 'platforms/ios/www/jsonConfig/sociallogins_configurations.json');
         var jsonConfigFile = fs.readFileSync(jsonConfig).toString();
         var jsonParsed = JSON.parse(jsonConfigFile);
-    
+
         jsonParsed.environment_configurations.forEach(function(configItem) {
             if ((configItem.provider_id == ProvidersEnum.google) && (configItem.application_type_id == ApplcationTypeEnum.ios)) {
-                google_client_id = configItem.client_id 
+                google_url_scheme = configItem.url_scheme 
             }
         });
 
@@ -40,7 +40,7 @@ module.exports = function (context) {
 
     for (var i = 0; i < infoPlistTags.length; i++) {
         if (infoPlistTags[i].text.includes("GOOGLE_CLIENT_ID")) {
-            infoPlistTags[i].text = infoPlistTags[i].text.replace('GOOGLE_CLIENT_ID', google_client_id)
+            infoPlistTags[i].text = infoPlistTags[i].text.replace('GOOGLE_CLIENT_ID', google_url_scheme)
         }
     }
 
