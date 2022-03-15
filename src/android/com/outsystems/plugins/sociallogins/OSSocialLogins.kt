@@ -15,12 +15,12 @@ class OSSocialLogins : CordovaImplementation() {
     val gson by lazy { Gson() }
 
     var socialLoginController: SocialLoginsController? = null
-    var socialLoginControllerApple = SocialLoginsAppleController()
-    var socialLoginControllerGoogle = SocialLoginsGoogleController()
 
     override fun initialize(cordova: CordovaInterface, webView: CordovaWebView) {
         super.initialize(cordova, webView)
 
+        var socialLoginControllerApple = SocialLoginsAppleController()
+        var socialLoginControllerGoogle = SocialLoginsGoogleController(cordova.context)
         socialLoginController = SocialLoginsController(socialLoginControllerApple, socialLoginControllerGoogle)
 
     }
@@ -96,7 +96,7 @@ class OSSocialLogins : CordovaImplementation() {
             if(intent != null){
 
                 super.onActivityResult(requestCode, resultCode, intent)
-                socialLoginController?.handleActivityResult(cordova.context, requestCode, resultCode, intent,
+                socialLoginController?.handleActivityResult(requestCode, resultCode, intent,
                     {
                         val pluginResponseJson = gson.toJson(it)
                         sendPluginResult(pluginResponseJson, null)
@@ -113,7 +113,7 @@ class OSSocialLogins : CordovaImplementation() {
 
             if(intent != null){
                 try {
-                    socialLoginController?.handleActivityResult(cordova.context, requestCode, resultCode, intent,
+                    socialLoginController?.handleActivityResult(requestCode, resultCode, intent,
                         {
                             val pluginResponseJson = gson.toJson(it)
                             sendPluginResult(pluginResponseJson, null)

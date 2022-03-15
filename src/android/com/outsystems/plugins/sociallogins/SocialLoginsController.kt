@@ -14,7 +14,7 @@ class SocialLoginsController(var appleController: SocialLoginsAppleController, v
         googleController.doLogin(activity)
     }
 
-    fun handleActivityResult(context: Context, requestCode: Int, resultCode: Int, intent: Intent,
+    fun handleActivityResult(requestCode: Int, resultCode: Int, intent: Intent,
                              onSuccess : (UserInfo) -> Unit, onError : (SocialLoginError) -> Unit){
 
         if(resultCode == 1){
@@ -28,7 +28,7 @@ class SocialLoginsController(var appleController: SocialLoginsAppleController, v
             )
         }
         else if(requestCode == 2){ //call google
-            googleController.handleActivityResult(context, requestCode, resultCode, intent,
+            googleController.handleActivityResult(requestCode, resultCode, intent,
                 {
                     onSuccess(it)
                 },

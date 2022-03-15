@@ -16,7 +16,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-class SocialLoginsGoogleController {
+class SocialLoginsGoogleController(private var context: Context? = null) {
 
     private val GOOGLE_SIGN_IN: Int = 2
 
@@ -39,11 +39,11 @@ class SocialLoginsGoogleController {
     }
 
 
-    fun handleActivityResult(context: Context, requestCode: Int, resultCode: Int, intent: Intent,
+    fun handleActivityResult(requestCode: Int, resultCode: Int, intent: Intent,
                              onSuccess : (UserInfo) -> Unit, onError : (SocialLoginError) -> Unit) {
         if (requestCode === 2) {
             val task: Task<GoogleSignInAccount> = GoogleSignIn.getSignedInAccountFromIntent(intent)
-            handleSignInResult(context, task,
+            handleSignInResult(task,
                 {
                     onSuccess(it)
                 },
@@ -54,7 +54,7 @@ class SocialLoginsGoogleController {
     }
 
 
-    private fun getAccessToken(context: Context, account: GoogleSignInAccount,
+    private fun getAccessToken(account: GoogleSignInAccount,
                                onSuccess : (String) -> Unit, onError : (SocialLoginError) -> Unit) {
 
         var accessToken = ""
@@ -73,12 +73,12 @@ class SocialLoginsGoogleController {
         }
     }
 
-    private fun handleSignInResult(context: Context, completedTask: Task<GoogleSignInAccount>,
+    private fun handleSignInResult(completedTask: Task<GoogleSignInAccount>,
                                    onSuccess : (UserInfo) -> Unit, onError : (SocialLoginError) -> Unit) {
         try {
             val account: GoogleSignInAccount = completedTask.getResult(ApiException::class.java)
 
-            getAccessToken(context, account,
+            getAccessToken(account,
                 {
                     if(account.id.isNullOrEmpty()){
                         onError(SocialLoginError.GOOGLE_MISSING_USER_ID)
