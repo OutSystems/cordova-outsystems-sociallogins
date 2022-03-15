@@ -96,7 +96,7 @@ class OSSocialLogins : CordovaImplementation() {
             if(intent != null){
 
                 super.onActivityResult(requestCode, resultCode, intent)
-                socialLoginController?.handleActivityResult(requestCode, resultCode, intent,
+                socialLoginController?.handleActivityResult(cordova.context, requestCode, resultCode, intent,
                     {
                         val pluginResponseJson = gson.toJson(it)
                         sendPluginResult(pluginResponseJson, null)
@@ -113,7 +113,7 @@ class OSSocialLogins : CordovaImplementation() {
 
             if(intent != null){
                 try {
-                    socialLoginController?.handleActivityResult(requestCode, resultCode, intent,
+                    socialLoginController?.handleActivityResult(cordova.context, requestCode, resultCode, intent,
                         {
                             val pluginResponseJson = gson.toJson(it)
                             sendPluginResult(pluginResponseJson, null)

@@ -1,33 +1,28 @@
 package com.outsystems.plugins.sociallogins
 
 import android.app.Activity
-import com.google.android.gms.auth.api.signin.GoogleSignIn
-import com.google.android.gms.auth.api.signin.GoogleSignInOptions
-import com.google.android.gms.auth.api.signin.GoogleSignInAccount
-
 import android.content.Context
+import android.content.Intent
 import android.util.Log
 import androidx.core.app.ActivityCompat.startActivityForResult
-
-import android.content.Intent
-import androidx.annotation.NonNull
-import com.google.android.gms.auth.GoogleAuthException
+import com.google.android.gms.auth.GoogleAuthUtil
+import com.google.android.gms.auth.api.signin.GoogleSignIn
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
-import com.google.android.gms.tasks.Task
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.api.ApiException
-import com.google.android.gms.tasks.OnCompleteListener
+import com.google.android.gms.tasks.Task
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 class SocialLoginsGoogleController {
 
     private val GOOGLE_SIGN_IN: Int = 2
 
     fun doLogin(activity: Activity){
-        // Configure sign-in to request the user's ID, email address, and basic
-        // profile. ID and basic profile are included in DEFAULT_SIGN_IN.
-        // Configure sign-in to request the user's ID, email address, and basic
-        // profile. ID and basic profile are included in DEFAULT_SIGN_IN.
+
         val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-            //.requestIdToken("87904510334-h7lnlun7gulp6p17o6hs7b6fk61hbboa.apps.googleusercontent.com") // do we want to have this value?
             .requestEmail()
             .requestId()
             .requestProfile()
@@ -45,7 +40,7 @@ class SocialLoginsGoogleController {
     }
 
 
-    fun handleActivityResult(requestCode: Int, resultCode: Int, intent: Intent,
+    fun handleActivityResult(context: Context, requestCode: Int, resultCode: Int, intent: Intent,
                              onSuccess : (UserInfo) -> Unit, onError : (SocialLoginError) -> Unit) {
 
         // Result returned from launching the Intent from GoogleSignInClient.getSignInIntent(...);
@@ -53,7 +48,7 @@ class SocialLoginsGoogleController {
             // The Task returned from this call is always completed, no need to attach
             // a listener.
             val task: Task<GoogleSignInAccount> = GoogleSignIn.getSignedInAccountFromIntent(intent)
-            handleSignInResult(task,
+            handleSignInResult(context, task,
                 {
                     onSuccess(it)
                 },
@@ -63,25 +58,63 @@ class SocialLoginsGoogleController {
         }
     }
 
-    private fun handleSignInResult(completedTask: Task<GoogleSignInAccount>,
+
+    private fun getAccessToken(context: Context, account: GoogleSignInAccount,
+                               onSuccess : (String) -> Unit, onError : (SocialLoginError) -> Unit) {
+
+        var accessToken = ""
+        val coroutine = CoroutineScope(Dispatchers.IO)
+
+        coroutine.launch {
+
+             accessToken = GoogleAuthUtil.getToken(context, account.account, "oauth2:email")
+
+            if(accessToken == ""){
+                onError(SocialLoginError.GOOGLE_MISSING_ACCESS_TOKEN_ERROR)
+            }
+            else{
+                onSuccess(accessToken)
+            }
+        }
+    }
+
+    private fun handleSignInResult(context: Context, completedTask: Task<GoogleSignInAccount>,
                                    onSuccess : (UserInfo) -> Unit, onError : (SocialLoginError) -> Unit) {
         try {
             val account: GoogleSignInAccount = completedTask.getResult(ApiException::class.java)
-            onSuccess(
-                UserInfo(
-                    account.id,
-                    account.email,
-                    account.givenName,
-                    account.familyName,
-                    account.idToken,
-                    account.photoUrl.toString()
-                ))
+
+            getAccessToken(context, account,
+                {
+                    if(account.id.isNullOrEmpty()){
+                        onError(SocialLoginError.GOOGLE_MISSING_USER_ID)
+                    }
+
+                    else{
+                        onSuccess(
+                            UserInfo(
+                                account.id,
+                                account.email,
+                                account.givenName,
+                                account.familyName,
+                                it,
+                                account.photoUrl.toString()
+                            )
+                        )
+                    }
+                },
+                {
+                    onError(it)
+                }
+            )
+
             // Signed in successfully, show authenticated UI.
         } catch (e: ApiException) {
             // The ApiException status code indicates the detailed failure reason.
             // Please refer to the GoogleSignInStatusCodes class reference for more information.
             Log.w("Google Sign In:", "signInResult:failed code=" + e.statusCode)
             onError(SocialLoginError.GOOGLE_SIGN_IN_GENERAL_ERROR)
+        } catch (e: Exception) {
+            e.message?.let { Log.d("Exception", it) }
         }
     }
 
