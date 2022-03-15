@@ -64,7 +64,7 @@ class SocialLoginsGoogleController {
 
              accessToken = GoogleAuthUtil.getToken(context, account.account, "oauth2:email")
 
-            if(accessToken == ""){
+            if(accessToken.isNullOrEmpty()){
                 onError(SocialLoginError.GOOGLE_MISSING_ACCESS_TOKEN_ERROR)
             }
             else{
