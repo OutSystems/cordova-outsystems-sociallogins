@@ -112,6 +112,7 @@ class SocialLoginsGoogleController(private var context: Context? = null) {
             onError(SocialLoginError.GOOGLE_SIGN_IN_GENERAL_ERROR)
         } catch (e: Exception) {
             e.message?.let { Log.d("Exception", it) }
+            onError(SocialLoginError.GOOGLE_SIGN_IN_GENERAL_ERROR)
         }
     }
 
