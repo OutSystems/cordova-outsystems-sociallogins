@@ -62,14 +62,20 @@ class SocialLoginsGoogleController(private var context: Context? = null) {
 
         coroutine.launch {
 
-             accessToken = GoogleAuthUtil.getToken(context, account.account, "oauth2:email")
+            if(context != null){
+                accessToken = GoogleAuthUtil.getToken(context, account.account, "oauth2:email")
 
-            if(accessToken.isNullOrEmpty()){
-                onError(SocialLoginError.GOOGLE_MISSING_ACCESS_TOKEN_ERROR)
+                if(accessToken.isNullOrEmpty()){
+                    onError(SocialLoginError.GOOGLE_MISSING_ACCESS_TOKEN_ERROR)
+                }
+                else{
+                    onSuccess(accessToken)
+                }
             }
             else{
                 onSuccess(accessToken)
             }
+
         }
     }
 
