@@ -30,7 +30,6 @@ class SocialLoginsGoogleController {
 
         val mGoogleSignInClient = GoogleSignIn.getClient(activity, gso);
 
-        //start the login flow:
         signIn(mGoogleSignInClient, activity)
     }
 
@@ -42,11 +41,7 @@ class SocialLoginsGoogleController {
 
     fun handleActivityResult(context: Context, requestCode: Int, resultCode: Int, intent: Intent,
                              onSuccess : (UserInfo) -> Unit, onError : (SocialLoginError) -> Unit) {
-
-        // Result returned from launching the Intent from GoogleSignInClient.getSignInIntent(...);
         if (requestCode === 2) {
-            // The Task returned from this call is always completed, no need to attach
-            // a listener.
             val task: Task<GoogleSignInAccount> = GoogleSignIn.getSignedInAccountFromIntent(intent)
             handleSignInResult(context, task,
                 {
@@ -106,11 +101,7 @@ class SocialLoginsGoogleController {
                     onError(it)
                 }
             )
-
-            // Signed in successfully, show authenticated UI.
         } catch (e: ApiException) {
-            // The ApiException status code indicates the detailed failure reason.
-            // Please refer to the GoogleSignInStatusCodes class reference for more information.
             Log.w("Google Sign In:", "signInResult:failed code=" + e.statusCode)
             onError(SocialLoginError.GOOGLE_SIGN_IN_GENERAL_ERROR)
         } catch (e: Exception) {
