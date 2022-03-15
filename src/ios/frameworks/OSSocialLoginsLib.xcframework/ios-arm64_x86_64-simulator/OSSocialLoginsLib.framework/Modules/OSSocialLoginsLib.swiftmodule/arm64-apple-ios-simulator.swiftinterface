@@ -1,5 +1,5 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 5.5.2 (swiftlang-1300.0.47.5 clang-1300.0.29.30)
+// swift-compiler-version: Apple Swift version 5.6 (swiftlang-5.6.0.323.62 clang-1316.0.20.8)
 // swift-module-flags: -target arm64-apple-ios13.0-simulator -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -module-name OSSocialLoginsLib
 import AuthenticationServices
 import Foundation
@@ -16,8 +16,10 @@ public enum SocialLoginsErrors : Swift.Int, Foundation.CustomNSError, Foundation
   case loginCancelledError
   case missingInputParametersError
   case googleSignInGenericError
-  case googleMissingConfigurationError
-  case googleAccessTokenError
+  case googleInvalidConfigurationError
+  case googleMissingAccessTokenError
+  case googleMissingUserIdError
+  case googleConfigurationNotValidError
   public var errorDescription: Swift.String? {
     get
   }
@@ -27,8 +29,8 @@ public enum SocialLoginsErrors : Swift.Int, Foundation.CustomNSError, Foundation
     get
   }
 }
-@objc @_inheritsConvenienceInitializers public class SocialLoginsGoogleController : OSSocialLoginsLib.SocialLoginsBaseController {
-  override public init(delegate: OSSocialLoginsLib.SocialLoginsProtocol)
+@objc @_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers public class SocialLoginsGoogleController : OSSocialLoginsLib.SocialLoginsBaseController {
+  override convenience public init(delegate: OSSocialLoginsLib.SocialLoginsProtocol, rootViewController: UIKit.UIViewController? = nil)
   @objc deinit
 }
 public protocol SocialLoginsProtocol {
@@ -36,7 +38,7 @@ public protocol SocialLoginsProtocol {
 }
 @objc @_inheritsConvenienceInitializers public class SocialLoginsAppleController : OSSocialLoginsLib.SocialLoginsBaseController {
   @objc public func authorizationController(controller: AuthenticationServices.ASAuthorizationController, didCompleteWithError error: Swift.Error)
-  override public init(delegate: OSSocialLoginsLib.SocialLoginsProtocol)
+  override public init(delegate: OSSocialLoginsLib.SocialLoginsProtocol, rootViewController: UIKit.UIViewController? = nil)
   @objc deinit
 }
 extension OSSocialLoginsLib.SocialLoginsAppleController : AuthenticationServices.ASAuthorizationControllerDelegate {
@@ -46,7 +48,7 @@ extension OSSocialLoginsLib.SocialLoginsAppleController : AuthenticationServices
   @objc dynamic public func presentationAnchor(for controller: AuthenticationServices.ASAuthorizationController) -> AuthenticationServices.ASPresentationAnchor
 }
 @objc open class SocialLoginsController : ObjectiveC.NSObject {
-  public init(appleController: OSSocialLoginsLib.SocialLoginsAppleController, googleController: OSSocialLoginsLib.SocialLoginsGoogleController, rootViewController: UIKit.UIViewController)
+  public init(appleController: OSSocialLoginsLib.SocialLoginsAppleController, googleController: OSSocialLoginsLib.SocialLoginsGoogleController)
   public func loginApple(callbackID: Swift.String)
   public func loginGoogle(callbackID: Swift.String)
   @objc deinit
@@ -63,7 +65,7 @@ extension AuthenticationServices.ASAuthorizationAppleIDCredential {
   }
 }
 @objc public class SocialLoginsBaseController : ObjectiveC.NSObject {
-  public init(delegate: OSSocialLoginsLib.SocialLoginsProtocol)
+  public init(delegate: OSSocialLoginsLib.SocialLoginsProtocol, rootViewController: UIKit.UIViewController? = nil)
   @objc deinit
 }
 extension Swift.Encodable {
