@@ -1,7 +1,6 @@
 package com.outsystems.plugins.sociallogins
 
 import android.app.Activity
-import android.content.Context
 import android.content.Intent
 
 class SocialLoginsController(var appleController: SocialLoginsAppleController, var googleController: SocialLoginsGoogleController) {
