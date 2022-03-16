@@ -6,25 +6,31 @@ const { Console } = require('console');
 
 module.exports = function (context) {
 
-    const ProvidersEnum = Object.freeze({"Apple":"1", "Facebook":"2", "Google":"3", "LinkedIn":"4"})
+    const ProvidersEnum = Object.freeze({"apple":"1", "facebook":"2", "google":"3", "linkedIn":"4"})
+    const ApplcationTypeEnum = Object.freeze({"web":"1", "ios":"2", "android":"3"})
     var projectRoot = context.opts.cordova.project ? context.opts.cordova.project.root : context.opts.projectRoot;
 
-    var google_client_id = "";
+    var google_url_scheme = "";
     var appNamePath = path.join(projectRoot, 'config.xml');
     var appNameParser = new ConfigParser(appNamePath);
     var appName = appNameParser.name();
 
     //read json config file                         platforms/ios/www/jsonConfig
-    var jsonConfig = path.join(projectRoot, 'platforms/ios/www/jsonConfig/sociallogins_configurations.json');
-    var jsonConfigFile = fs.readFileSync(jsonConfig).toString();
-    console.log(jsonConfigFile);
-    var jsonParsed = JSON.parse(jsonConfigFile);
+    var jsonConfig = "";
+    try {
+        jsonConfig = path.join(projectRoot, 'platforms/ios/www/jsonConfig/sociallogins_configurations.json');
+        var jsonConfigFile = fs.readFileSync(jsonConfig).toString();
+        var jsonParsed = JSON.parse(jsonConfigFile);
 
-    jsonParsed.forEach(function(configItem) {
-        if (configItem.AuthenticationConfiguration.ProviderId == ProvidersEnum.Google) {
-            google_client_id = configItem.ClientId 
-        }
-    });
+        jsonParsed.environment_configurations.forEach(function(configItem) {
+            if ((configItem.provider_id == ProvidersEnum.google) && (configItem.application_type_id == ApplcationTypeEnum.ios)) {
+                google_url_scheme = configItem.url_scheme 
+            }
+        });
+
+    } catch {
+        throw new Error("Missing configuration file or error trying to obtain the configuration.");
+    }
 
     //Change info.plist
     var infoPlistPath = path.join(projectRoot, 'platforms/ios/' + appName + '/'+ appName +'-info.plist');
@@ -34,7 +40,7 @@ module.exports = function (context) {
 
     for (var i = 0; i < infoPlistTags.length; i++) {
         if (infoPlistTags[i].text.includes("GOOGLE_CLIENT_ID")) {
-            infoPlistTags[i].text = infoPlistTags[i].text.replace('GOOGLE_CLIENT_ID', google_client_id)
+            infoPlistTags[i].text = infoPlistTags[i].text.replace('GOOGLE_CLIENT_ID', google_url_scheme)
         }
     }
 
