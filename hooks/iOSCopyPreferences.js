@@ -7,10 +7,14 @@ const { Console } = require('console');
 module.exports = function (context) {
 
     const ProvidersEnum = Object.freeze({"apple":"1", "facebook":"2", "google":"3", "linkedIn":"4"})
-    const ApplcationTypeEnum = Object.freeze({"web":"1", "ios":"2", "android":"3"})
+    const ApplicationTypeEnum = Object.freeze({"web":"1", "ios":"2", "android":"3"})
     var projectRoot = context.opts.cordova.project ? context.opts.cordova.project.root : context.opts.projectRoot;
 
     var google_url_scheme = "";
+    
+    var facebook_client_appId = "";
+    var facebook_client_token = "";
+
     var appNamePath = path.join(projectRoot, 'config.xml');
     var appNameParser = new ConfigParser(appNamePath);
     var appName = appNameParser.name();
@@ -21,13 +25,15 @@ module.exports = function (context) {
         jsonConfig = path.join(projectRoot, 'platforms/ios/www/jsonConfig/sociallogins_configurations.json');
         var jsonConfigFile = fs.readFileSync(jsonConfig).toString();
         var jsonParsed = JSON.parse(jsonConfigFile);
-
+    
         jsonParsed.environment_configurations.forEach(function(configItem) {
-            if ((configItem.provider_id == ProvidersEnum.google) && (configItem.application_type_id == ApplcationTypeEnum.ios)) {
-                google_url_scheme = configItem.url_scheme 
+            if ((configItem.provider_id == ProvidersEnum.google) && (configItem.application_type_id == ApplicationTypeEnum.ios)) {
+                google_url_scheme = configItem.url_scheme
+            } else if ((configItem.provider_id == ProvidersEnum.facebook) && (configItem.application_type_id == ApplicationTypeEnum.ios)) {
+                facebook_client_appId = configItem.client_id;
+                facebook_client_token = configItem.client_token;
             }
         });
-
     } catch {
         throw new Error("Missing configuration file or error trying to obtain the configuration.");
     }
@@ -37,10 +43,26 @@ module.exports = function (context) {
     var infoPlistFile = fs.readFileSync(infoPlistPath).toString();
     var etreeInfoPlist = et.parse(infoPlistFile);
     var infoPlistTags = etreeInfoPlist.findall('./dict/array/dict/array/string');
-
+    
     for (var i = 0; i < infoPlistTags.length; i++) {
         if (infoPlistTags[i].text.includes("GOOGLE_CLIENT_ID")) {
-            infoPlistTags[i].text = infoPlistTags[i].text.replace('GOOGLE_CLIENT_ID', google_url_scheme)
+            infoPlistTags[i].text = infoPlistTags[i].text.replace('GOOGLE_CLIENT_ID', google_url_scheme);
+        }
+
+        if (infoPlistTags[i].text.includes("FACEBOOK_CLIENT_URLSCHEME")) {
+            infoPlistTags[i].text = infoPlistTags[i].text.replace('FACEBOOK_CLIENT_URLSCHEME', "fb" + facebook_client_appId);
+        }
+    }
+
+    infoPlistTags = etreeInfoPlist.findall('./dict/string');
+
+    for (var i = 0; i < infoPlistTags.length; i++) {
+        if (infoPlistTags[i].text.includes("FACEBOOK_CLIENT_APPID")) {
+            infoPlistTags[i].text = infoPlistTags[i].text.replace('FACEBOOK_CLIENT_APPID', facebook_client_appId);
+        }
+
+        if (infoPlistTags[i].text.includes("FACEBOOK_CLIENT_TOKEN")) {
+            infoPlistTags[i].text = infoPlistTags[i].text.replace('FACEBOOK_CLIENT_TOKEN', facebook_client_token);
         }
     }
 
