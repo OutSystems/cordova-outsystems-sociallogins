@@ -15,6 +15,18 @@ public enum SocialLoginsErrors : Swift.Int, Foundation.CustomNSError, Foundation
   case appleSignInGenericError
   case loginCancelledError
   case missingInputParametersError
+  case googleSignInGenericError
+  case googleInvalidConfigurationError
+  case googleMissingAccessTokenError
+  case googleMissingUserIdError
+  case googleConfigurationNotValidError
+  case facebookSignInGenericError
+  case facebookLoginCancelledError
+  case facebookNoTokenFoundError
+  case facebookNoResultsError
+  case facebookInputParametersError
+  case facebookUserDataRequestError
+  case facebookConfigurationNotValidError
   public var errorDescription: Swift.String? {
     get
   }
@@ -24,12 +36,27 @@ public enum SocialLoginsErrors : Swift.Int, Foundation.CustomNSError, Foundation
     get
   }
 }
+@objc @_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers public class SocialLoginsFacebookController : OSSocialLoginsLib.SocialLoginsBaseController {
+  override convenience public init(delegate: OSSocialLoginsLib.SocialLoginsProtocol, rootViewController: UIKit.UIViewController? = nil)
+  @objc deinit
+}
+@objc @_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers public class SocialLoginsGoogleController : OSSocialLoginsLib.SocialLoginsBaseController {
+  override convenience public init(delegate: OSSocialLoginsLib.SocialLoginsProtocol, rootViewController: UIKit.UIViewController? = nil)
+  @objc deinit
+}
+@objc @_inheritsConvenienceInitializers @_Concurrency.MainActor(unsafe) public class SocialLoginsApplicationDelegate : ObjectiveC.NSObject, UIKit.UIApplicationDelegate {
+  @objc @_Concurrency.MainActor(unsafe) public static let shared: OSSocialLoginsLib.SocialLoginsApplicationDelegate
+  @_Concurrency.MainActor(unsafe) @objc public func application(_ application: UIKit.UIApplication, didFinishLaunchingWithOptions launchOptions: [UIKit.UIApplication.LaunchOptionsKey : Any]? = nil) -> Swift.Bool
+  @_Concurrency.MainActor(unsafe) @objc public func application(_ app: UIKit.UIApplication, open url: Foundation.URL, options: [UIKit.UIApplication.OpenURLOptionsKey : Any] = [:]) -> Swift.Bool
+  @objc override dynamic public init()
+  @objc deinit
+}
 public protocol SocialLoginsProtocol {
   func callBackUserInfo(result: OSSocialLoginsLib.UserInfo?, error: OSSocialLoginsLib.SocialLoginsErrors?, callBackID: Swift.String)
 }
-@objc public class SocialLoginsAppleController : ObjectiveC.NSObject {
-  public init(delegate: OSSocialLoginsLib.SocialLoginsProtocol)
+@objc @_inheritsConvenienceInitializers public class SocialLoginsAppleController : OSSocialLoginsLib.SocialLoginsBaseController {
   @objc public func authorizationController(controller: AuthenticationServices.ASAuthorizationController, didCompleteWithError error: Swift.Error)
+  override public init(delegate: OSSocialLoginsLib.SocialLoginsProtocol, rootViewController: UIKit.UIViewController? = nil)
   @objc deinit
 }
 extension OSSocialLoginsLib.SocialLoginsAppleController : AuthenticationServices.ASAuthorizationControllerDelegate {
@@ -39,19 +66,13 @@ extension OSSocialLoginsLib.SocialLoginsAppleController : AuthenticationServices
   @objc dynamic public func presentationAnchor(for controller: AuthenticationServices.ASAuthorizationController) -> AuthenticationServices.ASPresentationAnchor
 }
 @objc open class SocialLoginsController : ObjectiveC.NSObject {
-  public init(appleController: OSSocialLoginsLib.SocialLoginsAppleController, rootViewController: UIKit.UIViewController)
+  public init(appleController: OSSocialLoginsLib.SocialLoginsAppleController, googleController: OSSocialLoginsLib.SocialLoginsGoogleController, facebookController: OSSocialLoginsLib.SocialLoginsFacebookController)
   public func loginApple(callbackID: Swift.String)
   public func loginGoogle(callbackID: Swift.String)
+  public func loginFacebook(callbackID: Swift.String)
   @objc deinit
 }
-public protocol AppleIDCredentialProtocol {
-  var userIdentifier: Swift.String? { get }
-  var identityToken: Foundation.Data? { get }
-  var email: Swift.String? { get }
-  var givenName: Swift.String? { get }
-  var familyName: Swift.String? { get }
-}
-extension AuthenticationServices.ASAuthorizationAppleIDCredential : OSSocialLoginsLib.AppleIDCredentialProtocol {
+extension AuthenticationServices.ASAuthorizationAppleIDCredential {
   public var userIdentifier: Swift.String? {
     get
   }
@@ -61,6 +82,10 @@ extension AuthenticationServices.ASAuthorizationAppleIDCredential : OSSocialLogi
   public var familyName: Swift.String? {
     get
   }
+}
+@objc public class SocialLoginsBaseController : ObjectiveC.NSObject {
+  public init(delegate: OSSocialLoginsLib.SocialLoginsProtocol, rootViewController: UIKit.UIViewController? = nil)
+  @objc deinit
 }
 extension Swift.Encodable {
   public func encode() -> Swift.String

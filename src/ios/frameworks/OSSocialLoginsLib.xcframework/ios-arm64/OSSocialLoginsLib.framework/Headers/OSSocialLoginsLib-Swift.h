@@ -189,7 +189,9 @@ typedef unsigned int swift_uint4  __attribute__((__ext_vector_type__(4)));
 #pragma clang diagnostic ignored "-Watimport-in-framework-header"
 #endif
 @import AuthenticationServices;
+@import Foundation;
 @import ObjectiveC;
+@import UIKit;
 #endif
 
 #pragma clang diagnostic ignored "-Wproperty-attribute-mismatch"
@@ -208,13 +210,19 @@ typedef unsigned int swift_uint4  __attribute__((__ext_vector_type__(4)));
 #endif
 
 
+
+
+SWIFT_CLASS("_TtC17OSSocialLoginsLib26SocialLoginsBaseController")
+@interface SocialLoginsBaseController : NSObject
+- (nonnull instancetype)init SWIFT_UNAVAILABLE;
++ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
+@end
+
 @class ASAuthorizationController;
 
 SWIFT_CLASS("_TtC17OSSocialLoginsLib27SocialLoginsAppleController")
-@interface SocialLoginsAppleController : NSObject
+@interface SocialLoginsAppleController : SocialLoginsBaseController
 - (void)authorizationController:(ASAuthorizationController * _Nonnull)controller didCompleteWithError:(NSError * _Nonnull)error;
-- (nonnull instancetype)init SWIFT_UNAVAILABLE;
-+ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
 @end
 
 
@@ -228,11 +236,36 @@ SWIFT_CLASS("_TtC17OSSocialLoginsLib27SocialLoginsAppleController")
 - (void)authorizationController:(ASAuthorizationController * _Nonnull)controller didCompleteWithAuthorization:(ASAuthorization * _Nonnull)authorization;
 @end
 
+@class UIApplication;
+@class NSNumber;
+@class NSURL;
+
+SWIFT_CLASS("_TtC17OSSocialLoginsLib31SocialLoginsApplicationDelegate")
+@interface SocialLoginsApplicationDelegate : NSObject <UIApplicationDelegate>
+SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) SocialLoginsApplicationDelegate * _Nonnull shared;)
++ (SocialLoginsApplicationDelegate * _Nonnull)shared SWIFT_WARN_UNUSED_RESULT;
+- (BOOL)application:(UIApplication * _Nonnull)application didFinishLaunchingWithOptions:(NSDictionary<UIApplicationLaunchOptionsKey, id> * _Nullable)launchOptions SWIFT_WARN_UNUSED_RESULT;
+- (BOOL)application:(UIApplication * _Nonnull)app openURL:(NSURL * _Nonnull)url options:(NSDictionary<UIApplicationOpenURLOptionsKey, id> * _Nonnull)options SWIFT_WARN_UNUSED_RESULT;
+- (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
+@end
+
+
 
 SWIFT_CLASS("_TtC17OSSocialLoginsLib22SocialLoginsController")
 @interface SocialLoginsController : NSObject
 - (nonnull instancetype)init SWIFT_UNAVAILABLE;
 + (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
+@end
+
+
+SWIFT_CLASS("_TtC17OSSocialLoginsLib30SocialLoginsFacebookController")
+@interface SocialLoginsFacebookController : SocialLoginsBaseController
+@end
+
+
+
+SWIFT_CLASS("_TtC17OSSocialLoginsLib28SocialLoginsGoogleController")
+@interface SocialLoginsGoogleController : SocialLoginsBaseController
 @end
 
 #if __has_attribute(external_source_symbol)
