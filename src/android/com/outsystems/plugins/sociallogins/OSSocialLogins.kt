@@ -19,8 +19,10 @@ class OSSocialLogins : CordovaImplementation() {
     override fun initialize(cordova: CordovaInterface, webView: CordovaWebView) {
         super.initialize(cordova, webView)
 
+        var googleHelperInterface = GoogleHelper()
+
         var socialLoginControllerApple = SocialLoginsAppleController()
-        var socialLoginControllerGoogle = SocialLoginsGoogleController(cordova.context)
+        var socialLoginControllerGoogle = SocialLoginsGoogleController(cordova.context, googleHelperInterface)
         socialLoginController = SocialLoginsController(socialLoginControllerApple, socialLoginControllerGoogle)
 
     }

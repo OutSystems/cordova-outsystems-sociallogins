@@ -16,7 +16,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-class SocialLoginsGoogleController(private var context: Context? = null) {
+class SocialLoginsGoogleController(private var context: Context? = null, private var googleHelper: GoogleHelperInterface) {
 
     private val GOOGLE_SIGN_IN: Int = 2
 
@@ -53,43 +53,20 @@ class SocialLoginsGoogleController(private var context: Context? = null) {
         }
     }
 
-
-    private fun getAccessToken(account: GoogleSignInAccount,
-                               onSuccess : (String) -> Unit, onError : (SocialLoginError) -> Unit) {
-
-        var accessToken = ""
-        val coroutine = CoroutineScope(Dispatchers.IO)
-
-        coroutine.launch {
-
-            if(context != null){
-                accessToken = GoogleAuthUtil.getToken(context, account.account, "oauth2:email")
-
-                if(accessToken.isNullOrEmpty()){
-                    onError(SocialLoginError.GOOGLE_MISSING_ACCESS_TOKEN_ERROR)
-                }
-                else{
-                    onSuccess(accessToken)
-                }
-            }
-            else{
-                onSuccess(accessToken)
-            }
-
-        }
-    }
-
     private fun handleSignInResult(completedTask: Task<GoogleSignInAccount>,
                                    onSuccess : (UserInfo) -> Unit, onError : (SocialLoginError) -> Unit) {
+
         try {
             val account: GoogleSignInAccount = completedTask.getResult(ApiException::class.java)
 
-            getAccessToken(account,
+            googleHelper.getAccessToken(context, account,
                 {
                     if(account.id.isNullOrEmpty()){
                         onError(SocialLoginError.GOOGLE_MISSING_USER_ID)
                     }
-
+                    else if (account.email.isNullOrEmpty()){
+                        onError(SocialLoginError.GOOGLE_SIGN_IN_GENERAL_ERROR)
+                    }
                     else{
                         onSuccess(
                             UserInfo(

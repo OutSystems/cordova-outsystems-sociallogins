@@ -33,7 +33,7 @@ class SocialLoginsController(var appleController: SocialLoginsAppleController, v
                     onSuccess(it)
                 },
                 {
-                   onError(it)
+                    onError(it)
                 })
         }
 
