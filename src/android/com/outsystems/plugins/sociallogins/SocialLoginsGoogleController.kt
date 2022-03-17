@@ -29,6 +29,7 @@ class SocialLoginsGoogleController(private var context: Context? = null, private
     }
 
     private fun signIn(signInClient: GoogleSignInClient, activity: Activity) {
+        signInClient.signOut()
         val signInIntent: Intent = signInClient.signInIntent
         startActivityForResult(activity, signInIntent, GOOGLE_SIGN_IN, null)
     }
