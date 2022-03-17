@@ -64,15 +64,23 @@ class SocialLoginsGoogleController(private var context: Context? = null, private
                     }
                     else{
                         var photoUrl = ""
+                        var givenName = ""
+                        var familyName = ""
                         if(account.photoUrl != null){
                             photoUrl = account.photoUrl.toString()
+                        }
+                        if(!account.givenName.isNullOrEmpty()){
+                            givenName = account.givenName
+                        }
+                        if(!account.givenName.isNullOrEmpty()){
+                            familyName = account.familyName
                         }
                         onSuccess(
                             UserInfo(
                                 account.id,
                                 account.email,
-                                account.givenName,
-                                account.familyName,
+                                givenName,
+                                familyName,
                                 it,
                                 photoUrl
                             )
