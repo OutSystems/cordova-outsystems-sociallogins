@@ -63,14 +63,17 @@ class SocialLoginsGoogleController(private var context: Context? = null, private
                         onError(SocialLoginError.GOOGLE_SIGN_IN_GENERAL_ERROR)
                     }
                     else{
+                        var givenName = account.givenName ?: ""
+                        var familyName = account.familyName ?: ""
+                        var photoUrl = account.photoUrl?.toString() ?: ""
                         onSuccess(
                             UserInfo(
                                 account.id,
                                 account.email,
-                                account.givenName,
-                                account.familyName,
+                                givenName,
+                                familyName,
                                 it,
-                                account.photoUrl.toString()
+                                photoUrl
                             )
                         )
                     }
