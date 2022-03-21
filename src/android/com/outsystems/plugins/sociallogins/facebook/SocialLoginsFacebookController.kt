@@ -28,31 +28,7 @@ class SocialLoginsFacebookController {
         LoginManager.getInstance().registerCallback(callbackManager,
             object : FacebookCallback<LoginResult> {
                 override fun onSuccess(loginResult: LoginResult) {
-
                     Log.d("FBController","success: ${loginResult.accessToken}")
-
-                    val request = GraphRequest.newMeRequest(loginResult.accessToken,
-                        object : GraphRequest.GraphJSONObjectCallback {
-                            override fun onCompleted(obj: JSONObject?, response: GraphResponse?) {
-
-                                if(intent.extras == null ||
-                                    intent.extras?.getString("id")?.isNotEmpty() == true ||
-                                    intent.extras?.getString("email")?.isNotEmpty() == true ||
-                                    intent.extras?.getString("token")?.isNotEmpty() == true ) {
-                                    onError(SocialLoginError.APPLE_SIGN_IN_GENERAL_ERROR)
-                                }
-
-
-                                Log.d("FB", response.toString())
-                            }
-                        }
-                    )
-
-                    val parameters = Bundle()
-                    parameters.putString("fields", "id,first_name,last_name,picture.width(500).height(500),email")
-                    request.parameters = parameters
-                    request.executeAsync()
-
                 }
                 override fun onCancel() {
                     Log.d("FBController","cancel")
@@ -61,6 +37,7 @@ class SocialLoginsFacebookController {
                     Log.d("FBController","error: ${exception.message.toString()}")
                 }
             })
+
 
         LoginManager.getInstance().logInWithReadPermissions(activity, listOf("public_profile", "email"))
 

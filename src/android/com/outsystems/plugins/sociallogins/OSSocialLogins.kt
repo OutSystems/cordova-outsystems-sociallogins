@@ -22,6 +22,8 @@ class OSSocialLogins : CordovaImplementation() {
     override fun initialize(cordova: CordovaInterface, webView: CordovaWebView) {
         super.initialize(cordova, webView)
 
+        //socialloginControlerFacebook.init()
+
         socialLoginController = SocialLoginsController(
             socialLoginControllerApple,
             socialloginControlerFacebook)
