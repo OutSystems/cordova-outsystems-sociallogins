@@ -2,6 +2,8 @@ package com.outsystems.plugins.sociallogins
 
 import android.content.Intent
 import com.google.gson.Gson
+import com.outsystems.plugins.sociallogins.facebook.FacebookHelper
+import com.outsystems.plugins.sociallogins.facebook.SocialLoginsFacebookController
 import org.apache.cordova.CallbackContext
 import org.apache.cordova.CordovaInterface
 import org.apache.cordova.CordovaWebView
@@ -19,11 +21,17 @@ class OSSocialLogins : CordovaImplementation() {
     override fun initialize(cordova: CordovaInterface, webView: CordovaWebView) {
         super.initialize(cordova, webView)
 
-        var googleHelperInterface = GoogleHelper()
+        val googleHelperInterface = GoogleHelper()
+        val facebookHelper = FacebookHelper(cordova.activity)
 
-        var socialLoginControllerApple = SocialLoginsAppleController()
-        var socialLoginControllerGoogle = SocialLoginsGoogleController(cordova.context, googleHelperInterface)
-        socialLoginController = SocialLoginsController(socialLoginControllerApple, socialLoginControllerGoogle)
+        val socialLoginControllerApple = SocialLoginsAppleController()
+        val socialLoginControllerGoogle = SocialLoginsGoogleController(cordova.context, googleHelperInterface)
+        val socialLoginControllerFacebook = SocialLoginsFacebookController(facebookHelper)
+
+        socialLoginController = SocialLoginsController(
+            socialLoginControllerApple,
+            socialLoginControllerGoogle,
+            socialLoginControllerFacebook)
 
     }
 
@@ -40,6 +48,9 @@ class OSSocialLogins : CordovaImplementation() {
             }
             "loginGoogle" -> {
                 doLoginGoogle(args)
+            }
+            "loginFacebook" -> {
+                doLoginFacebook(args)
             }
         }
         return true
@@ -71,12 +82,13 @@ class OSSocialLogins : CordovaImplementation() {
         }
 
     }
-
     private fun doLoginGoogle(args : JSONArray) {
-
         setAsActivityResultCallback()
         socialLoginController?.doLoginGoogle(cordova.activity)
-
+    }
+    private fun doLoginFacebook(args: JSONArray) {
+        setAsActivityResultCallback()
+        socialLoginController?.doLoginFacebook(cordova.activity)
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, intent: Intent?) {
@@ -110,7 +122,7 @@ class OSSocialLogins : CordovaImplementation() {
 
             }
         }
-        else if (requestCode == 2){ //Google sign in case
+        else if(requestCode == 2){ //Google sign in case
             super.onActivityResult(requestCode, resultCode, intent)
 
             if(intent != null){
@@ -130,6 +142,18 @@ class OSSocialLogins : CordovaImplementation() {
             }
         }
 
+        else if(requestCode == SocialLoginsFacebookController.FACEBOOK_REQUEST_CODE) {
+            if(intent != null) {
+                socialLoginController?.handleActivityResult(requestCode, resultCode, intent,
+                { userInfo ->
+                    val pluginResponseJson = gson.toJson(userInfo)
+                    sendPluginResult(pluginResponseJson, null)
+                },
+                { error ->
+                    sendPluginResult(null, Pair(error.code, error.message))
+                })
+            }
+        }
     }
 
     override fun areGooglePlayServicesAvailable(): Boolean {
