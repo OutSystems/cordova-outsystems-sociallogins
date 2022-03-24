@@ -22,8 +22,9 @@ class OSSocialLogins : CordovaImplementation() {
         var googleHelperInterface = GoogleHelper()
 
         var socialLoginControllerApple = SocialLoginsAppleController()
+        var socialLoginsLinkedinController = SocialLoginsLinkedinController()
         var socialLoginControllerGoogle = SocialLoginsGoogleController(cordova.context, googleHelperInterface)
-        socialLoginController = SocialLoginsController(socialLoginControllerApple, socialLoginControllerGoogle)
+        socialLoginController = SocialLoginsController(socialLoginControllerApple, socialLoginControllerGoogle, socialLoginsLinkedinController)
 
     }
 
@@ -41,10 +42,37 @@ class OSSocialLogins : CordovaImplementation() {
             "loginGoogle" -> {
                 doLoginGoogle(args)
             }
+            "loginLinkedIn" -> {
+                doLoginLinkedIn(args)
+            }
         }
         return true
     }
 
+    private fun doLoginLinkedIn(args : JSONArray) {
+        var state = ""
+        var clientId = ""
+        var redirectUri = ""
+
+        try {
+            state = args.get(0).toString()
+            clientId = args.get(1).toString()
+            redirectUri = args.get(2).toString()
+
+            if(clientId.isNullOrEmpty() || redirectUri.isNullOrEmpty()){
+                sendPluginResult(null, Pair(SocialLoginError.MISSING_INPUT_PARAMETERS_ERROR.code, SocialLoginError.MISSING_INPUT_PARAMETERS_ERROR.message))
+            }
+            else{
+                setAsActivityResultCallback()
+                socialLoginController?.doLoginLinkedin(state, clientId, redirectUri, cordova.activity)
+            }
+        }catch (e: JSONException){
+            sendPluginResult(null, Pair(SocialLoginError.MISSING_INPUT_PARAMETERS_ERROR.code, SocialLoginError.MISSING_INPUT_PARAMETERS_ERROR.message))
+        }catch (e: Exception){
+            sendPluginResult(null, Pair(SocialLoginError.APPLE_SIGN_IN_GENERAL_ERROR.code, SocialLoginError.APPLE_SIGN_IN_GENERAL_ERROR.message))
+        }
+
+    }
 
     private fun doLoginApple(args : JSONArray) {
 
@@ -80,6 +108,7 @@ class OSSocialLogins : CordovaImplementation() {
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, intent: Intent?) {
+        super.onActivityResult(requestCode, resultCode, intent)
 
         if(resultCode == 0){
             sendPluginResult(null, Pair(SocialLoginError.LOGIN_CANCELLED_ERROR.code, SocialLoginError.LOGIN_CANCELLED_ERROR.message))
@@ -111,6 +140,25 @@ class OSSocialLogins : CordovaImplementation() {
             }
         }
         else if (requestCode == 2){ //Google sign in case
+            super.onActivityResult(requestCode, resultCode, intent)
+
+            if(intent != null){
+                try {
+                    socialLoginController?.handleActivityResult(requestCode, resultCode, intent,
+                        {
+                            val pluginResponseJson = gson.toJson(it)
+                            sendPluginResult(pluginResponseJson, null)
+                        },
+                        {
+                            sendPluginResult(null, Pair(it.code, it.message))
+                        })
+                }
+                catch(hse : Exception) {
+                    sendPluginResult(null, Pair(SocialLoginError.GOOGLE_SIGN_IN_GENERAL_ERROR.code, SocialLoginError.GOOGLE_SIGN_IN_GENERAL_ERROR.message))
+                }
+            }
+        }
+        else if (requestCode == 3) { //Linkedin sign in case
             super.onActivityResult(requestCode, resultCode, intent)
 
             if(intent != null){

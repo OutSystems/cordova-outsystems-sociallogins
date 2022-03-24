@@ -6,9 +6,15 @@ import android.os.Bundle
 import android.webkit.WebView
 
 class AppleSignInActivity : Activity() {
-    lateinit var redirectUri: String
-    lateinit var clientId: String
-    lateinit var state: String
+
+    private object AppleConstants {
+        const val SCOPE = "email name"
+        const val AUTH_URL = "https://appleid.apple.com/auth/authorize"
+    }
+
+    private lateinit var redirectUri: String
+    private lateinit var clientId: String
+    private lateinit var state: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -49,7 +55,7 @@ class AppleSignInActivity : Activity() {
         webView.webViewClient = AppleWebViewClient(this)
 
 
-        val url: String = AppleConstants.AUTHURL + "?response_type=code id_token&response_mode=form_post&client_id=" + clientId + "&scope=" + AppleConstants.SCOPE + "&state=" + state + "&redirect_uri=" + redirectUri
+        val url: String = AppleConstants.AUTH_URL + "?response_type=code%20id_token&response_mode=form_post&client_id=" + clientId + "&scope=" + AppleConstants.SCOPE + "&state=" + state + "&redirect_uri=" + redirectUri
 
         webView.loadUrl(url)
         this.setContentView(webView)
