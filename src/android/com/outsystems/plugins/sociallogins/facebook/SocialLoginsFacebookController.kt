@@ -1,12 +1,16 @@
 package com.outsystems.plugins.sociallogins.facebook
 
 import android.content.Intent
+import com.facebook.AccessToken
+import com.facebook.login.LoginResult
+import com.google.gson.Gson
 import com.outsystems.plugins.sociallogins.SocialLoginError
 import com.outsystems.plugins.sociallogins.UserInfo
-import org.json.JSONObject
-import com.outsystems.plugins.sociallogins.facebook.FacebookHelperInterface.FacebookLoginResult
+import com.outsystems.plugins.sociallogins.facebook.dto.FacebookLoginResult
+import com.outsystems.plugins.sociallogins.facebook.dto.FacebookUserData
+import java.lang.Exception
 
-class SocialLoginsFacebookController(private val facebookHelper: FacebookHelperInterface) {
+open class SocialLoginsFacebookController(private val facebookHelper: FacebookHelperInterface) {
 
     private val loginParameters: List<String> = listOf("public_profile", "email")
     private val requestParameters: String = "id,first_name,last_name,picture.width(500).height(500),email"
@@ -22,44 +26,42 @@ class SocialLoginsFacebookController(private val facebookHelper: FacebookHelperI
                              onError : (SocialLoginError) -> Unit) {
 
         val loginResult = facebookHelper.getLoginResult(requestCode, resultCode, intent)
-
-        if(loginResult.status == FacebookLoginResult.CANCEL) {
-            onError(SocialLoginError.LOGIN_CANCELLED_ERROR)
-            return
+        when {
+            loginResult.status == FacebookLoginResult.CANCEL -> onError(SocialLoginError.FACEBOOK_LOGIN_CANCELLED_ERROR)
+            loginResult.status == FacebookLoginResult.NOK -> onError(SocialLoginError.FACEBOOK_SIGN_IN_GENERAL_ERROR)
+            loginResult.accessToken?.token.isNullOrEmpty() -> onError(SocialLoginError.FACEBOOK_TOKEN_NOT_FOUND_ERROR)
+            else -> getUserData(loginResult.accessToken!!, onSuccess, onError)
         }
-
-        if(loginResult.status == FacebookLoginResult.NOK) {
-            onError(SocialLoginError.FACEBOOK_SIGN_IN_GENERAL_ERROR)
-            return
-        }
-
-        facebookHelper.getUserData(requestParameters) { result ->
-            if(result.isSuccessful && result.result != null) {
-                val userInfo = parseFacebookUserData(result.result)
-                userInfo.token = result.token
-                onSuccess(userInfo)
-            }
-            else {
-                val socialLoginError = SocialLoginError.FACEBOOK_SIGN_IN_GENERAL_ERROR
-                onError(socialLoginError)
-            }
-        }
-
     }
 
-    private fun parseFacebookUserData(json: JSONObject): UserInfo {
-        val id = json.getString("id")
-        val email = json.getString("email")
-        val firstName = json.getString("first_name")
-        val lastName = json.getString("last_name")
-        val picture = json.getJSONObject("picture")
-            .getJSONObject("data")
-            .getString("url")
-        return UserInfo(id, email, firstName, lastName, "", picture)
+    private fun getUserData(accessToken: AccessToken,
+                            onSuccess : (UserInfo) -> Unit,
+                            onError : (SocialLoginError) -> Unit) {
+        facebookHelper.getUserData(requestParameters) { result ->
+            try {
+                val data = Gson().fromJson(result.resultJson, FacebookUserData::class.java)
+                data.token = accessToken.token
+                when {
+                    !result.isSuccessful -> onError(SocialLoginError.FACEBOOK_USER_DATA_REQUEST_ERROR)
+                    result.resultJson.isEmpty() -> onError(SocialLoginError.FACEBOOK_NO_RESULTS_FOUND_ERROR)
+                    data.isNotValid() -> onError(SocialLoginError.FACEBOOK_INPUT_PARAMETERS_ERROR)
+                    else -> {
+                        onSuccess(
+                            UserInfo(data.id,
+                                data.email,
+                                data.firstName,
+                                data.lastName,
+                                data.token,
+                                data.picture!!.data!!.url))
+                    }
+                }
+            } catch (e : Exception) {
+                onError(SocialLoginError.FACEBOOK_USER_DATA_REQUEST_ERROR)
+            }
+        }
     }
 
     companion object {
-        const val FACEBOOK_RESULT_CODE = 3
         const val FACEBOOK_REQUEST_CODE = 64206
     }
 
