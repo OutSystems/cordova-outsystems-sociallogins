@@ -41,7 +41,7 @@ function copyFacebookPreferences(projectRoot) {
         var jsonConfigFile = fs.readFileSync(jsonConfig).toString();
         var jsonParsed = JSON.parse(jsonConfigFile);
     
-        jsonParsed.environment_configurations.forEach(function(configItem) {
+        jsonParsed.app_configurations.forEach(function(configItem) {
             if ((configItem.provider_id == ProvidersEnum.facebook) && 
                 (configItem.application_type_id == ApplicationTypeEnum.android)) {
                 facebook_client_appId = configItem.client_id;
