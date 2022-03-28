@@ -54,6 +54,7 @@
     <source-file src="src/android/com/outsystems/plugins/sociallogins/SocialLoginsGoogleController.kt" target-dir="app/src/main/kotlin/com/outsystems/plugins/sociallogins"/>
     <source-file src="src/android/com/outsystems/plugins/sociallogins/SocialLoginError.kt" target-dir="app/src/main/kotlin/com/outsystems/plugins/sociallogins"/>
     <source-file src="src/android/com/outsystems/plugins/sociallogins/UserInfo.kt" target-dir="app/src/main/kotlin/com/outsystems/plugins/sociallogins"/>
+    <source-file src="src/android/com/outsystems/plugins/sociallogins/ProvidersEnum.kt" target-dir="app/src/main/kotlin/com/outsystems/plugins/sociallogins"/>
     <source-file src="src/android/com/outsystems/plugins/sociallogins/AndroidPlatformInterface.kt" target-dir="app/src/main/kotlin/com/outsystems/plugins/sociallogins"/>
     <source-file src="src/android/com/outsystems/plugins/sociallogins/CordovaImplementation.kt" target-dir="app/src/main/kotlin/com/outsystems/plugins/sociallogins"/>
     <source-file src="src/android/com/outsystems/plugins/sociallogins/GoogleHelper.kt" target-dir="app/src/main/kotlin/com/outsystems/plugins/sociallogins"/>
