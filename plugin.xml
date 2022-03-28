@@ -60,7 +60,7 @@
     <source-file src="src/android/com/outsystems/plugins/sociallogins/GoogleHelperInterface.kt" target-dir="app/src/main/kotlin/com/outsystems/plugins/sociallogins"/>
     <source-file src="src/android/com/outsystems/plugins/sociallogins/AppleHelperInterface.kt" target-dir="app/src/main/kotlin/com/outsystems/plugins/sociallogins"/>
     <source-file src="src/android/com/outsystems/plugins/sociallogins/AppleHelper.kt" target-dir="app/src/main/kotlin/com/outsystems/plugins/sociallogins"/>
-    <source-file src="src/android/com/outsystems/plugins/sociallogins/LinkedinConstants.kt" target-dir="app/src/main/kotlin/com/outsystems/plugins/sociallogins"/>
+    <source-file src="src/android/com/outsystems/plugins/sociallogins/LinkedInConstants.kt" target-dir="app/src/main/kotlin/com/outsystems/plugins/sociallogins"/>
     <source-file src="src/android/com/outsystems/plugins/sociallogins/AppleConstants.kt" target-dir="app/src/main/kotlin/com/outsystems/plugins/sociallogins"/>
     <source-file src="src/android/com/outsystems/plugins/sociallogins/OAuthActivity.kt" target-dir="app/src/main/kotlin/com/outsystems/plugins/sociallogins"/>
     <source-file src="src/android/com/outsystems/plugins/sociallogins/SocialLoginsLinkedinController.kt" target-dir="app/src/main/kotlin/com/outsystems/plugins/sociallogins"/>
