@@ -9,23 +9,20 @@ import org.json.JSONArray
 import org.json.JSONException
 
 class OSSocialLogins : CordovaImplementation() {
-
+    private val gson by lazy { Gson() }
+    private var socialLoginController: SocialLoginsController? = null
     override var callbackContext: CallbackContext? = null
-
-    val gson by lazy { Gson() }
-
-    var socialLoginController: SocialLoginsController? = null
 
     override fun initialize(cordova: CordovaInterface, webView: CordovaWebView) {
         super.initialize(cordova, webView)
 
         var googleHelperInterface = GoogleHelper()
+        var appleHelperInterface = AppleHelper()
 
-        var socialLoginControllerApple = SocialLoginsAppleController()
+        var socialLoginControllerApple = SocialLoginsAppleController(appleHelperInterface)
         var socialLoginsLinkedinController = SocialLoginsLinkedinController()
         var socialLoginControllerGoogle = SocialLoginsGoogleController(cordova.context, googleHelperInterface)
         socialLoginController = SocialLoginsController(socialLoginControllerApple, socialLoginControllerGoogle, socialLoginsLinkedinController)
-
     }
 
     override fun execute(
@@ -101,7 +98,6 @@ class OSSocialLogins : CordovaImplementation() {
     }
 
     private fun doLoginGoogle(args : JSONArray) {
-
         setAsActivityResultCallback()
         socialLoginController?.doLoginGoogle(cordova.activity)
 
@@ -110,23 +106,11 @@ class OSSocialLogins : CordovaImplementation() {
     override fun onActivityResult(requestCode: Int, resultCode: Int, intent: Intent?) {
         super.onActivityResult(requestCode, resultCode, intent)
 
-        if(resultCode == 0){
+        // Todo Carlos this part will be refactored after merge all providers
+        if (resultCode == 0) {
             sendPluginResult(null, Pair(SocialLoginError.LOGIN_CANCELLED_ERROR.code, SocialLoginError.LOGIN_CANCELLED_ERROR.message))
-        }
-
-        else if(resultCode == 10){
-            sendPluginResult(null, Pair(SocialLoginError.APPLE_INVALID_TOKEN_ERROR.code, SocialLoginError.APPLE_INVALID_TOKEN_ERROR.message))
-        }
-
-        else if(resultCode == 11){
-            sendPluginResult(null, Pair(SocialLoginError.APPLE_SIGN_IN_GENERAL_ERROR.code, SocialLoginError.APPLE_SIGN_IN_GENERAL_ERROR.message))
-        }
-
-        else if(resultCode == 1){//Apple Sign in case
-
+        } else if(resultCode == AppleConstants.APPLE_SIGN_IN_RESULT_CODE) {
             if(intent != null){
-
-                super.onActivityResult(requestCode, resultCode, intent)
                 socialLoginController?.handleActivityResult(requestCode, resultCode, intent,
                     {
                         val pluginResponseJson = gson.toJson(it)
@@ -136,12 +120,8 @@ class OSSocialLogins : CordovaImplementation() {
                         sendPluginResult(null, Pair(it.code, it.message))
                     }
                 )
-
             }
-        }
-        else if (requestCode == 2){ //Google sign in case
-            super.onActivityResult(requestCode, resultCode, intent)
-
+        } else if (requestCode == 2) { //Google sign in case
             if(intent != null){
                 try {
                     socialLoginController?.handleActivityResult(requestCode, resultCode, intent,
@@ -158,23 +138,16 @@ class OSSocialLogins : CordovaImplementation() {
                 }
             }
         }
-        else if (requestCode == 3) { //Linkedin sign in case
-            super.onActivityResult(requestCode, resultCode, intent)
-
+        else if (resultCode == LinkedInConstants.LINKEDIN_SIGN_IN_RESULT_CODE) {
             if(intent != null){
-                try {
-                    socialLoginController?.handleActivityResult(requestCode, resultCode, intent,
-                        {
-                            val pluginResponseJson = gson.toJson(it)
-                            sendPluginResult(pluginResponseJson, null)
-                        },
-                        {
-                            sendPluginResult(null, Pair(it.code, it.message))
-                        })
-                }
-                catch(hse : Exception) {
-                    sendPluginResult(null, Pair(SocialLoginError.GOOGLE_SIGN_IN_GENERAL_ERROR.code, SocialLoginError.GOOGLE_SIGN_IN_GENERAL_ERROR.message))
-                }
+                socialLoginController?.handleActivityResult(requestCode, resultCode, intent,
+                    {
+                        val pluginResponseJson = gson.toJson(it)
+                        sendPluginResult(pluginResponseJson, null)
+                    },
+                    {
+                        sendPluginResult(null, Pair(it.code, it.message))
+                    })
             }
         }
 

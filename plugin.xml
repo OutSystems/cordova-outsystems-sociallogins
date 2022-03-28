@@ -23,33 +23,21 @@
     </config-file>
     
     <config-file parent="/*" target="AndroidManifest.xml"/>
-
     <config-file target="AndroidManifest.xml" parent="/manifest/application">
       <activity
-            android:name="com.outsystems.plugins.sociallogins.AppleSignInActivity"
+            android:name="com.outsystems.plugins.sociallogins.OAuthActivity"
             android:exported="true"
             android:launchMode="singleTop">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
-            </intent-filter>
-      </activity>
-      <activity
-            android:name="com.outsystems.plugins.sociallogins.LinkedInSignInActivity"
-            android:exported="true"
-            android:launchMode="singleTop">
-            <intent-filter>
-                <action android:name="android.intent.action.VIEW" />
-                <category android:name="android.intent.category.DEFAULT" />
-                <category android:name="android.intent.category.BROWSABLE" />
-                <data android:scheme="LINKEDIN_DEEPLINK_SCHEME" />
-                <data android:host="LINKEDIN_DEEPLINK_HOST" />
-                <data android:path="LINKEDIN_DEEPLINK_PATH" />
+                <data android:scheme="OAUTH_DEEPLINK_SCHEME" />
+                <data android:host="OAUTH_DEEPLINK_HOST" />
+                <data android:path="OAUTH_DEEPLINK_PATH" />
             </intent-filter>
       </activity>
     </config-file>
-
 
     <config-file target="AndroidManifest.xml" parent="/manifest">
       <queries>
@@ -60,7 +48,6 @@
       </queries>
     </config-file>
 
-
     <source-file src="src/android/com/outsystems/plugins/sociallogins/OSSocialLogins.kt" target-dir="app/src/main/kotlin/com/outsystems/plugins/sociallogins"/>
     <source-file src="src/android/com/outsystems/plugins/sociallogins/SocialLoginsController.kt" target-dir="app/src/main/kotlin/com/outsystems/plugins/sociallogins"/>
     <source-file src="src/android/com/outsystems/plugins/sociallogins/SocialLoginsAppleController.kt" target-dir="app/src/main/kotlin/com/outsystems/plugins/sociallogins"/>
@@ -69,13 +56,13 @@
     <source-file src="src/android/com/outsystems/plugins/sociallogins/UserInfo.kt" target-dir="app/src/main/kotlin/com/outsystems/plugins/sociallogins"/>
     <source-file src="src/android/com/outsystems/plugins/sociallogins/AndroidPlatformInterface.kt" target-dir="app/src/main/kotlin/com/outsystems/plugins/sociallogins"/>
     <source-file src="src/android/com/outsystems/plugins/sociallogins/CordovaImplementation.kt" target-dir="app/src/main/kotlin/com/outsystems/plugins/sociallogins"/>
-    <source-file src="src/android/com/outsystems/plugins/sociallogins/AppleSignInActivity.kt" target-dir="app/src/main/kotlin/com/outsystems/plugins/sociallogins"/>
-    <source-file src="src/android/com/outsystems/plugins/sociallogins/AppleWebViewClient.kt" target-dir="app/src/main/kotlin/com/outsystems/plugins/sociallogins"/>
     <source-file src="src/android/com/outsystems/plugins/sociallogins/GoogleHelper.kt" target-dir="app/src/main/kotlin/com/outsystems/plugins/sociallogins"/>
     <source-file src="src/android/com/outsystems/plugins/sociallogins/GoogleHelperInterface.kt" target-dir="app/src/main/kotlin/com/outsystems/plugins/sociallogins"/>
-
-    <!--LINKEDIN-->
-    <source-file src="src/android/com/outsystems/plugins/sociallogins/LinkedInSignInActivity.kt" target-dir="app/src/main/kotlin/com/outsystems/plugins/sociallogins"/>
+    <source-file src="src/android/com/outsystems/plugins/sociallogins/AppleHelperInterface.kt" target-dir="app/src/main/kotlin/com/outsystems/plugins/sociallogins"/>
+    <source-file src="src/android/com/outsystems/plugins/sociallogins/AppleHelper.kt" target-dir="app/src/main/kotlin/com/outsystems/plugins/sociallogins"/>
+    <source-file src="src/android/com/outsystems/plugins/sociallogins/LinkedinConstants.kt" target-dir="app/src/main/kotlin/com/outsystems/plugins/sociallogins"/>
+    <source-file src="src/android/com/outsystems/plugins/sociallogins/AppleConstants.kt" target-dir="app/src/main/kotlin/com/outsystems/plugins/sociallogins"/>
+    <source-file src="src/android/com/outsystems/plugins/sociallogins/OAuthActivity.kt" target-dir="app/src/main/kotlin/com/outsystems/plugins/sociallogins"/>
     <source-file src="src/android/com/outsystems/plugins/sociallogins/SocialLoginsLinkedinController.kt" target-dir="app/src/main/kotlin/com/outsystems/plugins/sociallogins"/>
 
     <!--aar for social logins library-->

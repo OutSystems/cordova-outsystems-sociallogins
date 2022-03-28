@@ -3,38 +3,41 @@ package com.outsystems.plugins.sociallogins
 import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.ComponentName
+import android.os.Bundle
 import android.content.Intent
 import android.net.Uri
-import android.os.Bundle
-import android.webkit.WebView
 import androidx.browser.customtabs.CustomTabsClient
 import androidx.browser.customtabs.CustomTabsIntent
 import androidx.browser.customtabs.CustomTabsServiceConnection
 
-class LinkedInSignInActivity : Activity() {
+class OAuthActivity : Activity() {
 
-    val SCOPE = "r_liteprofile r_emailaddress"
-    val AUTHURL = "https://www.linkedin.com/oauth/v2/authorization"
+    private companion object {
+        const val STABLE_PACKAGE = "com.android.chrome"
+    }
 
-    lateinit var redirectUri: String
-    lateinit var clientId: String
-    var state: String = ""
-    var isFirstTime = true
+    private lateinit var redirectUri: String
+    private lateinit var clientId: String
+    private var state: String = ""
+    private var isFirstTime = true
+    private var authUrl : String? = null
+    private var scope : String? = null
+    private var responseType : String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         val bundle = intent.extras
         if (bundle != null) {
-            state = bundle.getString("state").toString()
-            clientId = bundle.getString("clientId").toString()
-            redirectUri = bundle.getString("redirectUri").toString()
+            this.state = bundle.getString("state").toString()
+            this.clientId = bundle.getString("clientId").toString()
+            this.redirectUri = bundle.getString("redirectUri").toString()
+            this.authUrl = bundle.getString("authUrl").toString()
+            this.scope = bundle.getString("scope").toString()
+            this.responseType = bundle.getString("responseType").toString()
         }
 
-        setupLinkedInWebviewDialog(
-            clientId,
-            redirectUri)
-
+        setupViewDialog()
     }
 
     override fun onNewIntent(intent: Intent?) {
@@ -46,8 +49,9 @@ class LinkedInSignInActivity : Activity() {
         val token = intent?.data?.getQueryParameter("token")
         val email = intent?.data?.getQueryParameter("email")
         val picture = intent?.data?.getQueryParameter("picture")
+        val provider = intent?.data?.getQueryParameter("provider")
+        val state = intent?.data?.getQueryParameter("state")
 
-        //send Activity result
         val resultBundle = Bundle()
         resultBundle.putString("id", id)
         resultBundle.putString("firstName", firstName)
@@ -55,11 +59,17 @@ class LinkedInSignInActivity : Activity() {
         resultBundle.putString("token", token)
         resultBundle.putString("email", email)
         resultBundle.putString("picture", picture)
+        resultBundle.putString("state", state)
 
         val resultIntent = Intent()
         resultIntent.putExtras(resultBundle)
 
-        setResult(3, resultIntent)
+        if (provider?.toInt() == ProvidersEnum.APPLE.code) {
+            setResult(AppleConstants.APPLE_SIGN_IN_RESULT_CODE, resultIntent)
+        } else if (provider?.toInt() == ProvidersEnum.LINKEDIN.code) {
+            setResult(LinkedInConstants.LINKEDIN_SIGN_IN_RESULT_CODE, resultIntent)
+        }
+
     }
 
     override fun onResume() {
@@ -71,33 +81,23 @@ class LinkedInSignInActivity : Activity() {
     }
 
     @SuppressLint("SetJavaScriptEnabled", "NewApi")
-    fun setupLinkedInWebviewDialog(clientId: String, redirectUri: String/*, promise: Promise*/) {
-        this.clientId = clientId
-        this.redirectUri = redirectUri
-
+    fun setupViewDialog() {
         val connection: CustomTabsServiceConnection = object : CustomTabsServiceConnection() {
-
             override fun onCustomTabsServiceConnected(name: ComponentName, client: CustomTabsClient) {
                 openBrowser(client)
             }
-
             override fun onServiceDisconnected(name: ComponentName) {}
-
         }
-        val ok = CustomTabsClient.bindCustomTabsService(this, "com.android.chrome", connection)
-
+        val ok = CustomTabsClient.bindCustomTabsService(this, STABLE_PACKAGE , connection)
     }
 
     fun openBrowser(client : CustomTabsClient) {
-
         val session = client.newSession(null)!!
-
-        //custom chrome tabs solution
-        val url: String = this.AUTHURL +
-                "?response_type=code&client_id=" + clientId +
-                "&scope=" +  SCOPE +
-                "&state=" + state +
-                "&redirect_uri=" + redirectUri
+        val url: String = this.authUrl + "?response_type=" + this.responseType +
+                "&client_id=" + this.clientId +
+                "&scope=" +  this.scope +
+                "&state=" + this.state +
+                "&redirect_uri=" + this.redirectUri
 
         val builder = CustomTabsIntent.Builder()
         val customTabsIntent = builder
