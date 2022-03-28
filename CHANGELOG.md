@@ -8,6 +8,9 @@ The changes documented here do not include those from the original repository.
 
 ## [Unreleased]
 
+## 2022-03-28
+- Implementation of LinkedIn Sign In on Android (https://outsystemsrd.atlassian.net/browse/RMET-1450)
+
 ## 2022-03-16
 - Implementation of Google Sign In on Android ((https://outsystemsrd.atlassian.net/browse/RMET-1246)
 - Implementation of Facebook Sign In on iOS (https://outsystemsrd.atlassian.net/browse/RMET-1420) & (https://outsystemsrd.atlassian.net/browse/RMET-1421)
