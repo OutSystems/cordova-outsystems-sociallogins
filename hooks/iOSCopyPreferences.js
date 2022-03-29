@@ -24,7 +24,7 @@ module.exports = function (context) {
     //read json config file                         platforms/ios/www/jsonConfig
     var jsonConfig = "";
     try {
-        jsonConfig = path.join(projectRoot, 'platforms/ios/www/jsonConfig/sociallogins_configurations.json');
+        jsonConfig = path.join(projectRoot, 'platforms/ios/www/json-config/SocialLoginsConfigurations.json');
         var jsonConfigFile = fs.readFileSync(jsonConfig).toString();
         var jsonParsed = JSON.parse(jsonConfigFile);
     
