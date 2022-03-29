@@ -32,44 +32,57 @@ class SocialLoginsAppleController(private val appleTokenValidation: AppleHelperI
 
         val returnBundle = intent.extras
         returnBundle?.let {
-            val id = returnBundle.getString("id")
-            val state = returnBundle.getString("state")
-            val email = returnBundle.getString("email")
-            val token = returnBundle.getString("token")
-            val firstName = returnBundle.getString("firstName")
-            val lastName = returnBundle.getString("lastName")
 
-            if (id.isNullOrEmpty()) {
-                onError(SocialLoginError.APPLE_MISSING_USER_ID)
-            } else if (token.isNullOrEmpty()) {
-                onError(SocialLoginError.APPLE_MISSING_ACCESS_TOKEN_ERROR)
-            } else if (email.isNullOrEmpty()) {
-                onError(SocialLoginError.APPLE_MISSING_USER_EMAIL)
-            } else if (state.isNullOrEmpty()) {
-                onError(SocialLoginError.APPLE_SIGN_IN_GENERAL_ERROR)
+            var errorCode = returnBundle.getInt("errorCode", Int.MAX_VALUE)
+            if (errorCode == Int.MAX_VALUE) {
+
+                val id = returnBundle.getString("id")
+                val state = returnBundle.getString("state")
+                val email = returnBundle.getString("email")
+                val token = returnBundle.getString("token")
+                val firstName = returnBundle.getString("firstName")
+                val lastName = returnBundle.getString("lastName")
+
+                if (id.isNullOrEmpty()) {
+                    onError(SocialLoginError.APPLE_MISSING_USER_ID)
+                } else if (token.isNullOrEmpty()) {
+                    onError(SocialLoginError.APPLE_MISSING_ACCESS_TOKEN_ERROR)
+                } else if (email.isNullOrEmpty()) {
+                    onError(SocialLoginError.APPLE_MISSING_USER_EMAIL)
+                } else if (state.isNullOrEmpty()) {
+                    onError(SocialLoginError.APPLE_SIGN_IN_GENERAL_ERROR)
+                } else {
+
+                    if (!state.isNullOrEmpty()) {
+                        appleTokenValidation?.validateToken(id, state, this.redirectUri,
+                            {
+                                onSuccess(UserInfo(
+                                    id,
+                                    email,
+                                    firstName,
+                                    lastName,
+                                    token
+                                ))
+                            },
+                            {
+                                onError(it)
+                            }
+                        )
+                    }
+                }
+
             } else {
-
-                if (!state.isNullOrEmpty()) {
-                    appleTokenValidation?.validateToken(id, state, this.redirectUri,
-                        {
-                            onSuccess(UserInfo(
-                                id,
-                                email,
-                                firstName,
-                                lastName,
-                                token
-                            ))
-                        },
-                        {
-                            onError(it)
-                        }
-                    )
+                SocialLoginError.valueOf(errorCode)?.let { error ->
+                    onError(error)
+                } ?: run {
+                    onError(SocialLoginError.APPLE_SIGN_IN_GENERAL_ERROR)
                 }
             }
 
         } ?: run {
             onError(SocialLoginError.APPLE_SIGN_IN_GENERAL_ERROR)
         }
+
     }
 
 }

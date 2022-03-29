@@ -16,5 +16,10 @@ enum class SocialLoginError(val code: Int, val message: String) {
     LINKEDIN_SIGN_IN_GENERAL_ERROR(400, "There was an error signing in with LinkedIn"),
     LINKEDIN_MISSING_ACCESS_TOKEN_ERROR(402, "Access token missing"),
     LINKEDIN_SIGN_IN_MISSING_USER_ID(403, "User id missing"),
-    LINKEDIN_SIGN_IN_MISSING_EMAIL(404, "User e-mail missing")
+    LINKEDIN_SIGN_IN_MISSING_EMAIL(404, "User e-mail missing");
+
+    companion object {
+        fun valueOf(code: Int): SocialLoginError? = values().find { it.code == code }
+    }
+
 }
