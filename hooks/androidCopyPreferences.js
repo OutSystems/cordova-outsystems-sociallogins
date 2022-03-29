@@ -37,7 +37,7 @@ function copyFacebookPreferences(projectRoot) {
 
     var jsonConfig = "";
     try {
-        jsonConfig = path.join(projectRoot, 'www/jsonConfig/sociallogins_configurations.json');
+        jsonConfig = path.join(projectRoot, 'www/json-config/sociallogins_configurations.json');
         var jsonConfigFile = fs.readFileSync(jsonConfig).toString();
         var jsonParsed = JSON.parse(jsonConfigFile);
     
