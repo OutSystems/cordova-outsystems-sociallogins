@@ -15,6 +15,8 @@ module.exports = function (context) {
     var facebook_client_appId = "";
     var facebook_client_token = "";
 
+    var deeplink_url_scheme = "";
+
     var appNamePath = path.join(projectRoot, 'config.xml');
     var appNameParser = new ConfigParser(appNamePath);
     var appName = appNameParser.name();
@@ -26,7 +28,7 @@ module.exports = function (context) {
         var jsonConfigFile = fs.readFileSync(jsonConfig).toString();
         var jsonParsed = JSON.parse(jsonConfigFile);
     
-        jsonParsed.environment_configurations.forEach(function(configItem) {
+        jsonParsed.app_configurations.forEach(function(configItem) {
             if ((configItem.provider_id == ProvidersEnum.google) && (configItem.application_type_id == ApplicationTypeEnum.ios)) {
                 google_url_scheme = configItem.url_scheme
             } else if ((configItem.provider_id == ProvidersEnum.facebook) && (configItem.application_type_id == ApplicationTypeEnum.ios)) {
@@ -34,6 +36,7 @@ module.exports = function (context) {
                 facebook_client_token = configItem.client_token;
             }
         });
+        deeplink_url_scheme = jsonParsed.app_deeplink.url_scheme;
     } catch {
         throw new Error("Missing configuration file or error trying to obtain the configuration.");
     }
@@ -51,6 +54,10 @@ module.exports = function (context) {
 
         if (infoPlistTags[i].text.includes("FACEBOOK_CLIENT_URLSCHEME")) {
             infoPlistTags[i].text = infoPlistTags[i].text.replace('FACEBOOK_CLIENT_URLSCHEME', "fb" + facebook_client_appId);
+        }
+
+        if (infoPlistTags[i].text.includes("DEEP_LINK_URLSCHEME")) {
+            infoPlistTags[i].text = infoPlistTags[i].text.replace('DEEP_LINK_URLSCHEME', deeplink_url_scheme);
         }
     }
 
