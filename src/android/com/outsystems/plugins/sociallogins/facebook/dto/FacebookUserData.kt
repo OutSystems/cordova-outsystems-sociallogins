@@ -30,7 +30,6 @@ data class FacebookUserData(@SerializedName("id")
                 email == null ||
                 firstName == null ||
                 lastName == null ||
-                token == null ||
                 picture?.data?.url == null
     }
 

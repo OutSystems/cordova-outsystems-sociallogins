@@ -43,7 +43,7 @@ open class SocialLoginsFacebookController(private val facebookHelper: FacebookHe
                 when {
                     !result.isSuccessful -> onError(SocialLoginError.FACEBOOK_USER_DATA_REQUEST_ERROR)
                     result.resultJson.isEmpty() -> onError(SocialLoginError.FACEBOOK_NO_RESULTS_FOUND_ERROR)
-                    data.isNotValid() -> onError(SocialLoginError.FACEBOOK_INPUT_PARAMETERS_ERROR)
+                    data.isNotValid() || accessToken.token.isEmpty() -> onError(SocialLoginError.FACEBOOK_INPUT_PARAMETERS_ERROR)
                     else -> {
                         onSuccess(
                             UserInfo(data.id,
