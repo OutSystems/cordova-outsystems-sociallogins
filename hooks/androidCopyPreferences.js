@@ -6,6 +6,7 @@ module.exports = function (context) {
     const ProvidersEnum = Object.freeze({"apple":"1", "facebook":"2", "google":"3", "linkedIn":"4"})
     const ApplicationTypeEnum = Object.freeze({"web":"1", "ios":"2", "android":"3"})
 
+    const configFileName = 'www/json-config/SocialLoginsConfigurations.json';
     var linkedin_deeplink_url = "";
     var linkedin_deeplink_host = "";
     var linkedin_deeplink_path = "";
@@ -14,7 +15,7 @@ module.exports = function (context) {
      //read json config file       www/jsonConfig/sociallogins_configurations.json
      var jsonConfig = "";
      try {
-         jsonConfig = path.join(projectRoot, 'www/jsonConfig/sociallogins_configurations.json');
+         jsonConfig = path.join(projectRoot, configFileName);
          var jsonConfigFile = fs.readFileSync(jsonConfig).toString();
          var jsonParsed = JSON.parse(jsonConfigFile);
  
