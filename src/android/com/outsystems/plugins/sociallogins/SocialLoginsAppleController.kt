@@ -5,7 +5,7 @@ import android.content.Intent
 import android.os.Bundle
 
 class SocialLoginsAppleController(private val appleTokenValidation: AppleHelperInterface) {
-    private var redirectUri: String = ""
+    private lateinit var redirectUri: String
 
     fun doLogin(state: String,
                 clientId: String,

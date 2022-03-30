@@ -18,11 +18,11 @@ class OAuthActivity : Activity() {
 
     private lateinit var redirectUri: String
     private lateinit var clientId: String
-    private var state: String = ""
+    private lateinit var state: String
+    private lateinit var authUrl : String
+    private lateinit var scope : String
+    private lateinit var responseType : String
     private var isFirstTime = true
-    private var authUrl : String? = null
-    private var scope : String? = null
-    private var responseType : String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
