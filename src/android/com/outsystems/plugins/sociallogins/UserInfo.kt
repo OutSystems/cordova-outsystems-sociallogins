@@ -5,6 +5,6 @@ data class UserInfo (
     val email: String?,
     val firstName: String?,
     val lastName: String?,
-    var token: String?,
+    val token: String?,
     val picture: String? = ""
 )
