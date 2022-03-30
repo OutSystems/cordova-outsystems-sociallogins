@@ -11,7 +11,7 @@ data class FacebookUserData(@SerializedName("id")
                        @SerializedName("last_name")
                        val lastName: String?,
                        @SerializedName("token")
-                       var token: String?,
+                       val token: String?,
                        @SerializedName("picture")
                        val picture: Picture?) {
     data class Picture(val data: PictureData?)

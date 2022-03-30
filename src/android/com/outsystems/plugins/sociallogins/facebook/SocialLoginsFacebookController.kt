@@ -27,7 +27,7 @@ open class SocialLoginsFacebookController(private val facebookHelper: FacebookHe
 
         val loginResult = facebookHelper.getLoginResult(requestCode, resultCode, intent)
         when {
-            loginResult.status == FacebookLoginResult.CANCEL -> onError(SocialLoginError.FACEBOOK_LOGIN_CANCELLED_ERROR)
+            loginResult.status == FacebookLoginResult.CANCEL -> onError(SocialLoginError.LOGIN_CANCELLED_ERROR)
             loginResult.status == FacebookLoginResult.NOK -> onError(SocialLoginError.FACEBOOK_SIGN_IN_GENERAL_ERROR)
             loginResult.accessToken?.token.isNullOrEmpty() -> onError(SocialLoginError.FACEBOOK_TOKEN_NOT_FOUND_ERROR)
             else -> getUserData(loginResult.accessToken!!, onSuccess, onError)
@@ -40,7 +40,6 @@ open class SocialLoginsFacebookController(private val facebookHelper: FacebookHe
         facebookHelper.getUserData(requestParameters) { result ->
             try {
                 val data = Gson().fromJson(result.resultJson, FacebookUserData::class.java)
-                data.token = accessToken.token
                 when {
                     !result.isSuccessful -> onError(SocialLoginError.FACEBOOK_USER_DATA_REQUEST_ERROR)
                     result.resultJson.isEmpty() -> onError(SocialLoginError.FACEBOOK_NO_RESULTS_FOUND_ERROR)
@@ -51,8 +50,8 @@ open class SocialLoginsFacebookController(private val facebookHelper: FacebookHe
                                 data.email,
                                 data.firstName,
                                 data.lastName,
-                                data.token,
-                                data.picture!!.data!!.url))
+                                accessToken.token,
+                                data.picture?.data?.url ?: ""))
                     }
                 }
             } catch (e : Exception) {
