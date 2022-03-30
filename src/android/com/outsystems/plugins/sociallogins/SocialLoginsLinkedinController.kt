@@ -25,21 +25,32 @@ class SocialLoginsLinkedinController {
 
         val returnBundle = intent.extras
         returnBundle?.let {
-            if (it.getString("id")!!.isEmpty()) {
-                onError(SocialLoginError.LINKEDIN_SIGN_IN_MISSING_USER_ID)
-            } else if (it.getString("token")!!.isEmpty()) {
-                onError(SocialLoginError.LINKEDIN_MISSING_ACCESS_TOKEN_ERROR)
-            } else if (it.getString("email")!!.isEmpty()) {
-                onError(SocialLoginError.LINKEDIN_SIGN_IN_MISSING_EMAIL)
+            var errorCode = returnBundle.getInt("errorCode")
+            if (errorCode == 0) {
+
+                if (it.getString("id")!!.isEmpty()) {
+                    onError(SocialLoginError.LINKEDIN_SIGN_IN_MISSING_USER_ID)
+                } else if (it.getString("token")!!.isEmpty()) {
+                    onError(SocialLoginError.LINKEDIN_MISSING_ACCESS_TOKEN_ERROR)
+                } else if (it.getString("email")!!.isEmpty()) {
+                    onError(SocialLoginError.LINKEDIN_SIGN_IN_MISSING_EMAIL)
+                } else {
+                    onSuccess(UserInfo(
+                        it.getString("id"),
+                        it.getString("email"),
+                        it.getString("firstName"),
+                        it.getString("lastName"),
+                        it.getString("token"),
+                        it.getString("picture")
+                    ))
+                }
+
             } else {
-                onSuccess(UserInfo(
-                    it.getString("id"),
-                    it.getString("email"),
-                    it.getString("firstName"),
-                    it.getString("lastName"),
-                    it.getString("token"),
-                    it.getString("picture")
-                ))
+                SocialLoginError.valueOf(errorCode)?.let { error ->
+                    onError(error)
+                } ?: run {
+                    onError(SocialLoginError.LINKEDIN_SIGN_IN_GENERAL_ERROR)
+                }
             }
 
         } ?: run {

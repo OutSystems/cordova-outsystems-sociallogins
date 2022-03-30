@@ -33,8 +33,8 @@ class SocialLoginsAppleController(private val appleTokenValidation: AppleHelperI
         val returnBundle = intent.extras
         returnBundle?.let {
 
-            var errorCode = returnBundle.getInt("errorCode", Int.MAX_VALUE)
-            if (errorCode == Int.MAX_VALUE) {
+            var errorCode = returnBundle.getInt("errorCode")
+            if (errorCode == 0) {
 
                 val id = returnBundle.getString("id")
                 val state = returnBundle.getString("state")
