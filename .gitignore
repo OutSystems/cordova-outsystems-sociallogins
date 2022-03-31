@@ -89,3 +89,6 @@ src/android/com/outsystems/plugins/sociallogins/.DS_Store
 tests/android/OSSocialLoginsTests/.project
 tests/android/OSSocialLoginsTests/.settings/org.eclipse.buildship.core.prefs
 src/ios/frameworks/.DS_Store
+
+.idea
+.DS_Store

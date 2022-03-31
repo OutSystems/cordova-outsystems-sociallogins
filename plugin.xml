@@ -22,8 +22,14 @@
 
     </config-file>
     
-    <config-file parent="/*" target="AndroidManifest.xml"/>
+   <config-file parent="/*" target="res/values/strings.xml">
+    <string name="facebook_app_id">FACEBOOK_SDK_APP_ID</string>
+    <string name="facebook_client_token">FACEBOOK_SDK_CLIENT_TOKEN</string>
+   </config-file>
+    
     <config-file target="AndroidManifest.xml" parent="/manifest/application">
+      <meta-data android:name="com.facebook.sdk.ApplicationId" android:value="@string/facebook_app_id" />
+      <meta-data android:name="com.facebook.sdk.ClientToken" android:value="@string/facebook_client_token" />
       <activity
             android:name="com.outsystems.plugins.sociallogins.OAuthActivity"
             android:exported="true"
@@ -59,6 +65,15 @@
     <source-file src="src/android/com/outsystems/plugins/sociallogins/CordovaImplementation.kt" target-dir="app/src/main/kotlin/com/outsystems/plugins/sociallogins"/>
     <source-file src="src/android/com/outsystems/plugins/sociallogins/GoogleHelper.kt" target-dir="app/src/main/kotlin/com/outsystems/plugins/sociallogins"/>
     <source-file src="src/android/com/outsystems/plugins/sociallogins/GoogleHelperInterface.kt" target-dir="app/src/main/kotlin/com/outsystems/plugins/sociallogins"/>
+
+    <source-file src="src/android/com/outsystems/plugins/sociallogins/facebook/SocialLoginsFacebookController.kt" target-dir="app/src/main/kotlin/com/outsystems/plugins/sociallogins/facebook/"/>
+    <source-file src="src/android/com/outsystems/plugins/sociallogins/facebook/FacebookHelperInterface.kt" target-dir="app/src/main/kotlin/com/outsystems/plugins/sociallogins/facebook"/>
+    <source-file src="src/android/com/outsystems/plugins/sociallogins/facebook/FacebookHelper.kt" target-dir="app/src/main/kotlin/com/outsystems/plugins/sociallogins/facebook"/>
+    <source-file src="src/android/com/outsystems/plugins/sociallogins/facebook/FacebookLoginResultCallback.kt" target-dir="app/src/main/kotlin/com/outsystems/plugins/sociallogins/facebook"/>  
+    <source-file src="src/android/com/outsystems/plugins/sociallogins/facebook/dto/FacebookDataResult.kt" target-dir="app/src/main/kotlin/com/outsystems/plugins/sociallogins/facebook/dto"/>
+    <source-file src="src/android/com/outsystems/plugins/sociallogins/facebook/dto/FacebookLoginResult.kt" target-dir="app/src/main/kotlin/com/outsystems/plugins/sociallogins/facebook/dto"/>
+    <source-file src="src/android/com/outsystems/plugins/sociallogins/facebook/dto/FacebookUserData.kt" target-dir="app/src/main/kotlin/com/outsystems/plugins/sociallogins/facebook/dto"/>
+
     <source-file src="src/android/com/outsystems/plugins/sociallogins/AppleHelperInterface.kt" target-dir="app/src/main/kotlin/com/outsystems/plugins/sociallogins"/>
     <source-file src="src/android/com/outsystems/plugins/sociallogins/AppleHelper.kt" target-dir="app/src/main/kotlin/com/outsystems/plugins/sociallogins"/>
     <source-file src="src/android/com/outsystems/plugins/sociallogins/LinkedInConstants.kt" target-dir="app/src/main/kotlin/com/outsystems/plugins/sociallogins"/>
@@ -66,19 +81,16 @@
     <source-file src="src/android/com/outsystems/plugins/sociallogins/OAuthActivity.kt" target-dir="app/src/main/kotlin/com/outsystems/plugins/sociallogins"/>
     <source-file src="src/android/com/outsystems/plugins/sociallogins/SocialLoginsLinkedinController.kt" target-dir="app/src/main/kotlin/com/outsystems/plugins/sociallogins"/>
 
-    <!--aar for social logins library-->
-    <!--<source-file src="src/android/com/outsystems/plugins/sociallogins/OSSocialLoginsLib-Android-release.aar" target-dir="app/libs"/>-->
-
-    <!--<framework src="src/android/build.gradle" custom="true" type="gradleReference" />
-    <resource-file src="src/android/com/outsystems/plugins/sociallogins/OSSocialLoginsLib-Android-release.aar" target="libs/OSSocialLoginsLib-Android-release.aar" />-->
-
     <framework src="org.jetbrains.kotlinx:kotlinx-coroutines-core-jvm:1.4.3" />
     <framework src="org.jetbrains.kotlinx:kotlinx-coroutines-android:1.4.3" />
     
     <!--For Custom Tabs-->
     <framework src="androidx.browser:browser:1.3.0" />
-
     <framework src="com.google.android.gms:play-services-auth:19.2.0" />
+
+    <!--For Facebook SDK-->
+    <framework src="com.facebook.android:facebook-android-sdk:11.0.0" />
+    <framework src="com.google.code.gson:gson:2.8.8" />
   
   </platform>
 
