@@ -6,18 +6,20 @@ import com.outsystems.plugins.sociallogins.facebook.SocialLoginsFacebookControll
 
 class SocialLoginsController(var appleController: SocialLoginsAppleController,
                              var googleController: SocialLoginsGoogleController,
+                             var linkedinController: SocialLoginsLinkedinController,
                              var facebookController: SocialLoginsFacebookController) {
 
     fun doLoginApple(state: String, clientId: String, redirectUri: String, activity: Activity){
         appleController.doLogin(state, clientId, redirectUri, activity)
     }
-
     fun doLoginGoogle(activity: Activity){
         googleController.doLogin(activity)
     }
-
     fun doLoginFacebook(activity: Activity) {
         facebookController.doLogin()
+    }
+    fun doLoginLinkedin(state: String, clientId: String, redirectUri: String, activity: Activity){
+        linkedinController.doLogin(state, clientId, redirectUri, activity)
     }
 
     fun handleActivityResult(requestCode: Int,

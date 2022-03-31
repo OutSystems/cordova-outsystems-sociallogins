@@ -11,28 +11,25 @@ import org.json.JSONArray
 import org.json.JSONException
 
 class OSSocialLogins : CordovaImplementation() {
-
+    private val gson by lazy { Gson() }
+    private var socialLoginController: SocialLoginsController? = null
     override var callbackContext: CallbackContext? = null
-
-    val gson by lazy { Gson() }
-
-    var socialLoginController: SocialLoginsController? = null
 
     override fun initialize(cordova: CordovaInterface, webView: CordovaWebView) {
         super.initialize(cordova, webView)
 
-        val googleHelperInterface = GoogleHelper()
+        var googleHelperInterface = GoogleHelper()
+        var appleHelperInterface = AppleHelper()
         val facebookHelper = FacebookHelper(cordova.activity)
-
-        val socialLoginControllerApple = SocialLoginsAppleController()
-        val socialLoginControllerGoogle = SocialLoginsGoogleController(cordova.context, googleHelperInterface)
         val socialLoginControllerFacebook = SocialLoginsFacebookController(facebookHelper)
 
-        socialLoginController = SocialLoginsController(
-            socialLoginControllerApple,
-            socialLoginControllerGoogle,
-            socialLoginControllerFacebook)
-
+        var socialLoginControllerApple = SocialLoginsAppleController(appleHelperInterface)
+        var socialLoginsLinkedinController = SocialLoginsLinkedinController()
+        var socialLoginControllerGoogle = SocialLoginsGoogleController(cordova.context, googleHelperInterface)
+        socialLoginController = SocialLoginsController(socialLoginControllerApple, 
+                                                       socialLoginControllerGoogle, 
+                                                       socialLoginsLinkedinController,
+                                                       socialLoginControllerFacebook)
     }
 
     override fun execute(
@@ -52,10 +49,37 @@ class OSSocialLogins : CordovaImplementation() {
             "loginFacebook" -> {
                 doLoginFacebook(args)
             }
+            "loginLinkedIn" -> {
+                doLoginLinkedIn(args)
+            }
         }
         return true
     }
 
+    private fun doLoginLinkedIn(args : JSONArray) {
+        var state = ""
+        var clientId = ""
+        var redirectUri = ""
+
+        try {
+            state = args.get(0).toString()
+            clientId = args.get(1).toString()
+            redirectUri = args.get(2).toString()
+
+            if(clientId.isNullOrEmpty() || redirectUri.isNullOrEmpty()){
+                sendPluginResult(null, Pair(SocialLoginError.MISSING_INPUT_PARAMETERS_ERROR.code, SocialLoginError.MISSING_INPUT_PARAMETERS_ERROR.message))
+            }
+            else{
+                setAsActivityResultCallback()
+                socialLoginController?.doLoginLinkedin(state, clientId, redirectUri, cordova.activity)
+            }
+        }catch (e: JSONException){
+            sendPluginResult(null, Pair(SocialLoginError.MISSING_INPUT_PARAMETERS_ERROR.code, SocialLoginError.MISSING_INPUT_PARAMETERS_ERROR.message))
+        }catch (e: Exception){
+            sendPluginResult(null, Pair(SocialLoginError.APPLE_SIGN_IN_GENERAL_ERROR.code, SocialLoginError.APPLE_SIGN_IN_GENERAL_ERROR.message))
+        }
+
+    }
 
     private fun doLoginApple(args : JSONArray) {
 
@@ -92,6 +116,8 @@ class OSSocialLogins : CordovaImplementation() {
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, intent: Intent?) {
+        super.onActivityResult(requestCode, resultCode, intent)
+        
         if (resultCode == 0) {
             sendPluginResult(null, Pair(SocialLoginError.LOGIN_CANCELLED_ERROR.code, SocialLoginError.LOGIN_CANCELLED_ERROR.message))
         } else if(resultCode == AppleConstants.APPLE_SIGN_IN_RESULT_CODE) {

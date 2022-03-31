@@ -11,33 +11,51 @@ class OSSocialLogins: CordovaImplementation {
         let appleController = SocialLoginsAppleController(delegate:self, rootViewController: self.viewController)
         let googleController = SocialLoginsGoogleController(delegate:self, rootViewController: self.viewController)
         let facebookController = SocialLoginsFacebookController(delegate: self, rootViewController: self.viewController)
+        let linkedInController = SocialLoginsLinkedInController(delegate: self, rootViewController: self.viewController)
         plugin = SocialLoginsController(appleController: appleController, 
                                         googleController: googleController,
-                                        facebookController: facebookController)
+                                        facebookController: facebookController,
+                                        linkedInController: linkedInController)
     }
     
     @objc(loginApple:)
     func loginApple(command: CDVInvokedUrlCommand) {
-        callbackId = command.callbackId
-        plugin?.loginApple(callbackID: self.callbackId)
+        self.callbackId = command.callbackId
+        self.plugin?.loginApple()
     }
 
     @objc(loginGoogle:)
     func loginGoogle(command: CDVInvokedUrlCommand) {
-        callbackId = command.callbackId
-        plugin?.loginGoogle(callbackID: self.callbackId)
+        self.callbackId = command.callbackId
+        self.plugin?.loginGoogle()
     }
 
     @objc(loginFacebook:)
     func loginFacebook(command: CDVInvokedUrlCommand) {
-        callbackId = command.callbackId
-        plugin?.loginFacebook(callbackID: self.callbackId)
+        self.callbackId = command.callbackId
+        self.plugin?.loginFacebook()
+    }
+
+    @objc(loginLinkedIn:)
+    func loginLinkedIn(command: CDVInvokedUrlCommand) {
+        self.callbackId = command.callbackId
+
+        guard 
+            let state = command.arguments[0] as? String,
+            let clientID = command.arguments[1] as? String,
+            let redirectURI = command.arguments[2] as? String
+        else {
+            self.sendResult(result: "", error:SocialLoginsErrors.linkedInConfigurationNotValidError as NSError, callBackID: self.callbackId)
+            return
+        }
+        
+        self.plugin?.loginLinkedIn(state: state, clientID: clientID, redirectURI: redirectURI)
     }
        
 }
 
 extension OSSocialLogins: SocialLoginsProtocol {
-    func callBackUserInfo(result: UserInfo?, error: SocialLoginsErrors?, callBackID: String) {
+    func callBackUserInfo(result: UserInfo?, error: SocialLoginsErrors?) {
         if let error = error {
             self.sendResult(result: nil, error:error as NSError, callBackID: self.callbackId)
         } else {

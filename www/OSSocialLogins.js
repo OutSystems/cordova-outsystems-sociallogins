@@ -12,9 +12,17 @@ exports.loginGoogle = function (success, error, clientId, redirectUrl) {
     exec(success, error, 'OSSocialLogins', 'loginGoogle', [clientId, redirectUrl]);
 };
 
+exports.loginLinkedIn = function (success, error, state, clientId, redirectUrl) {
+    exec(success, error, 'OSSocialLogins', 'loginLinkedIn', [state, clientId, redirectUrl]);
+};
+
 exports.loginFacebook = function (success, error) {
     exec(success, error, 'OSSocialLogins', 'loginFacebook');
 };
+
+exports.loginLinkedIn = function (success, error, state, clientId, redirectUrl) {
+    exec(success, error, 'OSSocialLogins', 'loginLinkedIn', [state, clientId, redirectUrl]);
+}
 
 exports.logout = function (arg0, success, error) {
     exec(success, error, 'OSSocialLogins', 'logout', [arg0]);
