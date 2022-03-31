@@ -15,8 +15,6 @@ module.exports = function (context) {
 
     copyFacebookPreferences(projectRoot);
 
-    var configXML = path.join(projectRoot, 'config.xml');
-    var configParser = new ConfigParser(configXML);
     //read json config file       www/jsonConfig/sociallogins_configurations.json
     var jsonConfig = "";
     try {
