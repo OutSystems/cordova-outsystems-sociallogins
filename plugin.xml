@@ -104,16 +104,26 @@
                 <key>CFBundleTypeRole</key>
                 <string>Editor</string>
                 <key>CFBundleURLName</key>
-                <string>BUNDLE_ID</string>
+                <string>Google</string>
                 <key>CFBundleURLSchemes</key>
                 <array>
                     <string>GOOGLE_CLIENT_ID</string>
                 </array>
             </dict>
             <dict>
+                <key>CFBundleURLName</key>
+                <string>Facebook</string>
                 <key>CFBundleURLSchemes</key>
                 <array>
                     <string>FACEBOOK_CLIENT_URLSCHEME</string>
+                </array>
+            </dict>
+            <dict>
+                <key>CFBundleURLName</key>
+                <string>DeepLinkScheme</string>
+                <key>CFBundleURLSchemes</key>
+                <array>
+                    <string>DEEP_LINK_URLSCHEME</string>
                 </array>
             </dict>
         </array>
