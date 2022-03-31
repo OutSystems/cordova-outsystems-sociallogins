@@ -1,9 +1,9 @@
 package com.outsystems.plugins.sociallogins
 
 object AppleConstants {
-
-    val SCOPE = "email name"
-    val AUTHURL = "https://appleid.apple.com/auth/authorize"
-    val TOKENURL = "https://appleid.apple.com/auth/token"
-
+    const val SCOPE = "email name"
+    const val AUTH_URL = "https://appleid.apple.com/auth/authorize"
+    const val RESPONSE_TYPE = "code%20id_token" + "&response_mode=form_post"
+    const val APPLE_SIGN_IN_REQUEST_CODE = 1;
+    const val APPLE_SIGN_IN_RESULT_CODE = 1;
 }
