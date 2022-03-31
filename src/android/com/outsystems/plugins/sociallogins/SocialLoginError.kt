@@ -19,7 +19,7 @@ enum class SocialLoginError(val code: Int, val message: String) {
     FACEBOOK_NO_RESULTS_FOUND_ERROR(303, "No results were returned while signing in with Facebook."),
     FACEBOOK_INPUT_PARAMETERS_ERROR(304, "Couldn't fetch information for all parameters requested."),
     FACEBOOK_USER_DATA_REQUEST_ERROR(305, "There was a problem while request the user's data on Facebook."),
-    FACEBOOK_CONFIGURATION_NOT_VALID(399, "The configurations for Facebook were not properly set.")
+    FACEBOOK_CONFIGURATION_NOT_VALID(399, "The configurations for Facebook were not properly set."),
 
     LINKEDIN_SIGN_IN_GENERAL_ERROR(400, "There was an error signing in with LinkedIn"),
     LINKEDIN_MISSING_ACCESS_TOKEN_ERROR(402, "Access token missing"),
