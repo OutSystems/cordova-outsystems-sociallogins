@@ -92,24 +92,10 @@ class OSSocialLogins : CordovaImplementation() {
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, intent: Intent?) {
-
-        if(resultCode == 0){
+        if (resultCode == 0) {
             sendPluginResult(null, Pair(SocialLoginError.LOGIN_CANCELLED_ERROR.code, SocialLoginError.LOGIN_CANCELLED_ERROR.message))
-        }
-
-        else if(resultCode == 10){
-            sendPluginResult(null, Pair(SocialLoginError.APPLE_INVALID_TOKEN_ERROR.code, SocialLoginError.APPLE_INVALID_TOKEN_ERROR.message))
-        }
-
-        else if(resultCode == 11){
-            sendPluginResult(null, Pair(SocialLoginError.APPLE_SIGN_IN_GENERAL_ERROR.code, SocialLoginError.APPLE_SIGN_IN_GENERAL_ERROR.message))
-        }
-
-        else if(resultCode == 1){//Apple Sign in case
-
+        } else if(resultCode == AppleConstants.APPLE_SIGN_IN_RESULT_CODE) {
             if(intent != null){
-
-                super.onActivityResult(requestCode, resultCode, intent)
                 socialLoginController?.handleActivityResult(requestCode, resultCode, intent,
                     {
                         val pluginResponseJson = gson.toJson(it)
@@ -119,12 +105,8 @@ class OSSocialLogins : CordovaImplementation() {
                         sendPluginResult(null, Pair(it.code, it.message))
                     }
                 )
-
             }
-        }
-        else if(requestCode == 2){ //Google sign in case
-            super.onActivityResult(requestCode, resultCode, intent)
-
+        } else if (requestCode == 2) { //Google sign in case
             if(intent != null){
                 try {
                     socialLoginController?.handleActivityResult(requestCode, resultCode, intent,
@@ -141,7 +123,18 @@ class OSSocialLogins : CordovaImplementation() {
                 }
             }
         }
-
+        else if (resultCode == LinkedInConstants.LINKEDIN_SIGN_IN_RESULT_CODE) {
+            if(intent != null){
+                socialLoginController?.handleActivityResult(requestCode, resultCode, intent,
+                    {
+                        val pluginResponseJson = gson.toJson(it)
+                        sendPluginResult(pluginResponseJson, null)
+                    },
+                    {
+                        sendPluginResult(null, Pair(it.code, it.message))
+                    })
+            }
+        }
         else if(requestCode == SocialLoginsFacebookController.FACEBOOK_REQUEST_CODE) {
             if(intent != null) {
                 socialLoginController?.handleActivityResult(requestCode, resultCode, intent,

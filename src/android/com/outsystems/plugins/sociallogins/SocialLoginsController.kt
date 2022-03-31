@@ -26,9 +26,9 @@ class SocialLoginsController(var appleController: SocialLoginsAppleController,
                              onSuccess : (UserInfo) -> Unit,
                              onError : (SocialLoginError) -> Unit){
 
-        when(resultCode) {
-            1 -> {
-                //call apple
+
+        when (requestCode) {
+            AppleConstants.APPLE_SIGN_IN_REQUEST_CODE -> {
                 appleController.handleActivityResult(requestCode, resultCode, intent,
                     {
                         onSuccess(it)
@@ -37,9 +37,26 @@ class SocialLoginsController(var appleController: SocialLoginsAppleController,
                     }
                 )
             }
-            2 -> {
-                //call google
+            2 -> { //call google
                 googleController.handleActivityResult(requestCode, resultCode, intent,
+                    {
+                        onSuccess(it)
+                    },
+                    {
+                        onError(it)
+                    })
+            }
+            LinkedInConstants.LINKEDIN_SIGN_IN_REQUEST_CODE -> {
+                linkedinController.handleActivityResult(requestCode, resultCode, intent,
+                    {
+                        onSuccess(it)
+                    },
+                    {
+                        onError(it)
+                    })
+            }
+            SocialLoginsFacebookController.FACEBOOK_REQUEST_CODE -> {
+                facebookController.handleActivityResult(requestCode, resultCode, intent,
                     {
                         onSuccess(it)
                     },
@@ -48,24 +65,6 @@ class SocialLoginsController(var appleController: SocialLoginsAppleController,
                     }
                 )
             }
-            else -> {
-
-                when(requestCode) {
-                    SocialLoginsFacebookController.FACEBOOK_REQUEST_CODE -> {
-                        facebookController.handleActivityResult(requestCode, resultCode, intent,
-                            {
-                                onSuccess(it)
-                            },
-                            {
-                                onError(it)
-                            }
-                        )
-
-                    }
-                }
-
-            }
         }
     }
-
 }
