@@ -13,7 +13,6 @@ import com.outsystems.plugins.sociallogins.facebook.dto.FacebookLoginResult
 import org.json.JSONObject
 
 class FacebookHelper(private var activity: Activity? = null): FacebookHelperInterface {
-
     private val callbackManager: CallbackManager = CallbackManager.Factory.create()
     private val callback = FacebookLoginResultCallback()
 

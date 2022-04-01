@@ -1,4 +1,4 @@
-package com.outsystems.plugins.sociallogins
+package com.outsystems.plugins.sociallogins.google
 
 import android.app.Activity
 import android.content.Context
@@ -10,10 +10,14 @@ import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.api.ApiException
 import com.google.android.gms.tasks.Task
+import com.outsystems.plugins.sociallogins.SocialLoginError
+import com.outsystems.plugins.sociallogins.UserInfo
 
 class SocialLoginsGoogleController(private var context: Context? = null, private var googleHelper: GoogleHelperInterface) {
 
-    private val GOOGLE_SIGN_IN: Int = 2
+    companion object {
+        const val GOOGLE_REQUEST_CODE = 2
+    }
 
     fun doLogin(activity: Activity){
 
@@ -31,21 +35,27 @@ class SocialLoginsGoogleController(private var context: Context? = null, private
     private fun signIn(signInClient: GoogleSignInClient, activity: Activity) {
         signInClient.signOut()
         val signInIntent: Intent = signInClient.signInIntent
-        startActivityForResult(activity, signInIntent, GOOGLE_SIGN_IN, null)
+        startActivityForResult(activity, signInIntent, GOOGLE_REQUEST_CODE, null)
     }
 
 
-    fun handleActivityResult(requestCode: Int, resultCode: Int, intent: Intent,
+    fun handleActivityResult(resultCode: Int, intent: Intent?,
                              onSuccess : (UserInfo) -> Unit, onError : (SocialLoginError) -> Unit) {
-        if (requestCode === 2) {
-            val task: Task<GoogleSignInAccount> = GoogleSignIn.getSignedInAccountFromIntent(intent)
-            handleSignInResult(task,
-                {
-                    onSuccess(it)
-                },
-                {
-                    onError(it)
-                })
+        if (resultCode == 0) {
+            onError(SocialLoginError.LOGIN_CANCELLED_ERROR)
+        } else {
+            try {
+                val task: Task<GoogleSignInAccount> = GoogleSignIn.getSignedInAccountFromIntent(intent)
+                handleSignInResult(task,
+                    {
+                        onSuccess(it)
+                    },
+                    {
+                        onError(it)
+                    })
+            }  catch(hse : Exception) {
+                onError(SocialLoginError.GOOGLE_SIGN_IN_GENERAL_ERROR)
+            }
         }
     }
 
@@ -87,6 +97,5 @@ class SocialLoginsGoogleController(private var context: Context? = null, private
             onError(SocialLoginError.GOOGLE_SIGN_IN_GENERAL_ERROR)
         }
     }
-
 
 }

@@ -9,11 +9,20 @@ import android.net.Uri
 import androidx.browser.customtabs.CustomTabsClient
 import androidx.browser.customtabs.CustomTabsIntent
 import androidx.browser.customtabs.CustomTabsServiceConnection
+import com.outsystems.plugins.sociallogins.apple.AppleConstants
+import com.outsystems.plugins.sociallogins.linkedin.LinkedInConstants
 
 class OAuthActivity : Activity() {
 
     private companion object {
         const val STABLE_PACKAGE = "com.android.chrome"
+    }
+
+    val connection: CustomTabsServiceConnection = object : CustomTabsServiceConnection() {
+        override fun onCustomTabsServiceConnected(name: ComponentName, client: CustomTabsClient) {
+            openBrowser(client)
+        }
+        override fun onServiceDisconnected(name: ComponentName) {}
     }
 
     private lateinit var redirectUri: String
@@ -67,9 +76,9 @@ class OAuthActivity : Activity() {
         resultIntent.putExtras(resultBundle)
 
         if (provider?.toInt() == ProvidersEnum.APPLE.code) {
-            setResult(AppleConstants.APPLE_SIGN_IN_RESULT_CODE, resultIntent)
+            setResult(AppleConstants.APPLE_RESULT_CODE, resultIntent)
         } else if (provider?.toInt() == ProvidersEnum.LINKEDIN.code) {
-            setResult(LinkedInConstants.LINKEDIN_SIGN_IN_RESULT_CODE, resultIntent)
+            setResult(LinkedInConstants.LINKEDIN_RESULT_CODE, resultIntent)
         }
 
     }
@@ -84,12 +93,6 @@ class OAuthActivity : Activity() {
 
     @SuppressLint("SetJavaScriptEnabled", "NewApi")
     fun setupViewDialog() {
-        val connection: CustomTabsServiceConnection = object : CustomTabsServiceConnection() {
-            override fun onCustomTabsServiceConnected(name: ComponentName, client: CustomTabsClient) {
-                openBrowser(client)
-            }
-            override fun onServiceDisconnected(name: ComponentName) {}
-        }
         val ok = CustomTabsClient.bindCustomTabsService(this, STABLE_PACKAGE , connection)
     }
 
@@ -108,6 +111,12 @@ class OAuthActivity : Activity() {
 
         customTabsIntent.launchUrl(this, Uri.parse(url))
         isFirstTime = false
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+
+        unbindService(connection)
     }
 
 }

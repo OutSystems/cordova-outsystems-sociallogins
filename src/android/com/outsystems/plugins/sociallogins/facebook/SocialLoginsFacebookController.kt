@@ -21,17 +21,21 @@ open class SocialLoginsFacebookController(private val facebookHelper: FacebookHe
 
     fun handleActivityResult(requestCode: Int,
                              resultCode: Int,
-                             intent: Intent,
+                             intent: Intent?,
                              onSuccess : (UserInfo) -> Unit,
                              onError : (SocialLoginError) -> Unit) {
-
-        val loginResult = facebookHelper.getLoginResult(requestCode, resultCode, intent)
-        when {
-            loginResult.status == FacebookLoginResult.CANCEL -> onError(SocialLoginError.LOGIN_CANCELLED_ERROR)
-            loginResult.status == FacebookLoginResult.NOK -> onError(SocialLoginError.FACEBOOK_SIGN_IN_GENERAL_ERROR)
-            loginResult.accessToken?.token.isNullOrEmpty() -> onError(SocialLoginError.FACEBOOK_TOKEN_NOT_FOUND_ERROR)
-            else -> getUserData(loginResult.accessToken!!, onSuccess, onError)
+        intent?.let {
+            val loginResult = facebookHelper.getLoginResult(requestCode, resultCode, intent)
+            when {
+                loginResult.status == FacebookLoginResult.CANCEL -> onError(SocialLoginError.LOGIN_CANCELLED_ERROR)
+                loginResult.status == FacebookLoginResult.NOK -> onError(SocialLoginError.FACEBOOK_SIGN_IN_GENERAL_ERROR)
+                loginResult.accessToken?.token.isNullOrEmpty() -> onError(SocialLoginError.FACEBOOK_TOKEN_NOT_FOUND_ERROR)
+                else -> getUserData(loginResult.accessToken!!, onSuccess, onError)
+            }
+        } ?: run {
+            onError(SocialLoginError.FACEBOOK_SIGN_IN_GENERAL_ERROR)
         }
+
     }
 
     private fun getUserData(accessToken: AccessToken,

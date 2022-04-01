@@ -2,36 +2,40 @@ package com.outsystems.plugins.sociallogins
 
 import android.app.Activity
 import android.content.Intent
+import com.outsystems.plugins.sociallogins.apple.AppleConstants
+import com.outsystems.plugins.sociallogins.apple.SocialLoginsAppleController
 import com.outsystems.plugins.sociallogins.facebook.SocialLoginsFacebookController
+import com.outsystems.plugins.sociallogins.google.SocialLoginsGoogleController
+import com.outsystems.plugins.sociallogins.linkedin.LinkedInConstants
+import com.outsystems.plugins.sociallogins.linkedin.SocialLoginsLinkedinController
 
-class SocialLoginsController(var appleController: SocialLoginsAppleController,
-                             var googleController: SocialLoginsGoogleController,
-                             var linkedinController: SocialLoginsLinkedinController,
-                             var facebookController: SocialLoginsFacebookController) {
+class SocialLoginsController(private var appleController: SocialLoginsAppleController?,
+                             private var googleController: SocialLoginsGoogleController?,
+                             private var linkedinController: SocialLoginsLinkedinController?,
+                             private var facebookController: SocialLoginsFacebookController?) {
 
     fun doLoginApple(state: String, clientId: String, redirectUri: String, activity: Activity){
-        appleController.doLogin(state, clientId, redirectUri, activity)
+        appleController?.doLogin(state, clientId, redirectUri, activity)
     }
     fun doLoginGoogle(activity: Activity){
-        googleController.doLogin(activity)
+        googleController?.doLogin(activity)
     }
-    fun doLoginFacebook(activity: Activity) {
-        facebookController.doLogin()
+    fun doLoginFacebook() {
+        facebookController?.doLogin()
     }
     fun doLoginLinkedin(state: String, clientId: String, redirectUri: String, activity: Activity){
-        linkedinController.doLogin(state, clientId, redirectUri, activity)
+        linkedinController?.doLogin(state, clientId, redirectUri, activity)
     }
 
     fun handleActivityResult(requestCode: Int,
                              resultCode: Int,
-                             intent: Intent,
+                             intent: Intent?,
                              onSuccess : (UserInfo) -> Unit,
                              onError : (SocialLoginError) -> Unit){
 
-
         when (requestCode) {
-            AppleConstants.APPLE_SIGN_IN_REQUEST_CODE -> {
-                appleController.handleActivityResult(requestCode, resultCode, intent,
+            AppleConstants.APPLE_REQUEST_CODE -> {
+                appleController?.handleActivityResult(resultCode, intent,
                     {
                         onSuccess(it)
                     }, {
@@ -39,8 +43,8 @@ class SocialLoginsController(var appleController: SocialLoginsAppleController,
                     }
                 )
             }
-            2 -> { //call google
-                googleController.handleActivityResult(requestCode, resultCode, intent,
+            SocialLoginsGoogleController.GOOGLE_REQUEST_CODE -> {
+                googleController?.handleActivityResult(resultCode, intent,
                     {
                         onSuccess(it)
                     },
@@ -48,8 +52,8 @@ class SocialLoginsController(var appleController: SocialLoginsAppleController,
                         onError(it)
                     })
             }
-            LinkedInConstants.LINKEDIN_SIGN_IN_REQUEST_CODE -> {
-                linkedinController.handleActivityResult(requestCode, resultCode, intent,
+            LinkedInConstants.LINKEDIN_REQUEST_CODE -> {
+                linkedinController?.handleActivityResult(resultCode, intent,
                     {
                         onSuccess(it)
                     },
@@ -58,7 +62,7 @@ class SocialLoginsController(var appleController: SocialLoginsAppleController,
                     })
             }
             SocialLoginsFacebookController.FACEBOOK_REQUEST_CODE -> {
-                facebookController.handleActivityResult(requestCode, resultCode, intent,
+                facebookController?.handleActivityResult(requestCode, resultCode, intent,
                     {
                         onSuccess(it)
                     },

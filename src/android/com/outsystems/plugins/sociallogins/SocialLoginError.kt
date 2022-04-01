@@ -8,7 +8,6 @@ enum class SocialLoginError(val code: Int, val message: String) {
 
     APPLE_MISSING_USER_ID(105, "User id missing"),
     APPLE_MISSING_ACCESS_TOKEN_ERROR(106, "Access token missing"),
-    APPLE_MISSING_USER_EMAIL(107, "User e-mail missing"),
 
     GOOGLE_SIGN_IN_GENERAL_ERROR(200, "There was an error signing in with Google"),
     GOOGLE_MISSING_ACCESS_TOKEN_ERROR(202, "Access token missing"),
@@ -23,8 +22,7 @@ enum class SocialLoginError(val code: Int, val message: String) {
 
     LINKEDIN_SIGN_IN_GENERAL_ERROR(400, "There was an error signing in with LinkedIn"),
     LINKEDIN_MISSING_ACCESS_TOKEN_ERROR(402, "Access token missing"),
-    LINKEDIN_SIGN_IN_MISSING_USER_ID(403, "User id missing"),
-    LINKEDIN_SIGN_IN_MISSING_EMAIL(404, "User e-mail missing");
+    LINKEDIN_SIGN_IN_MISSING_USER_ID(403, "User id missing");
 
     companion object {
         fun valueOf(code: Int): SocialLoginError? = values().find { it.code == code }
