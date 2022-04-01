@@ -26,10 +26,11 @@ class OSSocialLogins : CordovaImplementation() {
         var socialLoginControllerApple = SocialLoginsAppleController(appleHelperInterface)
         var socialLoginsLinkedinController = SocialLoginsLinkedinController()
         var socialLoginControllerGoogle = SocialLoginsGoogleController(cordova.context, googleHelperInterface)
-        socialLoginController = SocialLoginsController(socialLoginControllerApple, 
-                                                       socialLoginControllerGoogle, 
-                                                       socialLoginsLinkedinController,
-                                                       socialLoginControllerFacebook)
+        socialLoginController = SocialLoginsController(
+            socialLoginControllerApple,
+            socialLoginControllerGoogle,
+            socialLoginsLinkedinController,
+            socialLoginControllerFacebook)
     }
 
     override fun execute(
@@ -112,80 +113,24 @@ class OSSocialLogins : CordovaImplementation() {
     }
     private fun doLoginFacebook(args: JSONArray) {
         setAsActivityResultCallback()
-        socialLoginController?.doLoginFacebook(cordova.activity)
+        socialLoginController?.doLoginFacebook()
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, intent: Intent?) {
         super.onActivityResult(requestCode, resultCode, intent)
-        
-        if (resultCode == 0) {
-            sendPluginResult(null, Pair(SocialLoginError.LOGIN_CANCELLED_ERROR.code, SocialLoginError.LOGIN_CANCELLED_ERROR.message))
-        } else if(resultCode == AppleConstants.APPLE_SIGN_IN_RESULT_CODE) {
-            if(intent != null){
-                socialLoginController?.handleActivityResult(requestCode, resultCode, intent,
-                    {
-                        val pluginResponseJson = gson.toJson(it)
-                        sendPluginResult(pluginResponseJson, null)
-                    },
-                    {
-                        sendPluginResult(null, Pair(it.code, it.message))
-                    }
-                )
+        socialLoginController?.handleActivityResult(requestCode, resultCode, intent,
+            {
+                val pluginResponseJson = gson.toJson(it)
+                sendPluginResult(pluginResponseJson, null)
+            },
+            {
+                sendPluginResult(null, Pair(it.code, it.message))
             }
-        } else if (requestCode == 2) { //Google sign in case
-            if(intent != null){
-                try {
-                    socialLoginController?.handleActivityResult(requestCode, resultCode, intent,
-                        {
-                            val pluginResponseJson = gson.toJson(it)
-                            sendPluginResult(pluginResponseJson, null)
-                        },
-                        {
-                            sendPluginResult(null, Pair(it.code, it.message))
-                        })
-                }
-                catch(hse : Exception) {
-                    sendPluginResult(null, Pair(SocialLoginError.GOOGLE_SIGN_IN_GENERAL_ERROR.code, SocialLoginError.GOOGLE_SIGN_IN_GENERAL_ERROR.message))
-                }
-            }
-        }
-        else if (resultCode == LinkedInConstants.LINKEDIN_SIGN_IN_RESULT_CODE) {
-            if(intent != null){
-                socialLoginController?.handleActivityResult(requestCode, resultCode, intent,
-                    {
-                        val pluginResponseJson = gson.toJson(it)
-                        sendPluginResult(pluginResponseJson, null)
-                    },
-                    {
-                        sendPluginResult(null, Pair(it.code, it.message))
-                    })
-            }
-        }
-        else if(requestCode == SocialLoginsFacebookController.FACEBOOK_REQUEST_CODE) {
-            if(intent != null) {
-                socialLoginController?.handleActivityResult(requestCode, resultCode, intent,
-                { userInfo ->
-                    val pluginResponseJson = gson.toJson(userInfo)
-                    sendPluginResult(pluginResponseJson, null)
-                },
-                { error ->
-                    sendPluginResult(null, Pair(error.code, error.message))
-                })
-            }
-        }
+        )
     }
 
     override fun areGooglePlayServicesAvailable(): Boolean {
-        //TODO
         return true
-    }
-
-    override fun onRequestPermissionResult(
-        requestCode: Int,
-        permissions: Array<String>,
-        grantResults: IntArray
-    ) {
-        //TODO
     }
 
 }
