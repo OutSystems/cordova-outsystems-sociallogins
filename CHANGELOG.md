@@ -8,6 +8,9 @@ The changes documented here do not include those from the original repository.
 
 ## [Unreleased]
 
+## 2022-04-01
+- Fixing if google email is empty or null (https://outsystemsrd.atlassian.net/browse/RMET-14522)
+
 ## 2022-03-28
 - Implementation of LinkedIn Sign In on Android (https://outsystemsrd.atlassian.net/browse/RMET-1450)
 
