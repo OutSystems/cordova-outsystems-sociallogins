@@ -60,17 +60,15 @@ class SocialLoginsGoogleController(private var context: Context? = null, private
                     if(account.id.isNullOrEmpty()){
                         onError(SocialLoginError.GOOGLE_MISSING_USER_ID)
                     }
-                    else if (account.email.isNullOrEmpty()){
-                        onError(SocialLoginError.GOOGLE_SIGN_IN_GENERAL_ERROR)
-                    }
                     else{
+                        var email = account.email ?: ""
                         var givenName = account.givenName ?: ""
                         var familyName = account.familyName ?: ""
                         var photoUrl = account.photoUrl?.toString() ?: ""
                         onSuccess(
                             UserInfo(
                                 account.id,
-                                account.email,
+                                email,
                                 givenName,
                                 familyName,
                                 it,
