@@ -89,7 +89,7 @@
     <framework src="com.google.android.gms:play-services-auth:19.2.0" />
 
     <!--For Facebook SDK-->
-    <framework src="com.facebook.android:facebook-android-sdk:11.0.0" />
+    <framework src="com.facebook.android:facebook-android-sdk:12.0.0" />
     <framework src="com.google.code.gson:gson:2.8.8" />
   
   </platform>

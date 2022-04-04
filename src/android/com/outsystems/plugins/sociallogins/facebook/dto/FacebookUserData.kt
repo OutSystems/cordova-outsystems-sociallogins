@@ -23,11 +23,10 @@ data class FacebookUserData(@SerializedName("id")
                 lastName: String?,
                 token: String?,
                 picture: String?) :
-            this(id, email, firstName, lastName, token, Picture(PictureData(picture)))
+            this(id, email ?: "", firstName, lastName, token, Picture(PictureData(picture)))
 
     fun isNotValid(): Boolean {
         return id == null ||
-                email == null ||
                 firstName == null ||
                 lastName == null ||
                 picture?.data?.url == null

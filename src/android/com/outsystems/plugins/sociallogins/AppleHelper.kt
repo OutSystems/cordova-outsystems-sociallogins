@@ -1,5 +1,6 @@
-package com.outsystems.plugins.sociallogins
+package com.outsystems.plugins.sociallogins.apple
 
+import com.outsystems.plugins.sociallogins.SocialLoginError
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch

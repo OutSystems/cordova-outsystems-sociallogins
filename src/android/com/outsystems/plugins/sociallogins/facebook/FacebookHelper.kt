@@ -7,19 +7,24 @@ import com.facebook.CallbackManager
 import com.facebook.FacebookSdk
 import com.facebook.GraphRequest
 import com.facebook.GraphResponse
+import com.facebook.*
 import com.facebook.login.LoginManager
 import com.outsystems.plugins.sociallogins.facebook.dto.FacebookDataResult
 import com.outsystems.plugins.sociallogins.facebook.dto.FacebookLoginResult
 import org.json.JSONObject
 
 class FacebookHelper(private var activity: Activity? = null): FacebookHelperInterface {
-
     private val callbackManager: CallbackManager = CallbackManager.Factory.create()
     private val callback = FacebookLoginResultCallback()
 
     init {
         if(activity != null) {
             FacebookSdk.sdkInitialize(activity!!.applicationContext)
+
+            if (BuildConfig.DEBUG) {
+                FacebookSdk.setIsDebugEnabled(true);
+                FacebookSdk.addLoggingBehavior(LoggingBehavior.INCLUDE_ACCESS_TOKENS);
+            }
         }
     }
 
