@@ -29,7 +29,6 @@ data class FacebookUserData(@SerializedName("id")
         return id == null ||
                 firstName == null ||
                 lastName == null ||
-                token == null ||
                 picture?.data?.url == null
     }
 

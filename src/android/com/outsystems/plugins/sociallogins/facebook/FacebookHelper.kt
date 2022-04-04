@@ -19,6 +19,11 @@ class FacebookHelper(private var activity: Activity? = null): FacebookHelperInte
     init {
         if(activity != null) {
             FacebookSdk.sdkInitialize(activity!!.applicationContext)
+
+            if (BuildConfig.DEBUG) {
+                FacebookSdk.setIsDebugEnabled(true);
+                FacebookSdk.addLoggingBehavior(LoggingBehavior.INCLUDE_ACCESS_TOKENS);
+            }
         }
     }
 
