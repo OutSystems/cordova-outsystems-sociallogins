@@ -7,6 +7,7 @@ import com.facebook.CallbackManager
 import com.facebook.FacebookSdk
 import com.facebook.GraphRequest
 import com.facebook.GraphResponse
+import com.facebook.*
 import com.facebook.login.LoginManager
 import com.outsystems.plugins.sociallogins.facebook.dto.FacebookDataResult
 import com.outsystems.plugins.sociallogins.facebook.dto.FacebookLoginResult
