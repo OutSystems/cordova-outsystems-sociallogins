@@ -55,35 +55,19 @@
     </config-file>
 
     <source-file src="src/android/com/outsystems/plugins/sociallogins/OSSocialLogins.kt" target-dir="app/src/main/kotlin/com/outsystems/plugins/sociallogins"/>
-    <source-file src="src/android/com/outsystems/plugins/sociallogins/SocialLoginsController.kt" target-dir="app/src/main/kotlin/com/outsystems/plugins/sociallogins"/>
-    <source-file src="src/android/com/outsystems/plugins/sociallogins/SocialLoginsAppleController.kt" target-dir="app/src/main/kotlin/com/outsystems/plugins/sociallogins"/>
-    <source-file src="src/android/com/outsystems/plugins/sociallogins/SocialLoginsGoogleController.kt" target-dir="app/src/main/kotlin/com/outsystems/plugins/sociallogins"/>
-    <source-file src="src/android/com/outsystems/plugins/sociallogins/SocialLoginError.kt" target-dir="app/src/main/kotlin/com/outsystems/plugins/sociallogins"/>
-    <source-file src="src/android/com/outsystems/plugins/sociallogins/UserInfo.kt" target-dir="app/src/main/kotlin/com/outsystems/plugins/sociallogins"/>
-    <source-file src="src/android/com/outsystems/plugins/sociallogins/ProvidersEnum.kt" target-dir="app/src/main/kotlin/com/outsystems/plugins/sociallogins"/>
-    <source-file src="src/android/com/outsystems/plugins/sociallogins/AndroidPlatformInterface.kt" target-dir="app/src/main/kotlin/com/outsystems/plugins/sociallogins"/>
     <source-file src="src/android/com/outsystems/plugins/sociallogins/CordovaImplementation.kt" target-dir="app/src/main/kotlin/com/outsystems/plugins/sociallogins"/>
-    <source-file src="src/android/com/outsystems/plugins/sociallogins/GoogleHelper.kt" target-dir="app/src/main/kotlin/com/outsystems/plugins/sociallogins"/>
-    <source-file src="src/android/com/outsystems/plugins/sociallogins/GoogleHelperInterface.kt" target-dir="app/src/main/kotlin/com/outsystems/plugins/sociallogins"/>
+    <source-file src="src/android/com/outsystems/plugins/sociallogins/OSSocialLoginsLib-Android-release.aar" target-dir="app/libs/"/>
 
-    <source-file src="src/android/com/outsystems/plugins/sociallogins/facebook/SocialLoginsFacebookController.kt" target-dir="app/src/main/kotlin/com/outsystems/plugins/sociallogins/facebook/"/>
-    <source-file src="src/android/com/outsystems/plugins/sociallogins/facebook/FacebookHelperInterface.kt" target-dir="app/src/main/kotlin/com/outsystems/plugins/sociallogins/facebook"/>
-    <source-file src="src/android/com/outsystems/plugins/sociallogins/facebook/FacebookHelper.kt" target-dir="app/src/main/kotlin/com/outsystems/plugins/sociallogins/facebook"/>
-    <source-file src="src/android/com/outsystems/plugins/sociallogins/facebook/FacebookLoginResultCallback.kt" target-dir="app/src/main/kotlin/com/outsystems/plugins/sociallogins/facebook"/>  
-    <source-file src="src/android/com/outsystems/plugins/sociallogins/facebook/dto/FacebookDataResult.kt" target-dir="app/src/main/kotlin/com/outsystems/plugins/sociallogins/facebook/dto"/>
-    <source-file src="src/android/com/outsystems/plugins/sociallogins/facebook/dto/FacebookLoginResult.kt" target-dir="app/src/main/kotlin/com/outsystems/plugins/sociallogins/facebook/dto"/>
-    <source-file src="src/android/com/outsystems/plugins/sociallogins/facebook/dto/FacebookUserData.kt" target-dir="app/src/main/kotlin/com/outsystems/plugins/sociallogins/facebook/dto"/>
+    <!-- OS Core Library -->
+    <framework src="com.github.OutSystems.os-plugins-base-interface:oscore-android:core-0.0.3@aar" />
+    
+    <!-- Social Logins Library -->
+    <framework src="src/android/build.gradle" custom="true" type="gradleReference" />
 
-    <source-file src="src/android/com/outsystems/plugins/sociallogins/AppleHelperInterface.kt" target-dir="app/src/main/kotlin/com/outsystems/plugins/sociallogins"/>
-    <source-file src="src/android/com/outsystems/plugins/sociallogins/AppleHelper.kt" target-dir="app/src/main/kotlin/com/outsystems/plugins/sociallogins"/>
-    <source-file src="src/android/com/outsystems/plugins/sociallogins/LinkedInConstants.kt" target-dir="app/src/main/kotlin/com/outsystems/plugins/sociallogins"/>
-    <source-file src="src/android/com/outsystems/plugins/sociallogins/AppleConstants.kt" target-dir="app/src/main/kotlin/com/outsystems/plugins/sociallogins"/>
-    <source-file src="src/android/com/outsystems/plugins/sociallogins/OAuthActivity.kt" target-dir="app/src/main/kotlin/com/outsystems/plugins/sociallogins"/>
-    <source-file src="src/android/com/outsystems/plugins/sociallogins/SocialLoginsLinkedinController.kt" target-dir="app/src/main/kotlin/com/outsystems/plugins/sociallogins"/>
-
+    <!--For Coroutines-->
     <framework src="org.jetbrains.kotlinx:kotlinx-coroutines-core-jvm:1.4.3" />
     <framework src="org.jetbrains.kotlinx:kotlinx-coroutines-android:1.4.3" />
-    
+
     <!--For Custom Tabs-->
     <framework src="androidx.browser:browser:1.3.0" />
     <framework src="com.google.android.gms:play-services-auth:19.2.0" />

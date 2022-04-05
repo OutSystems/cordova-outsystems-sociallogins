@@ -1,10 +1,11 @@
-repositories{    
- jcenter()
-   flatDir {
-     dirs 'src/main/libs'
-   }
+repositories {
+  google()
+  mavenCentral()
+  repositories {
+    maven { url "https://jitpack.io" }
+  }
 }
 
 dependencies {
-  implementation (name:'OSSocialLoginsLib-Android-release', ext:'aar')
+  implementation files("libs/OSSocialLoginsLib-Android-release.aar")
 }
