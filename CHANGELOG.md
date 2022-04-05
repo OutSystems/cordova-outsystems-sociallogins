@@ -8,6 +8,9 @@ The changes documented here do not include those from the original repository.
 
 ## [Unreleased]
 
+## 2022-04-05
+- Removed suplicated files and added .arr dependencies (https://outsystemsrd.atlassian.net/browse/RMET-1476)
+
 ## 2022-04-01
 - Fixing if google email is empty or null (https://outsystemsrd.atlassian.net/browse/RMET-1422)
 
