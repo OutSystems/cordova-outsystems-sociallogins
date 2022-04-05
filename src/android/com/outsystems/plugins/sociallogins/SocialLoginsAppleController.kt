@@ -45,17 +45,18 @@ class SocialLoginsAppleController(private val appleTokenValidation: AppleHelperI
                     val firstName = returnBundle.getString("firstName")
                     val lastName = returnBundle.getString("lastName")
                     val email = returnBundle.getString("email") ?: ""
+                    val code = returnBundle.getString("code")
 
                     if (id.isNullOrEmpty()) {
                         onError(SocialLoginError.APPLE_MISSING_USER_ID)
                     } else if (token.isNullOrEmpty()) {
                         onError(SocialLoginError.APPLE_MISSING_ACCESS_TOKEN_ERROR)
-                    } else if (state.isNullOrEmpty()) {
+                    } else if (state.isNullOrEmpty() || code.isNullOrEmpty()) {
                         onError(SocialLoginError.APPLE_SIGN_IN_GENERAL_ERROR)
                     } else {
 
                         if (!state.isNullOrEmpty()) {
-                            appleTokenValidation.validateToken(id, state, this.redirectUri,
+                            appleTokenValidation.validateToken(code, state, this.redirectUri,
                                 {
                                     onSuccess(
                                         UserInfo(

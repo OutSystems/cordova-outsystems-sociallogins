@@ -60,6 +60,7 @@ class OAuthActivity : Activity() {
         val picture = intent?.data?.getQueryParameter("picture")
         val provider = intent?.data?.getQueryParameter("provider")
         val state = intent?.data?.getQueryParameter("state")
+        val code = intent?.data?.getQueryParameter("code")
         val errorCode = intent?.data?.getQueryParameter("errorCode")?.toInt()
 
         val resultBundle = Bundle()
@@ -70,6 +71,7 @@ class OAuthActivity : Activity() {
         resultBundle.putString("email", email)
         resultBundle.putString("picture", picture)
         resultBundle.putString("state", state)
+        resultBundle.putString("code", code)
         errorCode?.let { resultBundle.putInt("errorCode", it) }
 
         val resultIntent = Intent()
