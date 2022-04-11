@@ -1,0 +1,11 @@
+repositories {
+  google()
+  mavenCentral()
+  repositories {
+    maven { url "https://jitpack.io" }
+  }
+}
+
+dependencies {
+  implementation files("libs/OSSocialLoginsLib-Android-release.aar")
+}

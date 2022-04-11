@@ -6,22 +6,174 @@
   <js-module name="OSSocialLogins" src="www/OSSocialLogins.js">
     <clobbers target="cordova.plugins.OSSocialLogins"/>
   </js-module>
+
   <platform name="android">
+
+    <hook type="after_prepare" src="hooks/androidCopyPreferences.js"/>
+
     <config-file parent="/*" target="res/xml/config.xml">
       <feature name="OSSocialLogins">
         <param name="android-package" value="com.outsystems.plugins.sociallogins.OSSocialLogins"/>
       </feature>
+
+      <preference name="GradlePluginKotlinEnabled" value="true" />
+      <preference name="GradlePluginKotlinCodeStyle" value="official" />
+      <preference name="AndroidXEnabled" value="true"/>
+
     </config-file>
-    <config-file parent="/*" target="AndroidManifest.xml"/>
-    <source-file src="src/android/com/outsystems/plugins/sociallogins/OSSocialLogins.java" target-dir="src/com/outsystems/plugins/sociallogins"/>
+    
+   <config-file parent="/*" target="res/values/strings.xml">
+    <string name="facebook_app_id">FACEBOOK_SDK_APP_ID</string>
+    <string name="facebook_client_token">FACEBOOK_SDK_CLIENT_TOKEN</string>
+   </config-file>
+    
+    <config-file target="AndroidManifest.xml" parent="/manifest/application">
+      <meta-data android:name="com.facebook.sdk.ApplicationId" android:value="@string/facebook_app_id" />
+      <meta-data android:name="com.facebook.sdk.ClientToken" android:value="@string/facebook_client_token" />
+      <activity
+            android:name="com.outsystems.plugins.sociallogins.OAuthActivity"
+            android:exported="true"
+            android:launchMode="singleTop">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <data android:scheme="OAUTH_DEEPLINK_SCHEME" />
+                <data android:host="OAUTH_DEEPLINK_HOST" />
+                <data android:path="OAUTH_DEEPLINK_PATH" />
+            </intent-filter>
+      </activity>
+    </config-file>
+
+    <config-file target="AndroidManifest.xml" parent="/manifest">
+      <queries>
+        <intent>
+            <action android:name=
+                "android.support.customtabs.action.CustomTabsService" />
+        </intent>
+      </queries>
+    </config-file>
+
+    <source-file src="src/android/com/outsystems/plugins/sociallogins/OSSocialLogins.kt" target-dir="app/src/main/kotlin/com/outsystems/plugins/sociallogins"/>
+    <source-file src="src/android/com/outsystems/plugins/sociallogins/CordovaImplementation.kt" target-dir="app/src/main/kotlin/com/outsystems/plugins/sociallogins"/>
+    <source-file src="src/android/com/outsystems/plugins/sociallogins/OSSocialLoginsLib-Android-release.aar" target-dir="app/libs/"/>
+
+    <!-- OS Core Library -->
+    <framework src="com.github.OutSystems.os-plugins-base-interface:oscore-android:core-0.0.3@aar" />
+    
+    <!-- Social Logins Library -->
+    <framework src="src/android/build.gradle" custom="true" type="gradleReference" />
+
+    <!--For Coroutines-->
+    <framework src="org.jetbrains.kotlinx:kotlinx-coroutines-core-jvm:1.4.3" />
+    <framework src="org.jetbrains.kotlinx:kotlinx-coroutines-android:1.4.3" />
+
+    <!--For Custom Tabs-->
+    <framework src="androidx.browser:browser:1.3.0" />
+    <framework src="com.google.android.gms:play-services-auth:19.2.0" />
+
+    <!--For Facebook SDK-->
+    <framework src="com.facebook.android:facebook-android-sdk:12.0.0" />
+    <framework src="com.google.code.gson:gson:2.8.8" />
+  
   </platform>
+
   <platform name="ios">
+
+    <!-- Hooks -->
+    <hook type="before_plugin_install" src="hooks/add_cordova_implementation_ios.js"/>
+		<hook type="before_plugin_install" src="hooks/install_prerequisites.js"/>
+    <hook type="after_plugin_add" src="hooks/add_swift_support.js" />
+    <hook type="after_prepare" src="hooks/iOSCopyPreferences.js" />
+
     <config-file parent="/*" target="config.xml">
       <feature name="OSSocialLogins">
         <param name="ios-package" value="OSSocialLogins"/>
       </feature>
+      <preference name="deployment-target" value="13" />
+      <preference name="UseSwiftLanguageVersion" value="5" />
     </config-file>
-    <source-file src="src/ios/OSSocialLogins.m"/>
-    <header-file src="src/ios/OSSocialLogins.h"/>
+
+    <config-file target="*-Info.plist" parent="CFBundleURLTypes">
+        <array>
+            <dict>
+                <key>CFBundleTypeRole</key>
+                <string>Editor</string>
+                <key>CFBundleURLName</key>
+                <string>Google</string>
+                <key>CFBundleURLSchemes</key>
+                <array>
+                    <string>GOOGLE_CLIENT_ID</string>
+                </array>
+            </dict>
+            <dict>
+                <key>CFBundleURLName</key>
+                <string>Facebook</string>
+                <key>CFBundleURLSchemes</key>
+                <array>
+                    <string>FACEBOOK_CLIENT_URLSCHEME</string>
+                </array>
+            </dict>
+            <dict>
+                <key>CFBundleURLName</key>
+                <string>DeepLinkScheme</string>
+                <key>CFBundleURLSchemes</key>
+                <array>
+                    <string>DEEP_LINK_URLSCHEME</string>
+                </array>
+            </dict>
+        </array>
+    </config-file>
+
+    <config-file target="*-Info.plist" parent="FacebookAppID">
+         <string>FACEBOOK_CLIENT_APPID</string>
+    </config-file>
+
+    <config-file target="*-Info.plist" parent="FacebookClientToken">
+         <string>FACEBOOK_CLIENT_TOKEN</string>
+    </config-file>
+
+    <config-file target="*-Info.plist" parent="LSApplicationQueriesSchemes">
+         <array>
+            <string>fbapi</string>
+        </array>
+    </config-file>
+
+
+    <!-- Entitlements -->
+    <config-file target="*/Entitlements-Debug.plist" parent="com.apple.developer.applesignin">
+      <array>
+        <string>Default</string>
+      </array>
+    </config-file>
+
+    <config-file target="*/Entitlements-Release.plist" parent="com.apple.developer.applesignin">
+      <array>
+        <string>Default</string>
+      </array>
+    </config-file>
+
+		<!-- iOS Source Files -->
+		<source-file src="src/ios/OSSocialLogins.swift" />
+    <source-file src="src/ios/CordovaImplementation.swift" />
+    <header-file src="src/ios/AppDelegate+OSSocialLogins.h" />
+    <source-file src="src/ios/AppDelegate+OSSocialLogins.m" />
+    <framework src="src/ios/frameworks/OSCore.xcframework" embed="true" custom="true" />
+    <framework src="src/ios/frameworks/OSSocialLoginsLib.xcframework" embed="true" custom="true" />
+
+  </platform>
+
+  <platform name="browser">
+
+    <config-file target="config.xml" parent="/*">
+      <feature name="OSSocialLogins">
+        <param name="browser-package" value="OSSocialLogins" />
+      </feature>
+    </config-file>
+
+    <js-module src="src/browser/OSSocialLoginsProxy.js" name="OSSocialLoginsProxy">
+      <runs />
+    </js-module>
+    
   </platform>
 </plugin>
