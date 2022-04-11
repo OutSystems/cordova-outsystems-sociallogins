@@ -8,6 +8,8 @@ The changes documented here do not include those from the original repository.
 
 ## [Unreleased]
 
+## Version 1.0.0 (11-04-2022)
+
 ## 2022-04-05
 - Removed suplicated files and added .arr dependencies (https://outsystemsrd.atlassian.net/browse/RMET-1476)
 
