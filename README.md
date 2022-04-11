@@ -4,7 +4,7 @@ This plugin is SUPPORTED by OutSystems. Customers entitled to Support Services m
   
 ## Installation
 
-    cordova plugin add 'path-to-repo-local-clone'
+    cordova plugin add <path-to-repo-local-clone>
 
 It is also possible to install via repo url directly
 
