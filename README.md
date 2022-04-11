@@ -19,10 +19,10 @@ It is also possible to install via repo url directly
 
 ## Methods
 
-- OSSocialLogins.loginApple
-- OSSocialLogins.loginGoogle
-- OSSocialLogins.loginFacebook
-- OSSocialLogins.loginLinkedIn
+* [OSSocialLogins.loginApple](#module_sociallogins.loginApple)
+* [OSSocialLogins.loginGoogle](#module_sociallogins.loginGoogle)
+* [OSSocialLogins.loginFacebook](#module_sociallogins.loginFacebook)
+* [OSSocialLogins.loginLinkedIn](#module_sociallogins.loginLinkedIn)
 
 ### Login Data returned by every method (JSON)
 
@@ -36,7 +36,7 @@ It is also possible to install via repo url directly
       "picture": "EXAMPLE_PROFILE_PICTURE"
     }
 
-
+<a name="module_sociallogins.loginApple"></a>
 ## OSSocialLogins.loginApple
 
 Starts the login process using Apple as the login provider. Returns the login date corresponding to the Apple account used to sign in through the `loginSuccess` callback. If there is an error, the `loginError` callback is called with an `error` object containing both `error.code` and `error.message`.
@@ -56,6 +56,7 @@ Starts the login process using Apple as the login provider. Returns the login da
 
 ---
 
+<a name="module_sociallogins.loginGoogle"></a>
 ## OSSocialLogins.loginGoogle
 
 Starts the login process using Google as the login provider. Returns the login data corresponding to the Google account used to sign in through the `loginSuccess` callback. If there is an error, the `loginError` callback is called with an `error` object containing both `error.code` and `error.message`.
@@ -73,6 +74,7 @@ Starts the login process using Google as the login provider. Returns the login d
 
 ---
 
+<a name="module_sociallogins.loginFacebook"></a>
 ## OSSocialLogins.loginFacebook
 
 Starts the login process using Facebook as the login provider. Returns the login data corresponding to the Apple account used to sign in through the `loginSuccess` callback. If there is an error, the `loginError` callback is called with an `error` object containing both `error.code` and `error.message`.
@@ -86,6 +88,7 @@ Starts the login process using Facebook as the login provider. Returns the login
 
 ---
 
+<a name="module_sociallogins.loginLinkedIn"></a>
 ## OSSocialLogins.loginLinkedIn
 
 Starts the login process using LinkedIn as the login provider. Returns the login data corresponding to the LinkedIn account used to sign in through the `loginSuccess` callback. If there is an error, the `loginError` callback is called with an `error` object containing both `error.code` and `error.message`.
