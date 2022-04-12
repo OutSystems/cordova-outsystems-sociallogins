@@ -15,7 +15,6 @@ It is also possible to install via repo url directly
 
 - Android
 - iOS
-- Windows
 
 ## Methods
 
