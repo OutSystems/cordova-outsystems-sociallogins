@@ -8,10 +8,15 @@ The changes documented here do not include those from the original repository.
 
 ## [Unreleased]
 
-## 2022-04-05
-- Hiding blank OAuthActivity called for Apple and LinkedIn login (https://outsystemsrd.atlassian.net/browse/RMET-1536)
+## [Released]
+
+## Version 1.0.0 (11-04-2022)
+
+## 2022-06-29
+- Fix: Removed hook that adds swift support and added the plugin as dependecy. (https://outsystemsrd.atlassian.net/browse/RMET-1680)
 
 ## 2022-04-05
+- Hiding blank OAuthActivity called for Apple and LinkedIn login (https://outsystemsrd.atlassian.net/browse/RMET-1536)
 - Removed suplicated files and added .arr dependencies (https://outsystemsrd.atlassian.net/browse/RMET-1476)
 
 ## 2022-04-01
