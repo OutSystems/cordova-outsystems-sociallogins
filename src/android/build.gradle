@@ -2,10 +2,23 @@ repositories {
   google()
   mavenCentral()
   repositories {
-    maven { url "https://jitpack.io" }
+    maven { url 'https://pkgs.dev.azure.com/OutSystemsRD/9e79bc5b-69b2-4476-9ca5-d67594972a52/_packaging/PublicArtifactRepository/maven/v1' }
   }
 }
 
 dependencies {
-  implementation files("libs/OSSocialLoginsLib-Android-release.aar")
+  implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core-jvm:1.6.2")
+  implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.2")
+
+  implementation("androidx.browser:browser:1.4.0")
+
+  implementation("com.google.android.gms:play-services-auth:20.2.0")
+  implementation("com.facebook.android:facebook-android-sdk:12.0.0")
+
+  implementation("com.google.code.gson:gson:2.8.9")
+
+  implementation("com.github.outsystems:oscore-android:1.1.0@aar")
+  implementation("com.github.outsystems:oscordova-android:1.1.0@aar")
+  implementation("com.github.outsystems:ossociallogins-android:0.0.2@aar")
+
 }
