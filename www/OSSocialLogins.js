@@ -20,10 +20,6 @@ exports.loginFacebook = function (success, error) {
     exec(success, error, 'OSSocialLogins', 'loginFacebook');
 };
 
-exports.loginLinkedIn = function (success, error, state, clientId, redirectUrl) {
-    exec(success, error, 'OSSocialLogins', 'loginLinkedIn', [state, clientId, redirectUrl]);
-}
-
 exports.logout = function (arg0, success, error) {
     exec(success, error, 'OSSocialLogins', 'logout', [arg0]);
 };
