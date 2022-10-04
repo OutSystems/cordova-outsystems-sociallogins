@@ -1,8 +1,12 @@
 import Foundation
 import OSSocialLoginsLib
 
+private protocol PlatformProtocol {
+    func sendResult(result: String?, error: NSError?, callBackID:String)
+}
+
 @objc(OSSocialLogins)
-class OSSocialLogins: CordovaImplementation {
+class OSSocialLogins: CDVPlugin {
     
     var plugin: SocialLoginsController?
     var callbackId:String=""
@@ -52,6 +56,26 @@ class OSSocialLogins: CordovaImplementation {
         self.plugin?.loginLinkedIn(state: state, clientID: clientID, redirectURI: redirectURI)
     }
        
+}
+
+// MARK: - OSCore's PlatformProtocol Methods
+extension OSSocialLogins: PlatformProtocol {
+    
+    func sendResult(result: String?, error: NSError?, callBackID: String) {
+        var pluginResult = CDVPluginResult(status: CDVCommandStatus_ERROR)
+        
+        if let error = error, !error.localizedDescription.isEmpty {
+            let errorCode = "OS-PLUG-SCLG-\(String(format: "%04d", error.code))"
+            let errorMessage = error.localizedDescription
+            let errorDict = ["code": errorCode, "message": errorMessage]
+            pluginResult = CDVPluginResult(status: CDVCommandStatus_ERROR, messageAs: errorDict);
+        } else if let result = result {
+            pluginResult = result.isEmpty ? CDVPluginResult(status: CDVCommandStatus_OK) : CDVPluginResult(status: CDVCommandStatus_OK, messageAs: result)
+        }
+        
+        self.commandDelegate.send(pluginResult, callbackId: callBackID);
+    }
+
 }
 
 extension OSSocialLogins: SocialLoginsProtocol {

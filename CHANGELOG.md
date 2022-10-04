@@ -8,6 +8,8 @@ The changes documented here do not include those from the original repository.
 
 ## [Unreleased]
 
+## 07-10-2022
+- Removed the CordovaImplementation class and the OSCore dependency on iOS.
 ## [Released]
 
 ## Version 1.0.0 (11-04-2022)
