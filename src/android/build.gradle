@@ -1,8 +1,9 @@
 repositories {
   google()
   mavenCentral()
-  repositories {
-    maven { url 'https://pkgs.dev.azure.com/OutSystemsRD/9e79bc5b-69b2-4476-9ca5-d67594972a52/_packaging/PublicArtifactRepository/maven/v1' }
+  maven { url 'https://pkgs.dev.azure.com/OutSystemsRD/9e79bc5b-69b2-4476-9ca5-d67594972a52/_packaging/PublicArtifactRepository/maven/v1' }
+  flatDir {
+    dirs 'src/main/libs'
   }
 }
 
@@ -19,6 +20,7 @@ dependencies {
 
   implementation("com.github.outsystems:oscore-android:1.1.0@aar")
   implementation("com.github.outsystems:oscordova-android:1.1.0@aar")
-  implementation("com.github.outsystems:ossociallogins-android:1.0.0@aar")
+  //implementation("com.github.outsystems:ossociallogins-android:1.0.0@aar")
+  implementation (name:'OSSocialLoginsLib-Android-release', ext:'aar')
 
 }
