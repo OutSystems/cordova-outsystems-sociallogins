@@ -162,7 +162,7 @@ class OSSocialLogins : CordovaImplementation() {
         socialLoginController?.doLoginFacebook()
     }
 
-    override fun onActivityResult(requestCode: Int, resultCode: Int, intent: Intent) {
+    override fun onActivityResult(requestCode: Int, resultCode: Int, intent: Intent?) {
         super.onActivityResult(requestCode, resultCode, intent)
         socialLoginController?.handleActivityResult(requestCode, resultCode, intent)
     }
