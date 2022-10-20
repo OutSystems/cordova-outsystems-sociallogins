@@ -19,7 +19,7 @@ dependencies {
   implementation("com.google.code.gson:gson:2.8.9")
 
   implementation("com.github.outsystems:oscore-android:1.2.0@aar")
-  implementation("com.github.outsystems:oscordova-android:1.2.0@aar")
+  implementation("com.github.outsystems:oscordova-android:2.0.0@aar")
   //implementation("com.github.outsystems:ossociallogins-android:1.0.0@aar")
   implementation (name:'OSSocialLoginsLib-Android-release', ext:'aar')
 
