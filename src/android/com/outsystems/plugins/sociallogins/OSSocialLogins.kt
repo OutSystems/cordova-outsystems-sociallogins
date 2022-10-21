@@ -57,7 +57,7 @@ class OSSocialLogins : CordovaImplementation() {
         permissions: Array<String>,
         grantResults: IntArray
     ) {
-        TODO("Not yet implemented")
+        // Does nothing for this plugin
     }
 
     private fun initializeApple() {
