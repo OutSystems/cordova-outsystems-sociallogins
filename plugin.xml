@@ -56,7 +56,6 @@
     </config-file>
 
     <source-file src="src/android/com/outsystems/plugins/sociallogins/OSSocialLogins.kt" target-dir="app/src/main/kotlin/com/outsystems/plugins/sociallogins"/>
-    <source-file src="src/android/com/outsystems/plugins/sociallogins/OSSocialLoginsLib-Android-release.aar" target-dir="app/src/main/libs/"/>
 
     <framework src="src/android/build.gradle" custom="true" type="gradleReference" />
 
