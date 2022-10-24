@@ -17,6 +17,6 @@ dependencies {
 
   implementation("com.github.outsystems:oscore-android:1.2.0@aar")
   implementation("com.github.outsystems:oscordova-android:2.0.0@aar")
-  implementation("com.github.outsystems:ossociallogins-android:2.0.0@aar")
+  implementation("com.github.outsystems:ossociallogins-android:1.1.0@aar")
 
 }
