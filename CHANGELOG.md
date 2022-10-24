@@ -8,9 +8,12 @@ The changes documented here do not include those from the original repository.
 
 ## [Unreleased]
 
-### 2022-10-31
+### 2022-10-24
 - Fix: [Android] Updated code to handle the new library version (https://outsystemsrd.atlassian.net/browse/RMET-1969).
 
+### 2022-10-18
+- Fix: [iOS] Update hook so that providers can be individually configured and not all are required for the plugin to work.
+- Fix: [iOS] Improve error handling, so that more detailed messages can be thrown on build process.
 
 ### 2022-10-12
 - Fix: [iOS] Rename the swizzled `appDelegate:didFinishLaunchingWithOptions:` method to something unique (https://outsystemsrd.atlassian.net/jira/software/c/projects/RMET/boards/893?selectedIssue=RPM-3153).
