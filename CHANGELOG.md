@@ -8,6 +8,10 @@ The changes documented here do not include those from the original repository.
 
 ## [Unreleased]
 
+### 2022-10-31
+- Fix: [Android] Updated code to handle the new library version (https://outsystemsrd.atlassian.net/browse/RMET-1969).
+
+
 ### 2022-10-12
 - Fix: [iOS] Rename the swizzled `appDelegate:didFinishLaunchingWithOptions:` method to something unique (https://outsystemsrd.atlassian.net/jira/software/c/projects/RMET/boards/893?selectedIssue=RPM-3153).
 

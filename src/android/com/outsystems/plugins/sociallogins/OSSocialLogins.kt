@@ -3,6 +3,7 @@ package com.outsystems.plugins.sociallogins
 import android.content.Intent
 import com.google.gson.Gson
 import com.outsystems.plugins.oscordova.CordovaImplementation
+import com.outsystems.plugins.sociallogins.SocialLoginsInterface
 import com.outsystems.plugins.sociallogins.apple.AppleHelper
 import com.outsystems.plugins.sociallogins.apple.SocialLoginsAppleController
 import com.outsystems.plugins.sociallogins.facebook.FacebookHelper
@@ -21,22 +22,62 @@ class OSSocialLogins : CordovaImplementation() {
     private var socialLoginController: SocialLoginsController? = null
     override var callbackContext: CallbackContext? = null
 
+    private var appleController: SocialLoginsAppleController? = null
+    private var googleController: SocialLoginsGoogleController? = null
+    private var linkedinController: SocialLoginsLinkedinController? = null
+    private var facebookController: SocialLoginsFacebookController? = null
+
+    private var delegate  = object : SocialLoginsInterface {
+        override fun callbackError(error: SocialLoginError) {
+            sendPluginResult(null, Pair(error.code.toString(), error.message))
+        }
+        override fun callbackUserInfo(result: UserInfo) {
+            val pluginResponseJson = gson.toJson(result)
+            sendPluginResult(pluginResponseJson, null)
+        }
+    }
+
     override fun initialize(cordova: CordovaInterface, webView: CordovaWebView) {
         super.initialize(cordova, webView)
 
-        var googleHelperInterface = GoogleHelper()
-        var appleHelperInterface = AppleHelper()
-        val facebookHelper = FacebookHelper(cordova.activity)
-        val socialLoginControllerFacebook = SocialLoginsFacebookController(facebookHelper)
+        initializeApple()
+        initializeGoogle()
+        initializeLinkedIn()
+        initializeFacebook()
 
-        var socialLoginControllerApple = SocialLoginsAppleController(appleHelperInterface)
-        var socialLoginsLinkedinController = SocialLoginsLinkedinController()
-        var socialLoginControllerGoogle = SocialLoginsGoogleController(cordova.context, googleHelperInterface)
         socialLoginController = SocialLoginsController(
-            socialLoginControllerApple,
-            socialLoginControllerGoogle,
-            socialLoginsLinkedinController,
-            socialLoginControllerFacebook)
+            appleController,
+            googleController,
+            linkedinController,
+            facebookController)
+    }
+
+    override fun onRequestPermissionResult(
+        requestCode: Int,
+        permissions: Array<String>,
+        grantResults: IntArray
+    ) {
+        // Does nothing for this plugin
+    }
+
+    private fun initializeApple() {
+        if(appleController != null) return
+        val appleHelperInterface = AppleHelper()
+        appleController = SocialLoginsAppleController(delegate, appleHelperInterface)
+    }
+
+    private fun initializeGoogle() {
+        val googleHelperInterface = GoogleHelper()
+        googleController = SocialLoginsGoogleController(delegate, cordova.context, googleHelperInterface)
+    }
+
+    private fun initializeLinkedIn() {
+        linkedinController = SocialLoginsLinkedinController(delegate)
+    }
+
+    private fun initializeFacebook() {
+        val facebookHelper = FacebookHelper(cordova.activity)
+        facebookController = SocialLoginsFacebookController(delegate, facebookHelper)
     }
 
     override fun execute(
@@ -51,10 +92,10 @@ class OSSocialLogins : CordovaImplementation() {
                 doLoginApple(args)
             }
             "loginGoogle" -> {
-                doLoginGoogle(args)
+                doLoginGoogle()
             }
             "loginFacebook" -> {
-                doLoginFacebook(args)
+                doLoginFacebook()
             }
             "loginLinkedIn" -> {
                 doLoginLinkedIn(args)
@@ -87,7 +128,6 @@ class OSSocialLogins : CordovaImplementation() {
         }
 
     }
-
     private fun doLoginApple(args : JSONArray) {
 
         var state = ""
@@ -113,26 +153,18 @@ class OSSocialLogins : CordovaImplementation() {
         }
 
     }
-    private fun doLoginGoogle(args : JSONArray) {
+    private fun doLoginGoogle() {
         setAsActivityResultCallback()
         socialLoginController?.doLoginGoogle(cordova.activity)
     }
-    private fun doLoginFacebook(args: JSONArray) {
+    private fun doLoginFacebook() {
         setAsActivityResultCallback()
         socialLoginController?.doLoginFacebook()
     }
 
-    override fun onActivityResult(requestCode: Int, resultCode: Int, intent: Intent) {
+    override fun onActivityResult(requestCode: Int, resultCode: Int, intent: Intent?) {
         super.onActivityResult(requestCode, resultCode, intent)
-        socialLoginController?.handleActivityResult(requestCode, resultCode, intent,
-            {
-                val pluginResponseJson = gson.toJson(it)
-                sendPluginResult(pluginResponseJson, null)
-            },
-            {
-                sendPluginResult(null, Pair(it.code.toString(), it.message))
-            }
-        )
+        socialLoginController?.handleActivityResult(requestCode, resultCode, intent)
     }
 
     override fun areGooglePlayServicesAvailable(): Boolean {
