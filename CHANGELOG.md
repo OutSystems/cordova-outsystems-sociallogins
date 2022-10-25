@@ -8,6 +8,8 @@ The changes documented here do not include those from the original repository.
 
 ## [Unreleased]
 
+## Version 1.0.2 (2022-10-25)
+
 ### 2022-10-24
 - Fix: [Android] Updated code to handle the new library version (https://outsystemsrd.atlassian.net/browse/RMET-1969).
 
