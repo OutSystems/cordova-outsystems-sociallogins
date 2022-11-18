@@ -8,6 +8,9 @@ The changes documented here do not include those from the original repository.
 
 ## [Unreleased]
 
+### 2022-12-19
+- Fix: [iOS] Make Apple Sign In optionally, enabling app generation without it (https://outsystemsrd.atlassian.net/browse/RMET-2060).
+
 ## Version 1.0.3 (2022-11-09)
 
 ### 2022-11-08
