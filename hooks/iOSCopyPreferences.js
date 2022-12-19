@@ -16,6 +16,8 @@ module.exports = function (context) {
     var facebook_client_appId = "";
     var facebook_client_token = "";
 
+    var use_apple_signin = true;
+
     var deeplink_url_scheme = "";
 
     var appNamePath = path.join(projectRoot, 'config.xml');
@@ -70,6 +72,10 @@ module.exports = function (context) {
             if (facebookErrorArray.length > 0) {
                 errorMap['Facebook'] = facebookErrorArray;
             }
+        } else if (configItem.provider_id == ProvidersEnum.apple) {
+            if (!configItem.is_enabled) {
+                use_apple_signin = false;    
+            }
         }
     });
 
@@ -122,4 +128,19 @@ module.exports = function (context) {
     }
 
     fs.writeFileSync(infoPlistPath, plist.build(infoPlist, { indent: '\t' }));
+
+    if (!use_apple_signin) {
+        // Change Entitlements files
+        var debugEntitlementsPath = path.join(platformPath, appName + '/'+ 'Entitlements-Debug.plist');
+        var debugEntitlementsFile = fs.readFileSync(debugEntitlementsPath, 'utf8');
+        var debugEntitlements = plist.parse(debugEntitlementsFile);    
+        delete debugEntitlements['com.apple.developer.applesignin'];
+        fs.writeFileSync(debugEntitlementsPath, plist.build(debugEntitlements, { indent: '\t' }));
+
+        var releaseEntitlementsPath = path.join(platformPath, appName + '/' + 'Entitlements-Release.plist');
+        var releaseEntitlementsFile = fs.readFileSync(releaseEntitlementsPath, 'utf8');
+        var releaseEntitlements = plist.parse(releaseEntitlementsFile);
+        delete releaseEntitlements['com.apple.developer.applesignin'];
+        fs.writeFileSync(releaseEntitlementsPath, plist.build(releaseEntitlements, { indent: '\t' }));
+    }
 };
