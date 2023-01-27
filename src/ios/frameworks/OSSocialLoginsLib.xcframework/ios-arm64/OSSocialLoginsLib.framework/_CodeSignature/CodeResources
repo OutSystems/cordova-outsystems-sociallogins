@@ -6,31 +6,27 @@
 	<dict>
 		<key>Headers/OSSocialLoginsLib-Swift.h</key>
 		<data>
-		6GwvFGP1YjzARiDAf7kGLVtm96s=
-		</data>
-		<key>Headers/OSSocialLoginsLib.h</key>
-		<data>
-		9lSjUQf/4Rd+Ku7AkXh8YwEMrHQ=
+		sXhZShTdRkLsdNR8pBws4VSM/vE=
 		</data>
 		<key>Info.plist</key>
 		<data>
-		LO3MeCWMVseYmGJ9vtXnvf8TGWw=
+		mg6wi/I/4h3Ci+v9KZIikW/29oI=
 		</data>
 		<key>Modules/OSSocialLoginsLib.swiftmodule/arm64-apple-ios.swiftdoc</key>
 		<data>
-		eIxDudbP/EsbH+u1gkYlB2YgPyM=
+		xUYz7pYzGYu+g/0zkeOw6kp/+T4=
 		</data>
 		<key>Modules/OSSocialLoginsLib.swiftmodule/arm64-apple-ios.swiftinterface</key>
 		<data>
-		U0nqhpOI29tX0EU71ifwtYpPgl0=
+		4qmD0RfKIHi6Ficog2N6vo1FBoY=
 		</data>
 		<key>Modules/OSSocialLoginsLib.swiftmodule/arm64-apple-ios.swiftmodule</key>
 		<data>
-		gvw49pVhfGJrHom4TXlOiKrSJRk=
+		ALc+JV4+R8rsLzIR6HiiMpikMY8=
 		</data>
 		<key>Modules/module.modulemap</key>
 		<data>
-		l0HbW9GkUj0qyatvdwVfwTLIt/c=
+		I9h2Oq7TohHBaioyrMgxm5WTp+A=
 		</data>
 	</dict>
 	<key>files2</key>
@@ -39,42 +35,35 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			H0YLlgSWHNlEn9nOpBa/wvrzBNdJodU5NK1TqP0h4Cg=
-			</data>
-		</dict>
-		<key>Headers/OSSocialLoginsLib.h</key>
-		<dict>
-			<key>hash2</key>
-			<data>
-			6tMk8IuFDftLVfG/mte526gb/eTCCy6CiwOzLkXDsgw=
+			vqbOpGcmzU6jWi/B6EI3YwiECctkfh0EB37Bkpyc14Q=
 			</data>
 		</dict>
 		<key>Modules/OSSocialLoginsLib.swiftmodule/arm64-apple-ios.swiftdoc</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			1ILDULta9kXsCM4kbntF0Oh+6Z+uFipZ7XZna8TtSew=
+			mpDQ3ZCi5KhwsEfTPtgoDzeHXYHGrI5phwzAPAYf+Ls=
 			</data>
 		</dict>
 		<key>Modules/OSSocialLoginsLib.swiftmodule/arm64-apple-ios.swiftinterface</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			xazM1hTfZvdlS6egqW/UeV9Hy24ebZQ1jdWb0Dy96aE=
+			yA6XLhPDufO5c1f/dhtYfYzSqvMvtakAWLW2/cT7qIc=
 			</data>
 		</dict>
 		<key>Modules/OSSocialLoginsLib.swiftmodule/arm64-apple-ios.swiftmodule</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			22+unPGm0KCMrI84XyUKFb05MEwCG7PEOrRL20qZWP0=
+			nFOyPFAsoJmbDy9LhdjfzinWiQNfDmD1/7ETMLTM+Po=
 			</data>
 		</dict>
 		<key>Modules/module.modulemap</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			m5RduuJODkh1u2eO72YsTmwA2ZY8kwjnz+sWJQQeqgM=
+			uDrSCzulSAobTalzVwn1/R1MH7OpdZFOPWjEf/kmqvA=
 			</data>
 		</dict>
 	</dict>
