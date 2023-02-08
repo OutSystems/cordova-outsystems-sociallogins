@@ -8,6 +8,9 @@ The changes documented here do not include those from the original repository.
 
 ## [Unreleased]
 
+### 2023-02-10
+- Feat: [iOS] Make library available as `xcframework` (https://outsystemsrd.atlassian.net/browse/RMET-2280).
+
 ### 2022-12-19
 - Fix: [iOS] Make Apple Sign In optionally, enabling app generation without it (https://outsystemsrd.atlassian.net/browse/RMET-2060).
 
