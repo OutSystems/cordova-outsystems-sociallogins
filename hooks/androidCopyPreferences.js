@@ -20,7 +20,7 @@ module.exports = async function (context) {
     let appName = configParser.name();
     
     let jsonConfig = await getJsonFile(configuratorBaseURL, appName);
-    copyFacebookPreferences(jsonConfig);
+    copyFacebookPreferences(jsonConfig, projectRoot);
 
     try {
         linkedin_deeplink_url = jsonConfig.app_deeplink.url_scheme.replace(/\s/g, '')
@@ -74,7 +74,7 @@ async function getJsonFile(baseURL, appName){
 };
 
 
-function copyFacebookPreferences(jsonConfig) {
+function copyFacebookPreferences(jsonConfig, projectRoot) {
 
     let facebook_client_appId = "";
     let facebook_client_token = "";
