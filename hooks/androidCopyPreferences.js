@@ -2,13 +2,13 @@ const et = require('elementtree');
 const path = require('path');
 const fs = require('fs');
 const { ConfigParser } = require('cordova-common');
+const axios = require('axios');
+
 const ProvidersEnum = Object.freeze({"apple":"1", "facebook":"2", "google":"3", "linkedIn":"4"})
 const ApplicationTypeEnum = Object.freeze({"web":"1", "ios":"2", "android":"3"})
 
 
 module.exports = async function (context) {
-
-    
     let linkedin_deeplink_url = "";
     let linkedin_deeplink_host = "";
     let linkedin_deeplink_path = "";
@@ -51,23 +51,28 @@ module.exports = async function (context) {
     
 };
 
+
 async function getJsonFile(baseURL, appName){
-    let jsonURL = baseURL + `/SocialLoginConfigurator/rest/v1/configurations?AppName=${appName}`;
-    let response = await fetch(jsonURL, {
-        method: 'GET',
-        headers: {
-            'Accept': 'application/json'
+    try {
+        let jsonURL = baseURL + `/SocialLoginConfigurator/rest/v1/configurations`;
+        let response = await axios.get(jsonURL, {
+            params: { AppName : appName }
+        });
+       
+        let json = response.data; 
+        return json;
+    } catch(err){
+        if(err.response){
+            let errorJSON = err.response.data;
+            throw new Error(errorJSON.Errors[0]);
+        } else if(err.request){
+            throw new Error(err.request);
+        } else{
+            throw new Error(err.message)
         }
-    });
-    
-    if(response.status != 200){
-        let errorJSON = await response.json();
-        throw new Error(errorJSON.Errors[0]);
     }
-    let json = await response.json(); 
-    return json;
-    
 };
+
 
 function copyFacebookPreferences(jsonConfig) {
 
