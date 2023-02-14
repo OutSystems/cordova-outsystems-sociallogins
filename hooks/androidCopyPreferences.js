@@ -1,7 +1,7 @@
 const et = require('elementtree');
 const path = require('path');
 const fs = require('fs');
-
+const { ConfigParser } = require('cordova-common');
 const ProvidersEnum = Object.freeze({"apple":"1", "facebook":"2", "google":"3", "linkedIn":"4"})
 const ApplicationTypeEnum = Object.freeze({"web":"1", "ios":"2", "android":"3"})
 
