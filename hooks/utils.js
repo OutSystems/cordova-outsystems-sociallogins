@@ -1,10 +1,8 @@
 const axios = require('axios');
 
-module.exports = async function getJsonFile(baseURL, appName){
-    const configuratorEndpoint =`/rest/v1/configurations`;
+module.exports = async function getJsonFile(endpoint, appName){
     try {
-        let jsonURL = baseURL + configuratorEndpoint;
-        let response = await axios.get(jsonURL, {
+        let response = await axios.get(endpoint, {
             params: { AppName : appName }
         });
        

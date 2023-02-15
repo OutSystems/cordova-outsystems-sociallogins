@@ -13,10 +13,10 @@ module.exports = async function (context) {
     let projectRoot = context.opts.cordova.project ? context.opts.cordova.project.root : context.opts.projectRoot;
     let configXML = path.join(projectRoot, 'config.xml');
     let configParser = new ConfigParser(configXML);
-    let configuratorBaseURL = configParser.getGlobalPreference("CONFIGURATOR_BASE_URL");
+    let configuratorURL = configParser.getGlobalPreference("CONFIGURATOR_BASE_URL");
     let appName = configParser.name();
     
-    let jsonConfig = await getJson(configuratorBaseURL, appName);
+    let jsonConfig = await getJson(configuratorURL, appName);
     copyFacebookPreferences(jsonConfig, projectRoot);
     copyLinkedInPreferences(jsonConfig, projectRoot);
 };

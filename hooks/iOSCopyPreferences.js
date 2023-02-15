@@ -24,9 +24,9 @@ module.exports = async function (context) {
     var appName = configParser.name();
 
     let platformPath = path.join(projectRoot, 'platforms/ios');
-    let configuratorBaseURL = configParser.getGlobalPreference("CONFIGURATOR_BASE_URL");
-    
-    let jsonConfig = await getJson(configuratorBaseURL, appName);
+    let configuratorURL = configParser.getGlobalPreference("CONFIGURATOR_BASE_URL");
+
+    let jsonConfig = await getJson(configuratorURL, appName);
 
     const iOSConfigArray = jsonConfig.app_configurations.filter(configItem => configItem.application_type_id == ApplicationTypeEnum.ios);
     const errorMap = new Map();
