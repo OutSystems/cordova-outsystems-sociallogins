@@ -14,6 +14,10 @@ module.exports = async function (context) {
     let configXML = path.join(projectRoot, 'config.xml');
     let configParser = new ConfigParser(configXML);
     let configuratorURL = configParser.getGlobalPreference("CONFIGURATOR_BASE_URL");
+    
+    if(configuratorURL.length == 0)
+        throw new Error("Missing preference: CONFIGURATOR_BASE_URL. Please make sure this preference is configured");
+    
     let appName = configParser.name();
     
     let jsonConfig = await getJson(configuratorURL, appName);

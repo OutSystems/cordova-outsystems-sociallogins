@@ -8,7 +8,6 @@ module.exports = async function getJsonFile(endpoint, appName){
        
         let json = response.data; 
         return json;
-
     } catch(err){
         if(err.response){
             if(err.response.status == 400){
@@ -21,7 +20,7 @@ module.exports = async function getJsonFile(endpoint, appName){
                 throw new Error("Not found: Social Logins Configurator is either outdated or CONFIGURATOR_BASE_URL is not well defined.");
             }
         } else if(err.request){
-            throw new Error("Request was sent but no response from Social Logins Configurator.");
+            throw new Error("Something went wrong with the request. " + err.toJSON());
         } else{
             throw new Error(err.message)
         }
