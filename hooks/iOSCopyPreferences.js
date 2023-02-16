@@ -22,7 +22,7 @@ module.exports = async function (context) {
     var appName = configParser.name();
 
     let platformPath = path.join(projectRoot, 'platforms/ios');
-    let configuratorURL = configParser.getGlobalPreference("CONFIGURATOR_URL");
+    let configuratorURL = configParser.getGlobalPreference("SOCIAL_CONF_API_ENDPOINT");
     
     if(configuratorURL.length == 0)
         throw new Error("Missing preference: CONFIGURATOR_BASE_URL. Please make sure this preference is configured");
