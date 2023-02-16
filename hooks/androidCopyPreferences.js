@@ -9,7 +9,7 @@ module.exports = async function (context) {
     let projectRoot = context.opts.cordova.project ? context.opts.cordova.project.root : context.opts.projectRoot;
     let configXML = path.join(projectRoot, 'config.xml');
     let configParser = new ConfigParser(configXML);
-    let configuratorURL = configParser.getGlobalPreference("CONFIGURATOR_BASE_URL");
+    let configuratorURL = configParser.getGlobalPreference("CONFIGURATOR_URL");
     
     if(configuratorURL.length == 0)
         throw new Error("Missing preference: CONFIGURATOR_BASE_URL. Please make sure this preference is configured");
