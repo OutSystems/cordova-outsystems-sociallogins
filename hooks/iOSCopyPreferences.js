@@ -4,12 +4,10 @@ const fs = require('fs');
 const plist = require('plist');
 const { ConfigParser } = require('cordova-common');
 const { Console } = require('console');
-const getJson = require('./utils');
+
+const {getJsonFile, ProvidersEnum, ApplicationTypeEnum} = require('./utils');
 
 module.exports = async function (context) {
-
-    const ProvidersEnum = Object.freeze({"apple":"1", "facebook":"2", "google":"3", "linkedIn":"4"})
-    const ApplicationTypeEnum = Object.freeze({"web":"1", "ios":"2", "android":"3"})
     var projectRoot = context.opts.cordova.project ? context.opts.cordova.project.root : context.opts.projectRoot;
 
     var google_url_scheme = "";
@@ -29,7 +27,7 @@ module.exports = async function (context) {
     if(configuratorURL.length == 0)
         throw new Error("Missing preference: CONFIGURATOR_BASE_URL. Please make sure this preference is configured");
     
-    let jsonConfig = await getJson(configuratorURL, appName);
+    let jsonConfig = await getJsonFile(configuratorURL, appName);
 
     const iOSConfigArray = jsonConfig.app_configurations.filter(configItem => configItem.application_type_id == ApplicationTypeEnum.ios);
     const errorMap = new Map();

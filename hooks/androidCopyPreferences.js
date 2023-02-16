@@ -3,11 +3,7 @@ const path = require('path');
 const fs = require('fs');
 const { ConfigParser } = require('cordova-common');
 
-const getJson = require('./utils');
-
-const ProvidersEnum = Object.freeze({"apple":"1", "facebook":"2", "google":"3", "linkedIn":"4"})
-const ApplicationTypeEnum = Object.freeze({"web":"1", "ios":"2", "android":"3"})
-
+const {getJsonFile, ProvidersEnum, ApplicationTypeEnum} = require('./utils');
 
 module.exports = async function (context) {
     let projectRoot = context.opts.cordova.project ? context.opts.cordova.project.root : context.opts.projectRoot;
@@ -20,7 +16,7 @@ module.exports = async function (context) {
     
     let appName = configParser.name();
     
-    let jsonConfig = await getJson(configuratorURL, appName);
+    let jsonConfig = await getJsonFile(configuratorURL, appName);
     copyFacebookPreferences(jsonConfig, projectRoot);
     copyLinkedInPreferences(jsonConfig, projectRoot);
 };
