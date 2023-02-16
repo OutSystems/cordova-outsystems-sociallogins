@@ -5,10 +5,9 @@ const plist = require('plist');
 const { ConfigParser } = require('cordova-common');
 const { Console } = require('console');
 
-module.exports = function (context) {
+const {getJsonFile, ProvidersEnum, ApplicationTypeEnum} = require('./utils');
 
-    const ProvidersEnum = Object.freeze({"apple":"1", "facebook":"2", "google":"3", "linkedIn":"4"})
-    const ApplicationTypeEnum = Object.freeze({"web":"1", "ios":"2", "android":"3"})
+module.exports = async function (context) {
     var projectRoot = context.opts.cordova.project ? context.opts.cordova.project.root : context.opts.projectRoot;
 
     var google_url_scheme = "";
@@ -21,22 +20,18 @@ module.exports = function (context) {
     var deeplink_url_scheme = "";
 
     var appNamePath = path.join(projectRoot, 'config.xml');
-    var appNameParser = new ConfigParser(appNamePath);
-    var appName = appNameParser.name();
+    var configParser = new ConfigParser(appNamePath);
+    var appName = configParser.name();
 
     let platformPath = path.join(projectRoot, 'platforms/ios');
+    let configuratorURL = configParser.getGlobalPreference("SOCIAL_CONF_API_ENDPOINT");
+    
+    if(configuratorURL.length == 0)
+        throw new Error("Missing preference: SOCIAL_CONF_API_ENDPOINT. Please make sure this preference is configured");
+    
+    let jsonConfig = await getJsonFile(configuratorURL, appName);
 
-    //read json config file                         platforms/ios/www/jsonConfig
-    var jsonConfig = "";
-    try {
-        jsonConfig = path.join(projectRoot, 'www/json-config/SocialLoginsConfigurations.json');
-        var jsonConfigFile = fs.readFileSync(jsonConfig, 'utf8');
-        var jsonParsed = JSON.parse(jsonConfigFile);
-    } catch {
-        throw new Error("Missing configuration file or error trying to obtain the configuration.");
-    }
-
-    const iOSConfigArray = jsonParsed.app_configurations.filter(configItem => configItem.application_type_id == ApplicationTypeEnum.ios);
+    const iOSConfigArray = jsonConfig.app_configurations.filter(configItem => configItem.application_type_id == ApplicationTypeEnum.ios);
     const errorMap = new Map();
 
     iOSConfigArray.forEach(function(configItem) {
@@ -79,8 +74,8 @@ module.exports = function (context) {
         }
     });
 
-    if (jsonParsed.app_deeplink.url_scheme != null && jsonParsed.app_deeplink.url_scheme !== "") {
-        deeplink_url_scheme = jsonParsed.app_deeplink.url_scheme;
+    if (jsonConfig.app_deeplink.url_scheme != null && jsonConfig.app_deeplink.url_scheme !== "") {
+        deeplink_url_scheme = jsonConfig.app_deeplink.url_scheme;
     } else {
         errorMap['General'] = ['URL Scheme'];
     }
