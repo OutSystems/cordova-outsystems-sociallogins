@@ -25,7 +25,7 @@ module.exports = async function (context) {
     let configuratorURL = configParser.getGlobalPreference("SOCIAL_CONF_API_ENDPOINT");
     
     if(configuratorURL.length == 0)
-        throw new Error("Missing preference: CONFIGURATOR_BASE_URL. Please make sure this preference is configured");
+        throw new Error("Missing preference: SOCIAL_CONF_API_ENDPOINT. Please make sure this preference is configured");
     
     let jsonConfig = await getJsonFile(configuratorURL, appName);
 
