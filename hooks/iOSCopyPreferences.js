@@ -51,14 +51,12 @@ module.exports = async function (context) {
             var facebookErrorArray = [];
 
             if (configItem.client_id != null && configItem.client_id !== "") {
-                console.log(facebook_client_appId);
                 facebook_client_appId = configItem.client_id;
             } else {
                 facebookErrorArray.push('Client ID');
             }
 
             if (configItem.client_token != null && configItem.client_token !== "") {
-                console.log(facebook_client_token);
                 facebook_client_token = configItem.client_token;
             } else {
                 facebookErrorArray.push('Client Token');
