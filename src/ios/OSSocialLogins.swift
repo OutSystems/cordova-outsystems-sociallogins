@@ -62,7 +62,7 @@ extension OSSocialLogins: PlatformProtocol {
         var pluginResult = CDVPluginResult(status: CDVCommandStatus_ERROR)
 
         if let error = error, !error.localizedDescription.isEmpty {
-            let errorCode = "OS-PLUG-SCLG-\(String(format: "%04d", error.code))"
+            let errorCode = "OS-PLUG-SOCI-\(String(format: "%04d", error.code))"
             let errorMessage = error.localizedDescription
             let errorDict = ["code": errorCode, "message": errorMessage]
             pluginResult = CDVPluginResult(status: CDVCommandStatus_ERROR, messageAs: errorDict);

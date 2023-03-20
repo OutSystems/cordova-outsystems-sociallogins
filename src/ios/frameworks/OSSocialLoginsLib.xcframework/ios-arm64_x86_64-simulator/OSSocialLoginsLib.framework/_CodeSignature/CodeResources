@@ -6,43 +6,39 @@
 	<dict>
 		<key>Headers/OSSocialLoginsLib-Swift.h</key>
 		<data>
-		bG+xS4R3yZwMdfgCglrh3VYPsyI=
-		</data>
-		<key>Headers/OSSocialLoginsLib.h</key>
-		<data>
-		9lSjUQf/4Rd+Ku7AkXh8YwEMrHQ=
+		dwFfXFOoDhIWtHAiLwpEVhubZ8A=
 		</data>
 		<key>Info.plist</key>
 		<data>
-		INT7mHkQyK8jHp+/bVM9iPwU08E=
+		sbK/s7kcZSvD6tR3I9n4WfjaqjU=
 		</data>
 		<key>Modules/OSSocialLoginsLib.swiftmodule/arm64-apple-ios-simulator.swiftdoc</key>
 		<data>
-		ERwfV/S/bRoPk30nwDoN49jGjo4=
+		Eq2zAwkKFbf/puCLfydcGvZ3Qp0=
 		</data>
 		<key>Modules/OSSocialLoginsLib.swiftmodule/arm64-apple-ios-simulator.swiftinterface</key>
 		<data>
-		tBuj0I4nzcDd3/MO5rzAo8uK1pE=
+		ZF2EItcvjgmn7KH4v2R48LkhGfs=
 		</data>
 		<key>Modules/OSSocialLoginsLib.swiftmodule/arm64-apple-ios-simulator.swiftmodule</key>
 		<data>
-		kqCSX0PY9CkIkdpTwzHUj0nJOeg=
+		Ar5z67YLYVNeN5CAmxr612Y4j/U=
 		</data>
 		<key>Modules/OSSocialLoginsLib.swiftmodule/x86_64-apple-ios-simulator.swiftdoc</key>
 		<data>
-		zH0esOY23Xtr76IduLUFLBDWFs0=
+		Uzu/Rr8cZKhqb9/3k+g9cZhcLgY=
 		</data>
 		<key>Modules/OSSocialLoginsLib.swiftmodule/x86_64-apple-ios-simulator.swiftinterface</key>
 		<data>
-		XmwvdcyGrSplBVl9PneKM8rs1qk=
+		EVT8k9mbTR6ghRd3tuT+BTUBqmI=
 		</data>
 		<key>Modules/OSSocialLoginsLib.swiftmodule/x86_64-apple-ios-simulator.swiftmodule</key>
 		<data>
-		hjZk2mhe5WNWFP0ZxiB1Kwe+Vkk=
+		rwtVlL/UKBL+ZGg+liqngdU2+5U=
 		</data>
 		<key>Modules/module.modulemap</key>
 		<data>
-		l0HbW9GkUj0qyatvdwVfwTLIt/c=
+		I9h2Oq7TohHBaioyrMgxm5WTp+A=
 		</data>
 	</dict>
 	<key>files2</key>
@@ -51,63 +47,56 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			lx+p1HpI+7NU9MV/libOK0CqAoYYX0QpvAwf5bsVHQE=
-			</data>
-		</dict>
-		<key>Headers/OSSocialLoginsLib.h</key>
-		<dict>
-			<key>hash2</key>
-			<data>
-			6tMk8IuFDftLVfG/mte526gb/eTCCy6CiwOzLkXDsgw=
+			w8udUXGrH3SDwHS7EjKIE19ifgJN0kULyNudV9n7hEM=
 			</data>
 		</dict>
 		<key>Modules/OSSocialLoginsLib.swiftmodule/arm64-apple-ios-simulator.swiftdoc</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			qGs8As2Zitcu547erYooqu5v5NBu/F5wJePP7ILDMAw=
+			ZUUdFWwcoWaZs5NqbgVXsptTmmIx8lp6qKL+aGSZRA0=
 			</data>
 		</dict>
 		<key>Modules/OSSocialLoginsLib.swiftmodule/arm64-apple-ios-simulator.swiftinterface</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			fHqgfb64RxNpLbFizgOEkJq6ohMf+WPLm0/EEtvw+pM=
+			qu4antnqNmNKDPuoBd8s10KBbOAG72x0jMofDSYZC7Q=
 			</data>
 		</dict>
 		<key>Modules/OSSocialLoginsLib.swiftmodule/arm64-apple-ios-simulator.swiftmodule</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			BBZa27Sr6Wxz1WPNQBHcmLaLzjpCZxwWfay7OYYOab4=
+			9Zq+t0Ra9hfeml4aYG1srByUl2UTJcbrchK00vyvMfI=
 			</data>
 		</dict>
 		<key>Modules/OSSocialLoginsLib.swiftmodule/x86_64-apple-ios-simulator.swiftdoc</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			xT+QAeqYhnI5RP/3+1STjUiDDLKSultoMOTqfAhuKOQ=
+			229jVmDjh0J5AbpAWvW9mC0QDvWKCMzgD19CxNJK6Og=
 			</data>
 		</dict>
 		<key>Modules/OSSocialLoginsLib.swiftmodule/x86_64-apple-ios-simulator.swiftinterface</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			UpF9P38hByC1BpWBMa7KY/KNOqM0qtMJht2ec2t9UJk=
+			DocMxfd9VQDjdqjaixxzAw+Ak8AiCvuqBh4N6MVZ3c4=
 			</data>
 		</dict>
 		<key>Modules/OSSocialLoginsLib.swiftmodule/x86_64-apple-ios-simulator.swiftmodule</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			RSw1i1SsJmxOG/bvTFMr3QoX+2mQqrVcIuwMrsrjiGo=
+			mgCRE7O0fSYSRilG4t8kEawZOhgi0VlRRq4wBoqGjso=
 			</data>
 		</dict>
 		<key>Modules/module.modulemap</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			m5RduuJODkh1u2eO72YsTmwA2ZY8kwjnz+sWJQQeqgM=
+			uDrSCzulSAobTalzVwn1/R1MH7OpdZFOPWjEf/kmqvA=
 			</data>
 		</dict>
 	</dict>
