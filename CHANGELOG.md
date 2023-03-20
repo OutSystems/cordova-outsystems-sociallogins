@@ -8,6 +8,9 @@ The changes documented here do not include those from the original repository.
 
 ## [Unreleased]
 
+### 2023-03-16
+- Feat: [iOS] Update error codes and descriptions (https://outsystemsrd.atlassian.net/browse/RMET-2342).
+
 ### 2022-12-19
 - Fix: [iOS] Make Apple Sign In optionally, enabling app generation without it (https://outsystemsrd.atlassian.net/browse/RMET-2060).
 
