@@ -18,7 +18,7 @@ module.exports = {
                     } else throw new Error("Bad Request: make sure your apps is configured correctly")
                 }
                 if(err.response.status == 404){
-                    throw new Error("Not found: Social Logins Configurator is either outdated or CONFIGURATOR_BASE_URL is not well defined.");
+                    throw new Error("Not found: Social Logins Configurator is either outdated or SOCIAL_CONF_API_ENDPOINT is not well defined.");
                 }
             } else if(err.request){
                 throw new Error("Something went wrong with the request. " + err.toJSON());
