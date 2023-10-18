@@ -6,6 +6,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 The changes documented here do not include those from the original repository.
 
+
+## Unreleased
+
+## 2023-10-18
+- Fix: Updated facebook-android-sdk version do MABS10 builds work with Facebook login.
+
 ## Version 2.0.0 (2023-03-21)
 
 ## 2023-03-20
