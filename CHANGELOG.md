@@ -8,6 +8,8 @@ The changes documented here do not include those from the original repository.
 
 ## Unreleased
 
+## Version 2.0.1 (2023-10-24)
+
 ## 2023-10-18
 - Fix: Updated facebook-android-sdk version do MABS10 builds work with Facebook login.
 
