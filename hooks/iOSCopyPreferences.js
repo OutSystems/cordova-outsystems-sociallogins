@@ -95,19 +95,25 @@ module.exports = async function (context) {
     const initialCFBundleURLTypeArray = infoPlist['CFBundleURLTypes'];
     var finalCFBundleURLTypeArray = [];
     initialCFBundleURLTypeArray.forEach(function(item) {
-        if (item['CFBundleURLName'] == 'Google' && google_url_scheme != '') {
-            item['CFBundleURLSchemes'] = [google_url_scheme];
-            finalCFBundleURLTypeArray.push(item);
-        } else if (item['CFBundleURLName'] == 'Facebook' && facebook_client_appId != '') {
-            item['CFBundleURLSchemes'] = ['fb' + facebook_client_appId];
-            finalCFBundleURLTypeArray.push(item);
+        if (item['CFBundleURLName'] == 'Google') {
+            if (google_url_scheme != '') {
+                item['CFBundleURLSchemes'] = [google_url_scheme];
+                finalCFBundleURLTypeArray.push(item);
+            }
+        } else if (item['CFBundleURLName'] == 'Facebook') {
+            if (facebook_client_appId != '') {
+                item['CFBundleURLSchemes'] = ['fb' + facebook_client_appId];
+                finalCFBundleURLTypeArray.push(item);
+            }
         } else if (item['CFBundleURLName'] == 'DeepLinkScheme') {
             item['CFBundleURLSchemes'] = [deeplink_url_scheme];
             finalCFBundleURLTypeArray.push(item);
+        } else {
+            finalCFBundleURLTypeArray.push(item);
         }
     });
-
     infoPlist['CFBundleURLTypes'] = finalCFBundleURLTypeArray;
+
     if (facebook_client_appId != '') {
         infoPlist['FacebookAppID'] = facebook_client_appId
     } else {
