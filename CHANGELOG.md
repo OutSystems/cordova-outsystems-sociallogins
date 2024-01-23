@@ -6,14 +6,19 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 The changes documented here do not include those from the original repository.
 
-## Unreleased
+## Version 2.0.2 (2024-01-23)
 
-## 2023-10-18
+### 2024-01-22
+- Fix: [iOS] Unable to use `Application ID` as `URL Scheme` when the plugin is installed. 
+
+## Version 2.0.1 (2023-10-24)
+
+### 2023-10-18
 - Fix: Updated facebook-android-sdk version do MABS10 builds work with Facebook login.
 
 ## Version 2.0.0 (2023-03-21)
 
-## 2023-03-20
+### 2023-03-20
 - Feat: Update error code format
 - Feat: [Android] Update error codes and descriptions (https://outsystemsrd.atlassian.net/browse/RMET-2343)
 
