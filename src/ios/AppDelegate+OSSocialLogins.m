@@ -20,10 +20,23 @@
 }
 
 - (BOOL)application:(UIApplication *)app openURL:(NSURL *)url options:(NSDictionary<UIApplicationOpenURLOptionsKey,id> *)options {
-    return [SocialLoginsApplicationDelegate.shared
-            application:app
-            openURL:url
-            options:options];
+    NSString *currentUrlScheme = [url.absoluteString componentsSeparatedByString:@"://"].firstObject;
+    
+    NSArray *urlTypes = [NSBundle.mainBundle objectForInfoDictionaryKey:@"CFBundleURLTypes"];
+    NSPredicate *predicate = [NSPredicate predicateWithBlock:^BOOL(id evaluatedObject, NSDictionary<NSString *,id> *bindings) {
+        NSArray *urlSchemeArray = evaluatedObject[@"CFBundleURLSchemes"];
+        return [urlSchemeArray containsObject:currentUrlScheme];
+    }];
+    
+    NSString *urlName = [urlTypes filteredArrayUsingPredicate:predicate].firstObject[@"CFBundleURLName"];
+    if ([@[@"Google", @"Facebook", @"DeepLinkScheme"] containsObject:urlName]) {
+        return [SocialLoginsApplicationDelegate.shared
+                application:app
+                openURL:url
+                options:options];
+    }
+    
+    return [super application:app openURL:url options:options];
 }
 
 @end
