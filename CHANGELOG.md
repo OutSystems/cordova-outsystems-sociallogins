@@ -6,10 +6,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 The changes documented here do not include those from the original repository.
 
+## [Unreleased]
+
+### 2024-01-30
+- Fix: [iOS] Unable for an app to route into the screen mentioned in the deep link (using the `ApplicationID`). (https://outsystemsrd.atlassian.net/browse/RMET-3139)
+
 ## Version 2.0.2 (2024-01-23)
 
 ### 2024-01-22
-- Fix: [iOS] Unable to use `Application ID` as `URL Scheme` when the plugin is installed. 
+- Fix: [iOS] Unable to use `Application ID` as `URL Scheme` when the plugin is installed. (https://outsystemsrd.atlassian.net/browse/RMET-3063)
 
 ## Version 2.0.1 (2023-10-24)
 
