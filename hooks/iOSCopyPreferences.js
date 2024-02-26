@@ -7,10 +7,28 @@ const { Console } = require('console');
 
 const {getJsonFile, ProvidersEnum, ApplicationTypeEnum} = require('./utils');
 
+function reverseURLScheme(str) {
+    // Step 1. Use the split() method to return a new array
+    var splitString = str.split("."); // split "hello.world"
+    // ["hello", "world"]
+ 
+    // Step 2. Use the reverse() method to reverse the new created array
+    var reverseArray = splitString.reverse(); // reverse ["hello", "world"]
+    // ["world", "hello"]
+ 
+    // Step 3. Use the join() method to join all elements of the array into a string
+    var joinArray = reverseArray.join("."); // join ["world", "hello"]
+    // "world.hello"
+    
+    //Step 4. Return the reversed string
+    return joinArray;
+}
+
 module.exports = async function (context) {
     var projectRoot = context.opts.cordova.project ? context.opts.cordova.project.root : context.opts.projectRoot;
 
     var google_url_scheme = "";
+    var google_client_id = "";
     
     var facebook_client_appId = "";
     var facebook_client_token = "";
@@ -40,6 +58,7 @@ module.exports = async function (context) {
 
             if (configItem.url_scheme != null && configItem.url_scheme !== "") {
                 google_url_scheme = configItem.url_scheme;
+                google_client_id = reverseURLScheme(google_url_scheme);
             } else {
                 googleErrorArray.push('URL Scheme');
             }
@@ -92,38 +111,43 @@ module.exports = async function (context) {
     var infoPlistFile = fs.readFileSync(infoPlistPath, 'utf8');
     var infoPlist = plist.parse(infoPlistFile);
 
-    const initialCFBundleURLTypeArray = infoPlist['CFBundleURLTypes'];
-    var finalCFBundleURLTypeArray = [];
-    initialCFBundleURLTypeArray.forEach(function(item) {
-        if (item['CFBundleURLName'] == 'Google') {
-            if (google_url_scheme != '') {
-                item['CFBundleURLSchemes'] = [google_url_scheme];
-                finalCFBundleURLTypeArray.push(item);
-            }
-        } else if (item['CFBundleURLName'] == 'Facebook') {
-            if (facebook_client_appId != '') {
-                item['CFBundleURLSchemes'] = ['fb' + facebook_client_appId];
-                finalCFBundleURLTypeArray.push(item);
-            }
-        } else if (item['CFBundleURLName'] == 'DeepLinkScheme') {
-            item['CFBundleURLSchemes'] = [deeplink_url_scheme];
-            finalCFBundleURLTypeArray.push(item);
-        } else {
-            finalCFBundleURLTypeArray.push(item);
-        }
-    });
-    infoPlist['CFBundleURLTypes'] = finalCFBundleURLTypeArray;
+    var cfbundleURLTypeArray = infoPlist['CFBundleURLTypes'];
+
+    const deepLinkSchemeHashMap = {
+        'CFBundleURLName': 'DeepLinkScheme',
+        'CFBundleURLSchemes': [deeplink_url_scheme]
+    };
+    cfbundleURLTypeArray.push(deepLinkSchemeHashMap);
+
+    if (google_url_scheme != '') {
+        const googleURLSchemeHashMap = {
+            'CFBundleURLName': 'Google',
+            'CFBundleURLSchemes': [google_url_scheme]
+        };
+
+        cfbundleURLTypeArray.push(googleURLSchemeHashMap);
+    }
+
+    if (facebook_client_appId != '') {
+        const facebookClientAppIdHashMap = {
+            'CFBundleURLName': 'Facebook',
+            'CFBundleURLSchemes': ['fb' + facebook_client_appId]
+        };
+
+        cfbundleURLTypeArray.push(facebookClientAppIdHashMap);
+    }
+    infoPlist['CFBundleURLTypes'] = cfbundleURLTypeArray;
 
     if (facebook_client_appId != '') {
         infoPlist['FacebookAppID'] = facebook_client_appId
-    } else {
-        delete infoPlist['FacebookAppID'];
     }
 
     if (facebook_client_token != '') {
         infoPlist['FacebookClientToken'] = facebook_client_token;
-    } else {
-        delete infoPlist['FacebookClientToken'];
+    }
+
+    if (google_client_id != '') {
+        infoPlist['GIDClientID'] = google_client_id;
     }
 
     fs.writeFileSync(infoPlistPath, plist.build(infoPlist, { indent: '\t' }));
