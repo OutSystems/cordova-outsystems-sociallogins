@@ -8,6 +8,9 @@ The changes documented here do not include those from the original repository.
 
 ## [Unreleased]
 
+### 2024-02-29
+- Chore: [iOS] Set the new `GIDClientID` property for `plist` file. This is required for `Google Sign-In` version `7.0.0` (https://outsystemsrd.atlassian.net/browse/RMET-2800).
+
 ### 2024-01-30
 - Fix: [iOS] Unable for an app to route into the screen mentioned in the deep link (using the `ApplicationID`). (https://outsystemsrd.atlassian.net/browse/RMET-3139)
 
