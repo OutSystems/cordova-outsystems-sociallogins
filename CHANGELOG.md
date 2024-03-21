@@ -6,7 +6,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 The changes documented here do not include those from the original repository.
 
-## [Unreleased]
+## Version 2.0.3 (2024-03-21)
 
 ### 2024-02-29
 - Chore: [iOS] Set the new `GIDClientID` property for `plist` file. This is required for `Google Sign-In` version `7.0.0` (https://outsystemsrd.atlassian.net/browse/RMET-2800).
