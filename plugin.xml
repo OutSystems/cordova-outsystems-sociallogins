@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<plugin id="com.outsystems.plugins.sociallogins" version="2.0.2" xmlns="http://apache.org/cordova/ns/plugins/1.0" xmlns:android="http://schemas.android.com/apk/res/android">
+<plugin id="com.outsystems.plugins.sociallogins" version="2.0.3" xmlns="http://apache.org/cordova/ns/plugins/1.0" xmlns:android="http://schemas.android.com/apk/res/android">
   <name>OSSocialLogins</name>
   <description>OutSystems Template for Cordova Plugin</description>
   <author>OutSystems Inc</author>
@@ -72,45 +72,6 @@
       </feature>
       <preference name="deployment-target" value="13" />
       <preference name="UseSwiftLanguageVersion" value="5" />
-    </config-file>
-
-    <config-file target="*-Info.plist" parent="CFBundleURLTypes">
-        <array>
-            <dict>
-                <key>CFBundleTypeRole</key>
-                <string>Editor</string>
-                <key>CFBundleURLName</key>
-                <string>Google</string>
-                <key>CFBundleURLSchemes</key>
-                <array>
-                    <string>GOOGLE_CLIENT_ID</string>
-                </array>
-            </dict>
-            <dict>
-                <key>CFBundleURLName</key>
-                <string>Facebook</string>
-                <key>CFBundleURLSchemes</key>
-                <array>
-                    <string>FACEBOOK_CLIENT_URLSCHEME</string>
-                </array>
-            </dict>
-            <dict>
-                <key>CFBundleURLName</key>
-                <string>DeepLinkScheme</string>
-                <key>CFBundleURLSchemes</key>
-                <array>
-                    <string>DEEP_LINK_URLSCHEME</string>
-                </array>
-            </dict>
-        </array>
-    </config-file>
-
-    <config-file target="*-Info.plist" parent="FacebookAppID">
-         <string>FACEBOOK_CLIENT_APPID</string>
-    </config-file>
-
-    <config-file target="*-Info.plist" parent="FacebookClientToken">
-         <string>FACEBOOK_CLIENT_TOKEN</string>
     </config-file>
 
     <config-file target="*-Info.plist" parent="LSApplicationQueriesSchemes">
