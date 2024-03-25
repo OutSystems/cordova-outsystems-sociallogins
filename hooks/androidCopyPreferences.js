@@ -12,7 +12,7 @@ module.exports = async function (context) {
     let configuratorURL = configParser.getGlobalPreference("SOCIAL_CONF_API_ENDPOINT");
     
     if(configuratorURL.length == 0)
-        throw new Error("Missing preference: SOCIAL_CONF_API_ENDPOINT. Please make sure this preference is configured");
+        throw new Error("OUTSYSTEMS_PLUGIN_ERROR: Missing preference SOCIAL_CONF_API_ENDPOINT. Please make sure this preference is configured");
     
     let appName = configParser.name();
     
@@ -31,7 +31,7 @@ function copyLinkedInPreferences(jsonConfig, projectRoot) {
         linkedin_deeplink_host = jsonConfig.app_deeplink.url_host.replace(/\s/g, '')
         linkedin_deeplink_path = jsonConfig.app_deeplink.url_path.replace(/\s/g, '')
     } catch {
-        throw new Error("Error trying to obtain the configuration.");
+        throw new Error("OUTSYSTEMS_PLUGIN_ERROR: Missing configuration file or error trying to obtain the configuration.");
     }
     
     //go inside the AndroidManifest and change values for schema, host and path
@@ -68,7 +68,7 @@ function copyFacebookPreferences(jsonConfig, projectRoot) {
             }
         });
     } catch {
-        throw new Error("Missing configuration file or error trying to obtain the configuration.");
+        throw new Error("OUTSYSTEMS_PLUGIN_ERROR: Missing configuration file or error trying to obtain the configuration.");
     }
 
     let stringsPath = path.join(projectRoot, 'platforms/android/app/src/main/res/values/strings.xml');

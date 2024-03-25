@@ -14,16 +14,18 @@ module.exports = {
                 if(err.response.status == 400){
                     let data = err.response.data;
                     if(data.Errors){
-                        throw new Error(data.Errors);
-                    } else throw new Error("Bad Request: make sure your apps is configured correctly")
+                        console.error(data.Errors);
+                        throw new Error(`OUTSYSTEMS_PLUGIN_ERROR: Something went wrong with the request. Check the logs for more information.`);
+                    } else throw new Error("OUTSYSTEMS_PLUGIN_ERROR: Bad Request - make sure your app and SOCIAL_CONF_API_ENDPOINT are configured correctly.")
                 }
                 if(err.response.status == 404){
-                    throw new Error("Not found: Social Logins Configurator is either outdated or SOCIAL_CONF_API_ENDPOINT is not well defined.");
+                    throw new Error("OUTSYSTEMS_PLUGIN_ERROR: Not found - Social Logins Configurator is either outdated or SOCIAL_CONF_API_ENDPOINT is not well defined.");
                 }
             } else if(err.request){
-                throw new Error("Something went wrong with the request. " + err.toJSON());
+                console.error(err.toJSON());
+                throw new Error(`OUTSYSTEMS_PLUGIN_ERROR: Something went wrong with the request. Check the logs for more information.`);
             } else{
-                throw new Error(err.message)
+                throw new Error(`OUTSYSTEMS_PLUGIN_ERROR: Unexpected error - ${err.message}`)
             }
         }
     },
