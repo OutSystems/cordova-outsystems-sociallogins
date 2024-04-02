@@ -1177,10 +1177,7 @@
         "name": "FBSDKLoginKit",
         "printedName": "FBSDKLoginKit",
         "declKind": "Import",
-        "moduleName": "OSSocialLoginsLib",
-        "declAttributes": [
-          "ImplementationOnly"
-        ]
+        "moduleName": "OSSocialLoginsLib"
       },
       {
         "kind": "Import",
@@ -1319,10 +1316,7 @@
         "name": "GoogleSignIn",
         "printedName": "GoogleSignIn",
         "declKind": "Import",
-        "moduleName": "OSSocialLoginsLib",
-        "declAttributes": [
-          "ImplementationOnly"
-        ]
+        "moduleName": "OSSocialLoginsLib"
       },
       {
         "kind": "Import",
@@ -1454,10 +1448,7 @@
         "name": "FBSDKLoginKit",
         "printedName": "FBSDKLoginKit",
         "declKind": "Import",
-        "moduleName": "OSSocialLoginsLib",
-        "declAttributes": [
-          "ImplementationOnly"
-        ]
+        "moduleName": "OSSocialLoginsLib"
       },
       {
         "kind": "Import",
@@ -1738,10 +1729,7 @@
         "name": "FBSDKLoginKit",
         "printedName": "FBSDKLoginKit",
         "declKind": "Import",
-        "moduleName": "OSSocialLoginsLib",
-        "declAttributes": [
-          "ImplementationOnly"
-        ]
+        "moduleName": "OSSocialLoginsLib"
       },
       {
         "kind": "TypeDecl",
@@ -1811,10 +1799,7 @@
         "name": "FBSDKLoginKit",
         "printedName": "FBSDKLoginKit",
         "declKind": "Import",
-        "moduleName": "OSSocialLoginsLib",
-        "declAttributes": [
-          "ImplementationOnly"
-        ]
+        "moduleName": "OSSocialLoginsLib"
       },
       {
         "kind": "Import",
@@ -2045,10 +2030,7 @@
         "name": "GoogleSignIn",
         "printedName": "GoogleSignIn",
         "declKind": "Import",
-        "moduleName": "OSSocialLoginsLib",
-        "declAttributes": [
-          "ImplementationOnly"
-        ]
+        "moduleName": "OSSocialLoginsLib"
       },
       {
         "kind": "Import",
@@ -2903,609 +2885,609 @@
   },
   "ConstValues": [
     {
-      "filePath": "\/Users\/tac\/Documents\/repositories\/iOS\/OSSocialLoginsLib-iOS\/OSSocialLoginsLib\/LinkedIn\/SocialLoginsLinkedInController.swift",
+      "filePath": "\/Users\/rcj\/Documents\/Projects\/SocialLogins Projects\/OSSocialLoginsLib-iOS\/OSSocialLoginsLib\/LinkedIn\/SocialLoginsLinkedInController.swift",
       "kind": "StringLiteral",
       "offset": 79,
       "length": 16,
       "value": "\"DeepLinkScheme\""
     },
     {
-      "filePath": "\/Users\/tac\/Documents\/repositories\/iOS\/OSSocialLoginsLib-iOS\/OSSocialLoginsLib\/LinkedIn\/SocialLoginsLinkedInController.swift",
+      "filePath": "\/Users\/rcj\/Documents\/Projects\/SocialLogins Projects\/OSSocialLoginsLib-iOS\/OSSocialLoginsLib\/LinkedIn\/SocialLoginsLinkedInController.swift",
       "kind": "StringLiteral",
       "offset": 79,
       "length": 16,
       "value": "\"DeepLinkScheme\""
     },
     {
-      "filePath": "\/Users\/tac\/Documents\/repositories\/iOS\/OSSocialLoginsLib-iOS\/OSSocialLoginsLib\/LinkedIn\/SocialLoginsLinkedInController.swift",
+      "filePath": "\/Users\/rcj\/Documents\/Projects\/SocialLogins Projects\/OSSocialLoginsLib-iOS\/OSSocialLoginsLib\/LinkedIn\/SocialLoginsLinkedInController.swift",
       "kind": "StringLiteral",
       "offset": 380,
       "length": 14,
       "value": "\"linkedin.com\""
     },
     {
-      "filePath": "\/Users\/tac\/Documents\/repositories\/iOS\/OSSocialLoginsLib-iOS\/OSSocialLoginsLib\/LinkedIn\/SocialLoginsLinkedInController.swift",
+      "filePath": "\/Users\/rcj\/Documents\/Projects\/SocialLogins Projects\/OSSocialLoginsLib-iOS\/OSSocialLoginsLib\/LinkedIn\/SocialLoginsLinkedInController.swift",
       "kind": "StringLiteral",
       "offset": 424,
       "length": 25,
       "value": "\"\/oauth\/v2\/authorization\""
     },
     {
-      "filePath": "\/Users\/tac\/Documents\/repositories\/iOS\/OSSocialLoginsLib-iOS\/OSSocialLoginsLib\/LinkedIn\/SocialLoginsLinkedInController.swift",
+      "filePath": "\/Users\/rcj\/Documents\/Projects\/SocialLogins Projects\/OSSocialLoginsLib-iOS\/OSSocialLoginsLib\/LinkedIn\/SocialLoginsLinkedInController.swift",
       "kind": "Array",
       "offset": 514,
       "length": 35,
       "value": "[\"r_liteprofile\", \"r_emailaddress\"]"
     },
     {
-      "filePath": "\/Users\/tac\/Documents\/repositories\/iOS\/OSSocialLoginsLib-iOS\/OSSocialLoginsLib\/LinkedIn\/SocialLoginsLinkedInController.swift",
+      "filePath": "\/Users\/rcj\/Documents\/Projects\/SocialLogins Projects\/OSSocialLoginsLib-iOS\/OSSocialLoginsLib\/LinkedIn\/SocialLoginsLinkedInController.swift",
       "kind": "StringLiteral",
       "offset": 581,
       "length": 6,
       "value": "\"code\""
     },
     {
-      "filePath": "\/Users\/tac\/Documents\/repositories\/iOS\/OSSocialLoginsLib-iOS\/OSSocialLoginsLib\/Utils\/SocialLoginsErrors.swift",
+      "filePath": "\/Users\/rcj\/Documents\/Projects\/SocialLogins Projects\/OSSocialLoginsLib-iOS\/OSSocialLoginsLib\/Utils\/SocialLoginsErrors.swift",
       "kind": "IntegerLiteral",
       "offset": 139,
       "length": 3,
       "value": "100"
     },
     {
-      "filePath": "\/Users\/tac\/Documents\/repositories\/iOS\/OSSocialLoginsLib-iOS\/OSSocialLoginsLib\/Utils\/SocialLoginsErrors.swift",
+      "filePath": "\/Users\/rcj\/Documents\/Projects\/SocialLogins Projects\/OSSocialLoginsLib-iOS\/OSSocialLoginsLib\/Utils\/SocialLoginsErrors.swift",
       "kind": "IntegerLiteral",
       "offset": 193,
       "length": 3,
       "value": "101"
     },
     {
-      "filePath": "\/Users\/tac\/Documents\/repositories\/iOS\/OSSocialLoginsLib-iOS\/OSSocialLoginsLib\/Utils\/SocialLoginsErrors.swift",
+      "filePath": "\/Users\/rcj\/Documents\/Projects\/SocialLogins Projects\/OSSocialLoginsLib-iOS\/OSSocialLoginsLib\/Utils\/SocialLoginsErrors.swift",
       "kind": "IntegerLiteral",
       "offset": 247,
       "length": 3,
       "value": "104"
     },
     {
-      "filePath": "\/Users\/tac\/Documents\/repositories\/iOS\/OSSocialLoginsLib-iOS\/OSSocialLoginsLib\/Utils\/SocialLoginsErrors.swift",
+      "filePath": "\/Users\/rcj\/Documents\/Projects\/SocialLogins Projects\/OSSocialLoginsLib-iOS\/OSSocialLoginsLib\/Utils\/SocialLoginsErrors.swift",
       "kind": "IntegerLiteral",
       "offset": 301,
       "length": 3,
       "value": "200"
     },
     {
-      "filePath": "\/Users\/tac\/Documents\/repositories\/iOS\/OSSocialLoginsLib-iOS\/OSSocialLoginsLib\/Utils\/SocialLoginsErrors.swift",
+      "filePath": "\/Users\/rcj\/Documents\/Projects\/SocialLogins Projects\/OSSocialLoginsLib-iOS\/OSSocialLoginsLib\/Utils\/SocialLoginsErrors.swift",
       "kind": "IntegerLiteral",
       "offset": 355,
       "length": 3,
       "value": "201"
     },
     {
-      "filePath": "\/Users\/tac\/Documents\/repositories\/iOS\/OSSocialLoginsLib-iOS\/OSSocialLoginsLib\/Utils\/SocialLoginsErrors.swift",
+      "filePath": "\/Users\/rcj\/Documents\/Projects\/SocialLogins Projects\/OSSocialLoginsLib-iOS\/OSSocialLoginsLib\/Utils\/SocialLoginsErrors.swift",
       "kind": "IntegerLiteral",
       "offset": 409,
       "length": 3,
       "value": "202"
     },
     {
-      "filePath": "\/Users\/tac\/Documents\/repositories\/iOS\/OSSocialLoginsLib-iOS\/OSSocialLoginsLib\/Utils\/SocialLoginsErrors.swift",
+      "filePath": "\/Users\/rcj\/Documents\/Projects\/SocialLogins Projects\/OSSocialLoginsLib-iOS\/OSSocialLoginsLib\/Utils\/SocialLoginsErrors.swift",
       "kind": "IntegerLiteral",
       "offset": 463,
       "length": 3,
       "value": "203"
     },
     {
-      "filePath": "\/Users\/tac\/Documents\/repositories\/iOS\/OSSocialLoginsLib-iOS\/OSSocialLoginsLib\/Utils\/SocialLoginsErrors.swift",
+      "filePath": "\/Users\/rcj\/Documents\/Projects\/SocialLogins Projects\/OSSocialLoginsLib-iOS\/OSSocialLoginsLib\/Utils\/SocialLoginsErrors.swift",
       "kind": "IntegerLiteral",
       "offset": 517,
       "length": 3,
       "value": "204"
     },
     {
-      "filePath": "\/Users\/tac\/Documents\/repositories\/iOS\/OSSocialLoginsLib-iOS\/OSSocialLoginsLib\/Utils\/SocialLoginsErrors.swift",
+      "filePath": "\/Users\/rcj\/Documents\/Projects\/SocialLogins Projects\/OSSocialLoginsLib-iOS\/OSSocialLoginsLib\/Utils\/SocialLoginsErrors.swift",
       "kind": "IntegerLiteral",
       "offset": 571,
       "length": 3,
       "value": "300"
     },
     {
-      "filePath": "\/Users\/tac\/Documents\/repositories\/iOS\/OSSocialLoginsLib-iOS\/OSSocialLoginsLib\/Utils\/SocialLoginsErrors.swift",
+      "filePath": "\/Users\/rcj\/Documents\/Projects\/SocialLogins Projects\/OSSocialLoginsLib-iOS\/OSSocialLoginsLib\/Utils\/SocialLoginsErrors.swift",
       "kind": "IntegerLiteral",
       "offset": 625,
       "length": 3,
       "value": "302"
     },
     {
-      "filePath": "\/Users\/tac\/Documents\/repositories\/iOS\/OSSocialLoginsLib-iOS\/OSSocialLoginsLib\/Utils\/SocialLoginsErrors.swift",
+      "filePath": "\/Users\/rcj\/Documents\/Projects\/SocialLogins Projects\/OSSocialLoginsLib-iOS\/OSSocialLoginsLib\/Utils\/SocialLoginsErrors.swift",
       "kind": "IntegerLiteral",
       "offset": 679,
       "length": 3,
       "value": "303"
     },
     {
-      "filePath": "\/Users\/tac\/Documents\/repositories\/iOS\/OSSocialLoginsLib-iOS\/OSSocialLoginsLib\/Utils\/SocialLoginsErrors.swift",
+      "filePath": "\/Users\/rcj\/Documents\/Projects\/SocialLogins Projects\/OSSocialLoginsLib-iOS\/OSSocialLoginsLib\/Utils\/SocialLoginsErrors.swift",
       "kind": "IntegerLiteral",
       "offset": 733,
       "length": 3,
       "value": "304"
     },
     {
-      "filePath": "\/Users\/tac\/Documents\/repositories\/iOS\/OSSocialLoginsLib-iOS\/OSSocialLoginsLib\/Utils\/SocialLoginsErrors.swift",
+      "filePath": "\/Users\/rcj\/Documents\/Projects\/SocialLogins Projects\/OSSocialLoginsLib-iOS\/OSSocialLoginsLib\/Utils\/SocialLoginsErrors.swift",
       "kind": "IntegerLiteral",
       "offset": 787,
       "length": 3,
       "value": "305"
     },
     {
-      "filePath": "\/Users\/tac\/Documents\/repositories\/iOS\/OSSocialLoginsLib-iOS\/OSSocialLoginsLib\/Utils\/SocialLoginsErrors.swift",
+      "filePath": "\/Users\/rcj\/Documents\/Projects\/SocialLogins Projects\/OSSocialLoginsLib-iOS\/OSSocialLoginsLib\/Utils\/SocialLoginsErrors.swift",
       "kind": "IntegerLiteral",
       "offset": 841,
       "length": 3,
       "value": "399"
     },
     {
-      "filePath": "\/Users\/tac\/Documents\/repositories\/iOS\/OSSocialLoginsLib-iOS\/OSSocialLoginsLib\/Utils\/SocialLoginsErrors.swift",
+      "filePath": "\/Users\/rcj\/Documents\/Projects\/SocialLogins Projects\/OSSocialLoginsLib-iOS\/OSSocialLoginsLib\/Utils\/SocialLoginsErrors.swift",
       "kind": "IntegerLiteral",
       "offset": 895,
       "length": 3,
       "value": "400"
     },
     {
-      "filePath": "\/Users\/tac\/Documents\/repositories\/iOS\/OSSocialLoginsLib-iOS\/OSSocialLoginsLib\/Utils\/SocialLoginsErrors.swift",
+      "filePath": "\/Users\/rcj\/Documents\/Projects\/SocialLogins Projects\/OSSocialLoginsLib-iOS\/OSSocialLoginsLib\/Utils\/SocialLoginsErrors.swift",
       "kind": "IntegerLiteral",
       "offset": 949,
       "length": 3,
       "value": "401"
     },
     {
-      "filePath": "\/Users\/tac\/Documents\/repositories\/iOS\/OSSocialLoginsLib-iOS\/OSSocialLoginsLib\/Utils\/SocialLoginsErrors.swift",
+      "filePath": "\/Users\/rcj\/Documents\/Projects\/SocialLogins Projects\/OSSocialLoginsLib-iOS\/OSSocialLoginsLib\/Utils\/SocialLoginsErrors.swift",
       "kind": "IntegerLiteral",
       "offset": 1003,
       "length": 3,
       "value": "402"
     },
     {
-      "filePath": "\/Users\/tac\/Documents\/repositories\/iOS\/OSSocialLoginsLib-iOS\/OSSocialLoginsLib\/Utils\/SocialLoginsErrors.swift",
+      "filePath": "\/Users\/rcj\/Documents\/Projects\/SocialLogins Projects\/OSSocialLoginsLib-iOS\/OSSocialLoginsLib\/Utils\/SocialLoginsErrors.swift",
       "kind": "IntegerLiteral",
       "offset": 1057,
       "length": 3,
       "value": "403"
     },
     {
-      "filePath": "\/Users\/tac\/Documents\/repositories\/iOS\/OSSocialLoginsLib-iOS\/OSSocialLoginsLib\/Utils\/SocialLoginsErrors.swift",
+      "filePath": "\/Users\/rcj\/Documents\/Projects\/SocialLogins Projects\/OSSocialLoginsLib-iOS\/OSSocialLoginsLib\/Utils\/SocialLoginsErrors.swift",
       "kind": "IntegerLiteral",
       "offset": 1111,
       "length": 3,
       "value": "406"
     },
     {
-      "filePath": "\/Users\/tac\/Documents\/repositories\/iOS\/OSSocialLoginsLib-iOS\/OSSocialLoginsLib\/Utils\/SocialLoginsErrors.swift",
+      "filePath": "\/Users\/rcj\/Documents\/Projects\/SocialLogins Projects\/OSSocialLoginsLib-iOS\/OSSocialLoginsLib\/Utils\/SocialLoginsErrors.swift",
       "kind": "IntegerLiteral",
       "offset": 1165,
       "length": 3,
       "value": "499"
     },
     {
-      "filePath": "\/Users\/tac\/Documents\/repositories\/iOS\/OSSocialLoginsLib-iOS\/OSSocialLoginsLib\/Utils\/SocialLoginsErrors.swift",
+      "filePath": "\/Users\/rcj\/Documents\/Projects\/SocialLogins Projects\/OSSocialLoginsLib-iOS\/OSSocialLoginsLib\/Utils\/SocialLoginsErrors.swift",
       "kind": "IntegerLiteral",
       "offset": 139,
       "length": 3,
       "value": "100"
     },
     {
-      "filePath": "\/Users\/tac\/Documents\/repositories\/iOS\/OSSocialLoginsLib-iOS\/OSSocialLoginsLib\/Utils\/SocialLoginsErrors.swift",
+      "filePath": "\/Users\/rcj\/Documents\/Projects\/SocialLogins Projects\/OSSocialLoginsLib-iOS\/OSSocialLoginsLib\/Utils\/SocialLoginsErrors.swift",
       "kind": "IntegerLiteral",
       "offset": 193,
       "length": 3,
       "value": "101"
     },
     {
-      "filePath": "\/Users\/tac\/Documents\/repositories\/iOS\/OSSocialLoginsLib-iOS\/OSSocialLoginsLib\/Utils\/SocialLoginsErrors.swift",
+      "filePath": "\/Users\/rcj\/Documents\/Projects\/SocialLogins Projects\/OSSocialLoginsLib-iOS\/OSSocialLoginsLib\/Utils\/SocialLoginsErrors.swift",
       "kind": "IntegerLiteral",
       "offset": 247,
       "length": 3,
       "value": "104"
     },
     {
-      "filePath": "\/Users\/tac\/Documents\/repositories\/iOS\/OSSocialLoginsLib-iOS\/OSSocialLoginsLib\/Utils\/SocialLoginsErrors.swift",
+      "filePath": "\/Users\/rcj\/Documents\/Projects\/SocialLogins Projects\/OSSocialLoginsLib-iOS\/OSSocialLoginsLib\/Utils\/SocialLoginsErrors.swift",
       "kind": "IntegerLiteral",
       "offset": 301,
       "length": 3,
       "value": "200"
     },
     {
-      "filePath": "\/Users\/tac\/Documents\/repositories\/iOS\/OSSocialLoginsLib-iOS\/OSSocialLoginsLib\/Utils\/SocialLoginsErrors.swift",
+      "filePath": "\/Users\/rcj\/Documents\/Projects\/SocialLogins Projects\/OSSocialLoginsLib-iOS\/OSSocialLoginsLib\/Utils\/SocialLoginsErrors.swift",
       "kind": "IntegerLiteral",
       "offset": 355,
       "length": 3,
       "value": "201"
     },
     {
-      "filePath": "\/Users\/tac\/Documents\/repositories\/iOS\/OSSocialLoginsLib-iOS\/OSSocialLoginsLib\/Utils\/SocialLoginsErrors.swift",
+      "filePath": "\/Users\/rcj\/Documents\/Projects\/SocialLogins Projects\/OSSocialLoginsLib-iOS\/OSSocialLoginsLib\/Utils\/SocialLoginsErrors.swift",
       "kind": "IntegerLiteral",
       "offset": 409,
       "length": 3,
       "value": "202"
     },
     {
-      "filePath": "\/Users\/tac\/Documents\/repositories\/iOS\/OSSocialLoginsLib-iOS\/OSSocialLoginsLib\/Utils\/SocialLoginsErrors.swift",
+      "filePath": "\/Users\/rcj\/Documents\/Projects\/SocialLogins Projects\/OSSocialLoginsLib-iOS\/OSSocialLoginsLib\/Utils\/SocialLoginsErrors.swift",
       "kind": "IntegerLiteral",
       "offset": 463,
       "length": 3,
       "value": "203"
     },
     {
-      "filePath": "\/Users\/tac\/Documents\/repositories\/iOS\/OSSocialLoginsLib-iOS\/OSSocialLoginsLib\/Utils\/SocialLoginsErrors.swift",
+      "filePath": "\/Users\/rcj\/Documents\/Projects\/SocialLogins Projects\/OSSocialLoginsLib-iOS\/OSSocialLoginsLib\/Utils\/SocialLoginsErrors.swift",
       "kind": "IntegerLiteral",
       "offset": 517,
       "length": 3,
       "value": "204"
     },
     {
-      "filePath": "\/Users\/tac\/Documents\/repositories\/iOS\/OSSocialLoginsLib-iOS\/OSSocialLoginsLib\/Utils\/SocialLoginsErrors.swift",
+      "filePath": "\/Users\/rcj\/Documents\/Projects\/SocialLogins Projects\/OSSocialLoginsLib-iOS\/OSSocialLoginsLib\/Utils\/SocialLoginsErrors.swift",
       "kind": "IntegerLiteral",
       "offset": 571,
       "length": 3,
       "value": "300"
     },
     {
-      "filePath": "\/Users\/tac\/Documents\/repositories\/iOS\/OSSocialLoginsLib-iOS\/OSSocialLoginsLib\/Utils\/SocialLoginsErrors.swift",
+      "filePath": "\/Users\/rcj\/Documents\/Projects\/SocialLogins Projects\/OSSocialLoginsLib-iOS\/OSSocialLoginsLib\/Utils\/SocialLoginsErrors.swift",
       "kind": "IntegerLiteral",
       "offset": 625,
       "length": 3,
       "value": "302"
     },
     {
-      "filePath": "\/Users\/tac\/Documents\/repositories\/iOS\/OSSocialLoginsLib-iOS\/OSSocialLoginsLib\/Utils\/SocialLoginsErrors.swift",
+      "filePath": "\/Users\/rcj\/Documents\/Projects\/SocialLogins Projects\/OSSocialLoginsLib-iOS\/OSSocialLoginsLib\/Utils\/SocialLoginsErrors.swift",
       "kind": "IntegerLiteral",
       "offset": 679,
       "length": 3,
       "value": "303"
     },
     {
-      "filePath": "\/Users\/tac\/Documents\/repositories\/iOS\/OSSocialLoginsLib-iOS\/OSSocialLoginsLib\/Utils\/SocialLoginsErrors.swift",
+      "filePath": "\/Users\/rcj\/Documents\/Projects\/SocialLogins Projects\/OSSocialLoginsLib-iOS\/OSSocialLoginsLib\/Utils\/SocialLoginsErrors.swift",
       "kind": "IntegerLiteral",
       "offset": 733,
       "length": 3,
       "value": "304"
     },
     {
-      "filePath": "\/Users\/tac\/Documents\/repositories\/iOS\/OSSocialLoginsLib-iOS\/OSSocialLoginsLib\/Utils\/SocialLoginsErrors.swift",
+      "filePath": "\/Users\/rcj\/Documents\/Projects\/SocialLogins Projects\/OSSocialLoginsLib-iOS\/OSSocialLoginsLib\/Utils\/SocialLoginsErrors.swift",
       "kind": "IntegerLiteral",
       "offset": 787,
       "length": 3,
       "value": "305"
     },
     {
-      "filePath": "\/Users\/tac\/Documents\/repositories\/iOS\/OSSocialLoginsLib-iOS\/OSSocialLoginsLib\/Utils\/SocialLoginsErrors.swift",
+      "filePath": "\/Users\/rcj\/Documents\/Projects\/SocialLogins Projects\/OSSocialLoginsLib-iOS\/OSSocialLoginsLib\/Utils\/SocialLoginsErrors.swift",
       "kind": "IntegerLiteral",
       "offset": 841,
       "length": 3,
       "value": "399"
     },
     {
-      "filePath": "\/Users\/tac\/Documents\/repositories\/iOS\/OSSocialLoginsLib-iOS\/OSSocialLoginsLib\/Utils\/SocialLoginsErrors.swift",
+      "filePath": "\/Users\/rcj\/Documents\/Projects\/SocialLogins Projects\/OSSocialLoginsLib-iOS\/OSSocialLoginsLib\/Utils\/SocialLoginsErrors.swift",
       "kind": "IntegerLiteral",
       "offset": 895,
       "length": 3,
       "value": "400"
     },
     {
-      "filePath": "\/Users\/tac\/Documents\/repositories\/iOS\/OSSocialLoginsLib-iOS\/OSSocialLoginsLib\/Utils\/SocialLoginsErrors.swift",
+      "filePath": "\/Users\/rcj\/Documents\/Projects\/SocialLogins Projects\/OSSocialLoginsLib-iOS\/OSSocialLoginsLib\/Utils\/SocialLoginsErrors.swift",
       "kind": "IntegerLiteral",
       "offset": 949,
       "length": 3,
       "value": "401"
     },
     {
-      "filePath": "\/Users\/tac\/Documents\/repositories\/iOS\/OSSocialLoginsLib-iOS\/OSSocialLoginsLib\/Utils\/SocialLoginsErrors.swift",
+      "filePath": "\/Users\/rcj\/Documents\/Projects\/SocialLogins Projects\/OSSocialLoginsLib-iOS\/OSSocialLoginsLib\/Utils\/SocialLoginsErrors.swift",
       "kind": "IntegerLiteral",
       "offset": 1003,
       "length": 3,
       "value": "402"
     },
     {
-      "filePath": "\/Users\/tac\/Documents\/repositories\/iOS\/OSSocialLoginsLib-iOS\/OSSocialLoginsLib\/Utils\/SocialLoginsErrors.swift",
+      "filePath": "\/Users\/rcj\/Documents\/Projects\/SocialLogins Projects\/OSSocialLoginsLib-iOS\/OSSocialLoginsLib\/Utils\/SocialLoginsErrors.swift",
       "kind": "IntegerLiteral",
       "offset": 1057,
       "length": 3,
       "value": "403"
     },
     {
-      "filePath": "\/Users\/tac\/Documents\/repositories\/iOS\/OSSocialLoginsLib-iOS\/OSSocialLoginsLib\/Utils\/SocialLoginsErrors.swift",
+      "filePath": "\/Users\/rcj\/Documents\/Projects\/SocialLogins Projects\/OSSocialLoginsLib-iOS\/OSSocialLoginsLib\/Utils\/SocialLoginsErrors.swift",
       "kind": "IntegerLiteral",
       "offset": 1111,
       "length": 3,
       "value": "406"
     },
     {
-      "filePath": "\/Users\/tac\/Documents\/repositories\/iOS\/OSSocialLoginsLib-iOS\/OSSocialLoginsLib\/Utils\/SocialLoginsErrors.swift",
+      "filePath": "\/Users\/rcj\/Documents\/Projects\/SocialLogins Projects\/OSSocialLoginsLib-iOS\/OSSocialLoginsLib\/Utils\/SocialLoginsErrors.swift",
       "kind": "IntegerLiteral",
       "offset": 1165,
       "length": 3,
       "value": "499"
     },
     {
-      "filePath": "\/Users\/tac\/Documents\/repositories\/iOS\/OSSocialLoginsLib-iOS\/OSSocialLoginsLib\/Utils\/SocialLoginsErrors.swift",
+      "filePath": "\/Users\/rcj\/Documents\/Projects\/SocialLogins Projects\/OSSocialLoginsLib-iOS\/OSSocialLoginsLib\/Utils\/SocialLoginsErrors.swift",
       "kind": "IntegerLiteral",
       "offset": 139,
       "length": 3,
       "value": "100"
     },
     {
-      "filePath": "\/Users\/tac\/Documents\/repositories\/iOS\/OSSocialLoginsLib-iOS\/OSSocialLoginsLib\/Utils\/SocialLoginsErrors.swift",
+      "filePath": "\/Users\/rcj\/Documents\/Projects\/SocialLogins Projects\/OSSocialLoginsLib-iOS\/OSSocialLoginsLib\/Utils\/SocialLoginsErrors.swift",
       "kind": "IntegerLiteral",
       "offset": 193,
       "length": 3,
       "value": "101"
     },
     {
-      "filePath": "\/Users\/tac\/Documents\/repositories\/iOS\/OSSocialLoginsLib-iOS\/OSSocialLoginsLib\/Utils\/SocialLoginsErrors.swift",
+      "filePath": "\/Users\/rcj\/Documents\/Projects\/SocialLogins Projects\/OSSocialLoginsLib-iOS\/OSSocialLoginsLib\/Utils\/SocialLoginsErrors.swift",
       "kind": "IntegerLiteral",
       "offset": 247,
       "length": 3,
       "value": "104"
     },
     {
-      "filePath": "\/Users\/tac\/Documents\/repositories\/iOS\/OSSocialLoginsLib-iOS\/OSSocialLoginsLib\/Utils\/SocialLoginsErrors.swift",
+      "filePath": "\/Users\/rcj\/Documents\/Projects\/SocialLogins Projects\/OSSocialLoginsLib-iOS\/OSSocialLoginsLib\/Utils\/SocialLoginsErrors.swift",
       "kind": "IntegerLiteral",
       "offset": 301,
       "length": 3,
       "value": "200"
     },
     {
-      "filePath": "\/Users\/tac\/Documents\/repositories\/iOS\/OSSocialLoginsLib-iOS\/OSSocialLoginsLib\/Utils\/SocialLoginsErrors.swift",
+      "filePath": "\/Users\/rcj\/Documents\/Projects\/SocialLogins Projects\/OSSocialLoginsLib-iOS\/OSSocialLoginsLib\/Utils\/SocialLoginsErrors.swift",
       "kind": "IntegerLiteral",
       "offset": 355,
       "length": 3,
       "value": "201"
     },
     {
-      "filePath": "\/Users\/tac\/Documents\/repositories\/iOS\/OSSocialLoginsLib-iOS\/OSSocialLoginsLib\/Utils\/SocialLoginsErrors.swift",
+      "filePath": "\/Users\/rcj\/Documents\/Projects\/SocialLogins Projects\/OSSocialLoginsLib-iOS\/OSSocialLoginsLib\/Utils\/SocialLoginsErrors.swift",
       "kind": "IntegerLiteral",
       "offset": 409,
       "length": 3,
       "value": "202"
     },
     {
-      "filePath": "\/Users\/tac\/Documents\/repositories\/iOS\/OSSocialLoginsLib-iOS\/OSSocialLoginsLib\/Utils\/SocialLoginsErrors.swift",
+      "filePath": "\/Users\/rcj\/Documents\/Projects\/SocialLogins Projects\/OSSocialLoginsLib-iOS\/OSSocialLoginsLib\/Utils\/SocialLoginsErrors.swift",
       "kind": "IntegerLiteral",
       "offset": 463,
       "length": 3,
       "value": "203"
     },
     {
-      "filePath": "\/Users\/tac\/Documents\/repositories\/iOS\/OSSocialLoginsLib-iOS\/OSSocialLoginsLib\/Utils\/SocialLoginsErrors.swift",
+      "filePath": "\/Users\/rcj\/Documents\/Projects\/SocialLogins Projects\/OSSocialLoginsLib-iOS\/OSSocialLoginsLib\/Utils\/SocialLoginsErrors.swift",
       "kind": "IntegerLiteral",
       "offset": 517,
       "length": 3,
       "value": "204"
     },
     {
-      "filePath": "\/Users\/tac\/Documents\/repositories\/iOS\/OSSocialLoginsLib-iOS\/OSSocialLoginsLib\/Utils\/SocialLoginsErrors.swift",
+      "filePath": "\/Users\/rcj\/Documents\/Projects\/SocialLogins Projects\/OSSocialLoginsLib-iOS\/OSSocialLoginsLib\/Utils\/SocialLoginsErrors.swift",
       "kind": "IntegerLiteral",
       "offset": 571,
       "length": 3,
       "value": "300"
     },
     {
-      "filePath": "\/Users\/tac\/Documents\/repositories\/iOS\/OSSocialLoginsLib-iOS\/OSSocialLoginsLib\/Utils\/SocialLoginsErrors.swift",
+      "filePath": "\/Users\/rcj\/Documents\/Projects\/SocialLogins Projects\/OSSocialLoginsLib-iOS\/OSSocialLoginsLib\/Utils\/SocialLoginsErrors.swift",
       "kind": "IntegerLiteral",
       "offset": 625,
       "length": 3,
       "value": "302"
     },
     {
-      "filePath": "\/Users\/tac\/Documents\/repositories\/iOS\/OSSocialLoginsLib-iOS\/OSSocialLoginsLib\/Utils\/SocialLoginsErrors.swift",
+      "filePath": "\/Users\/rcj\/Documents\/Projects\/SocialLogins Projects\/OSSocialLoginsLib-iOS\/OSSocialLoginsLib\/Utils\/SocialLoginsErrors.swift",
       "kind": "IntegerLiteral",
       "offset": 679,
       "length": 3,
       "value": "303"
     },
     {
-      "filePath": "\/Users\/tac\/Documents\/repositories\/iOS\/OSSocialLoginsLib-iOS\/OSSocialLoginsLib\/Utils\/SocialLoginsErrors.swift",
+      "filePath": "\/Users\/rcj\/Documents\/Projects\/SocialLogins Projects\/OSSocialLoginsLib-iOS\/OSSocialLoginsLib\/Utils\/SocialLoginsErrors.swift",
       "kind": "IntegerLiteral",
       "offset": 733,
       "length": 3,
       "value": "304"
     },
     {
-      "filePath": "\/Users\/tac\/Documents\/repositories\/iOS\/OSSocialLoginsLib-iOS\/OSSocialLoginsLib\/Utils\/SocialLoginsErrors.swift",
+      "filePath": "\/Users\/rcj\/Documents\/Projects\/SocialLogins Projects\/OSSocialLoginsLib-iOS\/OSSocialLoginsLib\/Utils\/SocialLoginsErrors.swift",
       "kind": "IntegerLiteral",
       "offset": 787,
       "length": 3,
       "value": "305"
     },
     {
-      "filePath": "\/Users\/tac\/Documents\/repositories\/iOS\/OSSocialLoginsLib-iOS\/OSSocialLoginsLib\/Utils\/SocialLoginsErrors.swift",
+      "filePath": "\/Users\/rcj\/Documents\/Projects\/SocialLogins Projects\/OSSocialLoginsLib-iOS\/OSSocialLoginsLib\/Utils\/SocialLoginsErrors.swift",
       "kind": "IntegerLiteral",
       "offset": 841,
       "length": 3,
       "value": "399"
     },
     {
-      "filePath": "\/Users\/tac\/Documents\/repositories\/iOS\/OSSocialLoginsLib-iOS\/OSSocialLoginsLib\/Utils\/SocialLoginsErrors.swift",
+      "filePath": "\/Users\/rcj\/Documents\/Projects\/SocialLogins Projects\/OSSocialLoginsLib-iOS\/OSSocialLoginsLib\/Utils\/SocialLoginsErrors.swift",
       "kind": "IntegerLiteral",
       "offset": 895,
       "length": 3,
       "value": "400"
     },
     {
-      "filePath": "\/Users\/tac\/Documents\/repositories\/iOS\/OSSocialLoginsLib-iOS\/OSSocialLoginsLib\/Utils\/SocialLoginsErrors.swift",
+      "filePath": "\/Users\/rcj\/Documents\/Projects\/SocialLogins Projects\/OSSocialLoginsLib-iOS\/OSSocialLoginsLib\/Utils\/SocialLoginsErrors.swift",
       "kind": "IntegerLiteral",
       "offset": 949,
       "length": 3,
       "value": "401"
     },
     {
-      "filePath": "\/Users\/tac\/Documents\/repositories\/iOS\/OSSocialLoginsLib-iOS\/OSSocialLoginsLib\/Utils\/SocialLoginsErrors.swift",
+      "filePath": "\/Users\/rcj\/Documents\/Projects\/SocialLogins Projects\/OSSocialLoginsLib-iOS\/OSSocialLoginsLib\/Utils\/SocialLoginsErrors.swift",
       "kind": "IntegerLiteral",
       "offset": 1003,
       "length": 3,
       "value": "402"
     },
     {
-      "filePath": "\/Users\/tac\/Documents\/repositories\/iOS\/OSSocialLoginsLib-iOS\/OSSocialLoginsLib\/Utils\/SocialLoginsErrors.swift",
+      "filePath": "\/Users\/rcj\/Documents\/Projects\/SocialLogins Projects\/OSSocialLoginsLib-iOS\/OSSocialLoginsLib\/Utils\/SocialLoginsErrors.swift",
       "kind": "IntegerLiteral",
       "offset": 1057,
       "length": 3,
       "value": "403"
     },
     {
-      "filePath": "\/Users\/tac\/Documents\/repositories\/iOS\/OSSocialLoginsLib-iOS\/OSSocialLoginsLib\/Utils\/SocialLoginsErrors.swift",
+      "filePath": "\/Users\/rcj\/Documents\/Projects\/SocialLogins Projects\/OSSocialLoginsLib-iOS\/OSSocialLoginsLib\/Utils\/SocialLoginsErrors.swift",
       "kind": "IntegerLiteral",
       "offset": 1111,
       "length": 3,
       "value": "406"
     },
     {
-      "filePath": "\/Users\/tac\/Documents\/repositories\/iOS\/OSSocialLoginsLib-iOS\/OSSocialLoginsLib\/Utils\/SocialLoginsErrors.swift",
+      "filePath": "\/Users\/rcj\/Documents\/Projects\/SocialLogins Projects\/OSSocialLoginsLib-iOS\/OSSocialLoginsLib\/Utils\/SocialLoginsErrors.swift",
       "kind": "IntegerLiteral",
       "offset": 1165,
       "length": 3,
       "value": "499"
     },
     {
-      "filePath": "\/Users\/tac\/Documents\/repositories\/iOS\/OSSocialLoginsLib-iOS\/OSSocialLoginsLib\/Facebook\/SocialLoginsFacebookController.swift",
+      "filePath": "\/Users\/rcj\/Documents\/Projects\/SocialLogins Projects\/OSSocialLoginsLib-iOS\/OSSocialLoginsLib\/Facebook\/SocialLoginsFacebookController.swift",
       "kind": "StringLiteral",
-      "offset": 220,
+      "offset": 199,
       "length": 4,
       "value": "\"fb\""
     },
     {
-      "filePath": "\/Users\/tac\/Documents\/repositories\/iOS\/OSSocialLoginsLib-iOS\/OSSocialLoginsLib\/Facebook\/SocialLoginsFacebookController.swift",
+      "filePath": "\/Users\/rcj\/Documents\/Projects\/SocialLogins Projects\/OSSocialLoginsLib-iOS\/OSSocialLoginsLib\/Facebook\/SocialLoginsFacebookController.swift",
       "kind": "StringLiteral",
-      "offset": 263,
+      "offset": 242,
       "length": 15,
       "value": "\"FacebookAppID\""
     },
     {
-      "filePath": "\/Users\/tac\/Documents\/repositories\/iOS\/OSSocialLoginsLib-iOS\/OSSocialLoginsLib\/Facebook\/SocialLoginsFacebookController.swift",
+      "filePath": "\/Users\/rcj\/Documents\/Projects\/SocialLogins Projects\/OSSocialLoginsLib-iOS\/OSSocialLoginsLib\/Facebook\/SocialLoginsFacebookController.swift",
       "kind": "StringLiteral",
-      "offset": 317,
+      "offset": 296,
       "length": 21,
       "value": "\"FacebookClientToken\""
     },
     {
-      "filePath": "\/Users\/tac\/Documents\/repositories\/iOS\/OSSocialLoginsLib-iOS\/OSSocialLoginsLib\/Facebook\/SocialLoginsFacebookController.swift",
+      "filePath": "\/Users\/rcj\/Documents\/Projects\/SocialLogins Projects\/OSSocialLoginsLib-iOS\/OSSocialLoginsLib\/Facebook\/SocialLoginsFacebookController.swift",
       "kind": "StringLiteral",
-      "offset": 377,
+      "offset": 356,
       "length": 7,
       "value": "\"fbapi\""
     },
     {
-      "filePath": "\/Users\/tac\/Documents\/repositories\/iOS\/OSSocialLoginsLib-iOS\/OSSocialLoginsLib\/Facebook\/SocialLoginsFacebookController.swift",
+      "filePath": "\/Users\/rcj\/Documents\/Projects\/SocialLogins Projects\/OSSocialLoginsLib-iOS\/OSSocialLoginsLib\/Facebook\/SocialLoginsFacebookController.swift",
       "kind": "StringLiteral",
-      "offset": 220,
+      "offset": 199,
       "length": 4,
       "value": "\"fb\""
     },
     {
-      "filePath": "\/Users\/tac\/Documents\/repositories\/iOS\/OSSocialLoginsLib-iOS\/OSSocialLoginsLib\/Facebook\/SocialLoginsFacebookController.swift",
+      "filePath": "\/Users\/rcj\/Documents\/Projects\/SocialLogins Projects\/OSSocialLoginsLib-iOS\/OSSocialLoginsLib\/Facebook\/SocialLoginsFacebookController.swift",
       "kind": "StringLiteral",
-      "offset": 263,
+      "offset": 242,
       "length": 15,
       "value": "\"FacebookAppID\""
     },
     {
-      "filePath": "\/Users\/tac\/Documents\/repositories\/iOS\/OSSocialLoginsLib-iOS\/OSSocialLoginsLib\/Facebook\/SocialLoginsFacebookController.swift",
+      "filePath": "\/Users\/rcj\/Documents\/Projects\/SocialLogins Projects\/OSSocialLoginsLib-iOS\/OSSocialLoginsLib\/Facebook\/SocialLoginsFacebookController.swift",
       "kind": "StringLiteral",
-      "offset": 317,
+      "offset": 296,
       "length": 21,
       "value": "\"FacebookClientToken\""
     },
     {
-      "filePath": "\/Users\/tac\/Documents\/repositories\/iOS\/OSSocialLoginsLib-iOS\/OSSocialLoginsLib\/Facebook\/SocialLoginsFacebookController.swift",
+      "filePath": "\/Users\/rcj\/Documents\/Projects\/SocialLogins Projects\/OSSocialLoginsLib-iOS\/OSSocialLoginsLib\/Facebook\/SocialLoginsFacebookController.swift",
       "kind": "StringLiteral",
-      "offset": 377,
+      "offset": 356,
       "length": 7,
       "value": "\"fbapi\""
     },
     {
-      "filePath": "\/Users\/tac\/Documents\/repositories\/iOS\/OSSocialLoginsLib-iOS\/OSSocialLoginsLib\/LinkedIn\/SocialLoginsLinkedInUserDataManager.swift",
+      "filePath": "\/Users\/rcj\/Documents\/Projects\/SocialLogins Projects\/OSSocialLoginsLib-iOS\/OSSocialLoginsLib\/LinkedIn\/SocialLoginsLinkedInUserDataManager.swift",
       "kind": "StringLiteral",
       "offset": 37,
       "length": 35,
       "value": "\"OSSocialLoginsLib.SocialLoginsLinkedInUserDataManager\""
     },
     {
-      "filePath": "\/Users\/tac\/Documents\/repositories\/iOS\/OSSocialLoginsLib-iOS\/OSSocialLoginsLib\/Google\/SocialLoginsGoogleController.swift",
+      "filePath": "\/Users\/rcj\/Documents\/Projects\/SocialLogins Projects\/OSSocialLoginsLib-iOS\/OSSocialLoginsLib\/Google\/SocialLoginsGoogleController.swift",
       "kind": "StringLiteral",
-      "offset": 165,
+      "offset": 144,
       "length": 2,
       "value": "\"\""
     },
     {
-      "filePath": "\/Users\/tac\/Documents\/repositories\/iOS\/OSSocialLoginsLib-iOS\/OSSocialLoginsLib\/Google\/SocialLoginsGoogleController.swift",
+      "filePath": "\/Users\/rcj\/Documents\/Projects\/SocialLogins Projects\/OSSocialLoginsLib-iOS\/OSSocialLoginsLib\/Google\/SocialLoginsGoogleController.swift",
       "kind": "StringLiteral",
-      "offset": 210,
+      "offset": 189,
       "length": 28,
       "value": "\"com.googleusercontent.apps\""
     },
     {
-      "filePath": "\/Users\/tac\/Documents\/repositories\/iOS\/OSSocialLoginsLib-iOS\/OSSocialLoginsLib\/SocialLoginsApplicationDelegate.swift",
+      "filePath": "\/Users\/rcj\/Documents\/Projects\/SocialLogins Projects\/OSSocialLoginsLib-iOS\/OSSocialLoginsLib\/SocialLoginsApplicationDelegate.swift",
       "kind": "Dictionary",
-      "offset": 672,
+      "offset": 651,
       "length": 3,
       "value": "[]"
     },
     {
-      "filePath": "\/Users\/tac\/Documents\/repositories\/iOS\/OSSocialLoginsLib-iOS\/OSSocialLoginsLib\/Facebook\/OSSLGFacebookLoginManagerDelegate.swift",
+      "filePath": "\/Users\/rcj\/Documents\/Projects\/SocialLogins Projects\/OSSocialLoginsLib-iOS\/OSSocialLoginsLib\/Facebook\/OSSLGFacebookLoginManagerDelegate.swift",
       "kind": "StringLiteral",
-      "offset": 4236,
+      "offset": 4215,
       "length": 12,
       "value": "\"first_name\""
     },
     {
-      "filePath": "\/Users\/tac\/Documents\/repositories\/iOS\/OSSocialLoginsLib-iOS\/OSSocialLoginsLib\/Facebook\/OSSLGFacebookLoginManagerDelegate.swift",
+      "filePath": "\/Users\/rcj\/Documents\/Projects\/SocialLogins Projects\/OSSocialLoginsLib-iOS\/OSSocialLoginsLib\/Facebook\/OSSLGFacebookLoginManagerDelegate.swift",
       "kind": "StringLiteral",
-      "offset": 4261,
+      "offset": 4240,
       "length": 11,
       "value": "\"last_name\""
     },
     {
-      "filePath": "\/Users\/tac\/Documents\/repositories\/iOS\/OSSocialLoginsLib-iOS\/OSSocialLoginsLib\/Facebook\/OSSLGFacebookLoginManagerDelegate.swift",
+      "filePath": "\/Users\/rcj\/Documents\/Projects\/SocialLogins Projects\/OSSocialLoginsLib-iOS\/OSSocialLoginsLib\/Facebook\/OSSLGFacebookLoginManagerDelegate.swift",
       "kind": "StringLiteral",
-      "offset": 4236,
+      "offset": 4215,
       "length": 12,
       "value": "\"first_name\""
     },
     {
-      "filePath": "\/Users\/tac\/Documents\/repositories\/iOS\/OSSocialLoginsLib-iOS\/OSSocialLoginsLib\/Facebook\/OSSLGFacebookLoginManagerDelegate.swift",
+      "filePath": "\/Users\/rcj\/Documents\/Projects\/SocialLogins Projects\/OSSocialLoginsLib-iOS\/OSSocialLoginsLib\/Facebook\/OSSLGFacebookLoginManagerDelegate.swift",
       "kind": "StringLiteral",
-      "offset": 4261,
+      "offset": 4240,
       "length": 11,
       "value": "\"last_name\""
     },
     {
-      "filePath": "\/Users\/tac\/Documents\/repositories\/iOS\/OSSocialLoginsLib-iOS\/OSSocialLoginsLib\/Facebook\/SocialLoginsFacebookUserDataManager.swift",
+      "filePath": "\/Users\/rcj\/Documents\/Projects\/SocialLogins Projects\/OSSocialLoginsLib-iOS\/OSSocialLoginsLib\/Facebook\/SocialLoginsFacebookUserDataManager.swift",
       "kind": "StringLiteral",
-      "offset": 167,
+      "offset": 146,
       "length": 4,
       "value": "\"me\""
     },
     {
-      "filePath": "\/Users\/tac\/Documents\/repositories\/iOS\/OSSocialLoginsLib-iOS\/OSSocialLoginsLib\/Facebook\/SocialLoginsFacebookUserDataManager.swift",
+      "filePath": "\/Users\/rcj\/Documents\/Projects\/SocialLogins Projects\/OSSocialLoginsLib-iOS\/OSSocialLoginsLib\/Facebook\/SocialLoginsFacebookUserDataManager.swift",
       "kind": "StringLiteral",
-      "offset": 186,
+      "offset": 165,
       "length": 8,
       "value": "\"fields\""
     },
     {
-      "filePath": "\/Users\/tac\/Documents\/repositories\/iOS\/OSSocialLoginsLib-iOS\/OSSocialLoginsLib\/Facebook\/SocialLoginsFacebookUserDataManager.swift",
+      "filePath": "\/Users\/rcj\/Documents\/Projects\/SocialLogins Projects\/OSSocialLoginsLib-iOS\/OSSocialLoginsLib\/Facebook\/SocialLoginsFacebookUserDataManager.swift",
       "kind": "StringLiteral",
-      "offset": 197,
+      "offset": 176,
       "length": 43,
       "value": "\"id, email, first_name, last_name, picture\""
     },
     {
-      "filePath": "\/Users\/tac\/Documents\/repositories\/iOS\/OSSocialLoginsLib-iOS\/OSSocialLoginsLib\/SocialLoginsController.swift",
+      "filePath": "\/Users\/rcj\/Documents\/Projects\/SocialLogins Projects\/OSSocialLoginsLib-iOS\/OSSocialLoginsLib\/SocialLoginsController.swift",
       "kind": "StringLiteral",
       "offset": 25,
       "length": 22,
       "value": "\"OSSocialLoginsLib.SocialLoginsController\""
     },
     {
-      "filePath": "\/Users\/tac\/Documents\/repositories\/iOS\/OSSocialLoginsLib-iOS\/OSSocialLoginsLib\/SocialLoginsBaseController.swift",
+      "filePath": "\/Users\/rcj\/Documents\/Projects\/SocialLogins Projects\/OSSocialLoginsLib-iOS\/OSSocialLoginsLib\/SocialLoginsBaseController.swift",
       "kind": "StringLiteral",
       "offset": 27,
       "length": 26,
