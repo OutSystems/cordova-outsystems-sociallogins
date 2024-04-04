@@ -8,7 +8,9 @@ The changes documented here do not include those from the original repository.
 
 ## [Unreleased]
 
-- Chore: Update cordova hooks with new OutSystems specific errors. (https://outsystemsrd.atlassian.net/browse/RMET-3310)
+### Changes
+- [iOS] Add the `Google Sign-In` and `Facebook SDK` pods to the plugin. This adds the Privacy Manifest files (https://outsystemsrd.atlassian.net/browse/RMET-3275).
+- Update cordova hooks with new OutSystems specific errors. (https://outsystemsrd.atlassian.net/browse/RMET-3310)
 
 ## Version 2.0.3 (2024-03-21)
 
