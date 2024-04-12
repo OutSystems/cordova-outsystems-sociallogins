@@ -6,10 +6,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 The changes documented here do not include those from the original repository.
 
-## [Unreleased]
+## 2.1.0
 
-### Changes
-- [iOS] Add the `Google Sign-In` and `Facebook SDK` pods to the plugin. This adds the Privacy Manifest files (https://outsystemsrd.atlassian.net/browse/RMET-3275).
+### Features
+- Add the `Google Sign-In` and `Facebook SDK` iOS pods to the plugin. This adds the Privacy Manifest files (https://outsystemsrd.atlassian.net/browse/RMET-3275).
+
+### Chores
 - Update cordova hooks with new OutSystems specific errors. (https://outsystemsrd.atlassian.net/browse/RMET-3310)
 
 ## Version 2.0.3 (2024-03-21)
