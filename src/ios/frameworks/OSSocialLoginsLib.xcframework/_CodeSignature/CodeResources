@@ -10,7 +10,7 @@
 		</data>
 		<key>ios-arm64/OSSocialLoginsLib.framework/Info.plist</key>
 		<data>
-		qRvGXTT53wTeeDKFvggEQ2fBy1k=
+		scgvdqNGPjFxaPDemxgkUgF9ZIM=
 		</data>
 		<key>ios-arm64/OSSocialLoginsLib.framework/Modules/OSSocialLoginsLib.swiftmodule/arm64-apple-ios.abi.json</key>
 		<data>
@@ -34,11 +34,11 @@
 		</data>
 		<key>ios-arm64/OSSocialLoginsLib.framework/OSSocialLoginsLib</key>
 		<data>
-		ZN3D2lkKQCB4XI6EKBswhbLR1G4=
+		8EBe7cbxl3BG1FdvEi1LmTRqjIE=
 		</data>
 		<key>ios-arm64/OSSocialLoginsLib.framework/_CodeSignature/CodeResources</key>
 		<data>
-		OrxCIucL1eZA6wrw/OY/oY3lVQ4=
+		2s/T1ondXgByksWwnFDByt/BUQs=
 		</data>
 		<key>ios-arm64_x86_64-simulator/OSSocialLoginsLib.framework/Headers/OSSocialLoginsLib-Swift.h</key>
 		<data>
@@ -46,7 +46,7 @@
 		</data>
 		<key>ios-arm64_x86_64-simulator/OSSocialLoginsLib.framework/Info.plist</key>
 		<data>
-		FaGDNgT/ljSqtohee+wjyk2rFr0=
+		sOC5PcerRupAXObCZREgJbd/6cA=
 		</data>
 		<key>ios-arm64_x86_64-simulator/OSSocialLoginsLib.framework/Modules/OSSocialLoginsLib.swiftmodule/arm64-apple-ios-simulator.abi.json</key>
 		<data>
@@ -86,11 +86,11 @@
 		</data>
 		<key>ios-arm64_x86_64-simulator/OSSocialLoginsLib.framework/OSSocialLoginsLib</key>
 		<data>
-		ZFVezhMNOuR2zedYIYOpIipKwF4=
+		m3W+S6gA2jOmubwLeUA6JedtC+I=
 		</data>
 		<key>ios-arm64_x86_64-simulator/OSSocialLoginsLib.framework/_CodeSignature/CodeResources</key>
 		<data>
-		KJopP+U8aEYLD06W/5ntK0aVwws=
+		7hRkojr2IIN5nuSMAJe5q6ZQoaU=
 		</data>
 	</dict>
 	<key>files2</key>
@@ -110,11 +110,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			qRvGXTT53wTeeDKFvggEQ2fBy1k=
+			scgvdqNGPjFxaPDemxgkUgF9ZIM=
 			</data>
 			<key>hash2</key>
 			<data>
-			CF8b2UF03JgCvKx77cfxyy9T4mC4aHhyT0Np1tkZ4Uk=
+			Uh3jbJlml2/Kni1JaOosYxuCwlTvkWTi7ivc9cRGjSc=
 			</data>
 		</dict>
 		<key>ios-arm64/OSSocialLoginsLib.framework/Modules/OSSocialLoginsLib.swiftmodule/arm64-apple-ios.abi.json</key>
@@ -176,22 +176,22 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			ZN3D2lkKQCB4XI6EKBswhbLR1G4=
+			8EBe7cbxl3BG1FdvEi1LmTRqjIE=
 			</data>
 			<key>hash2</key>
 			<data>
-			aJiFR7D7hOLAM5RKjbP+PrjkWd+K7AGxg5RuJ5ivCDY=
+			cRD0aTOZDoQ58RLvYuB6UCsWPMBKjISi1UBcmtDivn4=
 			</data>
 		</dict>
 		<key>ios-arm64/OSSocialLoginsLib.framework/_CodeSignature/CodeResources</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			OrxCIucL1eZA6wrw/OY/oY3lVQ4=
+			2s/T1ondXgByksWwnFDByt/BUQs=
 			</data>
 			<key>hash2</key>
 			<data>
-			Exd31TnkbKSsIrffb5D7Cxeu7S7vugBIL7cyF+B7Uk4=
+			6MNrdFd+jLIMInjLy+DFvUJY+tjy0aZe/xX84xGk3WM=
 			</data>
 		</dict>
 		<key>ios-arm64_x86_64-simulator/OSSocialLoginsLib.framework/Headers/OSSocialLoginsLib-Swift.h</key>
@@ -209,11 +209,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			FaGDNgT/ljSqtohee+wjyk2rFr0=
+			sOC5PcerRupAXObCZREgJbd/6cA=
 			</data>
 			<key>hash2</key>
 			<data>
-			rpg3WcdI5X4qGiAfhY/Ch+GmVQpAgN70eOEMh+gp/tA=
+			hnd8gxfh6ikpsedX64THf88ySas50iwZT3CMiTYjkFE=
 			</data>
 		</dict>
 		<key>ios-arm64_x86_64-simulator/OSSocialLoginsLib.framework/Modules/OSSocialLoginsLib.swiftmodule/arm64-apple-ios-simulator.abi.json</key>
@@ -319,22 +319,22 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			ZFVezhMNOuR2zedYIYOpIipKwF4=
+			m3W+S6gA2jOmubwLeUA6JedtC+I=
 			</data>
 			<key>hash2</key>
 			<data>
-			ZfuUr0MUU5AQqPj8FmAp7fMp4vxKMYc+bxsuitAYvHs=
+			3hM1ZaQKux817hO8MZk3jgtI2F1GoNtohLQt9AyqoJg=
 			</data>
 		</dict>
 		<key>ios-arm64_x86_64-simulator/OSSocialLoginsLib.framework/_CodeSignature/CodeResources</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			KJopP+U8aEYLD06W/5ntK0aVwws=
+			7hRkojr2IIN5nuSMAJe5q6ZQoaU=
 			</data>
 			<key>hash2</key>
 			<data>
-			xWqvj6VLMnyDEskqrMh4TETzRz+qsiS2gBNPP+9JN9c=
+			u4ASXQ0tOAr72UPEPJPbH1HFhWco5zSFN2dxjmhZyFA=
 			</data>
 		</dict>
 	</dict>
