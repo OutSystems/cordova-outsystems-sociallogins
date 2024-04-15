@@ -3,7 +3,6 @@ const path = require('path');
 const fs = require('fs');
 const plist = require('plist');
 const { ConfigParser } = require('cordova-common');
-const { Console } = require('console');
 
 const {getJsonFile, ProvidersEnum, ApplicationTypeEnum} = require('./utils');
 
@@ -45,7 +44,7 @@ module.exports = async function (context) {
     let configuratorURL = configParser.getGlobalPreference("SOCIAL_CONF_API_ENDPOINT");
     
     if(configuratorURL.length == 0)
-        throw new Error("Missing preference: SOCIAL_CONF_API_ENDPOINT. Please make sure this preference is configured");
+        throw new Error("OUTSYSTEMS_PLUGIN_ERROR: Missing preference SOCIAL_CONF_API_ENDPOINT. Please make sure this preference is configured");
     
     let jsonConfig = await getJsonFile(configuratorURL, appName);
 
@@ -98,7 +97,7 @@ module.exports = async function (context) {
     }
 
     if (Object.getOwnPropertyNames(errorMap).length > 0) {
-        var errorMessage = 'Configuration is missing the following fields: ';        
+        var errorMessage = 'OUTSYSTEMS_PLUGIN_ERROR: Configuration is missing the following fields: ';        
 
         for (const [key, value] of Object.entries(errorMap)) {
             errorMessage += '\n - On ' + key + ': ' + value + '.';

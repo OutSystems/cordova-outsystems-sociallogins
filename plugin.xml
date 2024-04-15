@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<plugin id="com.outsystems.plugins.sociallogins" version="2.0.3" xmlns="http://apache.org/cordova/ns/plugins/1.0" xmlns:android="http://schemas.android.com/apk/res/android">
+<plugin id="com.outsystems.plugins.sociallogins" version="2.1.0" xmlns="http://apache.org/cordova/ns/plugins/1.0" xmlns:android="http://schemas.android.com/apk/res/android">
   <name>OSSocialLogins</name>
   <description>OutSystems Template for Cordova Plugin</description>
   <author>OutSystems Inc</author>
@@ -108,6 +108,9 @@
         </config>
         <pods use-frameworks="true">
             <pod name="OSCommonPluginLib" spec="1.0.0" />
+
+            <pod name="FBSDKLoginKit" spec="17.0.0" />
+            <pod name="GoogleSignIn" spec="7.1.0" />            
         </pods>
     </podspec>
 
