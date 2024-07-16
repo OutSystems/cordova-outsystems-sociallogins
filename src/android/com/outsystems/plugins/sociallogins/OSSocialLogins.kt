@@ -64,6 +64,10 @@ class OSSocialLogins : CordovaImplementation() {
         // Does nothing for this plugin
     }
 
+    override fun onResume(multitasking: Boolean) {
+        // Not used in this project.
+    }
+
     private fun initializeApple() {
         if(appleController != null) return
         val appleHelperInterface = AppleHelper()
