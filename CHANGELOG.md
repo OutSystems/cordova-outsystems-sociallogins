@@ -6,6 +6,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 The changes documented here do not include those from the original repository.
 
+## 2.1.1
+
+### Fixes
+- Fix: Update `oscordova` dependency, which was causing incompatibility issues (https://outsystemsrd.atlassian.net/browse/RMET-3540).
+
 ## 2.1.0
 
 ### Features
