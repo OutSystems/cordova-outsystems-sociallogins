@@ -6,6 +6,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 The changes documented here do not include those from the original repository.
 
+## 2.1.2
+
+### Fixes
+- Fix: Update dependency to `OSSocialLoginsLib-Android` to use `@SerializableName` annotation to avoid issues when using code obfuscation (https://outsystemsrd.atlassian.net/browse/RMET-3387).
+
+
 ## 2.1.1
 
 ### Fixes
