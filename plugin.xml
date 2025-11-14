@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<plugin id="com.outsystems.plugins.sociallogins" version="2.1.3" xmlns="http://apache.org/cordova/ns/plugins/1.0" xmlns:android="http://schemas.android.com/apk/res/android">
+<plugin id="com.outsystems.plugins.sociallogins" version="2.1.4" xmlns="http://apache.org/cordova/ns/plugins/1.0" xmlns:android="http://schemas.android.com/apk/res/android">
   <name>OSSocialLogins</name>
   <description>OutSystems Template for Cordova Plugin</description>
   <author>OutSystems Inc</author>
