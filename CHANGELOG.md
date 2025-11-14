@@ -9,7 +9,7 @@ The changes documented here do not include those from the original repository.
 ## 2.1.4
 
 ### Fixes
-- (android) missing strings.xml on target project (https://outsystemsrd.atlassian.net/browse/RMET-4778).
+- (android) Fixes missing strings.xml on target project (https://outsystemsrd.atlassian.net/browse/RMET-4778).
 
 ## 2.1.3
 
