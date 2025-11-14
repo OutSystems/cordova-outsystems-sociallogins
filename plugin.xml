@@ -22,11 +22,6 @@
 
     </config-file>
     
-   <config-file parent="/*" target="res/values/strings.xml">
-    <string name="facebook_app_id">FACEBOOK_SDK_APP_ID</string>
-    <string name="facebook_client_token">FACEBOOK_SDK_CLIENT_TOKEN</string>
-   </config-file>
-    
     <config-file target="AndroidManifest.xml" parent="/manifest/application">
       <meta-data android:name="com.facebook.sdk.ApplicationId" android:value="@string/facebook_app_id" />
       <meta-data android:name="com.facebook.sdk.ClientToken" android:value="@string/facebook_client_token" />
