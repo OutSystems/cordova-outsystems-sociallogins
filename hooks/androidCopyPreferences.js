@@ -71,23 +71,17 @@ function copyFacebookPreferences(jsonConfig, projectRoot) {
         throw new Error("OUTSYSTEMS_PLUGIN_ERROR: Missing configuration file or error trying to obtain the configuration.");
     }
 
-    let stringsPath = path.join(projectRoot, 'platforms/android/app/src/main/res/values/strings.xml');
-    let stringsFile = fs.readFileSync(stringsPath).toString();
-    let etreeStrings = et.parse(stringsFile);
+    // create XML with correct values directly
+    var stringsXmlPath = path.join(projectRoot, 'platforms/android/app/src/main/res/values/os_sociallogins_strings.xml');
 
-    let appIdTags = etreeStrings.findall('./string/[@name="facebook_app_id"]');
-    for (let tag of appIdTags) {
-        tag.text = facebook_client_appId;
-    }
+    const xmlContent = `<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="facebook_app_id">${facebook_client_appId || 'FACEBOOK_SDK_APP_ID'}</string>
+    <string name="facebook_client_token">${facebook_client_token || 'FACEBOOK_SDK_CLIENT_TOKEN'}</string>
+</resources>`;
 
-    let clientTokenTags = etreeStrings.findall('./string/[@name="facebook_client_token"]');
-    for (let tag of clientTokenTags) {
-        tag.text = facebook_client_token;
-    }
-
-    let resultXmlStrings = etreeStrings.write();
-    fs.writeFileSync(stringsPath, resultXmlStrings);
-
+    // write XML file directly
+    fs.writeFileSync(stringsXmlPath, xmlContent);
 };
 
 
