@@ -1,5 +1,4 @@
 import Foundation
-import OSCommonPluginLib
 import OSSocialLoginsLib
 
 @objc(OSSocialLogins)
@@ -52,13 +51,8 @@ class OSSocialLogins: CDVPlugin {
         
         self.plugin?.loginLinkedIn(state: state, clientID: clientID, redirectURI: redirectURI)
     }
-       
-}
-
-// MARK: - OSCommonPluginLib's PlatformProtocol Methods
-extension OSSocialLogins: PlatformProtocol {
-
-    func sendResult(result: String?, error: NSError?, callBackID: String) {
+    
+    private func sendResult(result: String?, error: NSError?, callBackID: String) {
         var pluginResult = CDVPluginResult(status: CDVCommandStatus_ERROR)
 
         if let error = error, !error.localizedDescription.isEmpty {
@@ -72,7 +66,6 @@ extension OSSocialLogins: PlatformProtocol {
 
         self.commandDelegate.send(pluginResult, callbackId: callBackID);
     }
-
 }
 
 extension OSSocialLogins: SocialLoginsProtocol {
