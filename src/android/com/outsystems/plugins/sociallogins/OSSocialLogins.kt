@@ -2,8 +2,6 @@ package com.outsystems.plugins.sociallogins
 
 import android.content.Intent
 import com.google.gson.Gson
-import com.outsystems.plugins.oscordova.CordovaImplementation
-import com.outsystems.plugins.sociallogins.SocialLoginsInterface
 import com.outsystems.plugins.sociallogins.apple.AppleHelper
 import com.outsystems.plugins.sociallogins.apple.SocialLoginsAppleController
 import com.outsystems.plugins.sociallogins.facebook.FacebookHelper
@@ -13,14 +11,18 @@ import com.outsystems.plugins.sociallogins.google.SocialLoginsGoogleController
 import com.outsystems.plugins.sociallogins.linkedin.SocialLoginsLinkedinController
 import org.apache.cordova.CallbackContext
 import org.apache.cordova.CordovaInterface
+import org.apache.cordova.CordovaPlugin
 import org.apache.cordova.CordovaWebView
+import org.apache.cordova.PluginResult
+import org.apache.cordova.PluginResult.Status
 import org.json.JSONArray
 import org.json.JSONException
+import org.json.JSONObject
 
-class OSSocialLogins : CordovaImplementation() {
+class OSSocialLogins : CordovaPlugin() {
     private val gson by lazy { Gson() }
     private var socialLoginController: SocialLoginsController? = null
-    override var callbackContext: CallbackContext? = null
+    var callbackContext: CallbackContext? = null
 
     private var appleController: SocialLoginsAppleController? = null
     private var googleController: SocialLoginsGoogleController? = null
@@ -113,60 +115,60 @@ class OSSocialLogins : CordovaImplementation() {
     }
 
     private fun doLoginLinkedIn(args : JSONArray) {
-        var state = ""
-        var clientId = ""
-        var redirectUri = ""
+        var state: String
+        var clientId: String
+        var redirectUri: String
 
         try {
             state = args.get(0).toString()
             clientId = args.get(1).toString()
             redirectUri = args.get(2).toString()
 
-            if(clientId.isNullOrEmpty() || redirectUri.isNullOrEmpty()){
+            if(clientId.isEmpty() || redirectUri.isEmpty()){
                 sendPluginResult(null, Pair(formatErrorCode(SocialLoginError.MISSING_INPUT_PARAMETERS_ERROR.code), SocialLoginError.MISSING_INPUT_PARAMETERS_ERROR.message))
             }
             else{
-                setAsActivityResultCallback()
+                cordova.setActivityResultCallback(this)
                 socialLoginController?.doLoginLinkedin(state, clientId, redirectUri, cordova.activity)
             }
-        }catch (e: JSONException){
+        }catch (_: JSONException){
             sendPluginResult(null, Pair(formatErrorCode(SocialLoginError.MISSING_INPUT_PARAMETERS_ERROR.code), SocialLoginError.MISSING_INPUT_PARAMETERS_ERROR.message))
-        }catch (e: Exception){
+        }catch (_: Exception){
             sendPluginResult(null, Pair(formatErrorCode(SocialLoginError.APPLE_SIGN_IN_GENERAL_ERROR.code), SocialLoginError.APPLE_SIGN_IN_GENERAL_ERROR.message))
         }
 
     }
     private fun doLoginApple(args : JSONArray) {
 
-        var state = ""
-        var clientId = ""
-        var redirectUri = ""
+        var state: String
+        var clientId: String
+        var redirectUri: String
 
         try {
             state = args.get(0).toString()
             clientId = args.get(1).toString()
             redirectUri = args.get(2).toString()
 
-            if(clientId.isNullOrEmpty() || redirectUri.isNullOrEmpty()){
+            if(clientId.isEmpty() || redirectUri.isEmpty()){
                 sendPluginResult(null, Pair(formatErrorCode(SocialLoginError.MISSING_INPUT_PARAMETERS_ERROR.code), SocialLoginError.MISSING_INPUT_PARAMETERS_ERROR.message))
             }
             else{
-                setAsActivityResultCallback()
+                cordova.setActivityResultCallback(this)
                 socialLoginController?.doLoginApple(state, clientId, redirectUri, cordova.activity)
             }
-        }catch (e: JSONException){
+        }catch (_: JSONException){
             sendPluginResult(null, Pair(formatErrorCode(SocialLoginError.MISSING_INPUT_PARAMETERS_ERROR.code), SocialLoginError.MISSING_INPUT_PARAMETERS_ERROR.message))
-        }catch (e: Exception){
+        }catch (_: Exception){
             sendPluginResult(null, Pair(formatErrorCode(SocialLoginError.APPLE_SIGN_IN_GENERAL_ERROR.code), SocialLoginError.APPLE_SIGN_IN_GENERAL_ERROR.message))
         }
 
     }
     private fun doLoginGoogle() {
-        setAsActivityResultCallback()
+        cordova.setActivityResultCallback(this)
         socialLoginController?.doLoginGoogle(cordova.activity)
     }
     private fun doLoginFacebook() {
-        setAsActivityResultCallback()
+        cordova.setActivityResultCallback(this)
         socialLoginController?.doLoginFacebook()
     }
 
@@ -175,12 +177,22 @@ class OSSocialLogins : CordovaImplementation() {
         socialLoginController?.handleActivityResult(requestCode, resultCode, intent)
     }
 
-    override fun areGooglePlayServicesAvailable(): Boolean {
-        return true
-    }
-
     private fun formatErrorCode(code: Int): String {
         return ERROR_FORMAT_PREFIX + code.toString().padStart(4, '0')
+    }
+
+    private fun sendPluginResult(result: String?, error: Pair<String, String>?) {
+        var pluginResult: PluginResult?
+        result?.let {
+            pluginResult = PluginResult(Status.OK, result)
+            this.callbackContext?.sendPluginResult(pluginResult)
+            return
+        }
+        val jsonResult = JSONObject()
+        jsonResult.put("code", error?.first)
+        jsonResult.put("message", error?.second ?: "No Results")
+        pluginResult = PluginResult(Status.ERROR, jsonResult)
+        this.callbackContext?.sendPluginResult(pluginResult)
     }
 
 }
