@@ -1,6 +1,6 @@
 {
   "name": "com.outsystems.plugins.sociallogins",
-  "version": "2.1.4",
+  "version": "2.1.6",
   "description": "OutSystems Template for Cordova Plugin",
   "keywords": [
     "ecosystem:cordova",
