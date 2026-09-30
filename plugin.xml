@@ -55,7 +55,7 @@
 
   </platform>
 
-  <platform name="ios">
+  <platform name="ios" package="swift">
 
     <!-- Hooks -->
 	<hook type="before_plugin_install" src="hooks/install_prerequisites.js"/>
@@ -99,8 +99,8 @@
             <source url="https://cdn.cocoapods.org/"/>
         </config>
         <pods use-frameworks="true">
-            <pod name="FBSDKLoginKit" spec="17.0.0" />
-            <pod name="GoogleSignIn" spec="7.1.0" />            
+            <pod name="FBSDKLoginKit" spec="17.0.0"  nospm="true" />
+            <pod name="GoogleSignIn" spec="7.1.0"  nospm="true" />            
         </pods>
     </podspec>
 
