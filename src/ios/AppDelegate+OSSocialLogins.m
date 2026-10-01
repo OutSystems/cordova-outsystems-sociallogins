@@ -3,7 +3,7 @@
 #import <OSSocialLoginsLib/OSSocialLoginsLib-Swift.h>
 #import <objc/runtime.h>
 
-@implementation AppDelegate (OSSocialLogins)
+@implementation CDVAppDelegate (OSSocialLogins)
 
 + (void)load {
     Method original = class_getInstanceMethod(self, @selector(application:didFinishLaunchingWithOptions:));
