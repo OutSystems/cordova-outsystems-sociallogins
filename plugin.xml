@@ -58,7 +58,6 @@
   <platform name="ios" package="swift">
 
     <!-- Hooks -->
-	<hook type="before_plugin_install" src="hooks/install_prerequisites.js"/>
     <hook type="after_prepare" src="hooks/iOSCopyPreferences.js" />
 
     <config-file parent="/*" target="config.xml">
