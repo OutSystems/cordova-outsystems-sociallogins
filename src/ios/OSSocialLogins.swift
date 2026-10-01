@@ -106,17 +106,20 @@ class OSSocialLogins: CDVPlugin {
     }
 
     private func sendResult(result: String?, error: NSError?, callBackID: String) {
-        var pluginResult = CDVPluginResult.result(withStatus: CDVCommandStatus_ERROR)
+        // CDVPluginResult's initializer is failable on Cordova iOS 8+, so this must be explicitly
+        // typed as optional to compile against both Cordova iOS 7 and Cordova iOS 8.
+        var pluginResult: CDVPluginResult? = CDVPluginResult(status: CDVCommandStatus_ERROR)
 
         if let error = error, !error.localizedDescription.isEmpty {
             let errorCode = "OS-PLUG-SOCI-\(String(format: "%04d", error.code))"
             let errorMessage = error.localizedDescription
             let errorDict = ["code": errorCode, "message": errorMessage]
-            pluginResult = CDVPluginResult.result(withStatus: CDVCommandStatus_ERROR, messageAsDictionary: errorDict);
+            pluginResult = CDVPluginResult(status: CDVCommandStatus_ERROR, messageAs: errorDict);
         } else if let result = result {
-            pluginResult = result.isEmpty ? CDVPluginResult.result(withStatus: CDVCommandStatus_OK) : CDVPluginResult.result(withStatus: CDVCommandStatus_OK, messageAsString: result)
+            pluginResult = result.isEmpty ? CDVPluginResult(status: CDVCommandStatus_OK) : CDVPluginResult(status: CDVCommandStatus_OK, messageAs: result)
         }
 
+        guard let pluginResult else { return }
         self.commandDelegate.send(pluginResult, callbackId: callBackID);
     }
 }
