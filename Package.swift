@@ -20,16 +20,31 @@ let package = Package(
             path: "src/ios/frameworks/OSSocialLoginsLib.xcframework"
         ),
         .target(
+            name: "OSSocialLoginsObjectiveC",
+            dependencies: [
+                .product(name: "Cordova", package: "cordova-ios"),
+                .target(name: "OSSocialLoginsLib")
+            ],
+            path: "src/ios",
+            exclude: [
+                "frameworks/OSSocialLoginsLib.xcframework",
+                "OSSocialLogins.swift"
+            ],
+            publicHeadersPath: "."),
+        .target(
             name: "com.outsystems.plugins.sociallogins",
             dependencies: [
                 .product(name: "Cordova", package: "cordova-ios"),
                 .product(name: "GoogleSignIn", package: "GoogleSignIn-iOS"),
                 .product(name: "FacebookLogin", package: "facebook-ios-sdk"),
-                .target(name: "OSSocialLoginsLib")
+                .target(name: "OSSocialLoginsLib"),
+                .target(name: "OSSocialLoginsObjectiveC")
             ],
             path: "src/ios",
             exclude: [
-                "frameworks/OSSocialLoginsLib.xcframework"
+                "frameworks/OSSocialLoginsLib.xcframework",
+                "AppDelegate+OSSocialLogins.h",
+                "AppDelegate+OSSocialLogins.m"
             ],
             publicHeadersPath: ".")
     ]
