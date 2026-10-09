@@ -99,7 +99,6 @@
         </config>
         <pods use-frameworks="true">
             <pod name="FBSDKLoginKit" spec="17.0.0"  nospm="true" />
-            <pod name="GoogleSignIn" spec="7.1.0"  nospm="true" />            
         </pods>
     </podspec>
 
