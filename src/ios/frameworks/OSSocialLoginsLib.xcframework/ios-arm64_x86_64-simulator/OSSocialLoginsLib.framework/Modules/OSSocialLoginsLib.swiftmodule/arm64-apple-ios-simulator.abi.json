@@ -1372,7 +1372,10 @@
         "name": "GoogleSignIn",
         "printedName": "GoogleSignIn",
         "declKind": "Import",
-        "moduleName": "OSSocialLoginsLib"
+        "moduleName": "OSSocialLoginsLib",
+        "declAttributes": [
+          "ImplementationOnly"
+        ]
       },
       {
         "kind": "Import",
@@ -2160,7 +2163,10 @@
         "name": "GoogleSignIn",
         "printedName": "GoogleSignIn",
         "declKind": "Import",
-        "moduleName": "OSSocialLoginsLib"
+        "moduleName": "OSSocialLoginsLib",
+        "declAttributes": [
+          "ImplementationOnly"
+        ]
       },
       {
         "kind": "Import",
@@ -3314,14 +3320,14 @@
     {
       "filePath": "\/Users\/runner\/work\/OSSocialLoginsLib-iOS\/OSSocialLoginsLib-iOS\/OSSocialLoginsLib\/Google\/SocialLoginsGoogleController.swift",
       "kind": "StringLiteral",
-      "offset": 144,
+      "offset": 165,
       "length": 2,
       "value": "\"\""
     },
     {
       "filePath": "\/Users\/runner\/work\/OSSocialLoginsLib-iOS\/OSSocialLoginsLib-iOS\/OSSocialLoginsLib\/Google\/SocialLoginsGoogleController.swift",
       "kind": "StringLiteral",
-      "offset": 189,
+      "offset": 210,
       "length": 28,
       "value": "\"com.googleusercontent.apps\""
     },
