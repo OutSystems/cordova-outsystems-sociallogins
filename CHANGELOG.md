@@ -6,6 +6,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 The changes documented here do not include those from the original repository.
 
+## 2.2.0
+
+### Features
+
+- feat: SPM support and Cordova iOS 8 compatibility (#69)
+
 ## 2.1.6
 
 ### Chores
