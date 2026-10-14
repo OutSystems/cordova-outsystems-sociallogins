@@ -1,22 +1,22 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 5.7.1 (swiftlang-5.7.1.135.3 clang-1400.0.29.51)
-// swift-module-flags: -target arm64-apple-ios13.0 -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -module-name OSSocialLoginsLib
-// swift-module-flags-ignorable: -enable-bare-slash-regex
+// swift-compiler-version: Apple Swift version 6.1.2 effective-5.10 (swiftlang-6.1.2.1.2 clang-1700.0.13.5)
+// swift-module-flags: -target arm64-apple-ios15.0 -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -enable-experimental-feature DebugDescriptionMacro -enable-bare-slash-regex -module-name OSSocialLoginsLib
+// swift-module-flags-ignorable: -no-verify-emitted-module-interface -interface-compiler-version 6.1.2
 import AuthenticationServices
 import FBSDKLoginKit
 import Foundation
-import GoogleSignIn
 import Swift
 import UIKit
 import _Concurrency
 import _StringProcessing
+import _SwiftConcurrencyShims
 @objc @_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers public class SocialLoginsLinkedInController : OSSocialLoginsLib.SocialLoginsBaseController {
-  override convenience public init(delegate: OSSocialLoginsLib.SocialLoginsProtocol, rootViewController: UIKit.UIViewController? = nil)
+  override convenience public init(delegate: any OSSocialLoginsLib.SocialLoginsProtocol, rootViewController: UIKit.UIViewController? = nil)
   @objc deinit
 }
 public struct UserInfo : Swift.Encodable, Swift.Equatable {
   public static func == (a: OSSocialLoginsLib.UserInfo, b: OSSocialLoginsLib.UserInfo) -> Swift.Bool
-  public func encode(to encoder: Swift.Encoder) throws
+  public func encode(to encoder: any Swift.Encoder) throws
 }
 public enum SocialLoginsErrors : Swift.Int, Foundation.CustomNSError, Foundation.LocalizedError {
   case appleSignInGenericError
@@ -49,33 +49,33 @@ public enum SocialLoginsErrors : Swift.Int, Foundation.CustomNSError, Foundation
   }
 }
 @objc @_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers public class SocialLoginsFacebookController : OSSocialLoginsLib.SocialLoginsBaseController {
-  override convenience public init(delegate: OSSocialLoginsLib.SocialLoginsProtocol, rootViewController: UIKit.UIViewController? = nil)
+  override convenience public init(delegate: any OSSocialLoginsLib.SocialLoginsProtocol, rootViewController: UIKit.UIViewController? = nil)
   @objc deinit
 }
 @objc @_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers public class SocialLoginsGoogleController : OSSocialLoginsLib.SocialLoginsBaseController {
-  override convenience public init(delegate: OSSocialLoginsLib.SocialLoginsProtocol, rootViewController: UIKit.UIViewController? = nil)
+  override convenience public init(delegate: any OSSocialLoginsLib.SocialLoginsProtocol, rootViewController: UIKit.UIViewController? = nil)
   @objc deinit
 }
-@objc @_inheritsConvenienceInitializers @_Concurrency.MainActor(unsafe) public class SocialLoginsApplicationDelegate : ObjectiveC.NSObject, UIKit.UIApplicationDelegate {
-  @objc @_Concurrency.MainActor(unsafe) public static let shared: OSSocialLoginsLib.SocialLoginsApplicationDelegate
-  @_Concurrency.MainActor(unsafe) @objc public func application(_ application: UIKit.UIApplication, didFinishLaunchingWithOptions launchOptions: [UIKit.UIApplication.LaunchOptionsKey : Any]? = nil) -> Swift.Bool
-  @_Concurrency.MainActor(unsafe) @objc public func application(_ app: UIKit.UIApplication, open url: Foundation.URL, options: [UIKit.UIApplication.OpenURLOptionsKey : Any] = [:]) -> Swift.Bool
-  @_Concurrency.MainActor(unsafe) @objc override dynamic public init()
+@objc @_inheritsConvenienceInitializers @_Concurrency.MainActor @preconcurrency public class SocialLoginsApplicationDelegate : ObjectiveC.NSObject, UIKit.UIApplicationDelegate {
+  @objc @_Concurrency.MainActor @preconcurrency public static let shared: OSSocialLoginsLib.SocialLoginsApplicationDelegate
+  @_Concurrency.MainActor @preconcurrency @objc public func application(_ application: UIKit.UIApplication, didFinishLaunchingWithOptions launchOptions: [UIKit.UIApplication.LaunchOptionsKey : Any]? = nil) -> Swift.Bool
+  @_Concurrency.MainActor @preconcurrency @objc public func application(_ app: UIKit.UIApplication, open url: Foundation.URL, options: [UIKit.UIApplication.OpenURLOptionsKey : Any] = [:]) -> Swift.Bool
+  @_Concurrency.MainActor @preconcurrency @objc override dynamic public init()
   @objc deinit
 }
 public protocol SocialLoginsProtocol {
   func callBackUserInfo(result: OSSocialLoginsLib.UserInfo?, error: OSSocialLoginsLib.SocialLoginsErrors?)
 }
 @objc @_inheritsConvenienceInitializers public class SocialLoginsAppleController : OSSocialLoginsLib.SocialLoginsBaseController {
-  @objc public func authorizationController(controller: AuthenticationServices.ASAuthorizationController, didCompleteWithError error: Swift.Error)
-  override public init(delegate: OSSocialLoginsLib.SocialLoginsProtocol, rootViewController: UIKit.UIViewController? = nil)
+  @objc public func authorizationController(controller: AuthenticationServices.ASAuthorizationController, didCompleteWithError error: any Swift.Error)
+  override public init(delegate: any OSSocialLoginsLib.SocialLoginsProtocol, rootViewController: UIKit.UIViewController? = nil)
   @objc deinit
 }
 extension OSSocialLoginsLib.SocialLoginsAppleController : AuthenticationServices.ASAuthorizationControllerDelegate {
-  @objc dynamic public func authorizationController(controller: AuthenticationServices.ASAuthorizationController, didCompleteWithAuthorization authorization: AuthenticationServices.ASAuthorization)
+  @_Concurrency.MainActor @preconcurrency @objc dynamic public func authorizationController(controller: AuthenticationServices.ASAuthorizationController, didCompleteWithAuthorization authorization: AuthenticationServices.ASAuthorization)
 }
 extension OSSocialLoginsLib.SocialLoginsAppleController : AuthenticationServices.ASAuthorizationControllerPresentationContextProviding {
-  @objc dynamic public func presentationAnchor(for controller: AuthenticationServices.ASAuthorizationController) -> AuthenticationServices.ASPresentationAnchor
+  @_Concurrency.MainActor @preconcurrency @objc dynamic public func presentationAnchor(for controller: AuthenticationServices.ASAuthorizationController) -> AuthenticationServices.ASPresentationAnchor
 }
 @objc open class SocialLoginsController : ObjectiveC.NSObject {
   public init(appleController: OSSocialLoginsLib.SocialLoginsAppleController, googleController: OSSocialLoginsLib.SocialLoginsGoogleController, facebookController: OSSocialLoginsLib.SocialLoginsFacebookController, linkedInController: OSSocialLoginsLib.SocialLoginsLinkedInController)
@@ -97,7 +97,7 @@ extension AuthenticationServices.ASAuthorizationAppleIDCredential {
   }
 }
 @objc public class SocialLoginsBaseController : ObjectiveC.NSObject {
-  public init(delegate: OSSocialLoginsLib.SocialLoginsProtocol, rootViewController: UIKit.UIViewController? = nil)
+  public init(delegate: any OSSocialLoginsLib.SocialLoginsProtocol, rootViewController: UIKit.UIViewController? = nil)
   @objc deinit
 }
 extension Swift.Encodable {
@@ -106,3 +106,4 @@ extension Swift.Encodable {
 extension OSSocialLoginsLib.SocialLoginsErrors : Swift.Equatable {}
 extension OSSocialLoginsLib.SocialLoginsErrors : Swift.Hashable {}
 extension OSSocialLoginsLib.SocialLoginsErrors : Swift.RawRepresentable {}
+extension OSSocialLoginsLib.SocialLoginsApplicationDelegate : Swift.Sendable {}

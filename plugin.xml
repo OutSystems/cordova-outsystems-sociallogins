@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<plugin id="com.outsystems.plugins.sociallogins" version="2.1.6" xmlns="http://apache.org/cordova/ns/plugins/1.0" xmlns:android="http://schemas.android.com/apk/res/android">
+<plugin id="com.outsystems.plugins.sociallogins" version="2.2.0" xmlns="http://apache.org/cordova/ns/plugins/1.0" xmlns:android="http://schemas.android.com/apk/res/android">
   <name>OSSocialLogins</name>
   <description>OutSystems Template for Cordova Plugin</description>
   <author>OutSystems Inc</author>
@@ -55,10 +55,9 @@
 
   </platform>
 
-  <platform name="ios">
+  <platform name="ios" package="swift">
 
     <!-- Hooks -->
-	<hook type="before_plugin_install" src="hooks/install_prerequisites.js"/>
     <hook type="after_prepare" src="hooks/iOSCopyPreferences.js" />
 
     <config-file parent="/*" target="config.xml">
@@ -99,8 +98,7 @@
             <source url="https://cdn.cocoapods.org/"/>
         </config>
         <pods use-frameworks="true">
-            <pod name="FBSDKLoginKit" spec="17.0.0" />
-            <pod name="GoogleSignIn" spec="7.1.0" />            
+            <pod name="FBSDKLoginKit" spec="17.0.0"  nospm="true" />
         </pods>
     </podspec>
 

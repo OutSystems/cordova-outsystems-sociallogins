@@ -1,4 +1,4 @@
-#import "AppDelegate.h"
+#import <Cordova/CDVAppDelegate.h>
 
-@interface AppDelegate (OSSocialLogins) <UIApplicationDelegate>
+@interface CDVAppDelegate (OSSocialLogins)
 @end

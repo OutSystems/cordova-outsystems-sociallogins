@@ -6,6 +6,15 @@ const { ConfigParser } = require('cordova-common');
 
 const {getJsonFile, ProvidersEnum, ApplicationTypeEnum} = require('./utils');
 
+function resolveIOSAppFolderName(platformPath, appName) {
+    // Cordova iOS 8 always generates a fixed `App` folder/project regardless of the app's display name.
+    if (fs.existsSync(path.join(platformPath, 'App', 'App-Info.plist'))) {
+        return 'App';
+    }
+    // Cordova iOS 7 / MABS 12 names the folder and Info.plist after the app's display name.
+    return appName;
+}
+
 function reverseURLScheme(str) {
     // Step 1. Use the split() method to return a new array
     var splitString = str.split("."); // split "hello.world"
@@ -106,7 +115,8 @@ module.exports = async function (context) {
     }
     
     //Change info.plist
-    var infoPlistPath = path.join(platformPath, appName + '/'+ appName +'-info.plist');
+    var appFolderName = resolveIOSAppFolderName(platformPath, appName);
+    var infoPlistPath = path.join(platformPath, appFolderName, appFolderName + '-Info.plist');
     var infoPlistFile = fs.readFileSync(infoPlistPath, 'utf8');
     var infoPlist = plist.parse(infoPlistFile);
 
@@ -153,13 +163,13 @@ module.exports = async function (context) {
 
     if (!use_apple_signin) {
         // Change Entitlements files
-        var debugEntitlementsPath = path.join(platformPath, appName + '/'+ 'Entitlements-Debug.plist');
+        var debugEntitlementsPath = path.join(platformPath, appFolderName, 'Entitlements-Debug.plist');
         var debugEntitlementsFile = fs.readFileSync(debugEntitlementsPath, 'utf8');
-        var debugEntitlements = plist.parse(debugEntitlementsFile);    
+        var debugEntitlements = plist.parse(debugEntitlementsFile);
         delete debugEntitlements['com.apple.developer.applesignin'];
         fs.writeFileSync(debugEntitlementsPath, plist.build(debugEntitlements, { indent: '\t' }));
 
-        var releaseEntitlementsPath = path.join(platformPath, appName + '/' + 'Entitlements-Release.plist');
+        var releaseEntitlementsPath = path.join(platformPath, appFolderName, 'Entitlements-Release.plist');
         var releaseEntitlementsFile = fs.readFileSync(releaseEntitlementsPath, 'utf8');
         var releaseEntitlements = plist.parse(releaseEntitlementsFile);
         delete releaseEntitlements['com.apple.developer.applesignin'];
