@@ -10,7 +10,7 @@
 		</data>
 		<key>Info.plist</key>
 		<data>
-		joZF4GHveLVRrxeJt4DBFLDTpII=
+		4X3m7vaL4IY6q1Kx+hVvArV8cWc=
 		</data>
 		<key>Modules/OSSocialLoginsLib.swiftmodule/arm64-apple-ios-simulator.abi.json</key>
 		<data>
@@ -55,6 +55,10 @@
 		<key>Modules/module.modulemap</key>
 		<data>
 		I9h2Oq7TohHBaioyrMgxm5WTp+A=
+		</data>
+		<key>PrivacyInfo.xcprivacy</key>
+		<data>
+		pod4NLh9O8/5LBZUr2QiAkqow+A=
 		</data>
 	</dict>
 	<key>files2</key>
@@ -141,6 +145,13 @@
 			<key>hash2</key>
 			<data>
 			uDrSCzulSAobTalzVwn1/R1MH7OpdZFOPWjEf/kmqvA=
+			</data>
+		</dict>
+		<key>PrivacyInfo.xcprivacy</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			MmFQ+Oi10W23mevy3Z83hhaTTjDND5o+FgGr3yGe6oM=
 			</data>
 		</dict>
 	</dict>
